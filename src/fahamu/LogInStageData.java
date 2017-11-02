@@ -9,11 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static fahamu.LogInStage.*;
+
 class LogInStageData {
 
-    private static String username;
-    private static String password = "@Joshua&5715";
-    private static String serverAddress = "10.42.0.1";
     private static String localhost = "localhost";
 
 

@@ -11,11 +11,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.NumberFormat;
 
+import static fahamu.LogInStage.*;
+
 class PurchaseCategoryData {
 
-    private static String username = "root";
-    private static String password = "@Joshua&5715";
-    private static String serverAddress = "10.42.0.1";
     private static String localhost = "localhost";
 
     static float amountOfCreditInvoice = 0;

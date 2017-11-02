@@ -20,6 +20,8 @@ import javafx.stage.Popup;
 import java.io.File;
 import java.sql.*;
 
+import static fahamu.LogInStage.*;
+
 class StockCategoryUI {
 
     //this is the list of all the current stock updated
@@ -32,9 +34,6 @@ class StockCategoryUI {
     static Popup popupRemoveUnit;
     static Popup popupAddUnit;
 
-    private static String username = "root";
-    private static String password = "@Joshua&5715";
-    private static String serverAddress = "10.42.0.1";
     private static String localhost = "localhost";
 
     StockCategoryUI() {
@@ -1389,9 +1388,9 @@ class StockCategoryUI {
                     case ENTER:
                         //connect to the database
                         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-                        mysqlDataSource.setUser("root");
-                        mysqlDataSource.setPassword("@Joshua&5715");
-                        mysqlDataSource.setServerName("10.42.0.1");
+                        mysqlDataSource.setUser(username);
+                        mysqlDataSource.setPassword(password);
+                        mysqlDataSource.setServerName(serverAddress);
 
                         Connection connection = null;
                         try {

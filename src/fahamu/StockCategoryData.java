@@ -4,11 +4,13 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.ResultSet;
 import java.sql.Connection;
-import java.sql.Statement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.NumberFormat;
+
+import static fahamu.LogInStage.*;
 
 class StockCategoryData {
 
@@ -16,9 +18,6 @@ class StockCategoryData {
     static float sellPrice;
     static float wSellPrice;
 
-    private static String username = "root";
-    private static String password = "@Joshua&5715";
-    private static String serverAddress = "10.42.0.1";
     private static String localhost = "localhost";
     private static String selectDatabase = "use stockdata";
 

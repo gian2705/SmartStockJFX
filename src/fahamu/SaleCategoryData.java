@@ -8,12 +8,11 @@ import javafx.scene.chart.XYChart;
 import java.sql.*;
 import java.util.Calendar;
 
+import static fahamu.LogInStage.*;
 import static fahamu.StockCategoryUI.categoryList;
 
 class SaleCategoryData {
-    private static String username = "root";
-    private static String password = "@Joshua&5715";
-    private static String serverAddress = "10.42.0.1";
+
     private static String localhost = "127.0.0.1";
 
     //insert a row of data to the cashSale table
