@@ -1,23 +1,9 @@
 <component name="ArtifactManager">
-  <artifact type="javafx" name="Lb">
+  <artifact type="jar" build-on-make="true" name="Lb">
     <output-path>$PROJECT_DIR$/out/artifacts/Lb</output-path>
-    <properties id="javafx-properties">
-      <options>
-        <option name="appClass" value="fahamu.LogInStage" />
-        <option name="description" value="" />
-        <option name="htmlPlaceholderId" value="" />
-        <option name="title" value="LB Pharmacy" />
-        <option name="vendor" value="fahamuTech" />
-        <option name="version" value="1" />
-      </options>
-    </properties>
-    <root id="root">
-      <element id="archive" name="LbPharmacy_StockManager.jar">
-        <element id="module-output" name="LbPharmacy StockManager" />
-      </element>
-      <element id="library" level="project" name="mysql:mysql-connector-java:6.0.6" />
-      <element id="file-copy" path="$PROJECT_DIR$/src/serverCredential.db" />
-      <element id="file-copy" path="$PROJECT_DIR$/src/mainLogo.png" />
+    <root id="archive" name="Lb.jar">
+      <element id="module-output" name="LbPharmacy StockManager" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/mysql/mysql-connector-java/6.0.6/mysql-connector-java-6.0.6.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

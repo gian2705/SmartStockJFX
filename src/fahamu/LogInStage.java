@@ -505,7 +505,7 @@ public class LogInStage extends Application {
             popup.show(stageLogIn);
         });
 
-        System.out.println(LogInStage.class.getResource("serverCredential.db").getPath());
+        System.out.println();
     }
 
 
