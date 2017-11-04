@@ -1,4 +1,4 @@
-package fahamu;
+package fahamu.stockmanager;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import javafx.collections.FXCollections;
@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static fahamu.LogInStage.*;
+import static fahamu.stockmanager.LogInStage.*;
 
 class ExpenditureCategoryData {
 
@@ -69,8 +69,8 @@ class ExpenditureCategoryData {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(selectQuery);
             while (resultSet.next()) {
-                fahamu.ExpenditureCategoryUI.expensesListObservableList.add(
-                        new fahamu.ExpenditureCategoryUI.ExpensesList(
+                ExpenditureCategoryUI.expensesListObservableList.add(
+                        new ExpenditureCategoryUI.ExpensesList(
                                 resultSet.getString(1),
                                 resultSet.getString(2),
                                 resultSet.getString(3),

@@ -1,13 +1,11 @@
-package fahamu;
+package fahamu.stockmanager;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -20,6 +18,10 @@ import javafx.scene.text.Font;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 
 
@@ -30,12 +32,12 @@ public class LogInStage extends Application {
     private boolean isFirstTimeCashier = true;
     private SalesCategoryUI salesCategoryUIAdmin;
     private SalesCategoryUI salesCategoryUICashier;
-    static String username;
 
     static Stage stageLogIn;
     static String currentUserName;
     static String password;
     static String serverAddress;
+    static String username;
 
 
     @Override
@@ -51,8 +53,11 @@ public class LogInStage extends Application {
             path = "/usr/bin/Lb/serverCredential.db.encrypted";
         } else {
             //implement window file location
+
         }
-        ServerCredential serverCredential = new ServerCredential("");
+
+        //get the server credential just before show login interface
+        ServerCredential serverCredential = new ServerCredential(path);
         username = serverCredential.serverDetail.get("username");
         password = serverCredential.serverDetail.get("password");
         serverAddress = serverCredential.serverDetail.get("serverAddr");
@@ -63,6 +68,10 @@ public class LogInStage extends Application {
         Scene scene = new Scene(rootLoginStage, 300, 400);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
+
+        //perform a test to see if a server is reachable
+        checkServerReachable();
+
         primaryStage.show();
 
     }
@@ -187,17 +196,17 @@ public class LogInStage extends Application {
                                 //call admin uer interface
                                 if (isFirstTimeAdmin) {
                                     //set the objects
-                                    salesCategoryUIAdmin = new fahamu.SalesCategoryUI(true);
-                                    new fahamu.MainStage(fahamu.MainStage.ADMIN_UI, salesCategoryUIAdmin);
-                                    new fahamu.StockCategoryUI();
-                                    new fahamu.ExpenditureCategoryUI();
+                                    salesCategoryUIAdmin = new SalesCategoryUI(true);
+                                    new MainStage(MainStage.ADMIN_UI, salesCategoryUIAdmin);
+                                    new StockCategoryUI();
+                                    new ExpenditureCategoryUI();
 
                                     isFirstTimeAdmin = false;
                                 }
 
                                 //update total tra sales
-                                float traSaleTotal = fahamu.SaleCategoryData.getTotalTraSaleOfDay();
-                                float traCashierSales = fahamu.SaleCategoryData
+                                float traSaleTotal = SaleCategoryData.getTotalTraSaleOfDay();
+                                float traCashierSales = SaleCategoryData
                                         .getTotalTraSaleOfDayOfCashier(LogInStage.currentUserName);
                                 salesCategoryUIAdmin
                                         .totalTraSale.setText(NumberFormat.getInstance().format(traSaleTotal));
@@ -207,13 +216,13 @@ public class LogInStage extends Application {
 
                                 //update tables of all sale of the day for the specific user
                                 salesCategoryUIAdmin.tableViewSaleTraOfDay
-                                        .setItems(fahamu.SaleCategoryData.getCashTraSaleOfDay(username));
+                                        .setItems(SaleCategoryData.getCashTraSaleOfDay(username));
                                 salesCategoryUIAdmin.tableViewSalesOfDay
-                                        .setItems(fahamu.SaleCategoryData.getCashSaleOfDay(username));
+                                        .setItems(SaleCategoryData.getCashSaleOfDay(username));
 
                                 //call admin stage
-                                fahamu.MainStage.stageAdmin.setTitle("Lb Pharmacy-" + LogInStage.currentUserName);
-                                fahamu.MainStage.stageAdmin.show();
+                                MainStage.stageAdmin.setTitle("Lb Pharmacy-" + LogInStage.currentUserName);
+                                MainStage.stageAdmin.show();
 
 
                             } else {
@@ -230,15 +239,15 @@ public class LogInStage extends Application {
 
                                 if (isFirstTimeCashier) {
                                     //set objects
-                                    salesCategoryUICashier = new fahamu.SalesCategoryUI(false);
-                                    new fahamu.MainStage(fahamu.MainStage.CASHIER_UI, salesCategoryUICashier);
+                                    salesCategoryUICashier = new SalesCategoryUI(false);
+                                    new MainStage(MainStage.CASHIER_UI, salesCategoryUICashier);
 
                                     isFirstTimeCashier = false;
                                 }
 
                                 //update total tra sales
-                                float traSaleTotal = fahamu.SaleCategoryData.getTotalTraSaleOfDay();
-                                float traCashierSales = fahamu.SaleCategoryData
+                                float traSaleTotal = SaleCategoryData.getTotalTraSaleOfDay();
+                                float traCashierSales = SaleCategoryData
                                         .getTotalTraSaleOfDayOfCashier(LogInStage.currentUserName);
                                 salesCategoryUICashier
                                         .totalTraSale.setText(NumberFormat.getInstance().format(traSaleTotal));
@@ -248,13 +257,13 @@ public class LogInStage extends Application {
 
                                 //update tables of all sale of the day for the specific user
                                 salesCategoryUICashier.tableViewSaleTraOfDay
-                                        .setItems(fahamu.SaleCategoryData.getCashTraSaleOfDay(username));
+                                        .setItems(SaleCategoryData.getCashTraSaleOfDay(username));
                                 salesCategoryUICashier.tableViewSalesOfDay
-                                        .setItems(fahamu.SaleCategoryData.getCashSaleOfDay(username));
+                                        .setItems(SaleCategoryData.getCashSaleOfDay(username));
 
                                 //call the user interface
-                                fahamu.MainStage.stageUser.setTitle("Lb Pharmacy-" + LogInStage.currentUserName);
-                                fahamu.MainStage.stageUser.show();
+                                MainStage.stageUser.setTitle("Lb Pharmacy-" + LogInStage.currentUserName);
+                                MainStage.stageUser.show();
 
                                 //some keyboard shortcut
                                 salesCategoryUICashier.submitCashBill.getScene().getAccelerators().put(
@@ -359,18 +368,18 @@ public class LogInStage extends Application {
                         //call admin uer interface
                         if (isFirstTimeAdmin) {
                             //set the objects
-                            salesCategoryUIAdmin = new fahamu.SalesCategoryUI(true);
-                            new fahamu.MainStage(fahamu.MainStage.ADMIN_UI, salesCategoryUIAdmin);
+                            salesCategoryUIAdmin = new SalesCategoryUI(true);
+                            new MainStage(MainStage.ADMIN_UI, salesCategoryUIAdmin);
 
-                            new fahamu.StockCategoryUI();
-                            new fahamu.ExpenditureCategoryUI();
+                            new StockCategoryUI();
+                            new ExpenditureCategoryUI();
 
                             isFirstTimeAdmin = false;
                         }
 
                         //update total tra sales
-                        float traSaleTotal = fahamu.SaleCategoryData.getTotalTraSaleOfDay();
-                        float traCashierSales = fahamu.SaleCategoryData
+                        float traSaleTotal = SaleCategoryData.getTotalTraSaleOfDay();
+                        float traCashierSales = SaleCategoryData
                                 .getTotalTraSaleOfDayOfCashier(LogInStage.currentUserName);
                         salesCategoryUIAdmin
                                 .totalTraSale.setText(NumberFormat.getInstance().format(traSaleTotal));
@@ -379,13 +388,13 @@ public class LogInStage extends Application {
 
                         //update tables of all sale of the day for the specific user
                         salesCategoryUIAdmin.tableViewSaleTraOfDay
-                                .setItems(fahamu.SaleCategoryData.getCashTraSaleOfDay(username));
+                                .setItems(SaleCategoryData.getCashTraSaleOfDay(username));
                         salesCategoryUIAdmin.tableViewSalesOfDay
-                                .setItems(fahamu.SaleCategoryData.getCashSaleOfDay(username));
+                                .setItems(SaleCategoryData.getCashSaleOfDay(username));
 
                         //call admin stage
-                        fahamu.MainStage.stageAdmin.setTitle("Lb Pharmacy-" + LogInStage.currentUserName);
-                        fahamu.MainStage.stageAdmin.show();
+                        MainStage.stageAdmin.setTitle("Lb Pharmacy-" + LogInStage.currentUserName);
+                        MainStage.stageAdmin.show();
 
                     } else {
                         //get current user
@@ -401,15 +410,15 @@ public class LogInStage extends Application {
 
                         if (isFirstTimeCashier) {
                             //set objects
-                            salesCategoryUICashier = new fahamu.SalesCategoryUI(false);
-                            new fahamu.MainStage(fahamu.MainStage.CASHIER_UI, salesCategoryUICashier);
+                            salesCategoryUICashier = new SalesCategoryUI(false);
+                            new MainStage(MainStage.CASHIER_UI, salesCategoryUICashier);
 
                             isFirstTimeCashier = false;
                         }
 
                         //update total tra sales
-                        float traSaleTotal = fahamu.SaleCategoryData.getTotalTraSaleOfDay();
-                        float traCashierSales = fahamu.SaleCategoryData
+                        float traSaleTotal = SaleCategoryData.getTotalTraSaleOfDay();
+                        float traCashierSales = SaleCategoryData
                                 .getTotalTraSaleOfDayOfCashier(LogInStage.currentUserName);
                         salesCategoryUICashier
                                 .totalTraSale.setText(NumberFormat.getInstance().format(traSaleTotal));
@@ -418,13 +427,13 @@ public class LogInStage extends Application {
 
                         //update tables of all sale of the day for the specific user
                         salesCategoryUICashier.tableViewSaleTraOfDay
-                                .setItems(fahamu.SaleCategoryData.getCashTraSaleOfDay(username));
+                                .setItems(SaleCategoryData.getCashTraSaleOfDay(username));
                         salesCategoryUICashier.tableViewSalesOfDay
-                                .setItems(fahamu.SaleCategoryData.getCashSaleOfDay(username));
+                                .setItems(SaleCategoryData.getCashSaleOfDay(username));
 
                         //call the user interface
-                        fahamu.MainStage.stageUser.setTitle("Lb Pharmacy-" + LogInStage.currentUserName);
-                        fahamu.MainStage.stageUser.show();
+                        MainStage.stageUser.setTitle("Lb Pharmacy-" + LogInStage.currentUserName);
+                        MainStage.stageUser.show();
 
                         //set shortcut
                         salesCategoryUICashier.submitCashBill.getScene().getAccelerators().put(
@@ -511,7 +520,45 @@ public class LogInStage extends Application {
     }
 
     private void checkServerReachable() {
+        try {
+            InetAddress inetAddress = InetAddress.getByAddress(new byte[]{10, 42, 0, 1});
+            boolean reachable = inetAddress.isReachable(1000);
+            if (!reachable) {
+                //boolean check for availability of local server
+                boolean isLocalServerAvailable = false;
+                //check availability of local databases
+                MysqlDataSource mysqlDataSource = new MysqlDataSource();
+                mysqlDataSource.setUser(username);
+                mysqlDataSource.setPassword(password);
+                mysqlDataSource.setServerName("localhost");
 
+                Connection connection = null;
+                try {
+                    connection = mysqlDataSource.getConnection();
+
+                    //if connection success, change a server address to local
+                    isLocalServerAvailable = true;
+                    serverAddress = "localhost";
+
+                } catch (SQLException e) {
+                    isLocalServerAvailable = false;
+                    e.printStackTrace();
+                } finally {
+                    if (connection != null) try {
+                        connection.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (!isLocalServerAvailable) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("Database Server is not reachable.");
+                    alert.showAndWait();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

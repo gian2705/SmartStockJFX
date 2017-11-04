@@ -1,4 +1,4 @@
-package fahamu;
+package fahamu.stockmanager;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import javafx.collections.FXCollections;
@@ -10,8 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.NumberFormat;
-
-import static fahamu.LogInStage.*;
 
 class PurchaseCategoryData {
 
@@ -27,9 +25,9 @@ class PurchaseCategoryData {
         Connection connection = null;
         try {
             MysqlDataSource mysqlDataSource = new MysqlDataSource();
-            mysqlDataSource.setUser(username);
-            mysqlDataSource.setPassword(password);
-            mysqlDataSource.setServerName(serverAddress);
+            mysqlDataSource.setUser(LogInStage.username);
+            mysqlDataSource.setPassword(LogInStage.password);
+            mysqlDataSource.setServerName(LogInStage.serverAddress);
 
             try {
                 connection = mysqlDataSource.getConnection();
@@ -64,9 +62,9 @@ class PurchaseCategoryData {
         Connection connection = null;
         try {
             MysqlDataSource mysqlDataSource = new MysqlDataSource();
-            mysqlDataSource.setUser(username);
-            mysqlDataSource.setPassword(password);
-            mysqlDataSource.setServerName(serverAddress);
+            mysqlDataSource.setUser(LogInStage.username);
+            mysqlDataSource.setPassword(LogInStage.password);
+            mysqlDataSource.setServerName(LogInStage.serverAddress);
 
             try {
                 connection = mysqlDataSource.getConnection();
@@ -103,9 +101,9 @@ class PurchaseCategoryData {
             float purchase,
             float amount) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         try {
@@ -167,9 +165,9 @@ class PurchaseCategoryData {
             float purchase,
             float amount) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         try {
@@ -223,9 +221,9 @@ class PurchaseCategoryData {
     //get suppliers
     static ObservableList<String> getSuppliers() {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         ObservableList<String> suppliers = FXCollections.observableArrayList();
 
@@ -260,9 +258,9 @@ class PurchaseCategoryData {
     //get invoices
     static ObservableList<String> getDueInvoices(String supplier) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         ObservableList<String> invoices = FXCollections.observableArrayList();
 
@@ -297,9 +295,9 @@ class PurchaseCategoryData {
 
     static ObservableList<String> getDueInvoices() {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         ObservableList<String> invoices = FXCollections.observableArrayList();
 
@@ -332,14 +330,14 @@ class PurchaseCategoryData {
     }
 
     //get credit purchase product
-    static ObservableList<fahamu.PurchaseCategoryUI.InvoiceDetail> getCreditInvoiceDetail(String invoice, String supplier) {
+    static ObservableList<PurchaseCategoryUI.InvoiceDetail> getCreditInvoiceDetail(String invoice, String supplier) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
-        ObservableList<fahamu.PurchaseCategoryUI.InvoiceDetail> invoiceDetails = FXCollections.observableArrayList();
+        ObservableList<PurchaseCategoryUI.InvoiceDetail> invoiceDetails = FXCollections.observableArrayList();
         try {
 
             String selectQuery = "SELECT product," +
@@ -362,7 +360,7 @@ class PurchaseCategoryData {
                 //get total amount of the invoice
                 amountOfCreditInvoice = amountOfCreditInvoice + resultSet.getFloat(5);
                 invoiceDetails.addAll(
-                        new fahamu.PurchaseCategoryUI.InvoiceDetail(
+                        new PurchaseCategoryUI.InvoiceDetail(
                                 resultSet.getString(1),
                                 resultSet.getString(2),
                                 resultSet.getInt(3),
@@ -387,9 +385,9 @@ class PurchaseCategoryData {
     //get all credit purchased product not paid yet
     static void getCreditPurchasedProduct() {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         try {
@@ -411,8 +409,8 @@ class PurchaseCategoryData {
             ResultSet resultSet = statement.executeQuery(selectQuery);
 
             while (resultSet.next()) {
-                fahamu.PurchaseCategoryUI.creditPurchaseData.addAll(
-                        new fahamu.PurchaseCategoryUI.DueInvoiceListTable(
+                PurchaseCategoryUI.creditPurchaseData.addAll(
+                        new PurchaseCategoryUI.DueInvoiceListTable(
                                 resultSet.getString(1),
                                 resultSet.getInt(2),
                                 resultSet.getString(3),
@@ -436,9 +434,9 @@ class PurchaseCategoryData {
     //get expire invoice
     static String getExpiredInvoice() {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         String string = null;
@@ -475,9 +473,9 @@ class PurchaseCategoryData {
     //get near expire invoice
     static String getNearExpireInvoice() {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         String string = null;
@@ -514,9 +512,9 @@ class PurchaseCategoryData {
     //get total invoice
     static String getUnPaidProductsCount() {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         String string = null;
@@ -552,9 +550,9 @@ class PurchaseCategoryData {
     //get total amount of the credit purchase which not paid
     static String getTotalAmountOfNotPaidCreditPurchase() {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         String formattedAmount = null;
@@ -590,9 +588,9 @@ class PurchaseCategoryData {
     //pay the invoice
     static void payCreditInvoice(String invoice) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         try {
@@ -621,9 +619,9 @@ class PurchaseCategoryData {
 
     static ObservableList<String> getAllCashReceipt() {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         ObservableList<String> data = FXCollections.observableArrayList();
@@ -657,9 +655,9 @@ class PurchaseCategoryData {
 
     static ObservableList<String> getAllInvoice() {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         ObservableList<String> data = FXCollections.observableArrayList();
@@ -691,18 +689,18 @@ class PurchaseCategoryData {
         return data;
     }
 
-    static ObservableList<fahamu.PurchaseCategoryUI.CashPurchaseList> getCurrentPurchase(
+    static ObservableList<PurchaseCategoryUI.CashPurchaseList> getCurrentPurchase(
             String date,
             String receipt,
             String supplier
     ) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
-        ObservableList<fahamu.PurchaseCategoryUI.CashPurchaseList> data = FXCollections.observableArrayList();
+        ObservableList<PurchaseCategoryUI.CashPurchaseList> data = FXCollections.observableArrayList();
         String selectQuery = "SELECT * FROM purchasedata.cashPurchase " +
                 "WHERE date=\'" + date + "\' " +
                 "AND receipt=\'" + receipt + "\' " +
@@ -719,7 +717,7 @@ class PurchaseCategoryData {
             ResultSet resultSet = statement.executeQuery(selectQuery);
             while (resultSet.next()) {
                 data.add(
-                        new fahamu.PurchaseCategoryUI.CashPurchaseList(
+                        new PurchaseCategoryUI.CashPurchaseList(
                                 resultSet.getString(1),
                                 resultSet.getString(2),
                                 resultSet.getString(3),
@@ -744,18 +742,18 @@ class PurchaseCategoryData {
         return data;
     }
 
-    static ObservableList<fahamu.PurchaseCategoryUI.CreditPurchaseList> getCurrentCreditPurchase(
+    static ObservableList<PurchaseCategoryUI.CreditPurchaseList> getCurrentCreditPurchase(
             String date,
             String invoice,
             String supplier
     ) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
-        ObservableList<fahamu.PurchaseCategoryUI.CreditPurchaseList> data = FXCollections.observableArrayList();
+        ObservableList<PurchaseCategoryUI.CreditPurchaseList> data = FXCollections.observableArrayList();
         String selectQuery = "SELECT * FROM purchasedata.creditPurchase " +
                 "WHERE date=\'" + date + "\' " +
                 "AND invoice=\'" + invoice + "\' " +
@@ -772,7 +770,7 @@ class PurchaseCategoryData {
             ResultSet resultSet = statement.executeQuery(selectQuery);
             while (resultSet.next()) {
                 data.add(
-                        new fahamu.PurchaseCategoryUI.CreditPurchaseList(
+                        new PurchaseCategoryUI.CreditPurchaseList(
                                 resultSet.getString(1),
                                 resultSet.getString(2),
                                 resultSet.getString(3),
@@ -801,9 +799,9 @@ class PurchaseCategoryData {
 
     static float getAmountOfCurrentCashPurchase(String date, String receipt, String supplier) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         float sum = 0;
@@ -837,9 +835,9 @@ class PurchaseCategoryData {
 
     static float getAmountOfCurrentCreditPurchase(String date, String invoice, String supplier) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         float sum = 0;
@@ -871,15 +869,15 @@ class PurchaseCategoryData {
         return sum;
     }
 
-    static ObservableList<fahamu.SalesCategoryUI.CashierSale> getCreditPurchasedHistory(
+    static ObservableList<SalesCategoryUI.CashierSale> getCreditPurchasedHistory(
             String fromDate, String toDate, String product) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
-        ObservableList<fahamu.SalesCategoryUI.CashierSale> products = FXCollections.observableArrayList();
+        ObservableList<SalesCategoryUI.CashierSale> products = FXCollections.observableArrayList();
         try {
             try {
                 connection = mysqlDataSource.getConnection();
@@ -894,7 +892,7 @@ class PurchaseCategoryData {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(selectQuery);
             while (resultSet.next()) {
-                products.add(new fahamu.SalesCategoryUI.CashierSale(
+                products.add(new SalesCategoryUI.CashierSale(
                         resultSet.getString(1),
                         resultSet.getFloat(2),
                         resultSet.getFloat(3)
@@ -914,9 +912,9 @@ class PurchaseCategoryData {
 
     static ObservableList<String> getCreditPurchaseProductHistory(String fromDate, String toDate) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         ObservableList<String> products = FXCollections.observableArrayList();
@@ -948,15 +946,15 @@ class PurchaseCategoryData {
         return products;
     }
 
-    static ObservableList<fahamu.ReportsCategoryUI.DiscountDetailTableDataClass> getCashPurchasedHistory(
+    static ObservableList<ReportsCategoryUI.DiscountDetailTableDataClass> getCashPurchasedHistory(
             String fromDate, String toDate, String product) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
-        ObservableList<fahamu.ReportsCategoryUI.DiscountDetailTableDataClass> products = FXCollections.observableArrayList();
+        ObservableList<ReportsCategoryUI.DiscountDetailTableDataClass> products = FXCollections.observableArrayList();
         try {
             try {
                 connection = mysqlDataSource.getConnection();
@@ -971,7 +969,7 @@ class PurchaseCategoryData {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(selectQuery);
             while (resultSet.next()) {
-                products.add(new fahamu.ReportsCategoryUI.DiscountDetailTableDataClass(
+                products.add(new ReportsCategoryUI.DiscountDetailTableDataClass(
                         resultSet.getString(1),
                         resultSet.getFloat(2),
                         resultSet.getFloat(3)
@@ -991,9 +989,9 @@ class PurchaseCategoryData {
 
     static ObservableList<String> getCashPurchaseProductHistory(String fromDate, String toDate) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         ObservableList<String> products = FXCollections.observableArrayList();
@@ -1035,9 +1033,9 @@ class PurchaseCategoryData {
             float purchase) {
 
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         String updateQuery = "UPDATE purchasedata.cashPurchase SET " +
@@ -1080,9 +1078,9 @@ class PurchaseCategoryData {
             float purchase) {
 
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         String updateQuery = "UPDATE purchasedata.creditPurchase SET " +
@@ -1117,9 +1115,9 @@ class PurchaseCategoryData {
 
     static void insertReceipt(String receipt) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         String insertQuery = "INSERT INTO purchasedata.receipt(date,receipt) " +
@@ -1147,9 +1145,9 @@ class PurchaseCategoryData {
 
     static void removeReceipt(String receipt) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
 
@@ -1178,9 +1176,9 @@ class PurchaseCategoryData {
 
     static void insertInvoice(String invoice) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         String insertQuery = "INSERT INTO purchasedata.invoice(date,invoice) " +
@@ -1208,9 +1206,9 @@ class PurchaseCategoryData {
 
     static void removeInvoice(String invoice) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
 

@@ -1,4 +1,4 @@
-package fahamu;
+package fahamu.stockmanager;
 
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;

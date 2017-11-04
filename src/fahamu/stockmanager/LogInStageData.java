@@ -1,4 +1,4 @@
-package fahamu;
+package fahamu.stockmanager;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import javafx.collections.FXCollections;
@@ -9,33 +9,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static fahamu.LogInStage.*;
-
 class LogInStageData {
-
-    private static String localhost = "localhost";
-
 
     //authenticate the username with password to match in database
     static String authenticateUser(String user) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         String password = null;
 
         try {
-            try {
 
-                connection = mysqlDataSource.getConnection();
-
-            } catch (SQLException e) {
-                mysqlDataSource.setServerName(localhost);
-                connection = mysqlDataSource.getConnection();
-            }
+            connection = mysqlDataSource.getConnection();
 
             Statement statement = connection.createStatement();
             String selectQuery = "SELECT password FROM users.loginInfo WHERE name=\'" + user + "\'";
@@ -57,24 +46,21 @@ class LogInStageData {
     }
 
     //get user type
+
     static String getUserType(String user) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
         String type = null;
 
         try {
-            try {
 
-                connection = mysqlDataSource.getConnection();
-            } catch (SQLException e) {
-                mysqlDataSource.setServerName(localhost);
-                connection = mysqlDataSource.getConnection();
-            }
+            connection = mysqlDataSource.getConnection();
+
 
             Statement statement = connection.createStatement();
             String selectQuery = "SELECT type FROM users.loginInfo WHERE name=\'" + user + "\'";
@@ -96,34 +82,30 @@ class LogInStageData {
     }
 
     //get all user
-    static ObservableList<String> getAllUsers(String currentUser){
-        MysqlDataSource mysqlDataSource=new MysqlDataSource();
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+    static ObservableList<String> getAllUsers(String currentUser) {
+        MysqlDataSource mysqlDataSource = new MysqlDataSource();
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection=null;
-        String selectQuery="SELECT name FROM users.loginInfo where name!='"+currentUser+"'";
+        Connection connection = null;
+        String selectQuery = "SELECT name FROM users.loginInfo where name!='" + currentUser + "'";
 
-        ObservableList<String> users= FXCollections.observableArrayList();
+        ObservableList<String> users = FXCollections.observableArrayList();
 
         try {
-            try {
-                connection = mysqlDataSource.getConnection();
-            }catch (SQLException s){
-                mysqlDataSource.setServerName(localhost);
-                connection=mysqlDataSource.getConnection();
-            }
 
-            Statement statement=connection.createStatement();
-            ResultSet resultSet=statement.executeQuery(selectQuery);
-            while (resultSet.next()){
+            connection = mysqlDataSource.getConnection();
+
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(selectQuery);
+            while (resultSet.next()) {
                 users.add(resultSet.getString(1));
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            if (connection!=null) try {
+        } finally {
+            if (connection != null) try {
                 connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -136,24 +118,19 @@ class LogInStageData {
     static void addUser(String user, String passw, String type) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
 
         try {
-            try {
+            connection = mysqlDataSource.getConnection();
 
-                connection = mysqlDataSource.getConnection();
-            } catch (SQLException e) {
-                mysqlDataSource.setServerName(localhost);
-                connection = mysqlDataSource.getConnection();
-            }
 
             Statement statement = connection.createStatement();
             String insertQuery = "INSERT INTO users.loginInfo(name,password,type) " +
-                    " VALUES(\'"+user+"\',\'" + passw + "\',\'"+type+"\')";
+                    " VALUES(\'" + user + "\',\'" + passw + "\',\'" + type + "\')";
             statement.execute(insertQuery);
 
         } catch (SQLException e) {
@@ -168,26 +145,22 @@ class LogInStageData {
     }
 
     //remove user
-    static void removeUser(String user){
+    static void removeUser(String user) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
 
         try {
-            try {
 
-                connection = mysqlDataSource.getConnection();
-            } catch (SQLException e) {
-                mysqlDataSource.setServerName(localhost);
-                connection = mysqlDataSource.getConnection();
-            }
+            connection = mysqlDataSource.getConnection();
+
 
             Statement statement = connection.createStatement();
-            String insertQuery = "DELETE FROM users.loginInfo WHERE name=\'"+user+"\'";
+            String insertQuery = "DELETE FROM users.loginInfo WHERE name=\'" + user + "\'";
 
             statement.execute(insertQuery);
 
@@ -206,23 +179,19 @@ class LogInStageData {
     static void updateUserInfo(String user, String paswd) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(LogInStage.username);
+        mysqlDataSource.setPassword(LogInStage.password);
+        mysqlDataSource.setServerName(LogInStage.serverAddress);
 
         Connection connection = null;
 
         try {
-            try {
 
-                connection = mysqlDataSource.getConnection();
-            } catch (SQLException e) {
-                mysqlDataSource.setServerName(localhost);
-                connection = mysqlDataSource.getConnection();
-            }
+            connection = mysqlDataSource.getConnection();
+
 
             Statement statement = connection.createStatement();
-            String updateQuery = "UPDATE users.loginInfo SET password=\'"+paswd+"\' WHERE name=\'" + user + "\'";
+            String updateQuery = "UPDATE users.loginInfo SET password=\'" + paswd + "\' WHERE name=\'" + user + "\'";
             statement.execute(updateQuery);
 
         } catch (SQLException e) {

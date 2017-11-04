@@ -1,4 +1,4 @@
-package fahamu;
+package fahamu.stockmanager;
 
 import com.fahamu.tech.FileEncrypt;
 
@@ -12,9 +12,18 @@ class ServerCredential {
     HashMap<String, String> serverDetail;
     private FileEncrypt fileEncrypt;
 
+    /**
+     * this initialize create object to decrypt a file
+     * and then call the method to read data from sqlite file
+     *
+     * @param path=location of encrypted sqlite file which contain server Credential
+     */
     ServerCredential(String path) {
-        getServerCredential(path);
+
+        //initialize file encrypt class
         fileEncrypt = new FileEncrypt();
+        //call encrypt file method
+        getServerCredential(path);
     }
 
     /**
@@ -25,18 +34,21 @@ class ServerCredential {
     private void getServerCredential(String path) {
 
         serverDetail = new HashMap<>();
+        //mysql connection object
         Connection connection = null;
 
         //decrypt a server credential file
         String dataPath = null;
+        File decryptedFile=null;
         try {
             File inputFile = new File(path);
-            File decryptedFile = File.createTempFile("serverCredential", ".db");
-            dataPath = decryptedFile.getPath();
-            System.out.println(dataPath);
-            fileEncrypt.decrypt("Mary has one cat", inputFile, decryptedFile);
+            decryptedFile = File.createTempFile("serverCredential", ".db");
 
-            decryptedFile.deleteOnExit();
+            //dataPath is the temporary folder hold sqlite file which contain severCredential
+            dataPath = decryptedFile.getPath();
+
+            fileEncrypt.decrypt(FileEncrypt.KEY, inputFile, decryptedFile);
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -51,6 +63,9 @@ class ServerCredential {
                 serverDetail.put(resultSet.getString(1), resultSet.getString(2));
 
             }
+
+            //delete the temporary file when done
+            if (decryptedFile != null) decryptedFile.delete();
 
         } catch (SQLException e) {
             e.printStackTrace();

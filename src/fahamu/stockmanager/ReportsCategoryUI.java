@@ -1,4 +1,4 @@
-package fahamu;
+package fahamu.stockmanager;
 
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -8,7 +8,10 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.chart.*;
+import javafx.scene.chart.AreaChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
@@ -29,7 +32,7 @@ public class ReportsCategoryUI {
     private String dateClicked;
 
     TableView<SalesTableDataClass> salesTable;
-    TableView<fahamu.SalesCategoryUI.CashierSale> cashierSaleTable, purchaseCreditHistoryTable;
+    TableView<SalesCategoryUI.CashierSale> cashierSaleTable, purchaseCreditHistoryTable;
     TableView<DiscountDetailTableDataClass> discountDetail, purchaseCashHistoryTable;
     TableView<ProductSellHistoryDataClass> sellHistoryTable;
     AreaChart<String, Number> salesGraph, sellPurchaseChart;
@@ -116,7 +119,7 @@ public class ReportsCategoryUI {
                     discountDetail.getItems().clear();
                     for (String s : data) {
                         cashierSaleTable.getItems().add(
-                                new fahamu.SalesCategoryUI.CashierSale(
+                                new SalesCategoryUI.CashierSale(
                                         s,
                                         SaleCategoryData.getTotalSaleOfDay(s, date1),
                                         SaleCategoryData.getTotalDiscount(s, date1)
@@ -150,16 +153,16 @@ public class ReportsCategoryUI {
         return salesTableView;
     }
 
-    public TableView<fahamu.SalesCategoryUI.CashierSale> cashierSaleTableView(String c1, String c2, String c3) {
+    public TableView<SalesCategoryUI.CashierSale> cashierSaleTableView(String c1, String c2, String c3) {
 
-        TableView<fahamu.SalesCategoryUI.CashierSale> cashierSaleTableView = new TableView<>();
+        TableView<SalesCategoryUI.CashierSale> cashierSaleTableView = new TableView<>();
         cashierSaleTableView.setPadding(new Insets(2.5));
         cashierSaleTableView.setStyle("-fx-border-color: blue; -fx-border-width: 2; -fx-border-radius: 10");
         cashierSaleTableView.autosize();
 
-        TableColumn<fahamu.SalesCategoryUI.CashierSale, String> cashierColumn = new TableColumn<>(c1);
-        TableColumn<fahamu.SalesCategoryUI.CashierSale, Float> amountColumn = new TableColumn<>(c2);
-        TableColumn<fahamu.SalesCategoryUI.CashierSale, Float> discountColumn = new TableColumn<>(c3);
+        TableColumn<SalesCategoryUI.CashierSale, String> cashierColumn = new TableColumn<>(c1);
+        TableColumn<SalesCategoryUI.CashierSale, Float> amountColumn = new TableColumn<>(c2);
+        TableColumn<SalesCategoryUI.CashierSale, Float> discountColumn = new TableColumn<>(c3);
 
         cashierColumn.setMinWidth(100);
         cashierColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -178,7 +181,7 @@ public class ReportsCategoryUI {
         });
 
         cashierSaleTableView.setRowFactory(param -> {
-            TableRow<fahamu.SalesCategoryUI.CashierSale> tableRow=new TableRow<>();
+            TableRow<SalesCategoryUI.CashierSale> tableRow = new TableRow<>();
             tableRow.setOnMouseEntered(event -> {
                 if (tableRow.isSelected()){
                     event.consume();
@@ -360,7 +363,7 @@ public class ReportsCategoryUI {
         productListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
             public ListCell<String> call(ListView<String> param) {
-                ListCell<String> cell = new fahamu.ListCellsCustom();
+                ListCell<String> cell = new ListCellsCustom();
                 cell.setOnMouseEntered(event -> {
                     if (cell.isSelected()) {
                         event.consume();

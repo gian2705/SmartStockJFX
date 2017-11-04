@@ -2,6 +2,7 @@
   <dictionary name="joshua">
     <words>
       <w>addr</w>
+      <w>jdbc</w>
       <w>sqlite</w>
     </words>
   </dictionary>

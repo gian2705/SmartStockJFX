@@ -1,4 +1,4 @@
-package fahamu;
+package fahamu.stockmanager;
 
 import java.awt.*;
 import java.io.IOException;
