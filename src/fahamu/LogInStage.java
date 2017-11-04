@@ -36,7 +36,7 @@ public class LogInStage extends Application {
     static String currentUserName;
     static String password;
     static String serverAddress;
-    private ServerCredential serverCredential = new ServerCredential();
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -44,6 +44,15 @@ public class LogInStage extends Application {
         primaryStage.setTitle("LB Pharmacy");
 
         //get server credential details
+        // server credential object initialize the has map which contain server
+        //detail for login. the constructor the path of the encrypted file.
+        String path = "";
+        if (System.getProperty("os.name").equals("Linux")) {
+            path = "/usr/bin/Lb/serverCredential.db.encrypted";
+        } else {
+            //implement window file location
+        }
+        ServerCredential serverCredential = new ServerCredential("");
         username = serverCredential.serverDetail.get("username");
         password = serverCredential.serverDetail.get("password");
         serverAddress = serverCredential.serverDetail.get("serverAddr");
