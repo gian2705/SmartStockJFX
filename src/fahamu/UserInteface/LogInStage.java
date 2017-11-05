@@ -1,6 +1,10 @@
-package fahamu.stockmanager;
+package fahamu.UserInteface;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import fahamu.dataFactory.LogInStageData;
+import fahamu.dataFactory.SaleCategoryData;
+import fahamu.dataFactory.ServerCredentialFactory;
+import fahamu.dataFactory.StockCategoryData;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,6 +24,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.NumberFormat;
@@ -35,9 +40,9 @@ public class LogInStage extends Application {
 
     static Stage stageLogIn;
     static String currentUserName;
-    static String password;
-    static String serverAddress;
-    static String username;
+    public static String password;
+    public static String serverAddress;
+    public static String username;
 
 
     @Override
@@ -48,19 +53,20 @@ public class LogInStage extends Application {
         //get server credential details
         // server credential object initialize the has map which contain server
         //detail for login. the constructor the path of the encrypted file.
-        String path = "";
+        String path;
         if (System.getProperty("os.name").equals("Linux")) {
-            path = "/usr/bin/Lb/serverCredential.db.encrypted";
+            path = "/usr/bin/Lb/serverCredentialFactory.db.encrypted";
         } else {
             //implement window file location
+            path = Paths.get(System.getProperty("user.home")).toString();
 
         }
 
         //get the server credential just before show login interface
-        ServerCredential serverCredential = new ServerCredential(path);
-        username = serverCredential.serverDetail.get("username");
-        password = serverCredential.serverDetail.get("password");
-        serverAddress = serverCredential.serverDetail.get("serverAddr");
+        ServerCredentialFactory serverCredentialFactory = new ServerCredentialFactory(path);
+        username = serverCredentialFactory.serverDetail.get("username");
+        password = serverCredentialFactory.serverDetail.get("password");
+        serverAddress = serverCredentialFactory.serverDetail.get("serverAddr");
         //set contents of login stage
         setLogInUI();
 
@@ -525,7 +531,7 @@ public class LogInStage extends Application {
             boolean reachable = inetAddress.isReachable(1000);
             if (!reachable) {
                 //boolean check for availability of local server
-                boolean isLocalServerAvailable = false;
+                boolean isLocalServerAvailable;
                 //check availability of local databases
                 MysqlDataSource mysqlDataSource = new MysqlDataSource();
                 mysqlDataSource.setUser(username);
@@ -542,14 +548,13 @@ public class LogInStage extends Application {
 
                 } catch (SQLException e) {
                     isLocalServerAvailable = false;
-                    e.printStackTrace();
                 } finally {
                     if (connection != null) try {
                         connection.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
+                    } catch (SQLException ignore) {
                     }
                 }
+
                 if (!isLocalServerAvailable) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setContentText("Database Server is not reachable.");

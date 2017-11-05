@@ -1,6 +1,7 @@
-package fahamu.stockmanager;
+package fahamu.dataFactory;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import fahamu.UserInteface.LogInStage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -9,10 +10,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-class LogInStageData {
+public class LogInStageData {
 
     //authenticate the username with password to match in database
-    static String authenticateUser(String user) {
+    public static String authenticateUser(String user) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
 
         mysqlDataSource.setUser(LogInStage.username);
@@ -47,7 +48,7 @@ class LogInStageData {
 
     //get user type
 
-    static String getUserType(String user) {
+    public static String getUserType(String user) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
 
         mysqlDataSource.setUser(LogInStage.username);
@@ -82,7 +83,7 @@ class LogInStageData {
     }
 
     //get all user
-    static ObservableList<String> getAllUsers(String currentUser) {
+    public static ObservableList<String> getAllUsers(String currentUser) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
@@ -115,7 +116,7 @@ class LogInStageData {
     }
 
     //add new user
-    static void addUser(String user, String passw, String type) {
+    public static void addUser(String user, String passw, String type) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
 
         mysqlDataSource.setUser(LogInStage.username);
@@ -145,7 +146,7 @@ class LogInStageData {
     }
 
     //remove user
-    static void removeUser(String user) {
+    public static void removeUser(String user) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
 
         mysqlDataSource.setUser(LogInStage.username);
@@ -176,7 +177,7 @@ class LogInStageData {
     }
 
     //update user info
-    static void updateUserInfo(String user, String paswd) {
+    public static void updateUserInfo(String user, String paswd) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
 
         mysqlDataSource.setUser(LogInStage.username);

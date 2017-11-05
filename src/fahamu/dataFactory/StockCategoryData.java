@@ -1,6 +1,8 @@
-package fahamu.stockmanager;
+package fahamu.dataFactory;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import fahamu.UserInteface.SalesCategoryUI;
+import fahamu.UserInteface.StockCategoryUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -10,13 +12,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.NumberFormat;
 
-import static fahamu.stockmanager.LogInStage.*;
+import static fahamu.UserInteface.LogInStage.*;
 
-class StockCategoryData {
+public class StockCategoryData {
 
     //the selling price of the specific product
-    static float sellPrice;
-    static float wSellPrice;
+    public static float sellPrice;
+    public static float wSellPrice;
 
     private static String localhost = "localhost";
     private static String selectDatabase = "use stockdata";
@@ -26,7 +28,7 @@ class StockCategoryData {
     }
 
     //get all product for update
-    static ObservableList<String> getProductNames() {
+    public static ObservableList<String> getProductNames() {
         ObservableList<String> stockRetailProducts = FXCollections.observableArrayList();
         String getAllProducts = "SELECT product FROM retailStock   ORDER BY product";
 
@@ -50,7 +52,7 @@ class StockCategoryData {
             while (resultSet.next()) {
                 stockRetailProducts.add(resultSet.getString("product"));
             }
-        } catch (SQLException e) {
+        } catch (SQLException ignore) {
 
         } finally {
             if (connection != null) try {
@@ -62,7 +64,7 @@ class StockCategoryData {
         return stockRetailProducts;
     }
 
-    static String getUnit(String condition) {
+    public static String getUnit(String condition) {
 
         String query = "SELECT unit FROM retailStock WHERE product=\'" + condition + "\';";
         Connection connection = null;
@@ -96,7 +98,7 @@ class StockCategoryData {
         return data;
     }
 
-    static String getSellPrice(String condition) {
+    public static String getSellPrice(String condition) {
         String query = "SELECT sell FROM retailStock WHERE product=\'" + condition + "\'";
         Connection connection = null;
         String formattedPrice = null;
@@ -133,10 +135,9 @@ class StockCategoryData {
         return formattedPrice;
     }
 
-    static void getWholeSellPrice(String condition) {
+    public static void getWholeSellPrice(String condition) {
         String query = "SELECT wsell FROM retailStock WHERE product=\'" + condition + "\'";
         Connection connection = null;
-        String formattedPrice = null;
         try {
             MysqlDataSource mysqlDataSource = new MysqlDataSource();
             mysqlDataSource.setUser(username);
@@ -155,9 +156,7 @@ class StockCategoryData {
             ResultSet resultSet = statement.executeQuery(query);
             //store the sell price and the number separate formatted separate
             while (resultSet.next()) wSellPrice = resultSet.getFloat("wsell");
-            //format the number for accountant
-            NumberFormat format = NumberFormat.getInstance();
-            formattedPrice = format.format(wSellPrice);
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -169,7 +168,7 @@ class StockCategoryData {
         }
     }
 
-    static String getCategory(String condition) {
+    public static String getCategory(String condition) {
         String query = "SELECT category FROM retailStock WHERE product=\'" + condition + "\';";
         String category = null;
         Connection connection = null;
@@ -203,7 +202,7 @@ class StockCategoryData {
         return category;
     }
 
-    static void getAllCategories() {
+    public static void getAllCategories() {
 
         Connection connection = null;
         try {
@@ -236,7 +235,7 @@ class StockCategoryData {
         }
     }
 
-    static void removeCategory(String condition) {
+    public static void removeCategory(String condition) {
 
         Connection connection = null;
         try {
@@ -267,7 +266,7 @@ class StockCategoryData {
         }
     }
 
-    static void removeUnit(String condition) {
+    public static void removeUnit(String condition) {
 
         Connection connection = null;
         try {
@@ -299,7 +298,7 @@ class StockCategoryData {
     }
 
     //get all unit
-    static void getAllUnit() {
+    public static void getAllUnit() {
 
         Connection connection = null;
 
@@ -333,7 +332,7 @@ class StockCategoryData {
         }
     }
 
-    static String getShelf(String condition) {
+    public static String getShelf(String condition) {
         Connection connection = null;
         String query = "SELECT shelf FROM retailStock WHERE product=\'" + condition + "\';";
         String shelf = null;
@@ -367,7 +366,7 @@ class StockCategoryData {
         return shelf;
     }
 
-    static float getProfit(String condition) {
+    public static float getProfit(String condition) {
         Connection connection = null;
         String query = "SELECT sell-purchase FROM retailStock WHERE product=\'" + condition + "\'";
         float profitPrice = 0;
@@ -403,7 +402,7 @@ class StockCategoryData {
         return profitPrice;
     }
 
-    static float getPurchase(String condition) {
+    public static float getPurchase(String condition) {
         Connection connection = null;
         String query = "SELECT purchase FROM retailStock WHERE product=\'" + condition + "\'";
         float purchasePrice = 0;
@@ -439,7 +438,7 @@ class StockCategoryData {
     }
 
     //get a specific quantity of the product
-    static int getProductQuantity(String condition) {
+    public static int getProductQuantity(String condition) {
         int quantity = 0;
         String quantityQuery = "SELECT quantity FROM retailStock WHERE product=\'" + condition + "\'";
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
@@ -474,7 +473,7 @@ class StockCategoryData {
         return quantity;
     }
 
-    static String getProductQuantityCheckStatus(String condition) {
+    public static String getProductQuantityCheckStatus(String condition) {
         String q_status = null;
         String quantityQuery = "SELECT q_status FROM retailStock WHERE product=\'" + condition + "\'";
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
@@ -509,7 +508,7 @@ class StockCategoryData {
         return q_status;
     }
 
-    static int getWholeProductQuantity(String condition) {
+    public static int getWholeProductQuantity(String condition) {
         int quantity = 0;
         String quantityQuery = "SELECT wquantity FROM retailStock WHERE product=\'" + condition + "\'";
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
@@ -545,7 +544,7 @@ class StockCategoryData {
     }
 
     //get Product reorder level
-    static int getReorderLevel(String condition) {
+    public static int getReorderLevel(String condition) {
         Connection connection = null;
         String query = "SELECT reorder FROM retailStock WHERE product=\'" + condition + "\'";
         int reoderLevel = 0;
@@ -581,7 +580,7 @@ class StockCategoryData {
     }
 
     //get all stock
-    static ObservableList<StockCategoryUI.StockList> getStockList() {
+    public static ObservableList<StockCategoryUI.StockList> getStockList() {
         String selectQuery = "SELECT * FROM retailStock";
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
@@ -639,7 +638,7 @@ class StockCategoryData {
 
     //when a bill is submitted as payed in the cash sale update the remaining product
     //also this method will be called when you update the stock
-    static void updateProductQuantity(String product, int quantity) {
+    public static void updateProductQuantity(String product, int quantity) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
@@ -671,7 +670,7 @@ class StockCategoryData {
         }
     }
 
-    static void updateWholeQuantityOfProduct(String product, int wquantity) {
+    public static void updateWholeQuantityOfProduct(String product, int wquantity) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
@@ -703,7 +702,7 @@ class StockCategoryData {
         }
     }
 
-    static void updateWholeSalePrice(String product, float wsell) {
+    public static void updateWholeSalePrice(String product, float wsell) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
@@ -736,7 +735,7 @@ class StockCategoryData {
     }
 
     //insert a new product category
-    static void insertProductCategory(String category) {
+    public static void insertProductCategory(String category) {
 
         Connection connection = null;
         try {
@@ -769,7 +768,7 @@ class StockCategoryData {
     }
 
     //insert new product unit
-    static void insertProductUnit(String unit) {
+    public static void insertProductUnit(String unit) {
         Connection connection = null;
         try {
             MysqlDataSource mysqlDataSource = new MysqlDataSource();
@@ -801,7 +800,7 @@ class StockCategoryData {
     }
 
     //update the purchase
-    static void updatePurchasePrice(String product, float purchase) {
+    public static void updatePurchasePrice(String product, float purchase) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
@@ -833,7 +832,7 @@ class StockCategoryData {
         }
     }
 
-    static void updateSellPrice(String product, float sellPrice) {
+    public static void updateSellPrice(String product, float sellPrice) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
@@ -866,7 +865,7 @@ class StockCategoryData {
     }
 
     //update to current supplier
-    static void updateCurrentSupplier(String product, String supplier) {
+    public static void updateCurrentSupplier(String product, String supplier) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
@@ -898,7 +897,7 @@ class StockCategoryData {
     }
 
     //delete a row
-    static void deleteProduct(String product) {
+    public static void deleteProduct(String product) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
@@ -931,7 +930,7 @@ class StockCategoryData {
     }
 
     //update the product in the table
-    static void updateProductParameters(
+    public static void updateProductParameters(
             String condition,
             String product,
             String unity,
@@ -995,7 +994,7 @@ class StockCategoryData {
     }
 
     //insert new Stock
-    static void insertDataIntoStock(
+    public static void insertDataIntoStock(
             String product,
             String unit,
             String category,
@@ -1074,7 +1073,7 @@ class StockCategoryData {
     }
 
     //get the quick stock reports from database
-    static String[] getQuickStockReport() {
+    public static String[] getQuickStockReport() {
 
         String[] reports = new String[4];
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
@@ -1135,7 +1134,7 @@ class StockCategoryData {
         return reports;
     }
 
-    static ObservableList<String> getExpiredProduct() {
+    public static ObservableList<String> getExpiredProduct() {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
@@ -1169,7 +1168,7 @@ class StockCategoryData {
         return data;
     }
 
-    static ObservableList<SalesCategoryUI.ExpiredProduct> getExpiredProductDetail() {
+    public static ObservableList<SalesCategoryUI.ExpiredProduct> getExpiredProductDetail() {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
@@ -1207,7 +1206,7 @@ class StockCategoryData {
         return data;
     }
 
-    static ObservableList<String> getNearExpiredProduct() {
+    public static ObservableList<String> getNearExpiredProduct() {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
@@ -1241,7 +1240,7 @@ class StockCategoryData {
         return data;
     }
 
-    static ObservableList<SalesCategoryUI.NearExpire> getNearExpiredProductDetail() {
+    public static ObservableList<SalesCategoryUI.NearExpire> getNearExpiredProductDetail() {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
@@ -1280,7 +1279,7 @@ class StockCategoryData {
         return data;
     }
 
-    static ObservableList<String> getOrderList() {
+    public static ObservableList<String> getOrderList() {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
@@ -1314,7 +1313,7 @@ class StockCategoryData {
         return data;
     }
 
-    static ObservableList<SalesCategoryUI.OrderList> getOrderListDetail() {
+    public static ObservableList<SalesCategoryUI.OrderList> getOrderListDetail() {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);

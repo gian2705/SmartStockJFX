@@ -1,5 +1,7 @@
-package fahamu.stockmanager;
+package fahamu.UserInteface;
 
+import fahamu.dataFactory.PurchaseCategoryData;
+import fahamu.dataFactory.StockCategoryData;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -26,8 +28,8 @@ public class PurchaseCategoryUI {
     static Popup popupRemoveReceipt;
     static Popup popupRemoveInvoice;
 
-    static ObservableList<InvoiceDetail> invoiceDetailsData;
-    static ObservableList<DueInvoiceListTable> creditPurchaseData;
+    public static ObservableList<DueInvoiceListTable> creditPurchaseData;
+    private static ObservableList<InvoiceDetail> invoiceDetailsData;
 
 
     PurchaseCategoryUI() {
@@ -39,7 +41,6 @@ public class PurchaseCategoryUI {
         removeInvoice();
 
     }
-
 
     GridPane setDueInvoiceUI() {
 
@@ -271,9 +272,7 @@ public class PurchaseCategoryUI {
                     dueInvoiceListTableView.getFocusModel().focus(tableRow.getIndex());
                     tableRow.setStyle("-fx-background-color: rgba(0,0,255,0.15)");
                 }
-                tableRow.setOnMouseExited(event1 -> {
-                    tableRow.setStyle("-fx-base: white");
-                });
+                tableRow.setOnMouseExited(event1 -> tableRow.setStyle("-fx-base: white"));
             });
             return tableRow;
         });
@@ -715,9 +714,7 @@ public class PurchaseCategoryUI {
                     purchaseListTableView.getFocusModel().focus(tableRow.getIndex());
                     tableRow.setStyle("-fx-background-color: rgba(0,0,255,0.15)");
                 }
-                tableRow.setOnMouseExited(event1 -> {
-                    tableRow.setStyle("-fx-base: white");
-                });
+                tableRow.setOnMouseExited(event1 -> tableRow.setStyle("-fx-base: white"));
             });
             return tableRow;
         });
@@ -1183,10 +1180,7 @@ public class PurchaseCategoryUI {
             }
         });
 
-        supplierChooser.setOnMouseClicked(event -> {
-            supplierChooser.show();
-
-        });
+        supplierChooser.setOnMouseClicked(event -> supplierChooser.show());
         supplierChooser.getEditor().setOnMouseClicked(event -> {
             supplierChooser.show();
         });
@@ -1269,9 +1263,8 @@ public class PurchaseCategoryUI {
             supplierChooser.show();
         });
 
-        invoiceNumberChooser.setOnMouseClicked(event -> {
-            invoiceNumberChooser.setItems(PurchaseCategoryData.getAllInvoice());
-        });
+        invoiceNumberChooser.setOnMouseClicked(event ->
+                invoiceNumberChooser.setItems(PurchaseCategoryData.getAllInvoice()));
         invoiceNumberChooser.getEditor().setOnMouseClicked(event -> {
             invoiceNumberChooser.setItems(PurchaseCategoryData.getAllInvoice());
             invoiceNumberChooser.show();
@@ -2080,9 +2073,7 @@ public class PurchaseCategoryUI {
                     purchaseListTableView.getFocusModel().focus(tableRow.getIndex());
                     tableRow.setStyle("-fx-background-color: rgba(0,0,255,0.15)");
                 }
-                tableRow.setOnMouseExited(event1 -> {
-                    tableRow.setStyle("-fx-base: white");
-                });
+                tableRow.setOnMouseExited(event1 -> tableRow.setStyle("-fx-base: white"));
             });
             return tableRow;
         });
@@ -2633,9 +2624,7 @@ public class PurchaseCategoryUI {
                 }
             }
         });
-        receiptChooser.getEditor().setOnMouseClicked(event -> {
-            receiptChooser.show();
-        });
+        receiptChooser.getEditor().setOnMouseClicked(event -> receiptChooser.show());
         receiptChooser.getEditor().setOnKeyReleased(event -> {
             //update list of combo box
             ObservableList<String> products = PurchaseCategoryData.getAllCashReceipt();
@@ -2798,13 +2787,8 @@ public class PurchaseCategoryUI {
         });
 
 
-        supplierChooser.setOnMouseClicked(event -> {
-            supplierChooser.show();
-
-        });
-        supplierChooser.getEditor().setOnMouseClicked(event -> {
-            supplierChooser.show();
-        });
+        supplierChooser.setOnMouseClicked(event -> supplierChooser.show());
+        supplierChooser.getEditor().setOnMouseClicked(event -> supplierChooser.show());
         supplierChooser.getEditor().setOnKeyReleased(event -> {
             //update list of combo box
             ObservableList<String> products = PurchaseCategoryData.getSuppliers();
@@ -3591,9 +3575,7 @@ public class PurchaseCategoryUI {
         popupRemoveSupplier.setAutoFix(true);
         popupRemoveSupplier.getContent().add(vBox);
 
-        cancelButton.setOnAction(event -> {
-            popupRemoveSupplier.hide();
-        });
+        cancelButton.setOnAction(event -> popupRemoveSupplier.hide());
 
         removeProductButton.setOnAction(event1 -> {
             if (supplierList.getSelectionModel().isEmpty()) {
@@ -3934,15 +3916,15 @@ public class PurchaseCategoryUI {
         private final SimpleFloatProperty purchase;
         private final SimpleFloatProperty amount;
 
-        CashPurchaseList(String date,
-                         String invoice,
-                         String product,
-                         String category,
-                         String unit,
-                         String supplier,
-                         int quantity,
-                         float purchase,
-                         float amount) {
+        public CashPurchaseList(String date,
+                                String invoice,
+                                String product,
+                                String category,
+                                String unit,
+                                String supplier,
+                                int quantity,
+                                float purchase,
+                                float amount) {
             this.date = new SimpleStringProperty(date);
             this.invoice = new SimpleStringProperty(invoice);
             this.product = new SimpleStringProperty(product);
@@ -4041,17 +4023,17 @@ public class PurchaseCategoryUI {
         private final SimpleFloatProperty amount;
         private final SimpleStringProperty status;
 
-        CreditPurchaseList(String date,
-                           String due,
-                           String invoice,
-                           String product,
-                           String category,
-                           String unit,
-                           String supplier,
-                           int quantity,
-                           float purchase,
-                           float amount,
-                           String status) {
+        public CreditPurchaseList(String date,
+                                  String due,
+                                  String invoice,
+                                  String product,
+                                  String category,
+                                  String unit,
+                                  String supplier,
+                                  int quantity,
+                                  float purchase,
+                                  float amount,
+                                  String status) {
             this.date = new SimpleStringProperty(date);
             this.due = new SimpleStringProperty(due);
             this.invoice = new SimpleStringProperty(invoice);
@@ -4163,7 +4145,7 @@ public class PurchaseCategoryUI {
         private final SimpleStringProperty status;
         private final SimpleStringProperty supplier;
 
-        DueInvoiceListTable(
+        public DueInvoiceListTable(
                 String invoice,
                 int remain,
                 String due,
@@ -4206,7 +4188,7 @@ public class PurchaseCategoryUI {
         private final SimpleFloatProperty purchase;
         private final SimpleFloatProperty amount;
 
-        InvoiceDetail(
+        public InvoiceDetail(
                 String product,
                 String unit,
                 int quantity,

@@ -4,6 +4,9 @@
       <w>addr</w>
       <w>jdbc</w>
       <w>sqlite</w>
+      <w>squantity</w>
+      <w>stockdata</w>
+      <w>wsell</w>
     </words>
   </dictionary>
 </component>

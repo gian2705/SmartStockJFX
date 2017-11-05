@@ -1,5 +1,6 @@
-package fahamu.stockmanager;
+package fahamu.UserInteface;
 
+import fahamu.dataFactory.ExpenditureCategoryData;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -16,7 +17,7 @@ public class ExpenditureCategoryUI {
     static Popup popup;
     static GridPane newExpenditureUI;
 
-    static ObservableList<ExpensesList> expensesListObservableList;
+    public static ObservableList<ExpensesList> expensesListObservableList;
     private static ListView<String> categoryListView;
 
     ExpenditureCategoryUI() {
@@ -280,7 +281,7 @@ public class ExpenditureCategoryUI {
         private final SimpleStringProperty user;
         private final SimpleFloatProperty amount;
 
-        ExpensesList(
+        public ExpensesList(
                 String date,
                 String name,
                 String description,

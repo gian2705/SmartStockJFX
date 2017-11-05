@@ -1,6 +1,10 @@
-package fahamu.stockmanager;
+package fahamu.dataFactory;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import fahamu.UserInteface.LogInStage;
+import fahamu.UserInteface.ReportsCategoryUI;
+import fahamu.UserInteface.SalesCategoryUI;
+import fahamu.UserInteface.StockCategoryUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
@@ -8,12 +12,12 @@ import javafx.scene.chart.XYChart;
 import java.sql.*;
 import java.util.Calendar;
 
-class SaleCategoryData {
+public class SaleCategoryData {
 
     private static String localhost = "127.0.0.1";
 
     //insert a row of data to the cashSale table
-    static void insertData(
+    public static void insertData(
             String id,
             String product,
             String category,
@@ -67,7 +71,7 @@ class SaleCategoryData {
         }
     }
 
-    static ObservableList<SalesCategoryUI.CashSaleOfDay> getCashSaleOfDay(String user) {
+    public static ObservableList<SalesCategoryUI.CashSaleOfDay> getCashSaleOfDay(String user) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
@@ -111,7 +115,7 @@ class SaleCategoryData {
         return allCashSale;
     }
 
-    static ObservableList<SalesCategoryUI.CashTraSaleOfDay> getCashTraSaleOfDay(String user) {
+    public static ObservableList<SalesCategoryUI.CashTraSaleOfDay> getCashTraSaleOfDay(String user) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
@@ -155,7 +159,7 @@ class SaleCategoryData {
         return allCashSale;
     }
 
-    static ObservableList<String> cashierList(String inputDate) {
+    public static ObservableList<String> cashierList(String inputDate) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
@@ -192,7 +196,7 @@ class SaleCategoryData {
         return data;
     }
 
-    static float getTotalSaleOfDay(String user, String date) {
+    public static float getTotalSaleOfDay(String user, String date) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
@@ -227,8 +231,8 @@ class SaleCategoryData {
         return sum;
     }
 
-    static ObservableList<ReportsCategoryUI.DiscountDetailTableDataClass> getDiscountProduct(String user,
-                                                                                             String date) {
+    public static ObservableList<ReportsCategoryUI.DiscountDetailTableDataClass> getDiscountProduct(String user,
+                                                                                                    String date) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
@@ -267,7 +271,7 @@ class SaleCategoryData {
         return data;
     }
 
-    static ObservableList<XYChart.Series<String, Number>> getSalesByCategory(String fromDate, String toDate) {
+    public static ObservableList<XYChart.Series<String, Number>> getSalesByCategory(String fromDate, String toDate) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
@@ -336,7 +340,7 @@ class SaleCategoryData {
         return series;
     }
 
-    static float getTotalSaleOfDay(String date) {
+    public static float getTotalSaleOfDay(String date) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
@@ -371,7 +375,7 @@ class SaleCategoryData {
         return sum;
     }
 
-    static ObservableList<ReportsCategoryUI.SalesTableDataClass> getSales(String dateFrom, String dateTo) {
+    public static ObservableList<ReportsCategoryUI.SalesTableDataClass> getSales(String dateFrom, String dateTo) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
@@ -431,7 +435,7 @@ class SaleCategoryData {
         return salesTableDataClassObservableList;
     }
 
-    static float getTotalTraSaleOfDayOfCashier(String user) {
+    public static float getTotalTraSaleOfDayOfCashier(String user) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
@@ -466,7 +470,7 @@ class SaleCategoryData {
         return sum;
     }
 
-    static float getTotalTraSaleOfDay() {
+    public static float getTotalTraSaleOfDay() {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
@@ -501,7 +505,7 @@ class SaleCategoryData {
         return sum;
     }
 
-    static float getTotalDiscount(String user, String date) {
+    public static float getTotalDiscount(String user, String date) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
@@ -535,7 +539,7 @@ class SaleCategoryData {
         return sum;
     }
 
-    static ObservableList<ReportsCategoryUI.ProductSellHistoryDataClass> getCashSaleHistory(
+    public static ObservableList<ReportsCategoryUI.ProductSellHistoryDataClass> getCashSaleHistory(
             String fromDate, String toDate, String product) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
@@ -575,7 +579,7 @@ class SaleCategoryData {
         return products;
     }
 
-    static ObservableList<String> getCashSaleProductHistory(String fromDate, String toDate) {
+    public static ObservableList<String> getCashSaleProductHistory(String fromDate, String toDate) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
@@ -611,7 +615,7 @@ class SaleCategoryData {
         return products;
     }
 
-    static XYChart.Series<String, Number> getProductCashSaleFrequency(String fromDate, String toDate) {
+    public static XYChart.Series<String, Number> getProductCashSaleFrequency(String fromDate, String toDate) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);

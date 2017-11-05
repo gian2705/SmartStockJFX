@@ -1,6 +1,7 @@
-package fahamu.stockmanager;
+package fahamu.dataFactory;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import fahamu.UserInteface.ExpenditureCategoryUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -9,14 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static fahamu.stockmanager.LogInStage.*;
+import static fahamu.UserInteface.LogInStage.*;
 
-class ExpenditureCategoryData {
+public class ExpenditureCategoryData {
 
     private static String localhost = "localhost";
 
     //get list of expenditure
-    static ObservableList<String> getCategoryList() {
+    public static ObservableList<String> getCategoryList() {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
@@ -51,7 +52,7 @@ class ExpenditureCategoryData {
     }
 
     //get all expenses and its detail
-    static void getExpensesDetails() {
+    public static void getExpensesDetails() {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
@@ -93,7 +94,7 @@ class ExpenditureCategoryData {
     }
 
     //insert expenditure data
-    static void insertExpenditureData(
+    public static void insertExpenditureData(
             String date,
             String name,
             String description,
@@ -138,7 +139,7 @@ class ExpenditureCategoryData {
     }
 
     //insert new category
-    static void insertNewCategory(String category) {
+    public static void insertNewCategory(String category) {
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);

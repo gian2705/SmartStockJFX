@@ -1,5 +1,7 @@
-package fahamu.stockmanager;
+package fahamu.UserInteface;
 
+import fahamu.dataFactory.SaleCategoryData;
+import fahamu.dataFactory.StockCategoryData;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
@@ -23,7 +25,7 @@ import java.sql.Date;
 import java.text.NumberFormat;
 import java.util.Calendar;
 
-class SalesCategoryUI {
+public class SalesCategoryUI {
 
     private SplitPane splitPane;
 
@@ -1766,7 +1768,7 @@ class SalesCategoryUI {
         private SimpleFloatProperty amount;
         private SimpleLongProperty dateId;
 
-        CashSaleOfDay(String date, String product, String category, int quantity, float amount) {
+        public CashSaleOfDay(String date, String product, String category, int quantity, float amount) {
             this.date = new SimpleStringProperty(date);
             this.product = new SimpleStringProperty(product);
             this.category = new SimpleStringProperty(category);
@@ -1803,7 +1805,7 @@ class SalesCategoryUI {
         private SimpleIntegerProperty quantity;
         private SimpleFloatProperty amount;
 
-        CashTraSaleOfDay(String date, String product, String category, int quantity, float amount) {
+        public CashTraSaleOfDay(String date, String product, String category, int quantity, float amount) {
             this.date = new SimpleStringProperty(date);
             this.product = new SimpleStringProperty(product);
             this.category = new SimpleStringProperty(category);
@@ -1837,7 +1839,7 @@ class SalesCategoryUI {
         private final SimpleFloatProperty amount;
         private final SimpleFloatProperty discount;
 
-        CashierSale(String name, float amount, float discount) {
+        public CashierSale(String name, float amount, float discount) {
             this.name = new SimpleStringProperty(name);
             this.amount = new SimpleFloatProperty(amount);
             this.discount = new SimpleFloatProperty(discount);
@@ -1862,7 +1864,7 @@ class SalesCategoryUI {
         private final SimpleStringProperty supplier;
         private final SimpleFloatProperty purchase;
 
-        OrderList(String product, int quantity, String supplier, float purchase) {
+        public OrderList(String product, int quantity, String supplier, float purchase) {
             this.product = new SimpleStringProperty(product);
             this.quantity = new SimpleIntegerProperty(quantity);
             this.supplier = new SimpleStringProperty(supplier);
@@ -1891,7 +1893,7 @@ class SalesCategoryUI {
         private final SimpleIntegerProperty quantity;
         private final SimpleStringProperty date;
 
-        NearExpire(String product, int quantity, String date) {
+        public NearExpire(String product, int quantity, String date) {
             this.product = new SimpleStringProperty(product);
             this.quantity = new SimpleIntegerProperty(quantity);
             this.date = new SimpleStringProperty(date);
@@ -1915,7 +1917,7 @@ class SalesCategoryUI {
         private final SimpleIntegerProperty quantity;
         private final SimpleStringProperty date;
 
-        ExpiredProduct(String product, int quantity, String date) {
+        public ExpiredProduct(String product, int quantity, String date) {
             this.product = new SimpleStringProperty(product);
             this.quantity = new SimpleIntegerProperty(quantity);
             this.date = new SimpleStringProperty(date);

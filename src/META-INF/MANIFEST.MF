@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: fahamu.stockmanager.LogInStage
+Main-Class: fahamu.UserInteface.LogInStage
 

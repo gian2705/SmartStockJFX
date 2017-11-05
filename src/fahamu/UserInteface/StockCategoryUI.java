@@ -1,7 +1,9 @@
-package fahamu.stockmanager;
+package fahamu.UserInteface;
 
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import fahamu.dataFactory.PurchaseCategoryData;
+import fahamu.dataFactory.StockCategoryData;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -20,14 +22,14 @@ import javafx.stage.Popup;
 import java.io.File;
 import java.sql.*;
 
-import static fahamu.stockmanager.LogInStage.*;
+import static fahamu.UserInteface.LogInStage.*;
 
-class StockCategoryUI {
+public class StockCategoryUI {
 
     //this is the list of all the current stock updated
 
-    static ObservableList<String> unitList = FXCollections.observableArrayList();
-    static ObservableList<String> categoryList = FXCollections.observableArrayList();
+    public static ObservableList<String> unitList = FXCollections.observableArrayList();
+    public static ObservableList<String> categoryList = FXCollections.observableArrayList();
 
     static Popup popupAddCategory;
     static Popup popupRemoveCategory;
@@ -2420,21 +2422,21 @@ class StockCategoryUI {
         private final SimpleStringProperty expire;
         private final SimpleStringProperty shelf;
 
-        StockList(String product,
-                  String unit,
-                  String category,
-                  int quantity,
-                  String q_update,
-                  int wquantity,
-                  int reorder,
-                  String supplier,
-                  float purchase,
-                  float sell,
-                  float wsell,
-                  float profit,
-                  float times,
-                  String expire,
-                  String shelf) {
+        public StockList(String product,
+                         String unit,
+                         String category,
+                         int quantity,
+                         String q_update,
+                         int wquantity,
+                         int reorder,
+                         String supplier,
+                         float purchase,
+                         float sell,
+                         float wsell,
+                         float profit,
+                         float times,
+                         String expire,
+                         String shelf) {
             this.product = new SimpleStringProperty(product);
             this.unit = new SimpleStringProperty(unit);
             this.category = new SimpleStringProperty(category);

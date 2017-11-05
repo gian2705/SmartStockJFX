@@ -1,4 +1,4 @@
-package fahamu.stockmanager;
+package fahamu.dataFactory;
 
 import com.fahamu.tech.FileEncrypt;
 
@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
 
-class ServerCredential {
+public class ServerCredentialFactory {
     //a map contain detail of a server from sqlite file
-    HashMap<String, String> serverDetail;
+    public HashMap<String, String> serverDetail;
     private FileEncrypt fileEncrypt;
 
     /**
@@ -18,7 +18,7 @@ class ServerCredential {
      *
      * @param path=location of encrypted sqlite file which contain server Credential
      */
-    ServerCredential(String path) {
+    public ServerCredentialFactory(String path) {
 
         //initialize file encrypt class
         fileEncrypt = new FileEncrypt();

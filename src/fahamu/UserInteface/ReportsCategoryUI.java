@@ -1,5 +1,7 @@
-package fahamu.stockmanager;
+package fahamu.UserInteface;
 
+import fahamu.dataFactory.PurchaseCategoryData;
+import fahamu.dataFactory.SaleCategoryData;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -801,7 +803,7 @@ public class ReportsCategoryUI {
         public final SimpleFloatProperty sale;
         public final SimpleFloatProperty discount;
 
-        SalesTableDataClass(String date, float sale, float discount) {
+        public SalesTableDataClass(String date, float sale, float discount) {
             this.date = new SimpleStringProperty(date);
             this.sale = new SimpleFloatProperty(sale);
             this.discount = new SimpleFloatProperty(discount);
@@ -825,7 +827,7 @@ public class ReportsCategoryUI {
         public final SimpleFloatProperty sale;
         public final SimpleFloatProperty discount;
 
-        DiscountDetailTableDataClass(String product, float sale, float discount) {
+        public DiscountDetailTableDataClass(String product, float sale, float discount) {
             this.product = new SimpleStringProperty(product);
             this.sale = new SimpleFloatProperty(sale);
             this.discount = new SimpleFloatProperty(discount);
@@ -848,7 +850,7 @@ public class ReportsCategoryUI {
         public final SimpleStringProperty date;
         public final SimpleIntegerProperty quantity;
 
-        ProductSellHistoryDataClass(String date, int quantity) {
+        public ProductSellHistoryDataClass(String date, int quantity) {
             this.date = new SimpleStringProperty(date);
             this.quantity = new SimpleIntegerProperty(quantity);
         }

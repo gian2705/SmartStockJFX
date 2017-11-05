@@ -1,4 +1,4 @@
-package fahamu.stockmanager;
+package fahamu.UserInteface;
 
 import javafx.scene.control.ListCell;
 
