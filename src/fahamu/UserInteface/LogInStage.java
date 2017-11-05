@@ -55,7 +55,7 @@ public class LogInStage extends Application {
         //detail for login. the constructor the path of the encrypted file.
         String path;
         if (System.getProperty("os.name").equals("Linux")) {
-            path = "/usr/bin/Lb/serverCredentialFactory.db.encrypted";
+            path = "/usr/bin/Lb/serverCredential.db.encrypted";
         } else {
             //implement window file location
             path = Paths.get(System.getProperty("user.home")).toString();
