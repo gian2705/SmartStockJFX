@@ -634,6 +634,32 @@ public class ReportsCategoryUI {
         return navigationPane;
     }
 
+    public GridPane navigationLeftPaneSalesReports() {
+
+        Label chooseRangeLabel = new Label("Choose Range :");
+
+        chooseRangeLabel.setFont(new Font(14));
+
+        ComboBox<String> chooseRangeComboBox = new ComboBox<>();
+        ObservableList<String> ranges = FXCollections.observableArrayList();
+        ranges.addAll("Days", "Months", "Years");
+        chooseRangeComboBox.setItems(ranges);
+        chooseRangeComboBox.getSelectionModel().select(0);
+
+        Spinner<Integer> numberOfRange = new Spinner<>();
+
+
+        GridPane navigationPane = new GridPane();
+        ColumnConstraints c1 = new ColumnConstraints();
+        RowConstraints r1 = new RowConstraints(30);
+
+
+        navigationPane.getColumnConstraints().add(c1);
+        navigationPane.getRowConstraints().addAll(r1);
+
+        return navigationPane;
+    }
+
     public AreaChart<String, Number> setSalesGraphUI() {
 
         Date date = new Date(new java.util.Date().getTime());
