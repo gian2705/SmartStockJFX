@@ -479,6 +479,7 @@ class MainStage {
             homeUIDashboard.getSelectionModel().select(0);
         });
         productReportButton.setOnAction(event -> {
+            //this boolean its true if the searched tab with given id is not available
             boolean notAvailable = true;
             ObservableList<Tab> tabs = homeUIDashboard.getTabs();
             for (Tab tab : tabs) {
@@ -491,6 +492,7 @@ class MainStage {
                 } catch (NullPointerException ignore) {
                 }
             }
+
             if (notAvailable) {
                 Tab tab1 = new Tab("Product Report");
                 tab1.setId("product_report");
@@ -511,43 +513,50 @@ class MainStage {
 
                 //set maximum number of spinner
                 reportsCategoryUI.spinner.getValueFactory().setValue(reportsCategoryUI.multiples+1);
-
-                reportsCategoryUI.sellPurchaseChart.setOnMouseEntered(event1 -> {
-                        reportsCategoryUI.sellPurchaseChart.getScene()
-                                .getAccelerators()
-                                .put(new KeyCodeCombination(KeyCode.LEFT, KeyCombination.SHORTCUT_DOWN), new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if (reportsCategoryUI.productCashSaleFrequency.getData().size() > 50) {
-                                            int size = reportsCategoryUI.productCashSaleFrequency.getData().size();
-                                            int modulus = size % 50;
-                                            size = size / 50;
-                                            System.out.println("multiple of 50:   " + size);
-                                            System.out.println("remain   :" + modulus);
-                                            System.out.println("left");
-                                        }
-                                    }
-                                });
-                        reportsCategoryUI.sellPurchaseChart.getScene()
-                                .getAccelerators()
-                                .put(new KeyCodeCombination(KeyCode.RIGHT, KeyCombination.SHORTCUT_DOWN), new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if (reportsCategoryUI.productCashSaleFrequency.getData().size() > 50) {
-                                            int size = reportsCategoryUI.productCashSaleFrequency.getData().size();
-                                            int modulus = size % 50;
-                                            size = size / 50;
-                                            System.out.println("multiple of 50:   " + size);
-                                            System.out.println("remain   :" + modulus);
-                                            System.out.println("right");
-                                        }
-                                    }
-                                });
-                });
-
             }
 
         });
+        salesReports.setOnAction(event -> {
+
+            //this boolean its true if the searched tab with given id is not available
+            boolean notAvailable = true;
+            ObservableList<Tab> tabs = homeUIDashboard.getTabs();
+            for (Tab tab : tabs) {
+                try {
+                    if (tab.getId().equals("sales_report")) {
+                        homeUIDashboard.getSelectionModel().select(tab);
+                        notAvailable = false;
+                        break;
+                    }
+                } catch (NullPointerException ignore) {
+                }
+            }
+
+            if (notAvailable) {
+                Tab tab1 = new Tab("Sales Report");
+                tab1.setId("sales_report");
+
+                GridPane gridPane = reportsCategoryUI.setDashboardSalesReportUI();
+               /*
+               add components to the main grid pane
+
+               gridPane.add(reportsCategoryUI.navigationLeftPaneProductReport(), 0, 0);
+               gridPane.add(reportsCategoryUI
+               .mainTaskUI(
+               reportsCategoryUI.purchaseCreditHistoryTable,
+               reportsCategoryUI.purchaseCashHistoryTable,
+               reportsCategoryUI.sellHistoryTable,
+               reportsCategoryUI.sellPurchaseChart, 3),
+               1, 0);
+               */
+
+                tab1.setContent(gridPane);
+                homeUIDashboard.getTabs().add(tab1);
+                homeUIDashboard.getSelectionModel().select(tab1);
+
+            }
+        });
+
         //call cash sale activity
         cashSalesButton.setOnAction(event -> {
             openCashSaleCategory();

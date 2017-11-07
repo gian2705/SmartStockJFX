@@ -18,7 +18,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
-import javafx.util.Callback;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -368,27 +367,24 @@ public class ReportsCategoryUI {
         productListView.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 5");
         productListView.setItems(productsHistory);
 
-        productListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
-            @Override
-            public ListCell<String> call(ListView<String> param) {
-                ListCell<String> cell = new ListCellsCustom();
-                cell.setOnMouseEntered(event -> {
-                    if (cell.isSelected()) {
-                        event.consume();
-                    } else if (cell.getText() == null) {
-                        event.consume();
-                    } else {
-                        cell.setStyle("-fx-background-color: rgba(0, 0, 255,0.15)");
-                        productListView.requestFocus();
-                        productListView.getFocusModel().focus(cell.getIndex());
-                    }
-                });
-                cell.setOnMouseExited(event -> {
-                    cell.setStyle("-fx-base: white");
-                });
+        productListView.setCellFactory(param -> {
+            ListCell<String> cell = new ListCellsCustom();
+            cell.setOnMouseEntered(event -> {
+                if (cell.isSelected()) {
+                    event.consume();
+                } else if (cell.getText() == null) {
+                    event.consume();
+                } else {
+                    cell.setStyle("-fx-background-color: rgba(0, 0, 255,0.15)");
+                    productListView.requestFocus();
+                    productListView.getFocusModel().focus(cell.getIndex());
+                }
+            });
+            cell.setOnMouseExited(event -> {
+                cell.setStyle("-fx-base: white");
+            });
 
-                return cell;
-            }
+            return cell;
         });
 
         HBox fromDateHBox = new HBox();
