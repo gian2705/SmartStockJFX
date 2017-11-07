@@ -1,6 +1,7 @@
 package fahamu.UserInteface;
 
 import fahamu.dataFactory.PurchaseCategoryData;
+import fahamu.dataFactory.ReportCategoryData;
 import fahamu.dataFactory.SaleCategoryData;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -24,24 +25,25 @@ import java.util.List;
 
 public class ReportsCategoryUI {
 
-    private GridPane navPane;
     GridPane dashboard;
-    SplitPane splitPane;
 
     private String dateClicked;
 
-    TableView<SalesTableDataClass> salesTable;
-    TableView<SalesCategoryUI.CashierSale> cashierSaleTable, purchaseCreditHistoryTable;
-    TableView<DiscountDetailTableDataClass> discountDetail, purchaseCashHistoryTable;
+    public static XYChart.Series<String, Number> salesSeries;
+    public static XYChart.Series<String, Number> purchaseSeries;
+    private static ObservableList<String> productsHistory;
+    TableView<SalesCategoryUI.CashierSale> purchaseCreditHistoryTable;
+    TableView<DiscountDetailTableDataClass> purchaseCashHistoryTable;
     TableView<ProductSellHistoryDataClass> sellHistoryTable;
-    AreaChart<String, Number> salesGraph, sellPurchaseChart;
-
-    XYChart.Series<String, Number> productCashSaleFrequency;
-
-    static ObservableList<String> productsHistory;
+    AreaChart<String, Number> sellPurchaseChart;
+    private TableView<SalesTableDataClass> salesTable;
+    private TableView<SalesCategoryUI.CashierSale> cashierSaleTable;
+    private TableView<DiscountDetailTableDataClass> discountDetail;
+    private AreaChart<String, Number> salesGraph;
+    private XYChart.Series<String, Number> productCashSaleFrequency;
     Spinner<Number> spinner;
     int multiples;
-    int modulus;
+    private int modulus;
 
 
     ReportsCategoryUI() {
@@ -56,8 +58,8 @@ public class ReportsCategoryUI {
         salesGraph = setSalesGraphUI();
         sellPurchaseChart = setPotentialProductGraphUI();
 
-        navPane = navigationLeftPane();
-        splitPane = mainTaskUI(cashierSaleTable, discountDetail, null, salesGraph, 2);
+        GridPane navPane = navigationLeftPane();
+        SplitPane splitPane = mainTaskUI(cashierSaleTable, discountDetail, null, salesGraph, 2);
 
         //add contents
         dashboard.add(navPane, 0, 0);
@@ -634,45 +636,63 @@ public class ReportsCategoryUI {
     public GridPane navigationLeftPaneSalesReports() {
 
         Label chooseRangeLabel = new Label("Choose Range :");
+        Label fromLabel = new Label("From Date");
+        Label toLabel = new Label("To Date");
         chooseRangeLabel.setFont(new Font(14));
+        fromLabel.setFont(new Font(14));
+        toLabel.setFont(new Font(14));
         chooseRangeLabel.setPrefWidth(175);
+        fromLabel.setPrefWidth(175);
+        toLabel.setPrefWidth(175);
 
-        ComboBox<String> chooseRangeComboBox = new ComboBox<>();
-        chooseRangeComboBox.setPrefWidth(100);
-        chooseRangeComboBox.setStyle("-fx-base: blue");
-        ObservableList<String> ranges = FXCollections.observableArrayList();
-        ranges.addAll("Days", "Months", "Years");
-        chooseRangeComboBox.setItems(ranges);
-        chooseRangeComboBox.getSelectionModel().select(0);
+        Button refreshButton = new Button("Refresh");
+        refreshButton.setStyle("-fx-base: blue");
 
-        Spinner<Integer> numberOfRangeSpinner = new Spinner<>();
-        numberOfRangeSpinner.setPrefWidth(100);
-        Label chooseRangeNumberLabel = new Label("Number Of "
-                + chooseRangeComboBox.getSelectionModel().getSelectedItem() + ":");
-        chooseRangeNumberLabel.setPrefWidth(175);
+        DatePicker fromDatePicker = new DatePicker();
+        fromDatePicker.getEditor().setText("Last Week");
+        DatePicker toDatePicker = new DatePicker();
+        toDatePicker.getEditor().setText("today");
 
 
         GridPane navigationPane = new GridPane();
-        ColumnConstraints c1 = new ColumnConstraints();
-        RowConstraints r1 = new RowConstraints(30);
-        RowConstraints r2 = new RowConstraints(30);
-        RowConstraints r3 = new RowConstraints(30);
-        RowConstraints r4 = new RowConstraints(30);
+        navigationPane.setVgap(5);
+        navigationPane.add(fromLabel, 0, 0);
+        navigationPane.add(fromDatePicker, 1, 0);
+        navigationPane.add(toLabel, 0, 1);
+        navigationPane.add(toDatePicker, 1, 1);
+        navigationPane.add(refreshButton, 0, 2);
 
+        refreshButton.setOnAction(event -> {
+            if (fromDatePicker.getEditor().getText().isEmpty()) {
+                fromDatePicker.requestFocus();
+                fromDatePicker.show();
+            } else if (toDatePicker.getEditor().getText().isEmpty()) {
+                toDatePicker.requestFocus();
+                toDatePicker.show();
+            } else {
+                try {
+                    LocalDate fromDatePickerValue = fromDatePicker.getValue();
+                    LocalDate toDatePickerValue = toDatePicker.getValue();
+                    String from = fromDatePickerValue.getYear() + "-" +
+                            fromDatePickerValue.getMonthValue() + "-" +
+                            fromDatePickerValue.getDayOfMonth();
+                    String to = toDatePickerValue.getYear() + "-" +
+                            toDatePickerValue.getMonthValue() + "-" +
+                            toDatePickerValue.getDayOfMonth();
+                    /*
+                    change the graph according to the range set
+                     */
+                    ReportCategoryData.getSalesReport(from, to);
 
-        navigationPane.getColumnConstraints().add(c1);
-        navigationPane.getRowConstraints().addAll(r1, r2, r3, r4);
-
-        navigationPane.add(chooseRangeLabel, 0, 0);
-        navigationPane.add(chooseRangeComboBox, 1, 0);
-        navigationPane.add(chooseRangeNumberLabel, 0, 1);
-        navigationPane.add(numberOfRangeSpinner, 1, 1);
-
-        chooseRangeComboBox.setOnAction(event -> {
-            String selectedItem = chooseRangeComboBox.getSelectionModel().getSelectedItem();
-            chooseRangeNumberLabel.setText("Number Of "
-                    + selectedItem + ":");
+                } catch (NullPointerException e) {
+                    fromDatePicker.getEditor().clear();
+                    toDatePicker.getEditor().clear();
+                    fromDatePicker.requestFocus();
+                    fromDatePicker.show();
+                }
+            }
         });
+
         return navigationPane;
     }
 
@@ -751,7 +771,7 @@ public class ReportsCategoryUI {
 
     }
 
-    public BarChart<String, Number> setSalesReportGraph() {
+    public BarChart<String, Number> setGrossProfitReportGraph() {
         Date date = new Date(new java.util.Date().getTime());
         Calendar cal = Calendar.getInstance();
         cal.setTime(new java.util.Date());
@@ -763,29 +783,26 @@ public class ReportsCategoryUI {
 
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
-        xAxis.setLabel("Period");
+        xAxis.setLabel("Category");
         yAxis.setLabel("Amount(TZS)");
         yAxis.autosize();
         xAxis.autosize();
 
         BarChart<String, Number> salesGraph = new BarChart<>(xAxis, yAxis);
         salesGraph.setAnimated(true);
+        salesGraph.setPadding(new Insets(5));
         salesGraph.setTitle("Gross Profit  Graph");
         salesGraph.setStyle("-fx-border-color: blue; -fx-border-width: 2; -fx-border-radius: 5");
 
-        XYChart.Series<String, Number> salesSeries = new XYChart.Series<>();
+        salesSeries = new XYChart.Series<>();
         salesSeries.setName("Sales");
-        salesSeries.getData().add(new XYChart.Data<>("juzi", 2564887));
-        salesSeries.getData().add(new XYChart.Data<>("leo", 2566987));
-        salesSeries.getData().add(new XYChart.Data<>("kesho", 3256478));
 
-        XYChart.Series<String, Number> purchaseSeries = new XYChart.Series<>();
+        purchaseSeries = new XYChart.Series<>();
         purchaseSeries.setName("Purchases");
-        purchaseSeries.getData().add(new XYChart.Data<>("juzi", 2558997));
-        purchaseSeries.getData().add(new XYChart.Data<>("leo", 1122587));
-        purchaseSeries.getData().add(new XYChart.Data<>("kesho", 1787895));
 
         salesGraph.getData().addAll(salesSeries, purchaseSeries);
+
+        ReportCategoryData.getSalesReport(lastWeek, today);
 
         return salesGraph;
     }

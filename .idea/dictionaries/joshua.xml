@@ -2,7 +2,11 @@
   <dictionary name="joshua">
     <words>
       <w>addr</w>
+      <w>curdate</w>
       <w>jdbc</w>
+      <w>localserver</w>
+      <w>purchasedata</w>
+      <w>salesdata</w>
       <w>sqlite</w>
       <w>squantity</w>
       <w>stockdata</w>
