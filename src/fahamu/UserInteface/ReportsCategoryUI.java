@@ -22,6 +22,7 @@ import javafx.util.Callback;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -84,10 +85,13 @@ public class ReportsCategoryUI {
 
     public TableView<SalesTableDataClass> setSalesTableViewUI(String c1, String c2, String c3) {
         Date date = new Date(new java.util.Date().getTime());
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new java.util.Date());
+        cal.add(Calendar.DATE, -7);
+        java.util.Date dateBefore30Days = cal.getTime();
+
         String today = date.toString();
-        String lastWeek = date.toLocalDate().getYear() +
-                "-" + date.toLocalDate().getMonthValue() +
-                "-" + (date.toLocalDate().getDayOfMonth() - 7);
+        String lastWeek = new Date(dateBefore30Days.getTime()).toString();
 
         TableView<SalesTableDataClass> salesTableView = new TableView<>();
         salesTableView.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 5");
@@ -331,10 +335,12 @@ public class ReportsCategoryUI {
         refreshButton.setDefaultButton(true);
 
         Date date = new Date(new java.util.Date().getTime());
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new java.util.Date());
+        cal.add(Calendar.DATE, -7);
+        java.util.Date dateBefore30Days = cal.getTime();
         String today = date.toString();
-        String lastWeek = date.toLocalDate().getYear() +
-                "-" + date.toLocalDate().getMonthValue() +
-                "-" + (date.toLocalDate().getDayOfMonth() - 7);
+        String lastWeek = new Date(dateBefore30Days.getTime()).toString();
 
         fromDatePicker.getEditor().setText(lastWeek);
         toDatePicker.getEditor().setText(today);
@@ -635,10 +641,12 @@ public class ReportsCategoryUI {
     public AreaChart<String, Number> setSalesGraphUI() {
 
         Date date = new Date(new java.util.Date().getTime());
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new java.util.Date());
+        cal.add(Calendar.DATE, -7);
+        java.util.Date dateBefore30Days = cal.getTime();
         String today = date.toString();
-        String lastWeek = date.toLocalDate().getYear() +
-                "-" + date.toLocalDate().getMonthValue() +
-                "-" + (date.toLocalDate().getDayOfMonth() - 7);
+        String lastWeek = new Date(dateBefore30Days.getTime()).toString();
 
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
@@ -661,10 +669,13 @@ public class ReportsCategoryUI {
     public AreaChart<String, Number> setPotentialProductGraphUI() {
 
         Date date = new Date(new java.util.Date().getTime());
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new java.util.Date());
+        cal.add(Calendar.DATE, -7);
+        java.util.Date dateBefore30Days = cal.getTime();
         String today = date.toString();
-        String lastWeek = date.toLocalDate().getYear() +
-                "-" + date.toLocalDate().getMonthValue() +
-                "-" + (date.toLocalDate().getDayOfMonth() - 7);
+        String lastWeek = new Date(dateBefore30Days.getTime()).toString();
+
 
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();

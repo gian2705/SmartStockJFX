@@ -5,7 +5,6 @@ import fahamu.dataFactory.LogInStageData;
 import fahamu.dataFactory.SaleCategoryData;
 import fahamu.dataFactory.ServerCredentialFactory;
 import fahamu.dataFactory.StockCategoryData;
-import fahamu.service.ServerReachableWatch;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -86,8 +85,6 @@ public class LogInStage extends Application {
         checkServerReachable();
 
         primaryStage.show();
-
-        new ServerReachableWatch();
 
     }
 
