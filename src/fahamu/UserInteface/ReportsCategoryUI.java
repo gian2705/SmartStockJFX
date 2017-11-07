@@ -35,6 +35,7 @@ public class ReportsCategoryUI {
     TableView<SalesCategoryUI.CashierSale> purchaseCreditHistoryTable;
     TableView<DiscountDetailTableDataClass> purchaseCashHistoryTable;
     TableView<ProductSellHistoryDataClass> sellHistoryTable;
+    TableView<GrossProfitTableViewData> grossProfitTable;
     AreaChart<String, Number> sellPurchaseChart;
     private TableView<SalesTableDataClass> salesTable;
     private TableView<SalesCategoryUI.CashierSale> cashierSaleTable;
@@ -53,6 +54,7 @@ public class ReportsCategoryUI {
         cashierSaleTable = cashierSaleTableView("Name", "Amount(TZS)", "Discount(TZS)");
         discountDetail = setDiscountDetailTableView("Product", "Sale(TZS)", "Discount(TZS)");
         sellHistoryTable = setProductSellHistoryTableView();
+        grossProfitTable = setGrossProfitTableView();
         purchaseCashHistoryTable = setDiscountDetailTableView("Date", "Cash Purchase", "Stock");
         purchaseCreditHistoryTable = cashierSaleTableView("Date", "Credit Purchase", "Stock");
         salesGraph = setSalesGraphUI();
@@ -244,6 +246,27 @@ public class ReportsCategoryUI {
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
         return tableView;
+    }
+
+    public TableView<GrossProfitTableViewData> setGrossProfitTableView() {
+        TableView<GrossProfitTableViewData> grossProfitTableView = new TableView<>();
+        grossProfitTableView.autosize();
+
+        TableColumn<GrossProfitTableViewData, String> categoryColumn = new TableColumn<>("Category");
+        TableColumn<GrossProfitTableViewData, String> salesColumn = new TableColumn<>("Sales(TZS)");
+        TableColumn<GrossProfitTableViewData, String> purchaseColumn = new TableColumn<>("Purchases(TZS)");
+        TableColumn<GrossProfitTableViewData, String> profitColumn = new TableColumn<>("G-Profit");
+
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("categories"));
+        salesColumn.setCellValueFactory(new PropertyValueFactory<>("sales"));
+        purchaseColumn.setCellValueFactory(new PropertyValueFactory<>("purchases"));
+        profitColumn.setCellValueFactory(new PropertyValueFactory<>("gProfit"));
+
+        grossProfitTableView.getColumns().addAll(categoryColumn,
+                salesColumn, purchaseColumn, profitColumn);
+
+        return grossProfitTableView;
+
     }
 
     public GridPane navigationLeftPane() {
@@ -661,6 +684,7 @@ public class ReportsCategoryUI {
         navigationPane.add(toLabel, 0, 1);
         navigationPane.add(toDatePicker, 1, 1);
         navigationPane.add(refreshButton, 0, 2);
+        //navigationPane.add(grossProfitTable,0,3);
 
         refreshButton.setOnAction(event -> {
             if (fromDatePicker.getEditor().getText().isEmpty()) {
@@ -792,7 +816,7 @@ public class ReportsCategoryUI {
         salesGraph.setAnimated(true);
         salesGraph.setPadding(new Insets(5));
         salesGraph.setTitle("Gross Profit  Graph");
-        salesGraph.setStyle("-fx-border-color: blue; -fx-border-width: 2; -fx-border-radius: 5");
+        salesGraph.setStyle("-fx-border-color: blue; -fx-border-width: 2; -fx-border-radius: 5;");
 
         salesSeries = new XYChart.Series<>();
         salesSeries.setName("Sales");
@@ -966,6 +990,36 @@ public class ReportsCategoryUI {
 
         public int getQuantity() {
             return quantity.get();
+        }
+    }
+
+    public static class GrossProfitTableViewData {
+        public final SimpleStringProperty categories;
+        public final SimpleFloatProperty sales;
+        public final SimpleFloatProperty purchases;
+        public final SimpleFloatProperty gProfit;
+
+        GrossProfitTableViewData(String category, float sales, float purchases, float gProfit) {
+            this.categories = new SimpleStringProperty(category);
+            this.sales = new SimpleFloatProperty(sales);
+            this.purchases = new SimpleFloatProperty(purchases);
+            this.gProfit = new SimpleFloatProperty(gProfit);
+        }
+
+        public float getgProfit() {
+            return gProfit.get();
+        }
+
+        public float getPurchases() {
+            return purchases.get();
+        }
+
+        public String getCategories() {
+            return categories.get();
+        }
+
+        public float getSales() {
+            return sales.get();
         }
     }
 }
