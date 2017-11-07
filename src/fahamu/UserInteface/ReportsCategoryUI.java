@@ -10,10 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.chart.AreaChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
@@ -637,26 +634,45 @@ public class ReportsCategoryUI {
     public GridPane navigationLeftPaneSalesReports() {
 
         Label chooseRangeLabel = new Label("Choose Range :");
-
         chooseRangeLabel.setFont(new Font(14));
+        chooseRangeLabel.setPrefWidth(175);
 
         ComboBox<String> chooseRangeComboBox = new ComboBox<>();
+        chooseRangeComboBox.setPrefWidth(100);
+        chooseRangeComboBox.setStyle("-fx-base: blue");
         ObservableList<String> ranges = FXCollections.observableArrayList();
         ranges.addAll("Days", "Months", "Years");
         chooseRangeComboBox.setItems(ranges);
         chooseRangeComboBox.getSelectionModel().select(0);
 
-        Spinner<Integer> numberOfRange = new Spinner<>();
+        Spinner<Integer> numberOfRangeSpinner = new Spinner<>();
+        numberOfRangeSpinner.setPrefWidth(100);
+        Label chooseRangeNumberLabel = new Label("Number Of "
+                + chooseRangeComboBox.getSelectionModel().getSelectedItem() + ":");
+        chooseRangeNumberLabel.setPrefWidth(175);
 
 
         GridPane navigationPane = new GridPane();
         ColumnConstraints c1 = new ColumnConstraints();
         RowConstraints r1 = new RowConstraints(30);
+        RowConstraints r2 = new RowConstraints(30);
+        RowConstraints r3 = new RowConstraints(30);
+        RowConstraints r4 = new RowConstraints(30);
 
 
         navigationPane.getColumnConstraints().add(c1);
-        navigationPane.getRowConstraints().addAll(r1);
+        navigationPane.getRowConstraints().addAll(r1, r2, r3, r4);
 
+        navigationPane.add(chooseRangeLabel, 0, 0);
+        navigationPane.add(chooseRangeComboBox, 1, 0);
+        navigationPane.add(chooseRangeNumberLabel, 0, 1);
+        navigationPane.add(numberOfRangeSpinner, 1, 1);
+
+        chooseRangeComboBox.setOnAction(event -> {
+            String selectedItem = chooseRangeComboBox.getSelectionModel().getSelectedItem();
+            chooseRangeNumberLabel.setText("Number Of "
+                    + selectedItem + ":");
+        });
         return navigationPane;
     }
 
@@ -733,6 +749,45 @@ public class ReportsCategoryUI {
 
         return salesGraph;
 
+    }
+
+    public BarChart<String, Number> setSalesReportGraph() {
+        Date date = new Date(new java.util.Date().getTime());
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new java.util.Date());
+        cal.add(Calendar.DATE, -7);
+        java.util.Date dateBefore30Days = cal.getTime();
+        String today = date.toString();
+        String lastWeek = new Date(dateBefore30Days.getTime()).toString();
+
+
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+        xAxis.setLabel("Period");
+        yAxis.setLabel("Amount(TZS)");
+        yAxis.autosize();
+        xAxis.autosize();
+
+        BarChart<String, Number> salesGraph = new BarChart<>(xAxis, yAxis);
+        salesGraph.setAnimated(true);
+        salesGraph.setTitle("Gross Profit  Graph");
+        salesGraph.setStyle("-fx-border-color: blue; -fx-border-width: 2; -fx-border-radius: 5");
+
+        XYChart.Series<String, Number> salesSeries = new XYChart.Series<>();
+        salesSeries.setName("Sales");
+        salesSeries.getData().add(new XYChart.Data<>("juzi", 2564887));
+        salesSeries.getData().add(new XYChart.Data<>("leo", 2566987));
+        salesSeries.getData().add(new XYChart.Data<>("kesho", 3256478));
+
+        XYChart.Series<String, Number> purchaseSeries = new XYChart.Series<>();
+        purchaseSeries.setName("Purchases");
+        purchaseSeries.getData().add(new XYChart.Data<>("juzi", 2558997));
+        purchaseSeries.getData().add(new XYChart.Data<>("leo", 1122587));
+        purchaseSeries.getData().add(new XYChart.Data<>("kesho", 1787895));
+
+        salesGraph.getData().addAll(salesSeries, purchaseSeries);
+
+        return salesGraph;
     }
 
     public SplitPane mainTaskUI(

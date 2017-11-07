@@ -512,7 +512,7 @@ class MainStage {
                 homeUIDashboard.getSelectionModel().select(tab1);
 
                 //set maximum number of spinner
-                reportsCategoryUI.spinner.getValueFactory().setValue(reportsCategoryUI.multiples+1);
+                reportsCategoryUI.spinner.getValueFactory().setValue(reportsCategoryUI.multiples + 1);
             }
 
         });
@@ -537,18 +537,10 @@ class MainStage {
                 tab1.setId("sales_report");
 
                 GridPane gridPane = reportsCategoryUI.setDashboardSalesReportUI();
-               /*
-               add components to the main grid pane
 
-               gridPane.add(reportsCategoryUI.navigationLeftPaneProductReport(), 0, 0);
-               gridPane.add(reportsCategoryUI
-               .mainTaskUI(
-               reportsCategoryUI.purchaseCreditHistoryTable,
-               reportsCategoryUI.purchaseCashHistoryTable,
-               reportsCategoryUI.sellHistoryTable,
-               reportsCategoryUI.sellPurchaseChart, 3),
-               1, 0);
-               */
+                gridPane.add(reportsCategoryUI.navigationLeftPaneSalesReports(), 0, 0);
+
+                gridPane.add(reportsCategoryUI.setSalesReportGraph(), 1, 0);
 
                 tab1.setContent(gridPane);
                 homeUIDashboard.getTabs().add(tab1);
