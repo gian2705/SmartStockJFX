@@ -37,6 +37,7 @@ public class ReportCategoryData {
             /*
             categories used as x-axis of the graph
              */
+            categoryList.clear();
             StockCategoryData.getAllCategories();
 
             Statement statement;
@@ -120,6 +121,7 @@ public class ReportCategoryData {
             get all categories from stock data.
             this call populate categoryList static variable with data
              */
+            categoryList.clear();
             StockCategoryData.getAllCategories();
             Statement statement;
             ResultSet resultSet;
@@ -150,7 +152,7 @@ public class ReportCategoryData {
                 */
                 float saleSum = 0;
                 float sumPurchase = 0;
-                float grossProfitSum = 0;
+                int grossProfitSum;
 
                 /*
                 find sum of sales for given category
@@ -174,7 +176,7 @@ public class ReportCategoryData {
                     sumPurchase = +resultSet.getInt("sum");
                 }
 
-                grossProfitSum = saleSum - sumPurchase;
+                grossProfitSum = (int) (saleSum - sumPurchase);
 
                 /*
                 populate the gross profit table with data
@@ -185,6 +187,7 @@ public class ReportCategoryData {
                         sumPurchase,
                         grossProfitSum
                 ));
+
 
             }
 

@@ -734,6 +734,7 @@ public class ReportsCategoryUI {
                     /*
                     change the graph and table View according to the range of dates set
                      */
+
                     grossProfitTable.setItems(ReportCategoryData.getGrossProfitReportTableData(from, to));
                     ReportCategoryData.getGrossProfitReportGraphData(from, to);
 
@@ -1035,20 +1036,20 @@ public class ReportsCategoryUI {
         public final SimpleStringProperty categories;
         public final SimpleFloatProperty sales;
         public final SimpleFloatProperty purchases;
-        public final SimpleFloatProperty gProfit;
+        public final SimpleIntegerProperty gProfit;
 
-        public GrossProfitTableViewData(String category, float sales, float purchases, float gProfit) {
+        public GrossProfitTableViewData(String category, float sales, float purchases, int gProfit) {
             this.categories = new SimpleStringProperty(category);
             this.sales = new SimpleFloatProperty(sales);
             this.purchases = new SimpleFloatProperty(purchases);
-            this.gProfit = new SimpleFloatProperty(gProfit);
+            this.gProfit = new SimpleIntegerProperty(gProfit);
         }
 
         public float getgProfit() {
             return gProfit.get();
         }
 
-        public void setgProfit(float gProfit) {
+        public void setgProfit(int gProfit) {
             this.gProfit.set(gProfit);
         }
 
