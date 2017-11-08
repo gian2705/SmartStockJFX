@@ -138,13 +138,13 @@ public class ReportsCategoryUI {
         });
 
         salesTableView.setRowFactory(param -> {
-            TableRow<SalesTableDataClass> tableRow=new TableRow<>();
+            TableRow<SalesTableDataClass> tableRow = new TableRow<>();
             tableRow.setOnMouseEntered(event -> {
-                if (tableRow.isSelected()){
+                if (tableRow.isSelected()) {
                     event.consume();
-                }else if (tableRow.isEmpty()){
+                } else if (tableRow.isEmpty()) {
                     event.consume();
-                }else {
+                } else {
                     salesTableView.requestFocus();
                     salesTableView.getFocusModel().focus(tableRow.getIndex());
                     tableRow.setStyle("-fx-background-color: rgba(0,0,255,0.15)");
@@ -189,11 +189,11 @@ public class ReportsCategoryUI {
         cashierSaleTableView.setRowFactory(param -> {
             TableRow<SalesCategoryUI.CashierSale> tableRow = new TableRow<>();
             tableRow.setOnMouseEntered(event -> {
-                if (tableRow.isSelected()){
+                if (tableRow.isSelected()) {
                     event.consume();
-                }else if (tableRow.isEmpty()){
+                } else if (tableRow.isEmpty()) {
                     event.consume();
-                }else {
+                } else {
                     cashierSaleTableView.requestFocus();
                     cashierSaleTableView.getFocusModel().focus(tableRow.getIndex());
                     tableRow.setStyle("-fx-background-color: rgba(0,0,255,0.15)");
@@ -249,8 +249,21 @@ public class ReportsCategoryUI {
     }
 
     public TableView<GrossProfitTableViewData> setGrossProfitTableView() {
+        /*
+        get last week date from today
+        this range is used as initial to populate the table view
+         */
+        Date date = new Date(new java.util.Date().getTime());
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new java.util.Date());
+        cal.add(Calendar.DATE, -7);
+        java.util.Date dateBefore30Days = cal.getTime();
+        String today = date.toString();
+        String lastWeek = new Date(dateBefore30Days.getTime()).toString();
+
         TableView<GrossProfitTableViewData> grossProfitTableView = new TableView<>();
         grossProfitTableView.autosize();
+        grossProfitTableView.setPadding(new Insets(0, 5, 0, 0));
 
         TableColumn<GrossProfitTableViewData, String> categoryColumn = new TableColumn<>("Category");
         TableColumn<GrossProfitTableViewData, String> salesColumn = new TableColumn<>("Sales(TZS)");
@@ -265,6 +278,11 @@ public class ReportsCategoryUI {
         grossProfitTableView.getColumns().addAll(categoryColumn,
                 salesColumn, purchaseColumn, profitColumn);
 
+        /*
+        the following code populate the gross profit table view
+        and with the data of the last week
+         */
+        grossProfitTableView.setItems(ReportCategoryData.getGrossProfitReportTableData(lastWeek, today));
         return grossProfitTableView;
 
     }
@@ -676,15 +694,25 @@ public class ReportsCategoryUI {
         DatePicker toDatePicker = new DatePicker();
         toDatePicker.getEditor().setText("today");
 
+        HBox hBoxFromDate = new HBox();
+        HBox hBoxToDate = new HBox();
+        hBoxFromDate.setPadding(new Insets(0, 5, 0, 0));
+        hBoxFromDate.getChildren().addAll(fromLabel, fromDatePicker);
+        hBoxToDate.setPadding(new Insets(0, 5, 0, 0));
+        hBoxToDate.getChildren().addAll(toLabel, toDatePicker);
 
         GridPane navigationPane = new GridPane();
+        RowConstraints r1 = new RowConstraints(30);
+        RowConstraints r2 = new RowConstraints(30);
+        RowConstraints r3 = new RowConstraints(30);
+        RowConstraints r4 = new RowConstraints();
+        navigationPane.getRowConstraints().addAll(r1, r2, r3, r4);
+        r4.setVgrow(Priority.ALWAYS);
         navigationPane.setVgap(5);
-        navigationPane.add(fromLabel, 0, 0);
-        navigationPane.add(fromDatePicker, 1, 0);
-        navigationPane.add(toLabel, 0, 1);
-        navigationPane.add(toDatePicker, 1, 1);
+        navigationPane.add(hBoxFromDate, 0, 0);
+        navigationPane.add(hBoxToDate, 0, 1);
         navigationPane.add(refreshButton, 0, 2);
-        //navigationPane.add(grossProfitTable,0,3);
+        navigationPane.add(grossProfitTable, 0, 3);
 
         refreshButton.setOnAction(event -> {
             if (fromDatePicker.getEditor().getText().isEmpty()) {
@@ -704,9 +732,11 @@ public class ReportsCategoryUI {
                             toDatePickerValue.getMonthValue() + "-" +
                             toDatePickerValue.getDayOfMonth();
                     /*
-                    change the graph according to the range set
+                    change the graph and table View according to the range of dates set
                      */
-                    ReportCategoryData.getSalesReport(from, to);
+                    grossProfitTable.setItems(ReportCategoryData.getGrossProfitReportTableData(from, to));
+                    ReportCategoryData.getGrossProfitReportGraphData(from, to);
+
 
                 } catch (NullPointerException e) {
                     fromDatePicker.getEditor().clear();
@@ -796,6 +826,10 @@ public class ReportsCategoryUI {
     }
 
     public BarChart<String, Number> setGrossProfitReportGraph() {
+        /*
+        get last week date from today
+        this range is used as initial to populate the graph
+         */
         Date date = new Date(new java.util.Date().getTime());
         Calendar cal = Calendar.getInstance();
         cal.setTime(new java.util.Date());
@@ -826,7 +860,11 @@ public class ReportsCategoryUI {
 
         salesGraph.getData().addAll(salesSeries, purchaseSeries);
 
-        ReportCategoryData.getSalesReport(lastWeek, today);
+        /*
+        the following code populate the gross profit graph
+        and with the data of the last week
+         */
+        ReportCategoryData.getGrossProfitReportGraphData(lastWeek, today);
 
         return salesGraph;
     }
@@ -999,7 +1037,7 @@ public class ReportsCategoryUI {
         public final SimpleFloatProperty purchases;
         public final SimpleFloatProperty gProfit;
 
-        GrossProfitTableViewData(String category, float sales, float purchases, float gProfit) {
+        public GrossProfitTableViewData(String category, float sales, float purchases, float gProfit) {
             this.categories = new SimpleStringProperty(category);
             this.sales = new SimpleFloatProperty(sales);
             this.purchases = new SimpleFloatProperty(purchases);
@@ -1010,16 +1048,32 @@ public class ReportsCategoryUI {
             return gProfit.get();
         }
 
+        public void setgProfit(float gProfit) {
+            this.gProfit.set(gProfit);
+        }
+
         public float getPurchases() {
             return purchases.get();
+        }
+
+        public void setPurchases(float purchases) {
+            this.purchases.set(purchases);
         }
 
         public String getCategories() {
             return categories.get();
         }
 
+        public void setCategories(String categories) {
+            this.categories.set(categories);
+        }
+
         public float getSales() {
             return sales.get();
+        }
+
+        public void setSales(float sales) {
+            this.sales.set(sales);
         }
     }
 }

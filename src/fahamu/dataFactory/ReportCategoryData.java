@@ -1,6 +1,9 @@
 package fahamu.dataFactory;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import fahamu.UserInteface.ReportsCategoryUI;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
 
 import java.sql.Connection;
@@ -15,7 +18,7 @@ import static fahamu.UserInteface.StockCategoryUI.categoryList;
 
 public class ReportCategoryData {
 
-    public static void getSalesReport(String fromDate, String toDate) {
+    public static void getGrossProfitReportGraphData(String fromDate, String toDate) {
 
         MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
@@ -93,5 +96,108 @@ public class ReportCategoryData {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static ObservableList<ReportsCategoryUI.GrossProfitTableViewData> getGrossProfitReportTableData(
+            String fromDate, String toDate) {
+        MysqlDataSource mysqlDataSource = new MysqlDataSource();
+        mysqlDataSource.setUser(username);
+        mysqlDataSource.setPassword(password);
+        mysqlDataSource.setServerName(serverAddress);
+
+        Connection connection = null;
+        ObservableList<ReportsCategoryUI.GrossProfitTableViewData> data = FXCollections.observableArrayList();
+        try {
+            try {
+
+                connection = mysqlDataSource.getConnection();
+            } catch (SQLException s) {
+                mysqlDataSource.setServerName("localhost");
+                connection = mysqlDataSource.getConnection();
+            }
+
+            /*
+            get all categories from stock data.
+            this call populate categoryList static variable with data
+             */
+            StockCategoryData.getAllCategories();
+            Statement statement;
+            ResultSet resultSet;
+
+            for (String category :
+                    categoryList) {
+                String selectSumOfSalesQuery = "SELECT sum(amount) as sum " +
+                        "FROM salesdata.cashSale where category=\'" + category + "\' " +
+                        "AND date>=\'" + fromDate + "\' AND date<=\'" + toDate + "\'";
+
+                /*
+                because in database we have two source of purchase,
+                so cash and credit purchase found separate and their sum
+                calculated
+                 */
+                String selectSumOfCashPurchaseQuery = "SELECT sum(amount) as sum " +
+                        "FROM purchasedata.cashPurchase where category=\'" + category + "\' " +
+                        "AND date>=\'" + fromDate + "\' AND date<=\'" + toDate + "\'";
+
+                String selectSumOfCreditPurchaseQuery = "SELECT sum(amount) as sum " +
+                        "FROM purchasedata.creditPurchase where category=\'" + category + "\' " +
+                        "AND date>=\'" + fromDate + "\' AND date<=\'" + toDate + "\'";
+
+                /*
+                This variables used to populate gross profit table
+                sum is used to find total of credit and cash purchase,
+                initialized to zero every time loop repeat
+                */
+                float saleSum = 0;
+                float sumPurchase = 0;
+                float grossProfitSum = 0;
+
+                /*
+                find sum of sales for given category
+                 */
+                statement = connection.createStatement();
+                resultSet = statement.executeQuery(selectSumOfSalesQuery);
+                while (resultSet.next()) {
+                    saleSum = resultSet.getInt("sum");
+                }
+
+                /*
+                to find sum of all kind of purchase
+                 */
+                statement = connection.createStatement();
+                resultSet = statement.executeQuery(selectSumOfCashPurchaseQuery);
+                while (resultSet.next()) {
+                    sumPurchase = resultSet.getInt("sum");
+                }
+                resultSet = statement.executeQuery(selectSumOfCreditPurchaseQuery);
+                while (resultSet.next()) {
+                    sumPurchase = +resultSet.getInt("sum");
+                }
+
+                grossProfitSum = saleSum - sumPurchase;
+
+                /*
+                populate the gross profit table with data
+                 */
+                data.add(new ReportsCategoryUI.GrossProfitTableViewData(
+                        category,
+                        saleSum,
+                        sumPurchase,
+                        grossProfitSum
+                ));
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return data;
     }
 }
