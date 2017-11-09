@@ -160,7 +160,7 @@ public class ReportCategoryData {
                 statement = connection.createStatement();
                 resultSet = statement.executeQuery(selectSumOfSalesQuery);
                 while (resultSet.next()) {
-                    saleSum = resultSet.getInt("sum");
+                    saleSum = resultSet.getFloat("sum");
                 }
 
                 /*
@@ -169,11 +169,11 @@ public class ReportCategoryData {
                 statement = connection.createStatement();
                 resultSet = statement.executeQuery(selectSumOfCashPurchaseQuery);
                 while (resultSet.next()) {
-                    sumPurchase = resultSet.getInt("sum");
+                    sumPurchase = resultSet.getFloat("sum");
                 }
                 resultSet = statement.executeQuery(selectSumOfCreditPurchaseQuery);
                 while (resultSet.next()) {
-                    sumPurchase = +resultSet.getInt("sum");
+                    sumPurchase = sumPurchase + resultSet.getFloat("sum");
                 }
 
                 grossProfitSum = (int) (saleSum - sumPurchase);
@@ -181,6 +181,7 @@ public class ReportCategoryData {
                 /*
                 populate the gross profit table with data
                  */
+
                 data.add(new ReportsCategoryUI.GrossProfitTableViewData(
                         category,
                         saleSum,

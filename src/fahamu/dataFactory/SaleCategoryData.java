@@ -9,8 +9,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
 
-import java.sql.*;
-import java.util.Calendar;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class SaleCategoryData {
 
@@ -35,7 +37,7 @@ public class SaleCategoryData {
 
         Connection connection = null;
 
-        Date date = new Date(Calendar.getInstance().getTimeInMillis());
+
         insertQuery = "INSERT INTO salesdata.cashSale(" +
                 "id," +
                 "date," +
@@ -46,7 +48,7 @@ public class SaleCategoryData {
                 "amount," +
                 "discount," +
                 "user) " +
-                " VALUES(\'" + id + "\',\'" + date.toString() + "\',\'" + product + "\'," +
+                " VALUES(\'" + id + "\', curdate() ,\'" + product + "\'," +
                 "\'" + category + "\',\'" + unit + "\'," + quantity + "," + amount + "," + discount + ",\'" + user + "\')";
         try {
             try {

@@ -49,7 +49,7 @@ public class ReportsCategoryUI {
 
     ReportsCategoryUI() {
 
-        dashboard = setDashboardSalesReportUI();
+        dashboard = setDashboardSalesReportUI(280);
         salesTable = setSalesTableViewUI("Date", "Sale(TZS)", "Discount(TZS)");
         cashierSaleTable = cashierSaleTableView("Name", "Amount(TZS)", "Discount(TZS)");
         discountDetail = setDiscountDetailTableView("Product", "Sale(TZS)", "Discount(TZS)");
@@ -69,12 +69,12 @@ public class ReportsCategoryUI {
 
     }
 
-    public GridPane setDashboardSalesReportUI() {
+    public GridPane setDashboardSalesReportUI(int navigationWidth) {
         GridPane mainGridPaneUI = new GridPane();
         mainGridPaneUI.setId("dashboard");
         mainGridPaneUI.setPadding(new Insets(10, 10, 10, 10));
         RowConstraints r1 = new RowConstraints();
-        ColumnConstraints c1 = new ColumnConstraints(280);
+        ColumnConstraints c1 = new ColumnConstraints(navigationWidth);
         ColumnConstraints c2 = new ColumnConstraints();
         r1.setPercentHeight(100);
         c2.setHgrow(Priority.ALWAYS);
@@ -273,16 +273,21 @@ public class ReportsCategoryUI {
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("categories"));
         salesColumn.setCellValueFactory(new PropertyValueFactory<>("sales"));
         purchaseColumn.setCellValueFactory(new PropertyValueFactory<>("purchases"));
-        profitColumn.setCellValueFactory(new PropertyValueFactory<>("gProfit"));
+        profitColumn.setCellValueFactory(new PropertyValueFactory<>("profit"));
 
-        grossProfitTableView.getColumns().addAll(categoryColumn,
-                salesColumn, purchaseColumn, profitColumn);
+        grossProfitTableView.getColumns().addAll(
+                categoryColumn,
+                salesColumn,
+                purchaseColumn,
+                profitColumn);
 
         /*
         the following code populate the gross profit table view
         and with the data of the last week
          */
         grossProfitTableView.setItems(ReportCategoryData.getGrossProfitReportTableData(lastWeek, today));
+
+        //System.out.println(grossProfitTable.getItems().get(0).getProfit());
         return grossProfitTableView;
 
     }
@@ -725,18 +730,43 @@ public class ReportsCategoryUI {
                 try {
                     LocalDate fromDatePickerValue = fromDatePicker.getValue();
                     LocalDate toDatePickerValue = toDatePicker.getValue();
-                    String from = fromDatePickerValue.getYear() + "-" +
-                            fromDatePickerValue.getMonthValue() + "-" +
-                            fromDatePickerValue.getDayOfMonth();
-                    String to = toDatePickerValue.getYear() + "-" +
-                            toDatePickerValue.getMonthValue() + "-" +
-                            toDatePickerValue.getDayOfMonth();
+                    String from;
+                    String to;
+
+                    /*
+                    this block of if-else code make sure the date is in format of
+                    'YYYY-MM-0D' if date is less than 10
+                     */
+                    if (fromDatePickerValue.getDayOfMonth() < 10) {
+                        int dayFrom = fromDatePickerValue.getDayOfMonth();
+                        from = fromDatePickerValue.getYear() + "-" +
+                                fromDatePickerValue.getMonthValue() + "-0" + dayFrom;
+                    } else {
+                        from = fromDatePickerValue.getYear() + "-" +
+                                fromDatePickerValue.getMonthValue() + "-" +
+                                fromDatePickerValue.getDayOfMonth();
+                    }
+                    /*
+                    this block of if-else code make sure the date is in format of
+                    'YYYY-MM-0D' if date is less than 10
+                     */
+                    if (toDatePickerValue.getDayOfMonth() < 10) {
+                        int toDate = toDatePickerValue.getDayOfMonth();
+                        to = toDatePickerValue.getYear() + "-" +
+                                toDatePickerValue.getMonthValue() + "-0" + toDate;
+                    } else {
+                        to = toDatePickerValue.getYear() + "-" +
+                                toDatePickerValue.getMonthValue() + "-" +
+                                toDatePickerValue.getDayOfMonth();
+                    }
+
                     /*
                     change the graph and table View according to the range of dates set
                      */
 
                     grossProfitTable.setItems(ReportCategoryData.getGrossProfitReportTableData(from, to));
                     ReportCategoryData.getGrossProfitReportGraphData(from, to);
+
 
 
                 } catch (NullPointerException e) {
@@ -1036,21 +1066,21 @@ public class ReportsCategoryUI {
         public final SimpleStringProperty categories;
         public final SimpleFloatProperty sales;
         public final SimpleFloatProperty purchases;
-        public final SimpleIntegerProperty gProfit;
+        public final SimpleIntegerProperty profit;
 
         public GrossProfitTableViewData(String category, float sales, float purchases, int gProfit) {
             this.categories = new SimpleStringProperty(category);
             this.sales = new SimpleFloatProperty(sales);
             this.purchases = new SimpleFloatProperty(purchases);
-            this.gProfit = new SimpleIntegerProperty(gProfit);
+            this.profit = new SimpleIntegerProperty(gProfit);
         }
 
-        public float getgProfit() {
-            return gProfit.get();
+        public int getProfit() {
+            return profit.get();
         }
 
-        public void setgProfit(int gProfit) {
-            this.gProfit.set(gProfit);
+        public void setProfit(int gProfit) {
+            this.profit.set(gProfit);
         }
 
         public float getPurchases() {

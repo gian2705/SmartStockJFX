@@ -4,7 +4,6 @@ import fahamu.dataFactory.SaleCategoryData;
 import fahamu.dataFactory.StockCategoryData;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -1766,7 +1765,6 @@ public class SalesCategoryUI {
         private SimpleStringProperty category;
         private SimpleIntegerProperty quantity;
         private SimpleFloatProperty amount;
-        private SimpleLongProperty dateId;
 
         public CashSaleOfDay(String date, String product, String category, int quantity, float amount) {
             this.date = new SimpleStringProperty(date);

@@ -58,10 +58,9 @@ public class ServerCredentialFactory {
 
             connection = DriverManager.getConnection("jdbc:sqlite:" + dataPath);
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from serverDetail;");
+            ResultSet resultSet = statement.executeQuery("select * from serverDetail");
             while (resultSet.next()) {
                 serverDetail.put(resultSet.getString(1), resultSet.getString(2));
-
             }
 
             //delete the temporary file when done

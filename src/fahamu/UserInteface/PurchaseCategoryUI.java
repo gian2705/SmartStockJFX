@@ -857,7 +857,14 @@ public class PurchaseCategoryUI {
                 alert.show();
             } else {
                 LocalDate value = dateOfPurchase.getValue();
-                String date = value.getYear() + "-" + value.getMonthValue() + "-" + value.getDayOfMonth();
+
+                String date;
+                if (value.getDayOfMonth() < 0) {
+                    int day = value.getDayOfMonth();
+                    date = value.getYear() + "-" + value.getMonthValue() + "-0" + day;
+                } else {
+                    date = value.getYear() + "-" + value.getMonthValue() + "-" + value.getDayOfMonth();
+                }
                 String supplier = supplierChooser.getSelectionModel().getSelectedItem();
                 String receipt = invoiceNumberChooser.getSelectionModel().getSelectedItem();
 
@@ -887,7 +894,15 @@ public class PurchaseCategoryUI {
                 alert.show();
             } else {
                 LocalDate value = dateOfPurchase.getValue();
-                String date = value.getYear() + "-" + value.getMonthValue() + "-" + value.getDayOfMonth();
+
+                String date;
+                if (value.getDayOfMonth() < 0) {
+                    int day = value.getDayOfMonth();
+                    date = value.getYear() + "-" + value.getMonthValue() + "-0" + day;
+                } else {
+                    date = value.getYear() + "-" + value.getMonthValue() + "-" + value.getDayOfMonth();
+                }
+
                 String supplier = supplierChooser.getSelectionModel().getSelectedItem();
                 String receipt = invoiceNumberChooser.getSelectionModel().getSelectedItem();
 
@@ -1134,7 +1149,15 @@ public class PurchaseCategoryUI {
 
                                         //refresh the table
                                         LocalDate value = dateOfPurchase.getValue();
-                                        String date = value.getYear() + "-" + value.getMonthValue() + "-" + value.getDayOfMonth();
+
+                                        String date;
+                                        if (value.getDayOfMonth() < 0) {
+                                            int day = value.getDayOfMonth();
+                                            date = value.getYear() + "-" + value.getMonthValue() + "-0" + day;
+                                        } else {
+                                            date = value.getYear() + "-" + value.getMonthValue() + "-" + value.getDayOfMonth();
+                                        }
+
                                         String supplier = supplierChooser.getSelectionModel().getSelectedItem();
                                         String receipt = invoiceNumberChooser.getSelectionModel().getSelectedItem();
 
@@ -1162,7 +1185,15 @@ public class PurchaseCategoryUI {
                             } else if (list.getSelectionModel().getSelectedIndex() == 0) {
                                 //refresh the table
                                 LocalDate value = dateOfPurchase.getValue();
-                                String date = value.getYear() + "-" + value.getMonthValue() + "-" + value.getDayOfMonth();
+
+                                String date;
+                                if (value.getDayOfMonth() < 0) {
+                                    int day = value.getDayOfMonth();
+                                    date = value.getYear() + "-" + value.getMonthValue() + "-0" + day;
+                                } else {
+                                    date = value.getYear() + "-" + value.getMonthValue() + "-" + value.getDayOfMonth();
+                                }
+
                                 String supplier = supplierChooser.getSelectionModel().getSelectedItem();
                                 String receipt = invoiceNumberChooser.getSelectionModel().getSelectedItem();
 
@@ -1611,7 +1642,18 @@ public class PurchaseCategoryUI {
                     StockCategoryData.updateWholeSalePrice(product, wSell);
 
                     //insert data into credit purchase
-                    String date = dateOfPurchase.getValue().getYear() + "-"
+                    String date;
+                    if (dateOfPurchase.getValue().getDayOfMonth() < 0) {
+                        int day = dateOfPurchase.getValue().getDayOfMonth();
+                        date = dateOfPurchase.getValue().getYear() + "-"
+                                + dateOfPurchase.getValue().getMonthValue() + "-0" + day;
+                    } else {
+                        date = dateOfPurchase.getValue().getYear() + "-"
+                                + dateOfPurchase.getValue().getMonthValue() + "-"
+                                + dateOfPurchase.getValue().getDayOfMonth();
+                    }
+
+                    date = dateOfPurchase.getValue().getYear() + "-"
                             + dateOfPurchase.getValue().getMonthValue() + "-" + dateOfPurchase.getValue().getDayOfMonth();
                     String dueDate = dueDatePicker.getValue().getYear() + "-" +
                             dueDatePicker.getValue().getMonthValue() + "-" + dueDatePicker.getValue().getDayOfMonth();
@@ -1737,7 +1779,17 @@ public class PurchaseCategoryUI {
                             StockCategoryData.updateWholeSalePrice(product, wSell);
 
                             //insert data into credit purchase
-                            String date = dateOfPurchase.getValue().getYear() + "-"
+                            String date;
+                            if (dateOfPurchase.getValue().getDayOfMonth() < 0) {
+                                int day = dateOfPurchase.getValue().getDayOfMonth();
+                                date = dateOfPurchase.getValue().getYear() + "-"
+                                        + dateOfPurchase.getValue().getMonthValue() + "-0" + day;
+                            } else {
+                                date = dateOfPurchase.getValue().getYear() + "-"
+                                        + dateOfPurchase.getValue().getMonthValue() + "-"
+                                        + dateOfPurchase.getValue().getDayOfMonth();
+                            }
+                            date = dateOfPurchase.getValue().getYear() + "-"
                                     + dateOfPurchase.getValue().getMonthValue() + "-" + dateOfPurchase.getValue().getDayOfMonth();
                             String dueDate = dueDatePicker.getValue().getYear() + "-" +
                                     dueDatePicker.getValue().getMonthValue() + "-" + dueDatePicker.getValue().getDayOfMonth();
@@ -2095,7 +2147,15 @@ public class PurchaseCategoryUI {
                 alert.show();
             } else {
                 LocalDate value = dateOfPurchase.getValue();
-                String date = value.getYear() + "-" + value.getMonthValue() + "-" + value.getDayOfMonth();
+
+                String date;
+                if (value.getDayOfMonth() < 0) {
+                    int day = value.getDayOfMonth();
+                    date = value.getYear() + "-" + value.getMonthValue() + "-0" + day;
+                } else {
+                    date = value.getYear() + "-" + value.getMonthValue() + "-" + value.getDayOfMonth();
+                }
+
                 String supplier = supplierChooser.getSelectionModel().getSelectedItem();
                 String receipt = receiptChooser.getSelectionModel().getSelectedItem();
 
@@ -2125,7 +2185,15 @@ public class PurchaseCategoryUI {
                 alert.show();
             } else {
                 LocalDate value = dateOfPurchase.getValue();
-                String date = value.getYear() + "-" + value.getMonthValue() + "-" + value.getDayOfMonth();
+
+                String date;
+                if (value.getDayOfMonth() < 0) {
+                    int day = value.getDayOfMonth();
+                    date = value.getYear() + "-" + value.getMonthValue() + "-0" + day;
+                } else {
+                    date = value.getYear() + "-" + value.getMonthValue() + "-" + value.getDayOfMonth();
+                }
+
                 String supplier = supplierChooser.getSelectionModel().getSelectedItem();
                 String receipt = receiptChooser.getSelectionModel().getSelectedItem();
 
@@ -2565,9 +2633,15 @@ public class PurchaseCategoryUI {
 
                                     //refresh the table
                                     LocalDate value = dateOfPurchase.getValue();
-                                    String date = value.getYear() +
-                                            "-" + value.getMonthValue() +
-                                            "-" + value.getDayOfMonth();
+
+                                    String date;
+                                    if (value.getDayOfMonth() < 0) {
+                                        int day = value.getDayOfMonth();
+                                        date = value.getYear() + "-" + value.getMonthValue() + "-0" + day;
+                                    } else {
+                                        date = value.getYear() + "-" + value.getMonthValue() + "-" + value.getDayOfMonth();
+                                    }
+
                                     String supplier = supplierChooser.getSelectionModel().getSelectedItem();
                                     String receipt = receiptChooser.getSelectionModel().getSelectedItem();
 
@@ -2589,7 +2663,15 @@ public class PurchaseCategoryUI {
                             } else if (list.getSelectionModel().getSelectedIndex() == 0) {
                                 //refresh the table
                                 LocalDate value = dateOfPurchase.getValue();
-                                String date = value.getYear() + "-" + value.getMonthValue() + "-" + value.getDayOfMonth();
+
+                                String date;
+                                if (value.getDayOfMonth() < 0) {
+                                    int day = value.getDayOfMonth();
+                                    date = value.getYear() + "-" + value.getMonthValue() + "-0" + day;
+                                } else {
+                                    date = value.getYear() + "-" + value.getMonthValue() + "-" + value.getDayOfMonth();
+                                }
+
                                 String supplier = supplierChooser.getSelectionModel().getSelectedItem();
                                 String receipt = receiptChooser.getSelectionModel().getSelectedItem();
 
@@ -3247,8 +3329,18 @@ public class PurchaseCategoryUI {
 
 
                     //insert data into cash purchase
-                    String date = dateOfPurchase.getValue().getYear() + "-"
-                            + dateOfPurchase.getValue().getMonthValue() + "-" + dateOfPurchase.getValue().getDayOfMonth();
+                    String date;
+                    if (dateOfPurchase.getValue().getDayOfMonth() < 0) {
+                        int day = dateOfPurchase.getValue().getDayOfMonth();
+                        date = dateOfPurchase.getValue().getYear() + "-"
+                                + dateOfPurchase.getValue().getMonthValue() + "-0" + day;
+                    } else {
+                        date = dateOfPurchase.getValue().getYear() + "-"
+                                + dateOfPurchase.getValue().getMonthValue() + "-"
+                                + dateOfPurchase.getValue().getDayOfMonth();
+                    }
+
+
                     String receipt = receiptChooser.getSelectionModel().getSelectedItem();
                     String category = categoryTextField.getText();
                     String unit = unitTextField.getText();
@@ -3366,8 +3458,18 @@ public class PurchaseCategoryUI {
 
 
                             //insert data into cash purchase
-                            String date = dateOfPurchase.getValue().getYear() + "-"
-                                    + dateOfPurchase.getValue().getMonthValue() + "-" + dateOfPurchase.getValue().getDayOfMonth();
+                            String date;
+                            if (dateOfPurchase.getValue().getDayOfMonth() < 0) {
+                                int day = dateOfPurchase.getValue().getDayOfMonth();
+                                date = dateOfPurchase.getValue().getYear() + "-"
+                                        + dateOfPurchase.getValue().getMonthValue() + "-0" + day;
+                            } else {
+                                date = dateOfPurchase.getValue().getYear() + "-"
+                                        + dateOfPurchase.getValue().getMonthValue() + "-"
+                                        + dateOfPurchase.getValue().getDayOfMonth();
+                            }
+
+
                             String receipt = receiptChooser.getSelectionModel().getSelectedItem();
                             String category = categoryTextField.getText();
                             String unit = unitTextField.getText();

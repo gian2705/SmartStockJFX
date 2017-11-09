@@ -73,8 +73,8 @@ class MainStage {
                 setHomeUIDashboard();
                 //set menu bar of admin
                 setMenuNode(ADMIN_UI);
-                //cashier scene
-                Scene myScene = new Scene(rootAdmin, 1250, 660);
+                //admin scene
+                Scene myScene = new Scene(rootAdmin, 1250, 675);
                 stageAdmin.setScene(myScene);
 
                 stageAdmin.setOnCloseRequest(event -> {
@@ -497,7 +497,7 @@ class MainStage {
                 Tab tab1 = new Tab("Product Report");
                 tab1.setId("product_report");
 
-                GridPane gridPane = reportsCategoryUI.setDashboardSalesReportUI();
+                GridPane gridPane = reportsCategoryUI.setDashboardSalesReportUI(280);
                 gridPane.add(reportsCategoryUI.navigationLeftPaneProductReport(), 0, 0);
                 gridPane.add(reportsCategoryUI
                                 .mainTaskUI(
@@ -536,7 +536,7 @@ class MainStage {
                 Tab tab1 = new Tab("Sales Report");
                 tab1.setId("sales_report");
 
-                GridPane gridPane = reportsCategoryUI.setDashboardSalesReportUI();
+                GridPane gridPane = reportsCategoryUI.setDashboardSalesReportUI(350);
 
                 gridPane.add(reportsCategoryUI.navigationLeftPaneSalesReports(), 0, 0);
                 gridPane.add(reportsCategoryUI.setGrossProfitReportGraph(), 1, 0);

@@ -775,7 +775,13 @@ public class StockCategoryUI {
                 float profit = Float.parseFloat(profitTextField.getText());
                 float times = Float.parseFloat(timesTextField.getText());
 
-                String expireDate = year + "-" + month + "-" + day;
+                String expireDate;
+                if (day < 0) {
+
+                    expireDate = year + "-" + month + "-0" + day;
+                } else {
+                    expireDate = year + "-" + month + "-" + day;
+                }
                 //insert into database
                 StockCategoryData.insertDataIntoStock(
                         product,
@@ -1960,7 +1966,12 @@ public class StockCategoryUI {
                     year = expireDatePicker.getValue().getYear();
                     month = expireDatePicker.getValue().getMonth().getValue();
                     day = expireDatePicker.getValue().getDayOfMonth();
-                    expireDate = year + "-" + month + "-" + day;
+                    if (day < 0) {
+                        expireDate = year + "-" + month + "-0" + day;
+                    } else {
+                        expireDate = year + "-" + month + "-" + day;
+                    }
+
 
                 } catch (NullPointerException nullP) {
                     if (expireDatePicker.getEditor().getText().isEmpty()) {
@@ -1971,6 +1982,7 @@ public class StockCategoryUI {
                         expireDate = expireDatePicker.getEditor().getText();
                     }
                 }
+
                 //prepare value to update
                 String product, condition;
                 if (newProductNameTextField.getText().isEmpty()) {

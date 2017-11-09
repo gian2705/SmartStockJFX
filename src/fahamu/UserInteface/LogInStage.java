@@ -64,7 +64,7 @@ public class LogInStage extends Application {
             path = "/usr/bin/Lb/serverCredential.db.encrypted";
         } else {
             //implement window file location
-            path = Paths.get(System.getProperty("user.home")).toString();
+            path = Paths.get(System.getProperty("user.home"), "Lb", "serverCredential.db.encrypted").toString();
 
         }
 
@@ -72,7 +72,8 @@ public class LogInStage extends Application {
         ServerCredentialFactory serverCredentialFactory = new ServerCredentialFactory(path);
         username = serverCredentialFactory.serverDetail.get("username");
         password = serverCredentialFactory.serverDetail.get("password");
-        serverAddress = serverCredentialFactory.serverDetail.get("serverAddr");
+        serverAddress = serverCredentialFactory.serverDetail.get("serverAddress");
+
         //set contents of login stage
         setLogInUI();
 
