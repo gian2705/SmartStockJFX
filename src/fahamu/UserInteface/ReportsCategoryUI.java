@@ -29,8 +29,6 @@ public class ReportsCategoryUI {
 
     private String dateClicked;
 
-    public static XYChart.Series<String, Number> salesSeries;
-    public static XYChart.Series<String, Number> purchaseSeries;
     private static ObservableList<String> productsHistory;
     TableView<SalesCategoryUI.CashierSale> purchaseCreditHistoryTable;
     TableView<DiscountDetailTableDataClass> purchaseCashHistoryTable;
@@ -267,19 +265,17 @@ public class ReportsCategoryUI {
 
         TableColumn<GrossProfitTableViewData, String> categoryColumn = new TableColumn<>("Category");
         TableColumn<GrossProfitTableViewData, String> salesColumn = new TableColumn<>("Sales(TZS)");
-        TableColumn<GrossProfitTableViewData, String> purchaseColumn = new TableColumn<>("Purchases(TZS)");
         TableColumn<GrossProfitTableViewData, String> profitColumn = new TableColumn<>("G-Profit");
 
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("categories"));
         salesColumn.setCellValueFactory(new PropertyValueFactory<>("sales"));
-        purchaseColumn.setCellValueFactory(new PropertyValueFactory<>("purchases"));
         profitColumn.setCellValueFactory(new PropertyValueFactory<>("profit"));
 
         grossProfitTableView.getColumns().addAll(
                 categoryColumn,
                 salesColumn,
-                purchaseColumn,
-                profitColumn);
+                profitColumn
+        );
 
         /*
         the following code populate the gross profit table view
@@ -883,20 +879,15 @@ public class ReportsCategoryUI {
         salesGraph.setTitle("Gross Profit  Graph");
         salesGraph.setStyle("-fx-border-color: blue; -fx-border-width: 2; -fx-border-radius: 5;");
 
-        salesSeries = new XYChart.Series<>();
-        salesSeries.setName("Sales");
-
-        purchaseSeries = new XYChart.Series<>();
-        purchaseSeries.setName("Purchases");
-
-        salesGraph.getData().addAll(salesSeries, purchaseSeries);
-
         /*
         the following code populate the gross profit graph
         and with the data of the last week
          */
-        ReportCategoryData.getGrossProfitReportGraphData(lastWeek, today);
-
+        ObservableList<XYChart.Series> series = ReportCategoryData.getGrossProfitReportGraphData(lastWeek, today);
+        for (XYChart.Series<String, Number> axis :
+                series) {
+            salesGraph.getData().add(axis);
+        }
         return salesGraph;
     }
 
@@ -1064,31 +1055,21 @@ public class ReportsCategoryUI {
 
     public static class GrossProfitTableViewData {
         public final SimpleStringProperty categories;
-        public final SimpleFloatProperty sales;
-        public final SimpleFloatProperty purchases;
-        public final SimpleIntegerProperty profit;
+        public final SimpleStringProperty sales;
+        public final SimpleStringProperty profit;
 
-        public GrossProfitTableViewData(String category, float sales, float purchases, int gProfit) {
+        public GrossProfitTableViewData(String category, String sales, String gProfit) {
             this.categories = new SimpleStringProperty(category);
-            this.sales = new SimpleFloatProperty(sales);
-            this.purchases = new SimpleFloatProperty(purchases);
-            this.profit = new SimpleIntegerProperty(gProfit);
+            this.sales = new SimpleStringProperty(sales);
+            this.profit = new SimpleStringProperty(gProfit);
         }
 
-        public int getProfit() {
+        public String getProfit() {
             return profit.get();
         }
 
-        public void setProfit(int gProfit) {
+        public void setProfit(String gProfit) {
             this.profit.set(gProfit);
-        }
-
-        public float getPurchases() {
-            return purchases.get();
-        }
-
-        public void setPurchases(float purchases) {
-            this.purchases.set(purchases);
         }
 
         public String getCategories() {
@@ -1099,11 +1080,11 @@ public class ReportsCategoryUI {
             this.categories.set(categories);
         }
 
-        public float getSales() {
+        public String getSales() {
             return sales.get();
         }
 
-        public void setSales(float sales) {
+        public void setSales(String sales) {
             this.sales.set(sales);
         }
     }
