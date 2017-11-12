@@ -190,13 +190,13 @@ class MainStage {
         Button productReportButton;
 
         //content of titled pane dashboard
-        dashboardButton = new Button("Discount Reports");
+        dashboardButton = new Button("Sales Reports");
         dashboardButton.setStyle("-fx-base: #001a80");
         dashboardButton.setMinSize(200, 10);
         productReportButton = new Button("Product Reports");
         productReportButton.setStyle("-fx-base: #001a80");
         productReportButton.setMinSize(200, 10);
-        salesReports = new Button("Sales Reports");
+        salesReports = new Button("Gross Profit Reports");
         salesReports.setStyle("-fx-base: #001a80");
         salesReports.setMinSize(200, 10);
         purchaseReport = new Button("Purchase Reports");
@@ -539,7 +539,7 @@ class MainStage {
                 GridPane gridPane = reportsCategoryUI.setDashboardSalesReportUI(350);
 
                 gridPane.add(reportsCategoryUI.navigationLeftPaneSalesReports(), 0, 0);
-                gridPane.add(reportsCategoryUI.setGrossProfitReportGraph(), 1, 0);
+                gridPane.add(reportsCategoryUI.grossProfitGraph, 1, 0);
 
                 tab1.setContent(gridPane);
                 homeUIDashboard.getTabs().add(tab1);

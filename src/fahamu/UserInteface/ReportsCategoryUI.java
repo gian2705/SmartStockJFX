@@ -35,6 +35,7 @@ public class ReportsCategoryUI {
     TableView<ProductSellHistoryDataClass> sellHistoryTable;
     TableView<GrossProfitTableViewData> grossProfitTable;
     AreaChart<String, Number> sellPurchaseChart;
+    BarChart<String, Number> grossProfitGraph;
     private TableView<SalesTableDataClass> salesTable;
     private TableView<SalesCategoryUI.CashierSale> cashierSaleTable;
     private TableView<DiscountDetailTableDataClass> discountDetail;
@@ -53,6 +54,7 @@ public class ReportsCategoryUI {
         discountDetail = setDiscountDetailTableView("Product", "Sale(TZS)", "Discount(TZS)");
         sellHistoryTable = setProductSellHistoryTableView();
         grossProfitTable = setGrossProfitTableView();
+        grossProfitGraph = setGrossProfitReportGraph();
         purchaseCashHistoryTable = setDiscountDetailTableView("Date", "Cash Purchase", "Stock");
         purchaseCreditHistoryTable = cashierSaleTableView("Date", "Credit Purchase", "Stock");
         salesGraph = setSalesGraphUI();
@@ -261,7 +263,6 @@ public class ReportsCategoryUI {
 
         TableView<GrossProfitTableViewData> grossProfitTableView = new TableView<>();
         grossProfitTableView.autosize();
-        grossProfitTableView.setPadding(new Insets(0, 5, 0, 0));
 
         TableColumn<GrossProfitTableViewData, String> categoryColumn = new TableColumn<>("Category");
         TableColumn<GrossProfitTableViewData, String> salesColumn = new TableColumn<>("Sales(TZS)");
@@ -761,8 +762,13 @@ public class ReportsCategoryUI {
                      */
 
                     grossProfitTable.setItems(ReportCategoryData.getGrossProfitReportTableData(from, to));
-                    ReportCategoryData.getGrossProfitReportGraphData(from, to);
 
+                    ObservableList<XYChart.Series> series = ReportCategoryData.getGrossProfitReportGraphData(from, to);
+                    grossProfitGraph.getData().clear();
+                    for (XYChart.Series<String, Number> axis :
+                            series) {
+                        grossProfitGraph.getData().add(axis);
+                    }
 
 
                 } catch (NullPointerException e) {
@@ -884,9 +890,11 @@ public class ReportsCategoryUI {
         and with the data of the last week
          */
         ObservableList<XYChart.Series> series = ReportCategoryData.getGrossProfitReportGraphData(lastWeek, today);
-        for (XYChart.Series<String, Number> axis :
-                series) {
+        salesGraph.getData().clear();
+        for (XYChart.Series<String, Number> axis : series) {
+
             salesGraph.getData().add(axis);
+
         }
         return salesGraph;
     }

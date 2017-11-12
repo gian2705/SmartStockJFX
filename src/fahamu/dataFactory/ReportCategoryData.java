@@ -64,6 +64,10 @@ public class ReportCategoryData {
             ResultSet resultSet;
             XYChart.Series<String, Number> salesSeries;
             XYChart.Series<String, Number> grossProfitSeries;
+            salesSeries = new XYChart.Series<>();
+            grossProfitSeries = new XYChart.Series<>();
+            grossProfitSeries.setName("Gross Profit");
+            salesSeries.setName("Sales");
 
             /*
             select a distinct product from cashSale table on the given range
@@ -147,17 +151,14 @@ public class ReportCategoryData {
                 /*
                 populate the table with data
                 */
-                salesSeries = new XYChart.Series<>();
-                grossProfitSeries = new XYChart.Series<>();
-                grossProfitSeries.setName("Gross Profit");
-                salesSeries.setName("Sales");
+
 
                 salesSeries.getData().add(new XYChart.Data<>(category, totalCashSale));
                 grossProfitSeries.getData().add(new XYChart.Data<>(category, profit));
 
-                series.addAll(salesSeries, grossProfitSeries);
-
             }
+
+            series.addAll(salesSeries, grossProfitSeries);
 
         } catch (SQLException e) {
             e.printStackTrace();

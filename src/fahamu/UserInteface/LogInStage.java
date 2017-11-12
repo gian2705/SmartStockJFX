@@ -6,6 +6,7 @@ import fahamu.dataFactory.SaleCategoryData;
 import fahamu.dataFactory.ServerCredentialFactory;
 import fahamu.dataFactory.StockCategoryData;
 import javafx.application.Application;
+import javafx.concurrent.Task;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,14 +14,18 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -38,7 +43,7 @@ public class LogInStage extends Application {
     private SalesCategoryUI salesCategoryUIAdmin;
     private SalesCategoryUI salesCategoryUICashier;
 
-    public static Stage stageLogIn;
+    static Stage stageLogIn;
     static String currentUserName;
     public static String password;
     public static String serverAddress;
@@ -61,7 +66,9 @@ public class LogInStage extends Application {
         //detail for login. the constructor the path of the encrypted file.
         String path;
         if (System.getProperty("os.name").equals("Linux")) {
+
             path = "/usr/bin/Lb/serverCredential.db.encrypted";
+
         } else {
             //implement window file location
             path = Paths.get(System.getProperty("user.home"), "Lb", "serverCredential.db.encrypted").toString();
@@ -364,157 +371,176 @@ public class LogInStage extends Application {
 
             } else {
 
-                //call check server if its reachable before login
-                if (checkServerReachable()) {
-                    String username = usernameTextField.getText();
-                    String password = passwordField.getText();
-                    //if authentication is successful
-                    if (password.equals(LogInStageData.authenticateUser(username))) {
+                if (usernameTextField.getText().isEmpty()) {
 
-                        //for login of admin
-                        if (LogInStageData.getUserType(username).equals("admin")) {
-                            //get current user
-                            currentUserName = usernameTextField.getText();
+                    usernameTextField.requestFocus();
+                    resetPassword.setVisible(false);
+                    logInButton.setVisible(false);
 
-                            usernameTextField.clear();
-                            passwordField.clear();
+                } else if (passwordField.getText().isEmpty()) {
 
-                            //hide login page
-                            logInButton.setVisible(false);
-                            resetPassword.setVisible(false);
-                            stageLogIn.hide();
+                    passwordField.requestFocus();
+                    resetPassword.setVisible(false);
+                    logInButton.setVisible(false);
 
-                            //call admin uer interface
-                            if (isFirstTimeAdmin) {
-                                //set the objects
-                                salesCategoryUIAdmin = new SalesCategoryUI(true);
-                                new MainStage(MainStage.ADMIN_UI, salesCategoryUIAdmin);
+                } else {
 
-                                new StockCategoryUI();
-                                new ExpenditureCategoryUI();
+                    //check for server reachable before login
+                    if (checkServerReachable()) {
+                        String username = usernameTextField.getText();
+                        String password = passwordField.getText();
+                        //if authentication is successful
+                        if (password.equals(LogInStageData.authenticateUser(username))) {
 
-                                isFirstTimeAdmin = false;
-                            }
+                            //for login of admin
+                            if (LogInStageData.getUserType(username).equals("admin")) {
+                                //get current user
+                                currentUserName = usernameTextField.getText();
 
-                            //update total tra sales
-                            float traSaleTotal = SaleCategoryData.getTotalTraSaleOfDay();
-                            float traCashierSales = SaleCategoryData
-                                    .getTotalTraSaleOfDayOfCashier(LogInStage.currentUserName);
-                            salesCategoryUIAdmin
-                                    .totalTraSale.setText(NumberFormat.getInstance().format(traSaleTotal));
-                            salesCategoryUIAdmin
-                                    .totalUserTraSales.setText(NumberFormat.getInstance().format(traCashierSales));
+                                usernameTextField.clear();
+                                passwordField.clear();
 
-                            //update tables of all sale of the day for the specific user
-                            salesCategoryUIAdmin.tableViewSaleTraOfDay
-                                    .setItems(SaleCategoryData.getCashTraSaleOfDay(username));
-                            salesCategoryUIAdmin.tableViewSalesOfDay
-                                    .setItems(SaleCategoryData.getCashSaleOfDay(username));
+                                //hide login page
+                                logInButton.setVisible(false);
+                                resetPassword.setVisible(false);
 
-                            //call admin stage
-                            MainStage.stageAdmin.setTitle("Lb Pharmacy-" + LogInStage.currentUserName);
-                            MainStage.stageAdmin.show();
+                                stageLogIn.hide();
 
-                        } else {
-                            //get current user
-                            currentUserName = usernameTextField.getText();
+                                //call admin uer interface
+                                if (isFirstTimeAdmin) {
+                                    //set the objects
+                                    salesCategoryUIAdmin = new SalesCategoryUI(true);
+                                    new MainStage(MainStage.ADMIN_UI, salesCategoryUIAdmin);
+                                    new StockCategoryUI();
+                                    new ExpenditureCategoryUI();
 
-                            usernameTextField.clear();
-                            passwordField.clear();
+                                    isFirstTimeAdmin = false;
+                                }
 
-                            //hide login page
-                            logInButton.setVisible(false);
-                            resetPassword.setVisible(false);
-                            stageLogIn.hide();
+                                //update total tra sales
+                                float traSaleTotal = SaleCategoryData.getTotalTraSaleOfDay();
+                                float traCashierSales = SaleCategoryData
+                                        .getTotalTraSaleOfDayOfCashier(LogInStage.currentUserName);
+                                salesCategoryUIAdmin
+                                        .totalTraSale.setText(NumberFormat.getInstance().format(traSaleTotal));
+                                salesCategoryUIAdmin
+                                        .totalUserTraSales
+                                        .setText(NumberFormat.getInstance().format(traCashierSales));
 
-                            if (isFirstTimeCashier) {
-                                //set objects
-                                salesCategoryUICashier = new SalesCategoryUI(false);
-                                new MainStage(MainStage.CASHIER_UI, salesCategoryUICashier);
+                                //update tables of all sale of the day for the specific user
+                                salesCategoryUIAdmin.tableViewSaleTraOfDay
+                                        .setItems(SaleCategoryData.getCashTraSaleOfDay(username));
+                                salesCategoryUIAdmin.tableViewSalesOfDay
+                                        .setItems(SaleCategoryData.getCashSaleOfDay(username));
 
-                                isFirstTimeCashier = false;
-                            }
+                                //call admin stage
+                                MainStage.stageAdmin.setTitle("Lb Pharmacy-" + LogInStage.currentUserName);
+                                MainStage.stageAdmin.show();
 
-                            //update total tra sales
-                            float traSaleTotal = SaleCategoryData.getTotalTraSaleOfDay();
-                            float traCashierSales = SaleCategoryData
-                                    .getTotalTraSaleOfDayOfCashier(LogInStage.currentUserName);
-                            salesCategoryUICashier
-                                    .totalTraSale.setText(NumberFormat.getInstance().format(traSaleTotal));
-                            salesCategoryUICashier
-                                    .totalUserTraSales.setText(NumberFormat.getInstance().format(traCashierSales));
 
-                            //update tables of all sale of the day for the specific user
-                            salesCategoryUICashier.tableViewSaleTraOfDay
-                                    .setItems(SaleCategoryData.getCashTraSaleOfDay(username));
-                            salesCategoryUICashier.tableViewSalesOfDay
-                                    .setItems(SaleCategoryData.getCashSaleOfDay(username));
+                            } else {
+                                //get current user
+                                currentUserName = usernameTextField.getText();
 
-                            //call the user interface
-                            MainStage.stageUser.setTitle("Lb Pharmacy-" + LogInStage.currentUserName);
-                            MainStage.stageUser.show();
+                                usernameTextField.clear();
+                                passwordField.clear();
 
-                            //set shortcut
-                            salesCategoryUICashier.submitCashBill.getScene().getAccelerators().put(
-                                    new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN),
-                                    salesCategoryUICashier::setSubmitCashBill
-                            );
-                            salesCategoryUICashier.traCheckButton.getScene().getAccelerators().put(
-                                    new KeyCodeCombination(KeyCode.T, KeyCombination.SHORTCUT_DOWN),
-                                    () -> {
-                                        if (salesCategoryUICashier.traCheckButton.isSelected()) {
-                                            salesCategoryUICashier.traCheckButton.setSelected(false);
-                                            salesCategoryUICashier.listBillTable.setStyle("-fx-base: #efeded");
-                                        } else {
-                                            salesCategoryUICashier.traCheckButton.setSelected(true);
-                                            salesCategoryUICashier.listBillTable.setStyle("-fx-base: #00ff00");
-                                        }
-                                    }
-                            );
-                            salesCategoryUICashier.wholeSaleCheckBox.getScene().getAccelerators().put(
-                                    new KeyCodeCombination(KeyCode.W, KeyCombination.SHORTCUT_DOWN),
-                                    () -> {
-                                        if (salesCategoryUICashier.wholeSaleCheckBox.isSelected()) {
-                                            salesCategoryUICashier.wholeSaleCheckBox.setSelected(false);
-                                            float price = StockCategoryData.sellPrice;
-                                            try {
-                                                float product = (price * (Integer.parseInt(salesCategoryUICashier.
-                                                        quantityTextField.getText())))
-                                                        - Integer.parseInt(salesCategoryUICashier.discountTextField.getText());
-                                                //format number for accountant
-                                                String value = NumberFormat.getInstance().format(product);
-                                                salesCategoryUICashier.amountTextField.setText(value);
-                                            } catch (Throwable throwable) {
-                                                salesCategoryUICashier.amountTextField.setText(String.valueOf(0));
-                                            }
-                                        } else {
-                                            salesCategoryUICashier.wholeSaleCheckBox.setSelected(true);
-                                            if (salesCategoryUICashier.quantityTextField.getText().isEmpty()) {
-                                                salesCategoryUICashier.amountTextField.setText(String.valueOf(0));
+                                //hide login page
+                                logInButton.setVisible(false);
+                                resetPassword.setVisible(false);
+                                stageLogIn.hide();
+
+                                if (isFirstTimeCashier) {
+                                    //set objects
+                                    salesCategoryUICashier = new SalesCategoryUI(false);
+                                    new MainStage(MainStage.CASHIER_UI, salesCategoryUICashier);
+
+                                    isFirstTimeCashier = false;
+                                }
+
+                                //update total tra sales
+                                float traSaleTotal = SaleCategoryData.getTotalTraSaleOfDay();
+                                float traCashierSales = SaleCategoryData
+                                        .getTotalTraSaleOfDayOfCashier(LogInStage.currentUserName);
+                                salesCategoryUICashier
+                                        .totalTraSale.setText(NumberFormat.getInstance().format(traSaleTotal));
+                                salesCategoryUICashier
+                                        .totalUserTraSales
+                                        .setText(NumberFormat.getInstance().format(traCashierSales));
+
+                                //update tables of all sale of the day for the specific user
+                                salesCategoryUICashier.tableViewSaleTraOfDay
+                                        .setItems(SaleCategoryData.getCashTraSaleOfDay(username));
+                                salesCategoryUICashier.tableViewSalesOfDay
+                                        .setItems(SaleCategoryData.getCashSaleOfDay(username));
+
+                                //call the user interface
+                                MainStage.stageUser.setTitle("Lb Pharmacy-" + LogInStage.currentUserName);
+                                MainStage.stageUser.show();
+
+                                //some keyboard shortcut
+                                salesCategoryUICashier.submitCashBill.getScene().getAccelerators().put(
+                                        new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN),
+                                        salesCategoryUICashier::setSubmitCashBill
+                                );
+                                salesCategoryUICashier.traCheckButton.getScene().getAccelerators().put(
+                                        new KeyCodeCombination(KeyCode.T, KeyCombination.SHORTCUT_DOWN),
+                                        () -> {
+                                            if (salesCategoryUICashier.traCheckButton.isSelected()) {
+                                                salesCategoryUICashier.traCheckButton.setSelected(false);
+                                                salesCategoryUICashier.listBillTable.setStyle("-fx-base: #efeded");
                                             } else {
-                                                int quant = Integer.parseInt(salesCategoryUICashier.quantityTextField.getText());
-                                                float wPrice = StockCategoryData.wSellPrice;
-                                                try {
-                                                    float total = (wPrice * quant)
-                                                            - Integer.parseInt(salesCategoryUICashier.discountTextField.getText());
-                                                    salesCategoryUICashier.amountTextField
-                                                            .setText(NumberFormat.getInstance().format(total));
+                                                salesCategoryUICashier.traCheckButton.setSelected(true);
+                                                salesCategoryUICashier.listBillTable.setStyle("-fx-base: #00ff00");
+                                            }
+                                        }
+                                );
 
-                                                } catch (Throwable q) {
+                                salesCategoryUICashier.wholeSaleCheckBox.getScene().getAccelerators().put(
+                                        new KeyCodeCombination(KeyCode.W, KeyCombination.SHORTCUT_DOWN),
+                                        () -> {
+                                            if (salesCategoryUICashier.wholeSaleCheckBox.isSelected()) {
+                                                salesCategoryUICashier.wholeSaleCheckBox.setSelected(false);
+                                                float price = StockCategoryData.sellPrice;
+                                                try {
+                                                    float product = (price * (Integer.parseInt(salesCategoryUICashier.
+                                                            quantityTextField.getText())))
+                                                            - Integer.parseInt(salesCategoryUICashier.discountTextField.getText());
+                                                    //format number for accountant
+                                                    String value = NumberFormat.getInstance().format(product);
+                                                    salesCategoryUICashier.amountTextField.setText(value);
+                                                } catch (Throwable throwable) {
                                                     salesCategoryUICashier.amountTextField.setText(String.valueOf(0));
+                                                }
+                                            } else {
+                                                salesCategoryUICashier.wholeSaleCheckBox.setSelected(true);
+                                                if (salesCategoryUICashier.quantityTextField.getText().isEmpty()) {
+                                                    salesCategoryUICashier.amountTextField.setText(String.valueOf(0));
+                                                } else {
+                                                    int quant = Integer.parseInt(salesCategoryUICashier.quantityTextField.getText());
+                                                    float wPrice = StockCategoryData.wSellPrice;
+                                                    try {
+                                                        float total = (wPrice * quant)
+                                                                - Integer.parseInt(salesCategoryUICashier.discountTextField.getText());
+                                                        salesCategoryUICashier.amountTextField
+                                                                .setText(NumberFormat.getInstance().format(total));
+
+                                                    } catch (Throwable q) {
+                                                        salesCategoryUICashier.amountTextField.setText(String.valueOf(0));
+                                                    }
                                                 }
                                             }
                                         }
-                                    }
-                            );
+                                );
 
+                            }
+                        } else {
+                            passwordField.requestFocus();
+                            logInButton.setVisible(false);
+                            resetPassword.setVisible(true);
                         }
-                    } else {
-                        passwordField.requestFocus();
-                        logInButton.setVisible(false);
-                        resetPassword.setVisible(true);
-                    }
 
+                    }
                 }
             }
         });
@@ -590,10 +616,48 @@ public class LogInStage extends Application {
         return serverReachable;
     }
 
-
     public static void main(String[] args) {
         launch(args);
 
+    }
+
+    public static class ProgressForm {
+        private final Stage dialogStage;
+        private final ProgressBar pb = new ProgressBar();
+
+        public ProgressForm() {
+            dialogStage = new Stage();
+            dialogStage.initStyle(StageStyle.UNDECORATED);
+            dialogStage.setResizable(false);
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+
+            // PROGRESS BAR
+            HBox hBoxProgressBar = new HBox();
+            hBoxProgressBar.setAlignment(Pos.CENTER_RIGHT);
+            hBoxProgressBar.setPadding(new Insets(0, 0, 30, 0));
+            hBoxProgressBar.getChildren().addAll(pb);
+            pb.setMinWidth(400);
+            pb.setProgress(-1F);
+
+            final BorderPane borderPane = new BorderPane();
+            borderPane.setId("pane");
+            //borderPane.setCenter(pin);
+            borderPane.setBottom(hBoxProgressBar);
+
+            Scene scene = new Scene(borderPane, 550, 380);
+            scene.getStylesheets()
+                    .addAll(this.getClass().getResource("style.css").toExternalForm());
+            dialogStage.setScene(scene);
+        }
+
+        public void activateProgressBar(final Task<?> task1) {
+            pb.progressProperty().bind(task1.progressProperty());
+            dialogStage.show();
+        }
+
+        public Stage getDialogStage() {
+            return dialogStage;
+        }
     }
 
 }

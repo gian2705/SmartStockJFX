@@ -26,34 +26,32 @@ import java.util.Calendar;
 
 public class SalesCategoryUI {
 
-    private SplitPane splitPane;
-
+    /*
+    package private field
+     */
     TabPane tabPane;
-    Tab salesTableViewTab;
-
-    Button submitCashBill;
+    /*
+    private fields
+     */
+    private SplitPane splitPane;
     private Button addToCartButton;
+    private ComboBox<String> productNameChooser;
+    private TextField receivedTextField;
+    private TextField totalAmountTextField;
+    private TextField changesTextField;
+    private TextField invisibleTotalAmountTextField;
+    Tab salesTableViewTab;
+    Button submitCashBill;
     RadioButton traCheckButton;
     CheckBox wholeSaleCheckBox;
-
-    private ComboBox<String> productNameChooser;
-
     TableView<CashSaleTableBill> listBillTable;
     TableView<CashSaleOfDay> tableViewSalesOfDay;
     TableView<CashTraSaleOfDay> tableViewSaleTraOfDay;
-
     TextField totalTraSale;
     TextField totalUserTraSales;
     TextField quantityTextField;
     TextField amountTextField;
     TextField discountTextField;
-
-    private TextField receivedTextField;
-    private TextField totalAmountTextField;
-    private TextField changesTextField;
-    private TextField invisibleTotalAmountTextField;
-
-    private int wquantity = 0;
 
     SalesCategoryUI(boolean isAdmin) {
 
@@ -490,7 +488,6 @@ public class SalesCategoryUI {
                         String sell = StockCategoryData.getSellPrice(condition);
                         String shelf = StockCategoryData.getShelf(condition);
                         String stockRemain = String.valueOf(StockCategoryData.getProductQuantity(condition));
-                        wquantity = StockCategoryData.getWholeProductQuantity(condition);
                         StockCategoryData.getWholeSellPrice(condition);
                         priceTextField.setText(sell);
                         shelfTextField.setText(shelf);
@@ -601,7 +598,6 @@ public class SalesCategoryUI {
                         String sell = StockCategoryData.getSellPrice(condition);
                         String shelf = StockCategoryData.getShelf(condition);
                         String stockRemain = String.valueOf(StockCategoryData.getProductQuantity(condition));
-                        wquantity = StockCategoryData.getWholeProductQuantity(condition);
                         StockCategoryData.getWholeSellPrice(condition);
                         priceTextField.setText(sell);
                         shelfTextField.setText(shelf);
@@ -782,7 +778,6 @@ public class SalesCategoryUI {
                     String sellPrice = StockCategoryData.getSellPrice(condition);
                     String shelf = StockCategoryData.getShelf(condition);
                     String stockRemain = String.valueOf(StockCategoryData.getProductQuantity(condition));
-                    wquantity = StockCategoryData.getWholeProductQuantity(condition);
                     StockCategoryData.getWholeSellPrice(condition);
                     priceTextField.setText(sellPrice);
                     shelfTextField.setText(shelf);
@@ -1283,6 +1278,7 @@ public class SalesCategoryUI {
     }
 
     private void cashSaleReports(boolean isAdmin) {
+
         if (isAdmin) {
 
             Label totalSale = new Label("Total :");
