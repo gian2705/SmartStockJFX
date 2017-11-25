@@ -3,11 +3,13 @@ package fahamu.UserInteface;
 import fahamu.dataFactory.PurchaseCategoryData;
 import fahamu.dataFactory.ReportCategoryData;
 import fahamu.dataFactory.SaleCategoryData;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -27,6 +29,10 @@ public class ReportsCategoryUI {
 
     GridPane dashboard;
 
+    private Button refreshButton = new Button("Refresh");
+    private DatePicker fromDatePicker = new DatePicker();
+    private DatePicker toDatePicker = new DatePicker();
+    private ProgressIndicator progressIndicator=new ProgressIndicator();
     private String dateClicked;
 
     private static ObservableList<String> productsHistory;
@@ -688,16 +694,18 @@ public class ReportsCategoryUI {
         fromLabel.setPrefWidth(175);
         toLabel.setPrefWidth(175);
 
-        Button refreshButton = new Button("Refresh");
-        refreshButton.setStyle("-fx-base: blue");
 
-        DatePicker fromDatePicker = new DatePicker();
+        refreshButton.setStyle("-fx-base: blue");
         fromDatePicker.getEditor().setText("Last Week");
-        DatePicker toDatePicker = new DatePicker();
         toDatePicker.getEditor().setText("today");
+
+        progressIndicator.setProgress(1);
 
         HBox hBoxFromDate = new HBox();
         HBox hBoxToDate = new HBox();
+        HBox refreshDataHBox=new HBox();
+        refreshDataHBox.setSpacing(5);
+        refreshDataHBox.getChildren().addAll(refreshButton,progressIndicator);
         hBoxFromDate.setPadding(new Insets(0, 5, 0, 0));
         hBoxFromDate.getChildren().addAll(fromLabel, fromDatePicker);
         hBoxToDate.setPadding(new Insets(0, 5, 0, 0));
@@ -713,71 +721,22 @@ public class ReportsCategoryUI {
         navigationPane.setVgap(5);
         navigationPane.add(hBoxFromDate, 0, 0);
         navigationPane.add(hBoxToDate, 0, 1);
-        navigationPane.add(refreshButton, 0, 2);
+        navigationPane.add(refreshDataHBox, 0, 2);
         navigationPane.add(grossProfitTable, 0, 3);
 
-        refreshButton.setOnAction(event -> {
-            if (fromDatePicker.getEditor().getText().isEmpty()) {
-                fromDatePicker.requestFocus();
-                fromDatePicker.show();
-            } else if (toDatePicker.getEditor().getText().isEmpty()) {
-                toDatePicker.requestFocus();
-                toDatePicker.show();
-            } else {
-                try {
-                    LocalDate fromDatePickerValue = fromDatePicker.getValue();
-                    LocalDate toDatePickerValue = toDatePicker.getValue();
-                    String from;
-                    String to;
-
-                    /*
-                    this block of if-else code make sure the date is in format of
-                    'YYYY-MM-0D' if date is less than 10
-                     */
-                    if (fromDatePickerValue.getDayOfMonth() < 10) {
-                        int dayFrom = fromDatePickerValue.getDayOfMonth();
-                        from = fromDatePickerValue.getYear() + "-" +
-                                fromDatePickerValue.getMonthValue() + "-0" + dayFrom;
-                    } else {
-                        from = fromDatePickerValue.getYear() + "-" +
-                                fromDatePickerValue.getMonthValue() + "-" +
-                                fromDatePickerValue.getDayOfMonth();
-                    }
-                    /*
-                    this block of if-else code make sure the date is in format of
-                    'YYYY-MM-0D' if date is less than 10
-                     */
-                    if (toDatePickerValue.getDayOfMonth() < 10) {
-                        int toDate = toDatePickerValue.getDayOfMonth();
-                        to = toDatePickerValue.getYear() + "-" +
-                                toDatePickerValue.getMonthValue() + "-0" + toDate;
-                    } else {
-                        to = toDatePickerValue.getYear() + "-" +
-                                toDatePickerValue.getMonthValue() + "-" +
-                                toDatePickerValue.getDayOfMonth();
-                    }
-
-                    /*
-                    change the graph and table View according to the range of dates set
-                     */
-
-                    grossProfitTable.setItems(ReportCategoryData.getGrossProfitReportTableData(from, to));
-
-                    ObservableList<XYChart.Series> series = ReportCategoryData.getGrossProfitReportGraphData(from, to);
-                    grossProfitGraph.getData().clear();
-                    for (XYChart.Series<String, Number> axis :
-                            series) {
-                        grossProfitGraph.getData().add(axis);
-                    }
-
-
-                } catch (NullPointerException e) {
-                    fromDatePicker.getEditor().clear();
-                    toDatePicker.getEditor().clear();
-                    fromDatePicker.requestFocus();
-                    fromDatePicker.show();
+        refreshButton.setOnAction((event) -> {
+            Task<Void> task =new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {
+                    updateProgress(-1F,1);
+                    findGrossProfit();
+                    updateProgress(1,1);
+                    return null;
                 }
-            }
+            };
+           // progressIndicator.setProgress(-1F);
+            progressIndicator.progressProperty().bind(task.progressProperty());
+            new Thread(task).start();
         });
 
         return navigationPane;
@@ -995,6 +954,97 @@ public class ReportsCategoryUI {
         return splitPaneVertical;
     }
 
+    /*
+    *private method of the class
+     */
+
+    private void findGrossProfit(){
+        if (fromDatePicker.getEditor().getText().isEmpty()) {
+            Platform.runLater(()->{
+                fromDatePicker.requestFocus();
+                fromDatePicker.show();
+                refreshButton.setDisable(false);
+            });
+
+        } else if (toDatePicker.getEditor().getText().isEmpty()) {
+            Platform.runLater(()->{
+                toDatePicker.requestFocus();
+                toDatePicker.show();
+                refreshButton.setDisable(false);
+            });
+        } else {
+            try {
+                //disable the button to avoid multiple press which will cause a multiple load of data
+                refreshButton.setDisable(true);
+
+                LocalDate fromDatePickerValue = fromDatePicker.getValue();
+                LocalDate toDatePickerValue = toDatePicker.getValue();
+                String from;
+                String to;
+
+                /*
+                this block of if-else code make sure the date is in format of
+                'YYYY-MM-0D' if date is less than 10
+                 */
+                if (fromDatePickerValue.getDayOfMonth() < 10) {
+                    int dayFrom = fromDatePickerValue.getDayOfMonth();
+                    from = fromDatePickerValue.getYear() + "-" +
+                            fromDatePickerValue.getMonthValue() + "-0" + dayFrom;
+                } else {
+                    from = fromDatePickerValue.getYear() + "-" +
+                            fromDatePickerValue.getMonthValue() + "-" +
+                            fromDatePickerValue.getDayOfMonth();
+                }
+                /*
+                this block of if-else code make sure the date is in format of
+                'YYYY-MM-0D' if date is less than 10
+                 */
+                if (toDatePickerValue.getDayOfMonth() < 10) {
+                    int toDate = toDatePickerValue.getDayOfMonth();
+                    to = toDatePickerValue.getYear() + "-" +
+                            toDatePickerValue.getMonthValue() + "-0" + toDate;
+                } else {
+                    to = toDatePickerValue.getYear() + "-" +
+                            toDatePickerValue.getMonthValue() + "-" +
+                            toDatePickerValue.getDayOfMonth();
+                }
+
+                /*
+                change the graph and table View according to the range of dates set
+                 */
+                grossProfitTable.setItems(ReportCategoryData.getGrossProfitReportTableData(from, to));
+                ObservableList<XYChart.Series> series = ReportCategoryData.getGrossProfitReportGraphData(from, to);
+                /*
+                use thread make sure to update the graph,
+                later after the task to find the series of the graph finish
+                 */
+                Platform.runLater(() -> {
+                    grossProfitGraph.getData().clear();
+                    for (XYChart.Series<String, Number> axis :
+                            series) {
+                        grossProfitGraph.getData().add(axis);
+                    }
+                    refreshButton.setDisable(false);
+                });
+
+            } catch (NullPointerException e) {
+                /*
+                this thread make sure to update the stage
+                 */
+                Platform.runLater(()-> {
+                    refreshButton.setDisable(false);
+                    fromDatePicker.getEditor().clear();
+                    toDatePicker.getEditor().clear();
+                    fromDatePicker.requestFocus();
+                    fromDatePicker.show();
+                });
+            }
+        }
+    }
+
+    /*
+    internal static class
+     */
     public static class SalesTableDataClass {
         public final SimpleStringProperty date;
         public final SimpleFloatProperty sale;

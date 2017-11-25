@@ -82,9 +82,9 @@ public class LogInStage extends Application {
 
         //get the server credential just before show login interface
         ServerCredentialFactory serverCredentialFactory = new ServerCredentialFactory(path);
-        username = serverCredentialFactory.serverDetail.get("username");
-        password = serverCredentialFactory.serverDetail.get("password");
-        serverAddress = serverCredentialFactory.serverDetail.get("serverAddress");
+        username = "root";//serverCredentialFactory.serverDetail.get("username");
+        password = "@Joshua&5715";//serverCredentialFactory.serverDetail.get("password");
+        serverAddress = "localhost";//serverCredentialFactory.serverDetail.get("serverAddress");
 
         //set contents of login stage
         setLogInUI();
@@ -208,16 +208,15 @@ public class LogInStage extends Application {
 
                                 ProgressForm progressForm = new ProgressForm();
                                 progressForm.dialogStage.show();
-                                Task<ProgressForm> task = new Task<ProgressForm>() {
+                                Task<Void> task = new Task<Void>() {
                                     @Override
-                                    protected ProgressForm call() throws Exception {
+                                    protected Void call() throws Exception {
                                         //updateProgress(-1F,1);
                                         Platform.runLater(new Runnable() {
                                             @Override
                                             public void run() {
                                                 stageLogIn.hide();
                                                 login();
-                                                updateProgress(1, 1);
                                             }
                                         });
                                         return null;
@@ -279,16 +278,16 @@ public class LogInStage extends Application {
 
                             ProgressForm progressForm = new ProgressForm();
                             progressForm.dialogStage.show();
-                            Task<ProgressForm> task = new Task<ProgressForm>() {
+                            Task<Void> task = new Task<Void>() {
                                 @Override
-                                protected ProgressForm call() throws Exception {
+                                protected Void call() throws Exception {
                                     updateProgress(-1F, 1);
                                     Platform.runLater(new Runnable() {
                                         @Override
                                         public void run() {
                                             stageLogIn.hide();
                                             login();
-                                            updateProgress(1, 1);
+
                                         }
                                     });
                                     return null;
@@ -538,9 +537,9 @@ public class LogInStage extends Application {
 
     }
 
-    public static class ProgressForm {
-        private final Stage dialogStage;
-        private final ProgressBar pb = new ProgressBar();
+    public class ProgressForm {
+        private  Stage dialogStage;
+        private  ProgressBar pb = new ProgressBar();
 
         public ProgressForm() {
             dialogStage = new Stage();
@@ -556,7 +555,7 @@ public class LogInStage extends Application {
             pb.setMinWidth(400);
             pb.setProgress(-1F);
 
-            final BorderPane borderPane = new BorderPane();
+            BorderPane borderPane = new BorderPane();
             borderPane.setId("pane");
             //borderPane.setCenter(pin);
             borderPane.setBottom(hBoxProgressBar);
@@ -577,7 +576,7 @@ public class LogInStage extends Application {
         }
 
         public void activateProgressBar(final Task<?> task) {
-            pb.progressProperty().bind(task.progressProperty());
+            //pb.progressProperty().bind(task.progressProperty());
         }
 
         public Stage getDialogStage() {
