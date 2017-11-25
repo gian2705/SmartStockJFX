@@ -1036,16 +1036,16 @@ public class ReportsCategoryUI {
                     }
                 }
 
-                productsHistory = cashPurchaseProducts1;
-                //update product list view
-                productListViewProdctReport.setItems(productsHistory);
-
-                purchaseCashHistoryTable.getItems().clear();
-                sellHistoryTable.getItems().clear();
-                purchaseCreditHistoryTable.getItems().clear();
-
-                //update the graph
                 Platform.runLater(() -> {
+                    productsHistory = cashPurchaseProducts1;
+                    //update product list view
+                    productListViewProdctReport.setItems(productsHistory);
+
+                    purchaseCashHistoryTable.getItems().clear();
+                    sellHistoryTable.getItems().clear();
+                    purchaseCreditHistoryTable.getItems().clear();
+
+                    //update the graph
                     sellPurchaseChart.getData().clear();
                 });
                 productCashSaleFrequency = SaleCategoryData.getProductCashSaleFrequency(from, to);

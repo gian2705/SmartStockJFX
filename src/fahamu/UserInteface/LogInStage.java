@@ -17,13 +17,11 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
-import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -92,9 +90,9 @@ public class LogInStage extends Application {
 
         //get the server credential just before show login interface
         ServerCredentialFactory serverCredentialFactory = new ServerCredentialFactory(path);
-        username = "root";//serverCredentialFactory.serverDetail.get("username");
-        password = "@Joshua&5715";//serverCredentialFactory.serverDetail.get("password");
-        serverAddress = "localhost";//serverCredentialFactory.serverDetail.get("serverAddress");
+        username = serverCredentialFactory.serverDetail.get("username");
+        password = serverCredentialFactory.serverDetail.get("password");
+        serverAddress = serverCredentialFactory.serverDetail.get("serverAddress");
 
         //set contents of login stage
         setLogInUI();
@@ -298,11 +296,14 @@ public class LogInStage extends Application {
                 }
 
                 if (!isLocalServerAvailable) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setContentText("Server Is Not Reachable.\nCheck your connection");
-                    stageLogIn.setIconified(true);
-                    alert.showAndWait();
-                    stageLogIn.setIconified(false);
+                    Platform.runLater(() -> {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setContentText("Server Is Not Reachable.\nCheck your connection");
+                        stageLogIn.setIconified(true);
+                        alert.showAndWait();
+                        stageLogIn.setIconified(false);
+                    });
+
                 }
             } else serverReachable = true;
         } catch (IOException e) {
@@ -322,15 +323,17 @@ public class LogInStage extends Application {
             });
 
         } else if (passwordField.getText().isEmpty()) {
-
-            passwordField.requestFocus();
-            resetPassword.setVisible(false);
-            logInButton.setVisible(false);
+            Platform.runLater(() -> {
+                passwordField.requestFocus();
+                resetPassword.setVisible(false);
+                logInButton.setVisible(false);
+            });
 
         } else {
 
             //check for server reachable before login
-            if (checkServerReachable(new byte[]{(byte) 192, (byte) 168, 0, 2})) {
+            boolean reachable = checkServerReachable(new byte[]{(byte) 192, (byte) 168, 0, 2});
+            if (reachable) {
                 String username = usernameTextField.getText();
                 String password = passwordField.getText();
                 //if authentication is successful
