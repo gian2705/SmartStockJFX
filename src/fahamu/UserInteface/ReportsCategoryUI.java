@@ -33,12 +33,16 @@ public class ReportsCategoryUI {
     private ListView<String> productListViewProdctReport = new ListView<>();
     private DatePicker fromDatePickerProductReport = new DatePicker();
     private DatePicker toDatePickerProductReport = new DatePicker();
+    private DatePicker fromDatePickerSalesReport = new DatePicker();
+    private DatePicker toDatePickerSalesReport = new DatePicker();
     private Button refreshButtonProductReport = new Button("Refresh");
     private Button refreshButtonGrossProfit = new Button("Refresh");
+    private Button refreshButtonSalesReport = new Button("Refresh");
     private DatePicker fromDatePickerGrossProfit = new DatePicker();
     private DatePicker toDatePickerGrossProfit = new DatePicker();
     private ProgressIndicator progressIndicator = new ProgressIndicator();
     private ProgressIndicator progressIndicatorProductReport = new ProgressIndicator();
+    private ProgressIndicator progressIndicatorSalesReport=new ProgressIndicator();
     private ProgressBar progressBar = new ProgressBar();
     private String dateClicked;
     private TableView<GrossProfitTableViewData> grossProfitTable;
@@ -49,7 +53,6 @@ public class ReportsCategoryUI {
     private XYChart.Series<String, Number> productCashSaleFrequency;
     private int modulus;
     private static ObservableList<String> productsHistory;
-
     //*************************************************************//
     //package private fields                                       //
     //*************************************************************//
@@ -76,7 +79,7 @@ public class ReportsCategoryUI {
         salesGraph = setSalesGraphUI();
         sellPurchaseChart = setPotentialProductGraphUI();
 
-        GridPane navPane = navigationLeftPane();
+        GridPane navPane = navigationLeftPaneSalesReports();
         SplitPane splitPane = mainTaskUI(cashierSaleTable, discountDetail, null, salesGraph, 2);
 
         //add contents
@@ -308,7 +311,7 @@ public class ReportsCategoryUI {
 
     }
 
-    GridPane navigationLeftPane() {
+    GridPane navigationLeftPaneSalesReports() {
         Label fromLabel = new Label("From Date");
         Label toLabel = new Label("To Date");
 
@@ -317,17 +320,17 @@ public class ReportsCategoryUI {
 
         fromLabel.setMinWidth(100);
         toLabel.setMinWidth(100);
-
-        DatePicker fromDatePicker = new DatePicker();
-        DatePicker toDatePicker = new DatePicker();
-
-        Button refreshButton = new Button("Refresh");
-        refreshButton.setDefaultButton(true);
+        refreshButtonSalesReport.setStyle("-fx-base: blue");
+        progressIndicatorSalesReport.setProgress(1);
 
         HBox fromDateHBox = new HBox();
         HBox toDateHBox = new HBox();
-        fromDateHBox.getChildren().addAll(fromLabel, fromDatePicker);
-        toDateHBox.getChildren().addAll(toLabel, toDatePicker);
+        HBox refreshData=new HBox();
+        refreshData.setAlignment(Pos.CENTER_LEFT);
+        refreshData.setSpacing(10);
+        refreshData.getChildren().addAll(refreshButtonSalesReport,progressIndicatorSalesReport);
+        fromDateHBox.getChildren().addAll(fromLabel, fromDatePickerSalesReport);
+        toDateHBox.getChildren().addAll(toLabel, toDatePickerSalesReport);
 
         GridPane navigationPane = new GridPane();
         RowConstraints r1 = new RowConstraints(30);
@@ -340,38 +343,24 @@ public class ReportsCategoryUI {
         navigationPane.getColumnConstraints().addAll(c1);
         navigationPane.getRowConstraints().addAll(r1, r2, r3, r4);
 
-        navigationPane.add(refreshButton, 0, 2);
+        navigationPane.add(refreshData, 0, 2);
         navigationPane.add(fromDateHBox, 0, 0);
         navigationPane.add(toDateHBox, 0, 1);
         navigationPane.add(salesTable, 0, 3);
 
-        refreshButton.setOnAction(event -> {
-            if (fromDatePicker.getEditor().getText().isEmpty()) {
-                fromDatePicker.requestFocus();
-                fromDatePicker.show();
-            } else if (toDatePicker.getEditor().getText().isEmpty()) {
-                toDatePicker.requestFocus();
-                toDatePicker.show();
-            } else {
-                LocalDate fromDatePickerValue = fromDatePicker.getValue();
-                LocalDate toDatePickerValue = toDatePicker.getValue();
-                String from = fromDatePickerValue.getYear() + "-" +
-                        fromDatePickerValue.getMonthValue() + "-" +
-                        fromDatePickerValue.getDayOfMonth();
-                String to = toDatePickerValue.getYear() + "-" +
-                        toDatePickerValue.getMonthValue() + "-" +
-                        toDatePickerValue.getDayOfMonth();
-
-                salesTable.setItems(SaleCategoryData.getSales(from, to));
-                cashierSaleTable.getItems().clear();
-                discountDetail.getItems().clear();
-
-                //update the graph
-                salesGraph.getData().clear();
-                for (XYChart.Series<String, Number> series : SaleCategoryData.getSalesByCategory(from, to)) {
-                    salesGraph.getData().add(series);
+        refreshButtonSalesReport.setOnAction(event -> {
+            refreshButtonSalesReport.setDisable(true);
+            Task<Void> task=new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {
+                    updateProgress(-1F,1);
+                    findSalesReport();
+                    updateProgress(1,1);
+                    return null;
                 }
-            }
+            };
+            progressIndicatorSalesReport.progressProperty().bind(task.progressProperty());
+            new Thread(task).start();
         });
 
         return navigationPane;
@@ -1091,6 +1080,46 @@ public class ReportsCategoryUI {
                     fromDatePickerProductReport.show();
                 });
             }
+        }
+    }
+
+    private void findSalesReport(){
+        if (fromDatePickerSalesReport.getEditor().getText().isEmpty()) {
+            Platform.runLater(()->{
+                refreshButtonSalesReport.setDisable(false);
+                fromDatePickerSalesReport.requestFocus();
+                fromDatePickerSalesReport.show();
+            });
+
+        } else if (toDatePickerSalesReport.getEditor().getText().isEmpty()) {
+            Platform.runLater(()->{
+                refreshButtonSalesReport.setDisable(false);
+                toDatePickerSalesReport.requestFocus();
+                toDatePickerSalesReport.show();
+            });
+
+        } else {
+            LocalDate fromDatePickerValue = fromDatePickerSalesReport.getValue();
+            LocalDate toDatePickerValue = toDatePickerSalesReport.getValue();
+            String from = fromDatePickerValue.getYear() + "-" +
+                    fromDatePickerValue.getMonthValue() + "-" +
+                    fromDatePickerValue.getDayOfMonth();
+            String to = toDatePickerValue.getYear() + "-" +
+                    toDatePickerValue.getMonthValue() + "-" +
+                    toDatePickerValue.getDayOfMonth();
+
+            salesTable.setItems(SaleCategoryData.getSales(from, to));
+            cashierSaleTable.getItems().clear();
+            discountDetail.getItems().clear();
+
+            //update the graph
+            Platform.runLater(()-> {
+                salesGraph.getData().clear();
+                for (XYChart.Series<String, Number> series : SaleCategoryData.getSalesByCategory(from, to)) {
+                    salesGraph.getData().add(series);
+                }
+                refreshButtonSalesReport.setDisable(false);
+            });
         }
     }
 
