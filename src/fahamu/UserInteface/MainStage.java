@@ -538,7 +538,7 @@ class MainStage {
 
                 GridPane gridPane = reportsCategoryUI.setDashboardSalesReportUI(350);
 
-                gridPane.add(reportsCategoryUI.navigationLeftPaneSalesReports(), 0, 0);
+                gridPane.add(reportsCategoryUI.navigationLeftPaneGrossProfitReports(), 0, 0);
                 gridPane.add(reportsCategoryUI.grossProfitGraph, 1, 0);
 
                 tab1.setContent(gridPane);
