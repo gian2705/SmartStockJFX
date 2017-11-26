@@ -12,15 +12,15 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Arc;
-import javafx.scene.shape.ArcType;
-import javafx.scene.shape.Circle;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -136,19 +136,15 @@ public class LogInStage extends Application {
         logInButton.setVisible(false);
         resetPassword.setVisible(false);
 
-        Circle circle = new Circle(55);
-        circle.setStyle("-fx-background-color: #000000");
-
-        Arc arc = new Arc();
-        arc.setStartAngle(0f);
-        arc.setLength(180f);
-        arc.setType(ArcType.ROUND);
-        arc.setRadiusX(15);
-        arc.setRadiusY(15);
+        Image image = new Image(this.getClass().getResource("lbLogo.jpg").toExternalForm());
+        Rectangle rectangle = new Rectangle(200, 200);
+        rectangle.setFill(new ImagePattern(image));
+        rectangle.setArcWidth(200);
+        rectangle.setArcHeight(200);
 
         VBox inputControl = new VBox();
-        inputControl.setSpacing(10);
-        inputControl.setPadding(new Insets(20, 20, 30, 20));
+        inputControl.setSpacing(5);
+        inputControl.setPadding(new Insets(10, 20, 10, 20));
 
         inputControl.getChildren().addAll(
                 usernameLabel,
@@ -157,7 +153,7 @@ public class LogInStage extends Application {
                 passwordField
         );
 
-        rootLoginStage.getChildren().addAll(circle, arc, inputControl, logInButton, resetPassword);
+        rootLoginStage.getChildren().addAll(rectangle, inputControl, logInButton, resetPassword);
 
         usernameTextField.setOnMouseClicked(event -> {
             resetPassword.setVisible(false);
