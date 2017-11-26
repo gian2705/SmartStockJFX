@@ -398,8 +398,8 @@ public class PurchaseCategoryData {
 
             String selectQuery = "SELECT DISTINCT " +
                     "invoice," +
-                    "timestampdiff(day,curdate(),due)," +
-                    "due," +
+                    "timestampdiff(day,curdate(),due) as remain," +
+                    "date," +
                     "status," +
                     "supplier " +
                     "FROM purchasedata.creditPurchase where status='not paid' ";
@@ -415,11 +415,11 @@ public class PurchaseCategoryData {
             while (resultSet.next()) {
                 PurchaseCategoryUI.creditPurchaseData.addAll(
                         new PurchaseCategoryUI.DueInvoiceListTable(
-                                resultSet.getString(1),
-                                resultSet.getInt(2),
-                                resultSet.getString(3),
-                                resultSet.getString(4),
-                                resultSet.getString(5)
+                                resultSet.getString("invoice"),
+                                resultSet.getInt("remain"),
+                                resultSet.getString("date"),
+                                resultSet.getString("status"),
+                                resultSet.getString("supplier")
                         )
                 );
             }
@@ -722,15 +722,15 @@ public class PurchaseCategoryData {
             while (resultSet.next()) {
                 data.add(
                         new PurchaseCategoryUI.CashPurchaseList(
-                                resultSet.getString(1),
-                                resultSet.getString(2),
-                                resultSet.getString(3),
-                                resultSet.getString(4),
-                                resultSet.getString(5),
-                                resultSet.getString(6),
-                                resultSet.getInt(7),
-                                resultSet.getFloat(8),
-                                resultSet.getFloat(9)
+                                resultSet.getString("date"),
+                                resultSet.getString("receipt"),
+                                resultSet.getString("product"),
+                                resultSet.getString("category"),
+                                resultSet.getString("unit"),
+                                resultSet.getString("supplier"),
+                                resultSet.getInt("quantity"),
+                                resultSet.getFloat("purchase"),
+                                resultSet.getFloat("amount")
                         )
                 );
             }
@@ -775,17 +775,17 @@ public class PurchaseCategoryData {
             while (resultSet.next()) {
                 data.add(
                         new PurchaseCategoryUI.CreditPurchaseList(
-                                resultSet.getString(1),
-                                resultSet.getString(2),
-                                resultSet.getString(3),
-                                resultSet.getString(4),
-                                resultSet.getString(5),
-                                resultSet.getString(6),
-                                resultSet.getString(7),
-                                resultSet.getInt(8),
-                                resultSet.getFloat(9),
-                                resultSet.getFloat(10),
-                                resultSet.getString(11)
+                                resultSet.getString("date"),
+                                resultSet.getString("due"),
+                                resultSet.getString("invoice"),
+                                resultSet.getString("product"),
+                                resultSet.getString("category"),
+                                resultSet.getString("unit"),
+                                resultSet.getString("supplier"),
+                                resultSet.getInt("quantity"),
+                                resultSet.getFloat("purchase"),
+                                resultSet.getFloat("amount"),
+                                resultSet.getString("status")
                         )
                 );
             }

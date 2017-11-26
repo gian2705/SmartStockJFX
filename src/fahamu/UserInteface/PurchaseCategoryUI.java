@@ -173,9 +173,10 @@ public class PurchaseCategoryUI {
                         "-fx-padding:2.5");
         TableColumn<DueInvoiceListTable, String> invoiceNumberColumn = new TableColumn<>("Invoice#");
         TableColumn<DueInvoiceListTable, Integer> daysRemainColumn = new TableColumn<>("Remains Day");
-        TableColumn<DueInvoiceListTable, String> dueDateColumn = new TableColumn<>("Due");
+        TableColumn<DueInvoiceListTable, String> dueDateColumn = new TableColumn<>("Date");
         TableColumn<DueInvoiceListTable, String> statusColumn = new TableColumn<>("Status");
         TableColumn<DueInvoiceListTable, String> supplierColumn = new TableColumn<>("Supplier");
+        supplierColumn.setPrefWidth(200);
         dueInvoiceListTableView.getColumns().addAll(
                 invoiceNumberColumn,
                 supplierColumn,
@@ -866,6 +867,7 @@ public class PurchaseCategoryUI {
                     date = value.getYear() + "-" + value.getMonthValue() + "-" + value.getDayOfMonth();
                 }
                 String supplier = supplierChooser.getSelectionModel().getSelectedItem();
+                //supplier
                 String receipt = invoiceNumberChooser.getSelectionModel().getSelectedItem();
 
                 purchaseListTableView.getItems().clear();
