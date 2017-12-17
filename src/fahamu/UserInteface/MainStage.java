@@ -171,7 +171,7 @@ class MainStage {
         Button removeUnitButton;
         Button newStock;
         Button updateStock;
-        Button stockReports;
+        Button cashierReports;
         Button balanceSheet;
         Button profitAndLoss;
         Button balanceStock;
@@ -202,9 +202,9 @@ class MainStage {
         purchaseReport = new Button("Purchase Reports");
         purchaseReport.setStyle("-fx-base: #001a80");
         purchaseReport.setMinSize(200, 10);
-        stockReports = new Button("Stock Reports");
-        stockReports.setStyle("-fx-base: #001a80");
-        stockReports.setMinSize(200, 10);
+        cashierReports = new Button("Cashier Sales");
+        cashierReports.setStyle("-fx-base: #001a80");
+        cashierReports.setMinSize(200, 10);
         balanceSheet = new Button("Balance Sheet");
         balanceSheet.setStyle("-fx-base: #001a80");
         balanceSheet.setMinSize(200, 10);
@@ -222,8 +222,8 @@ class MainStage {
         dashboardTilePane.getChildren().add(dashboardButton);
         dashboardTilePane.getChildren().add(productReportButton);
         dashboardTilePane.getChildren().add(salesReports);
+        dashboardTilePane.getChildren().add(cashierReports);
         dashboardTilePane.getChildren().add(purchaseReport);
-        dashboardTilePane.getChildren().add(stockReports);
         dashboardTilePane.getChildren().add(balanceSheet);
         dashboardTilePane.getChildren().add(profitAndLoss);
         dashboardTilePane.getChildren().add(customers);

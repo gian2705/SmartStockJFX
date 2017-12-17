@@ -19,14 +19,22 @@ import static fahamu.UserInteface.StockCategoryUI.categoryList;
 
 public class ReportCategoryData {
 
+    private static String localhost;
+    private static MysqlDataSource mysqlDataSource;
+    private static Connection connection;
+
+    static {
+        mysqlDataSource = new MysqlDataSource();
+        localhost = "localhost";
+    }
+
     public static ObservableList<XYChart.Series> getGrossProfitReportGraphData(String fromDate, String toDate) {
 
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
         mysqlDataSource.setServerName(serverAddress);
 
-        Connection connection = null;
+        connection = null;
         ObservableList<XYChart.Series> series = FXCollections.observableArrayList();
 
         /*
@@ -174,12 +182,11 @@ public class ReportCategoryData {
 
     public static ObservableList<ReportsCategoryUI.GrossProfitTableViewData> getGrossProfitReportTableData(
             String fromDate, String toDate) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
         mysqlDataSource.setServerName(serverAddress);
 
-        Connection connection = null;
+        connection = null;
         ObservableList<ReportsCategoryUI.GrossProfitTableViewData> data = FXCollections.observableArrayList();
 
         /*

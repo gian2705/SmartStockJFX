@@ -16,7 +16,14 @@ import java.sql.Statement;
 
 public class SaleCategoryData {
 
-    private static String localhost = "127.0.0.1";
+    private static String localhost;
+    private static MysqlDataSource mysqlDataSource;
+    private static Connection connection;
+
+    static {
+        mysqlDataSource = new MysqlDataSource();
+        localhost = "localhost";
+    }
 
     //insert a row of data to the cashSale table
     public static void insertData(
@@ -30,12 +37,12 @@ public class SaleCategoryData {
             String user) {
         String insertQuery;
         //initialize connection to database server
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
+
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection = null;
+        connection = null;
 
 
         insertQuery = "INSERT INTO salesdata.cashSale(" +
@@ -74,12 +81,12 @@ public class SaleCategoryData {
     }
 
     public static ObservableList<SalesCategoryUI.CashSaleOfDay> getCashSaleOfDay(String user) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
+
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
         mysqlDataSource.setPassword(LogInStage.password);
 
-        Connection connection = null;
+        connection = null;
         ObservableList<SalesCategoryUI.CashSaleOfDay> allCashSale = FXCollections.observableArrayList();
 
         String selectQuery = "SELECT * FROM salesdata.cashSale WHERE user=\'" + user + "\' AND date=curdate()";
@@ -118,12 +125,11 @@ public class SaleCategoryData {
     }
 
     public static ObservableList<SalesCategoryUI.CashTraSaleOfDay> getCashTraSaleOfDay(String user) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
         mysqlDataSource.setPassword(LogInStage.password);
 
-        Connection connection = null;
+        connection = null;
         ObservableList<SalesCategoryUI.CashTraSaleOfDay> allCashSale = FXCollections.observableArrayList();
 
         String selectQuery = "SELECT * FROM salesdata.cashSale WHERE user=\'" + user + "\' AND date=curdate() AND id='n/n'";
@@ -162,12 +168,11 @@ public class SaleCategoryData {
     }
 
     public static ObservableList<String> cashierList(String inputDate) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection = null;
+        connection = null;
         String selectQuery = "SELECT DISTINCT user FROM salesdata.cashSale WHERE date=\'" + inputDate + "\'";
         ObservableList<String> data = FXCollections.observableArrayList();
 
@@ -199,12 +204,12 @@ public class SaleCategoryData {
     }
 
     public static float getTotalSaleOfDay(String user, String date) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
+
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection = null;
+        connection = null;
         String selectQuery
                 = "SELECT sum(amount) FROM salesdata.cashSale WHERE user=\'" + user + "\' AND date=\'" + date + "\'";
         float sum = 0;
@@ -235,12 +240,11 @@ public class SaleCategoryData {
 
     public static ObservableList<ReportsCategoryUI.DiscountDetailTableDataClass> getDiscountProduct(String user,
                                                                                                     String date) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection = null;
+        connection = null;
         ObservableList<ReportsCategoryUI.DiscountDetailTableDataClass> data = FXCollections.observableArrayList();
         try {
             try {
@@ -274,12 +278,12 @@ public class SaleCategoryData {
     }
 
     public static ObservableList<XYChart.Series<String, Number>> getSalesByCategory(String fromDate, String toDate) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
+
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection = null;
+        connection = null;
         ObservableList<XYChart.Series<String, Number>> series = FXCollections.observableArrayList();
         ObservableList<String> dates = FXCollections.observableArrayList();
 
@@ -343,12 +347,12 @@ public class SaleCategoryData {
     }
 
     public static float getTotalSaleOfDay(String date) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
+
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection = null;
+        connection = null;
         String selectQuery
                 = "SELECT sum(amount) FROM salesdata.cashSale WHERE date=\'" + date + "\'";
         float sum = 0;
@@ -378,12 +382,11 @@ public class SaleCategoryData {
     }
 
     public static ObservableList<ReportsCategoryUI.SalesTableDataClass> getSales(String dateFrom, String dateTo) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection = null;
+        connection = null;
         ObservableList<String> dates = FXCollections.observableArrayList();
         ObservableList<ReportsCategoryUI.SalesTableDataClass> salesTableDataClassObservableList = FXCollections
                 .observableArrayList();
@@ -438,12 +441,11 @@ public class SaleCategoryData {
     }
 
     public static float getTotalTraSaleOfDayOfCashier(String user) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection = null;
+        connection = null;
         String selectQuery =
                 "SELECT sum(amount) FROM salesdata.cashSale WHERE user=\'" + user + "\' AND id='n/n' AND date=curdate()";
         float sum = 0;
@@ -473,12 +475,12 @@ public class SaleCategoryData {
     }
 
     public static float getTotalTraSaleOfDay() {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
+
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection = null;
+        connection = null;
         String selectQuery =
                 "SELECT sum(amount) FROM salesdata.cashSale WHERE  id='n/n' AND date=curdate()";
         float sum = 0;
@@ -508,12 +510,12 @@ public class SaleCategoryData {
     }
 
     public static float getTotalDiscount(String user, String date) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
+
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection = null;
+        connection = null;
         String selectQuery = "SELECT sum(discount) FROM salesdata.cashSale where user=\'" + user + "\' AND date=\'" + date + "\'";
         float sum = 0;
         try {
@@ -543,12 +545,12 @@ public class SaleCategoryData {
 
     public static ObservableList<ReportsCategoryUI.ProductSellHistoryDataClass> getCashSaleHistory(
             String fromDate, String toDate, String product) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
+
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection = null;
+        connection = null;
         ObservableList<ReportsCategoryUI.ProductSellHistoryDataClass> products = FXCollections.observableArrayList();
         try {
             try {
@@ -582,12 +584,12 @@ public class SaleCategoryData {
     }
 
     public static ObservableList<String> getCashSaleProductHistory(String fromDate, String toDate) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
+
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection = null;
+        connection = null;
         ObservableList<String> products = FXCollections.observableArrayList();
         try {
             try {
@@ -618,12 +620,12 @@ public class SaleCategoryData {
     }
 
     public static XYChart.Series<String, Number> getProductCashSaleFrequency(String fromDate, String toDate) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
+
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection = null;
+        connection = null;
         ObservableList<String> products = FXCollections.observableArrayList();
         XYChart.Series<String, Number> stringNumberSeries;
         stringNumberSeries = new XYChart.Series<>();
@@ -646,25 +648,25 @@ public class SaleCategoryData {
                 products.add(resultSetDate.getString(1));
             }
 
-            int a=1;
+            int a = 1;
             for (String string : products) {
                 a++;
                 String getFrequency = "SELECT count(product)" +
                         " FROM salesdata.cashSale " +
-                        " WHERE  date>=\'" + fromDate + "\' AND date<=\'" + toDate + "\' AND product=\'" + string +"\'";
+                        " WHERE  date>=\'" + fromDate + "\' AND date<=\'" + toDate + "\' AND product=\'" + string + "\'";
 
                 Statement statementSeries = connection.createStatement();
 
                 ResultSet resultSetSums = statementSeries.executeQuery(getFrequency);
 
-                if (string.length()>10){
-                    string=string.substring(0,10);
+                if (string.length() > 10) {
+                    string = string.substring(0, 10);
                 }
 
                 while (resultSetSums.next()) {
-                    int frequency= resultSetSums.getInt(1);
-                    string=frequency+"."+string;
-                    stringNumberSeries.getData().add(new XYChart.Data<>(string,frequency));
+                    int frequency = resultSetSums.getInt(1);
+                    string = frequency + "." + string;
+                    stringNumberSeries.getData().add(new XYChart.Data<>(string, frequency));
                 }
             }
 

@@ -12,15 +12,21 @@ import java.sql.Statement;
 
 public class LogInStageData {
 
+    private static MysqlDataSource mysqlDataSource;
+    private static Connection connection;
+
+    static {
+        mysqlDataSource = new MysqlDataSource();
+    }
+
     //authenticate the username with password to match in database
     public static String authenticateUser(String user) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
 
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection = null;
+        connection = null;
         String password = null;
 
         try {
@@ -47,15 +53,13 @@ public class LogInStageData {
     }
 
     //get user type
-
     public static String getUserType(String user) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
 
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection = null;
+        connection = null;
         String type = null;
 
         try {
@@ -84,12 +88,11 @@ public class LogInStageData {
 
     //get all user
     public static ObservableList<String> getAllUsers(String currentUser) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection = null;
+        connection = null;
         String selectQuery = "SELECT name FROM users.loginInfo where name!='" + currentUser + "'";
 
         ObservableList<String> users = FXCollections.observableArrayList();
@@ -117,13 +120,12 @@ public class LogInStageData {
 
     //add new user
     public static void addUser(String user, String passw, String type) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
 
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection = null;
+        connection = null;
 
         try {
             connection = mysqlDataSource.getConnection();
@@ -147,13 +149,12 @@ public class LogInStageData {
 
     //remove user
     public static void removeUser(String user) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
 
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection = null;
+        connection = null;
 
         try {
 
@@ -178,13 +179,12 @@ public class LogInStageData {
 
     //update user info
     public static void updateUserInfo(String user, String paswd) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
 
         mysqlDataSource.setUser(LogInStage.username);
         mysqlDataSource.setPassword(LogInStage.password);
         mysqlDataSource.setServerName(LogInStage.serverAddress);
 
-        Connection connection = null;
+        connection = null;
 
         try {
 

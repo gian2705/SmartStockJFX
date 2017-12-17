@@ -14,17 +14,24 @@ import static fahamu.UserInteface.LogInStage.*;
 
 public class ExpenditureCategoryData {
 
-    private static String localhost = "localhost";
+    private static String localhost;
+    private static MysqlDataSource mysqlDataSource;
+    private static Connection connection;
+
+    static {
+        mysqlDataSource = new MysqlDataSource();
+        localhost = "localhost";
+    }
 
     //get list of expenditure
     public static ObservableList<String> getCategoryList() {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
+
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
         mysqlDataSource.setServerName(serverAddress);
 
         ObservableList<String> expenditure = FXCollections.observableArrayList();
-        Connection connection = null;
+        connection = null;
         String selectQuery = "SELECT name FROM expensedata.expenseCategory";
         try {
             try {
@@ -53,12 +60,11 @@ public class ExpenditureCategoryData {
 
     //get all expenses and its detail
     public static void getExpensesDetails() {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
         mysqlDataSource.setServerName(serverAddress);
 
-        Connection connection = null;
+        connection = null;
         String selectQuery = "SELECT * FROM expensedata.expenseList";
         try {
             try {
@@ -94,18 +100,12 @@ public class ExpenditureCategoryData {
     }
 
     //insert expenditure data
-    public static void insertExpenditureData(
-            String date,
-            String name,
-            String description,
-            String user,
-            float amount) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
+    public static void insertExpenditureData(String date, String name, String description, String user, float amount) {
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
         mysqlDataSource.setServerName(serverAddress);
 
-        Connection connection = null;
+        connection = null;
         String insertQuery = "INSERT INTO expensedata.expenseList(" +
                 "date," +
                 "name," +
@@ -140,14 +140,13 @@ public class ExpenditureCategoryData {
 
     //insert new category
     public static void insertNewCategory(String category) {
-        MysqlDataSource mysqlDataSource = new MysqlDataSource();
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
         mysqlDataSource.setServerName(serverAddress);
 
-        Connection connection = null;
+        connection = null;
         String insertQuery = "INSERT INTO expensedata.expenseCategory VALUES(" +
-                "\'"+category+"\')";
+                "\'" + category + "\')";
         try {
             try {
                 connection = mysqlDataSource.getConnection();
