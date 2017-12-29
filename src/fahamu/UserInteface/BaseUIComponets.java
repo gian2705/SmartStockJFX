@@ -13,4 +13,10 @@ public class BaseUIComponets {
         return null;
     }
 
+    private void getServerCredential() {
+
+    }
+
+
+
 }

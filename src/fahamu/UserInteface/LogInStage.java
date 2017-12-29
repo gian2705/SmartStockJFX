@@ -28,7 +28,6 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.NumberFormat;
@@ -54,8 +53,8 @@ public class LogInStage extends Application {
     //**************************************************//
     //package private fields                            //
     //**************************************************//
-    Scene sceneMain;
-    Scene sceneLoginProgress;
+    private Scene sceneMain;
+    private Scene sceneLoginProgress;
     static Stage stageLogIn;
     static String currentUserName;
 
@@ -77,30 +76,38 @@ public class LogInStage extends Application {
         //get server credential details
         // server credential object initialize the has map which contain server
         //detail for login. the constructor the path of the encrypted file.
-        String path;
-        if (System.getProperty("os.name").equals("Linux")) {
+        String path = null;
+        try {
+            path = LogInStage.class.getClass().getResource("data/serverCredential.db.encrypted").toExternalForm();
+            getServerCredential(path);
+            initializeLoginStage(primaryStage);
 
-            path = "/usr/bin/Lb/serverCredential.db.encrypted";
-
-        } else {
-            //implement window file location
-            path = Paths.get(System.getProperty("user.home"), "Lb", "serverCredential.db.encrypted").toString();
-
+        } catch (Throwable e) {
+            if (path == null) {
+                initializeLoginStage(primaryStage);
+            }
         }
 
+
+    }
+
+    private void getServerCredential(String path) {
         //get the server credential just before show login interface
         ServerCredentialFactory serverCredentialFactory = new ServerCredentialFactory(path);
         username = serverCredentialFactory.serverDetail.get("username");
         password = serverCredentialFactory.serverDetail.get("password");
         serverAddress = serverCredentialFactory.serverDetail.get("serverAddress");
+    }
+
+    private void initializeLoginStage(Stage primaryStage) {
 
         //set contents of login stage
         setLogInUI();
 
         //set scene
         sceneMain = new Scene(rootLoginStage, 300, 400);
-        String css = this.getClass().getResource("style.css").toExternalForm();
-        sceneLoginProgress=new Scene(rootLogInProgress,550,300);
+        String css = this.getClass().getResource("data/style.css").toExternalForm();
+        sceneLoginProgress = new Scene(rootLogInProgress, 550, 300);
         rootLogInProgress.setId("pane");
         sceneLoginProgress.getStylesheets().add(css);
         primaryStage.setScene(sceneMain);
@@ -110,13 +117,14 @@ public class LogInStage extends Application {
         checkServerReachable(new byte[]{(byte) 192, (byte) 168, 0, 2});
 
         primaryStage.show();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
     }
 
     private void setLogInUI() {
 
         rootLoginStage = new VBox();
-        rootLogInProgress=new BorderPane();
+        rootLogInProgress = new BorderPane();
         rootLogInProgress.setCenter(progressIndicatorLogIn);
         progressIndicatorLogIn.setProgress(1);
         rootLoginStage.setAlignment(Pos.TOP_CENTER);
@@ -136,7 +144,7 @@ public class LogInStage extends Application {
         logInButton.setVisible(false);
         resetPassword.setVisible(false);
 
-        Image image = new Image(this.getClass().getResource("lbLogo.jpg").toExternalForm());
+        Image image = new Image(this.getClass().getResource("data/lbLogo.jpg").toExternalForm());
         Rectangle rectangle = new Rectangle(200, 200);
         rectangle.setFill(new ImagePattern(image));
         rectangle.setArcWidth(200);
@@ -188,11 +196,10 @@ public class LogInStage extends Application {
                     logInButton.setVisible(false);
                 }
             } else {
-                if (usernameTextField.getText().isEmpty()){
+                if (usernameTextField.getText().isEmpty()) {
                     usernameTextField.requestFocus();
                     passwordField.clear();
-                }
-                else logInButton.setVisible(true);
+                } else logInButton.setVisible(true);
             }
 
             //login if its enter
