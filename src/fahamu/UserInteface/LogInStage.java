@@ -76,13 +76,17 @@ public class LogInStage extends Application {
         //get server credential details
         // server credential object initialize the has map which contain server
         //detail for login. the constructor the path of the encrypted file.
-        String path = null;
+        String path = "";
         try {
-            path = LogInStage.class.getClass().getResource("data/serverCredential.db.encrypted").toExternalForm();
+            path = LogInStage.class.getResource("data/serverCredential.db.encrypted").getFile();
+            //print out the credential path
+            System.out.println("\n" + path);
+
             getServerCredential(path);
             initializeLoginStage(primaryStage);
 
         } catch (Throwable e) {
+            e.printStackTrace();
             if (path == null) {
                 initializeLoginStage(primaryStage);
             }
