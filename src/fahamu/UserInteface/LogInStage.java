@@ -38,21 +38,17 @@ public class LogInStage extends Application {
     //*********************************************//
     //private fields                               //
     //*********************************************//
-    private VBox rootLoginStage;
-    private BorderPane rootLogInProgress;
-    private boolean isFirstTimeAdmin = true;
-    private boolean isFirstTimeCashier = true;
-    private SalesCategoryUI salesCategoryUIAdmin;
-    private SalesCategoryUI salesCategoryUICashier;
     private ProgressIndicator progressIndicatorLogIn = new ProgressIndicator();
-    private PasswordField passwordField;
-    private TextField usernameTextField;
     private Button resetPassword = new Button("Reset Password");
     private Button logInButton = new Button("Login");
-
-    //**************************************************//
-    //package private fields                            //
-    //**************************************************//
+    private boolean isFirstTimeAdmin = true;
+    private boolean isFirstTimeCashier = true;
+    private VBox rootLoginStage;
+    private BorderPane rootLogInProgress;
+    private SalesCategoryUI salesCategoryUIAdmin;
+    private SalesCategoryUI salesCategoryUICashier;
+    private PasswordField passwordField;
+    private TextField usernameTextField;
     private Scene sceneMain;
     private Scene sceneLoginProgress;
     static Stage stageLogIn;
@@ -67,7 +63,7 @@ public class LogInStage extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         stageLogIn = primaryStage;
         stageLogIn.setAlwaysOnTop(true);
         stageLogIn.initStyle(StageStyle.UTILITY);
@@ -79,9 +75,6 @@ public class LogInStage extends Application {
         String path = "";
         try {
             path = LogInStage.class.getResource("data/serverCredential.db.encrypted").getFile();
-            //print out the credential path
-            System.out.println("\n" + path);
-
             getServerCredential(path);
             initializeLoginStage(primaryStage);
 
