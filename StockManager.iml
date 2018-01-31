@@ -12,7 +12,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/src/fahamu/resources/FileEncryption.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/fahamu/jarLibs/FileEncryption.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

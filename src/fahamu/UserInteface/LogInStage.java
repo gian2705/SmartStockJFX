@@ -69,31 +69,35 @@ public class LogInStage extends Application {
         stageLogIn.initStyle(StageStyle.UTILITY);
         primaryStage.setTitle("LB Pharmacy");
 
-        //get server credential details
-        // server credential object initialize the has map which contain server
-        //detail for login. the constructor the path of the encrypted file.
-        String path = "";
-        try {
-            path = LogInStage.class.getResource("data/serverCredential.db.encrypted").getFile();
-            getServerCredential(path);
-            initializeLoginStage(primaryStage);
+        //get server credential from encrypted file
+        String credentialFilePath = this.getClass().getResource("data/serverCredential.db.encrypted").getFile();
+        if (credentialFilePath.contains("!")) credentialFilePath = credentialFilePath.replace("!", "");
+        boolean serverCredential = getServerCredential(credentialFilePath);
 
-        } catch (Throwable e) {
-            e.printStackTrace();
-            if (path == null) {
-                initializeLoginStage(primaryStage);
-            }
-        }
-
+        //initialize the stage if server credential is obtained
+        if (serverCredential) initializeLoginStage(primaryStage);
 
     }
 
-    private void getServerCredential(String path) {
-        //get the server credential just before show login interface
-        ServerCredentialFactory serverCredentialFactory = new ServerCredentialFactory(path);
-        username = serverCredentialFactory.serverDetail.get("username");
-        password = serverCredentialFactory.serverDetail.get("password");
-        serverAddress = serverCredentialFactory.serverDetail.get("serverAddress");
+    private boolean getServerCredential(String path) {
+
+        //get server credential details
+        // server credential object initialize the has map which contain server
+        //detail for login. the constructor the path of the encrypted file.
+        try {
+
+            //get the server credential just before show login interface
+            ServerCredentialFactory serverCredentialFactory = new ServerCredentialFactory(path);
+            username = serverCredentialFactory.serverDetail.get("username");
+            password = serverCredentialFactory.serverDetail.get("password");
+            serverAddress = serverCredentialFactory.serverDetail.get("serverAddress");
+            return true;
+
+        } catch (Throwable e) {
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
     private void initializeLoginStage(Stage primaryStage) {
