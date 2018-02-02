@@ -148,18 +148,7 @@ public class Main extends Application {
         logInButton.setOnAction(event -> {
             stageLogIn.setScene(sceneLoginProgress);
             stageLogIn.centerOnScreen();
-            Task<Void> task = new Task<Void>() {
-                @Override
-                protected Void call() throws Exception {
-                    updateProgress(-1F, 1);
-                    login();
-                    updateProgress(1, 1);
-                    return null;
-                }
-            };
-            task.setOnSucceeded(event1 -> stageLogIn.setScene(sceneMain));
-            progressIndicatorLogIn.progressProperty().bind(task.progressProperty());
-            new Thread(task).start();
+
         });
 
         //reset button clicked
@@ -373,7 +362,7 @@ public class Main extends Application {
         URL location = Main.this.getClass().getResource("fxmls/loginStage.fxml");
         FXMLLoader loader = new FXMLLoader(location);
         try {
-            sceneMain = new Scene(loader.load(), 300, 450);
+            sceneMain = new Scene(loader.load());
         } catch (IOException e) {
             e.printStackTrace();
         }

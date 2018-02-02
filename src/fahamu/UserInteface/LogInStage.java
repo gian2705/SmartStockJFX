@@ -2,11 +2,17 @@ package fahamu.UserInteface;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import fahamu.dataFactory.ServerCredentialFactory;
+import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
@@ -22,7 +28,7 @@ public class LogInStage {
     //************************************************//
     public static String password;
     @FXML
-    public Rectangle imageRectangle;
+    public Rectangle logoRectangle;
     @FXML
     public TextField usernameField;
     @FXML
@@ -31,6 +37,11 @@ public class LogInStage {
     public Button forgetPasswordButton;
     @FXML
     public PasswordField passwordField;
+    @FXML
+    public Rectangle rectangleImage;
+    @FXML
+    public ProgressIndicator progressIndicator;
+
     public static String serverAddress;
     public static String username;
     private boolean serverReachable;
@@ -51,8 +62,10 @@ public class LogInStage {
     @FXML
     public void initialize() {
         // to be moved to constructor
-        Image image = new Image(this.getClass().getResource("data/lbLogo.jpg").toExternalForm());
-        imageRectangle.setFill(new ImagePattern(image));
+        Image imageLogo = new Image(this.getClass().getResource("data/lbLogo.jpg").toExternalForm());
+        Image brulImage = new Image(this.getClass().getResource("data/calculate.jpg").toExternalForm());
+        logoRectangle.setFill(new ImagePattern(imageLogo));
+        rectangleImage.setFill(new ImagePattern(brulImage));
 
     }
 
@@ -124,6 +137,68 @@ public class LogInStage {
 
         return serverReachable;
     }
+
+    public void changeLogo(MouseEvent mouseEvent) {
+        //TODO: implement change logo method
+    }
+
+    public void enterKeyClicked(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            if (usernameField.getText().isEmpty()) usernameField.requestFocus();
+            else if (passwordField.getText().isEmpty()) passwordField.requestFocus();
+            else logIn(null);
+        }
+    }
+
+    public void logIn(ActionEvent actionEvent) {
+        if (actionEvent != null) actionEvent.consume();
+        if (validateInputs(usernameField, passwordField)) {
+            //get username and password
+            final String username = usernameField.getText();
+            final String password = passwordField.getText();
+
+            //disable buttons
+            usernameField.setDisable(true);
+            logInButton.setDisable(true);
+            //enable progress Indicator
+            progressIndicator.setVisible(true);
+            progressIndicator.setProgress(-1f);
+
+            //initiate background task for login
+            Task<Void> task = new Task<>() {
+                @Override
+                protected Void call() throws Exception {
+                    updateProgress(-1F, 1);
+                    authenticateUser(username, password);
+                    return null;
+                }
+            };
+            //task.setOnSucceeded(event1 -> );
+            progressIndicator.progressProperty().bind(task.progressProperty());
+            new Thread(task).start();
+        }
+
+    }
+
+    public void resetPassword(ActionEvent actionEvent) {
+        //TODO: reset a password implementation
+    }
+
+    private void authenticateUser(String username, String password) {
+        //TODO: authenticate user
+
+    }
+
+    private boolean validateInputs(TextField usernameField, PasswordField passwordField) {
+        if (usernameField.getText().isEmpty()) {
+            usernameField.requestFocus();
+            return false;
+        } else if (passwordField.getText().isEmpty()) {
+            passwordField.requestFocus();
+            return false;
+        } else return true;
+    }
+
 
 }
 
