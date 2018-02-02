@@ -454,7 +454,7 @@ public class SalesCategoryUI {
             //update total tra sales
             float traSaleTotal1 = SaleCategoryData.getTotalTraSaleOfDay();
             float traCashierSales1 = SaleCategoryData
-                    .getTotalTraSaleOfDayOfCashier(LogInStage.currentUserName);
+                    .getTotalTraSaleOfDayOfCashier(Main.currentUserName);
             totalTraSale.setText(NumberFormat.getInstance().format(traSaleTotal1));
             totalUserTraSales.setText(NumberFormat.getInstance().format(traCashierSales1));
 
@@ -1201,7 +1201,7 @@ public class SalesCategoryUI {
                     Date date1 = new Date(timeInMillis);
 
                     //get the user input the data
-                    user = LogInStage.currentUserName;
+                    user = Main.currentUserName;
 
                     //add data to all sale of the day table
                     tableViewSalesOfDay.getItems().add(
@@ -1242,7 +1242,7 @@ public class SalesCategoryUI {
                     //update total tra sales
                     float traSaleTotal1 = SaleCategoryData.getTotalTraSaleOfDay();
                     float traCashierSales1 = SaleCategoryData
-                            .getTotalTraSaleOfDayOfCashier(LogInStage.currentUserName);
+                            .getTotalTraSaleOfDayOfCashier(Main.currentUserName);
                     totalTraSale.setText(NumberFormat.getInstance().format(traSaleTotal1));
                     totalUserTraSales.setText(NumberFormat.getInstance().format(traCashierSales1));
 

@@ -1,15 +1,7 @@
 package fahamu.service;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
-import fahamu.UserInteface.LogInStage;
-
-import java.io.IOException;
-import java.net.InetAddress;
-import java.sql.Connection;
-import java.sql.SQLException;
-
-import static fahamu.UserInteface.LogInStage.password;
-import static fahamu.UserInteface.LogInStage.username;
+//import static fahamu.UserInteface.Main.password;
+//import static fahamu.UserInteface.Main.username;
 
 public class ServerReachableWatch implements Runnable {
     /**
@@ -23,6 +15,7 @@ public class ServerReachableWatch implements Runnable {
         thread.start();
     }
 
+    /*
     private static void startService() {
         for (; ; ) {
 
@@ -44,7 +37,7 @@ public class ServerReachableWatch implements Runnable {
 
                         //if connection success, change a server address to local
                         isLocalServerAvailable = true;
-                        LogInStage.serverAddress = "localhost";
+                        Main.serverAddress = "localhost";
 
                     } catch (SQLException e) {
                         isLocalServerAvailable = false;
@@ -92,6 +85,7 @@ public class ServerReachableWatch implements Runnable {
      */
     @Override
     public void run() {
-        startService();
+        //startService();
     }
+
 }

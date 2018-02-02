@@ -799,7 +799,7 @@ class MainStage {
 
                         stageAdmin.hide();
 
-                        LogInStage.stageLogIn.show();
+                        Main.stageLogIn.show();
 
                     } else {
 
@@ -911,7 +911,7 @@ class MainStage {
                     ListView<String> listView = new ListView<>();
                     listView.setStyle("-fx-base: gray");
                     //get all users
-                    listView.setItems(LogInStageData.getAllUsers(LogInStage.currentUserName));
+                    listView.setItems(LogInStageData.getAllUsers(Main.currentUserName));
 
                     VBox listUserListView = new VBox();
                     listUserListView.setAlignment(Pos.TOP_CENTER);
@@ -949,7 +949,7 @@ class MainStage {
                             LogInStageData.removeUser(user);
                             //update list view
                             listView.getItems().clear();
-                            listView.setItems(LogInStageData.getAllUsers(LogInStage.currentUserName));
+                            listView.setItems(LogInStageData.getAllUsers(Main.currentUserName));
                         }
                     });
 
@@ -988,7 +988,7 @@ class MainStage {
                         salesCategoryUI.tableViewSalesOfDay.getItems().clear();
                         salesCategoryUI.tableViewSaleTraOfDay.getItems().clear();
 
-                        LogInStage.stageLogIn.show();
+                        Main.stageLogIn.show();
                     } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setContentText("You have unconfirmed bill\nSubmit it or delete contents");
@@ -1077,7 +1077,7 @@ class MainStage {
                         //implementation of change the password
                         if (newPasswordTextField.getText().equals(confirmPasswordTextField.getText())) {
                             LogInStageData
-                                    .updateUserInfo(LogInStage.currentUserName, confirmPasswordTextField.getText());
+                                    .updateUserInfo(Main.currentUserName, confirmPasswordTextField.getText());
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setContentText("Password Changed");
                             alert.show();
@@ -1108,7 +1108,7 @@ class MainStage {
         submitButton.setOnAction(event -> {
             if (newPasswordTextField.getText().equals(confirmPasswordTextField.getText())) {
                 LogInStageData
-                        .updateUserInfo(LogInStage.currentUserName, confirmPasswordTextField.getText());
+                        .updateUserInfo(Main.currentUserName, confirmPasswordTextField.getText());
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setContentText("Password Changed");
                 alert.show();
