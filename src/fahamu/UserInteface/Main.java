@@ -360,19 +360,15 @@ public class Main extends Application {
 
         //set scene
         URL location = Main.this.getClass().getResource("fxmls/loginStage.fxml");
+
         FXMLLoader loader = new FXMLLoader(location);
         try {
             sceneMain = new Scene(loader.load());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //String css = this.getClass().getResource("data/style.css").toExternalForm();
-        //sceneLoginProgress = new Scene(rootLogInProgress, 550, 300);
-        //rootLogInProgress.setId("pane");
-        //sceneLoginProgress.getStylesheets().add(css);
 
         primaryStage.setScene(sceneMain);
-        primaryStage.setAlwaysOnTop(true);
         primaryStage.setResizable(false);
         primaryStage.setTitle("LB Pharmacy");
         primaryStage.show();

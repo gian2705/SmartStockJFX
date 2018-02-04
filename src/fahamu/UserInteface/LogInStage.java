@@ -4,25 +4,28 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 import fahamu.dataFactory.LogInStageData;
 import fahamu.dataFactory.ServerCredentialFactory;
 import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Popup;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class LogInStage extends Task<Void> {
+public class LogInStage {
 
     @FXML
     public Rectangle logoRectangle;
@@ -41,6 +44,8 @@ public class LogInStage extends Task<Void> {
     public static String serverAddress;
     public static String username;
     public static String password;
+    @FXML
+    public AnchorPane popUp;
     private boolean serverReachable;
     private byte[] serverIPv4Address;
     private final String ADMIN="admin";
@@ -59,21 +64,6 @@ public class LogInStage extends Task<Void> {
         }
     }
 
-    //this method call the logIn task
-    @Override
-    protected Void call() {
-        System.out.println("call methods");
-        //get username and password
-        final String username = usernameField.getText();
-        final String password = passwordField.getText();
-
-        //disable buttons
-        forgetPasswordButton.setDisable(true);
-        logInButton.setDisable(true);
-        updateProgress(-1F, 1);
-        authenticateUser(username, password);
-        return null;
-    }
 
     @FXML
     public void initialize() {
@@ -174,17 +164,18 @@ public class LogInStage extends Task<Void> {
     public void logIn(ActionEvent actionEvent) {
         //if (actionEvent != null) actionEvent.consume();
         if (validateInputs(usernameField, passwordField)) {
-            //enable progress Indicator
-            progressIndicator.setVisible(true);
-            progressIndicator.progressProperty().bind(this.progressProperty());
-            new Thread(this).start();
-
+            startBackGroundLogin(usernameField.getText(),passwordField.getText(),progressIndicator);
         }
-
     }
 
     public void resetPassword(ActionEvent actionEvent) {
-        //TODO: reset a password implementation
+        if (usernameField.getText().isEmpty())usernameField.requestFocus();
+        else {
+            Alert alertType=new Alert(Alert.AlertType.INFORMATION);
+            alertType.setContentText("Contact admin");
+            alertType.showAndWait();
+            passwordField.clear();
+        }
     }
 
     private void authenticateUser(String username, String password) {
@@ -195,15 +186,13 @@ public class LogInStage extends Task<Void> {
                 //check type of u
                 if (LogInStageData.getUserType(username).equals(ADMIN)){
                     //TODO: call admin scene
-                    finishLogInProgress();
 
                 }else if (LogInStageData.getUserType(username).equals(CASHIER)){
                     //TODO: call cashier UI
-                    finishLogInProgress();
+
                 }
             }
         }
-
     }
 
     private boolean validateInputs(TextField usernameField, PasswordField passwordField) {
@@ -216,11 +205,52 @@ public class LogInStage extends Task<Void> {
         } else return true;
     }
 
-    private void finishLogInProgress(){
-        updateProgress(1,1);
-        progressIndicator.setVisible(false);
-        logInButton.setDisable(false);
-        forgetPasswordButton.setDisable(false);
+    private void enableIndicator(ProgressIndicator p){
+        p.setVisible(true);
+    }
+
+    private void disableProgress(ProgressIndicator p){
+        p.setVisible(false);
+    }
+
+    private void disableButtons(Button[] buttons){
+        for (Button bu :
+                buttons) {
+            bu.setDisable(true);
+        }
+    }
+
+    private void enableButtons(Button[] buttons){
+        for (Button bu :
+                buttons) {
+            bu.setDisable(false);
+        }
+    }
+
+    private void startBackGroundLogin(String username,String password,ProgressIndicator p){
+        //disable buttons and show progress indicator
+        disableButtons(new Button[]{logInButton,forgetPasswordButton});
+        enableIndicator(progressIndicator);
+
+       Task<Void> task= new Task<>() {
+           @Override
+           protected Void call() throws Exception {
+               updateProgress(-1F, 1);
+               //authenticate user
+               authenticateUser(username, password);
+               return null;
+           }
+       } ;
+       task.setOnSucceeded(event -> {
+           enableButtons(new Button[]{logInButton,forgetPasswordButton});
+           disableProgress(progressIndicator);
+       });
+       task.setOnFailed(event -> {
+           enableButtons(new Button[]{logInButton,forgetPasswordButton});
+           disableProgress(progressIndicator);
+       });
+        p.progressProperty().bind(task.progressProperty());
+       new Thread(task).start();
     }
 }
 
