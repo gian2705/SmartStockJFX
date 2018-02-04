@@ -1,6 +1,7 @@
 package fahamu.UserInteface;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import fahamu.dataFactory.LogInStageData;
 import fahamu.dataFactory.ServerCredentialFactory;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -21,12 +22,8 @@ import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class LogInStage {
+public class LogInStage extends Task<Void> {
 
-    //************************************************//
-    //private fields                                   //
-    //************************************************//
-    public static String password;
     @FXML
     public Rectangle logoRectangle;
     @FXML
@@ -41,22 +38,41 @@ public class LogInStage {
     public Rectangle rectangleImage;
     @FXML
     public ProgressIndicator progressIndicator;
-
     public static String serverAddress;
     public static String username;
+    public static String password;
     private boolean serverReachable;
+    private byte[] serverIPv4Address;
+    private final String ADMIN="admin";
+    private final String CASHIER="cashier";
 
 
-    public LogInStage() {
-
+    public LogInStage()  {
+        serverIPv4Address=new byte[]{(byte) 192, (byte) 168, 0, 2};
         if (getServerCredential()) {
             //TODO: implementation needed if server is reachable, the address of server is to be replaced
             //check if server is reachable
-            serverReachable = checkServerReachable(new byte[]{(byte) 192, (byte) 168, 0, 2});
+            serverReachable = checkServerReachable(serverIPv4Address);
         } else {
-            //TODO: if server is not reachable
+            //TODO: if it fails to get a credential of a server
             serverReachable = false;
         }
+    }
+
+    //this method call the logIn task
+    @Override
+    protected Void call() {
+        System.out.println("call methods");
+        //get username and password
+        final String username = usernameField.getText();
+        final String password = passwordField.getText();
+
+        //disable buttons
+        forgetPasswordButton.setDisable(true);
+        logInButton.setDisable(true);
+        updateProgress(-1F, 1);
+        authenticateUser(username, password);
+        return null;
     }
 
     @FXML
@@ -79,8 +95,6 @@ public class LogInStage {
         if (credentialFilePath.contains("!")) credentialFilePath = credentialFilePath.replace("!", "");
 
         //get server credential details
-        // server credential object initialize the has map which contain server
-        //detail for login. the constructor the path of the encrypted file.
         try {
 
             //get the server credential just before show login interface
@@ -96,6 +110,13 @@ public class LogInStage {
         }
     }
 
+    /**
+     * check a server on the give IPv4 address if its reachable, if not it check
+     * for local host too.
+     * @param serverIp=byte array of the server IPv4 address
+     * @return true if its reachable on the given IP or local host and
+     * false if no mysql server available in a given IPv4 address and local host
+     */
     private boolean checkServerReachable(byte[] serverIp) {
         //this boolean check if the server is reachable
         boolean serverReachable;
@@ -151,31 +172,13 @@ public class LogInStage {
     }
 
     public void logIn(ActionEvent actionEvent) {
-        if (actionEvent != null) actionEvent.consume();
+        //if (actionEvent != null) actionEvent.consume();
         if (validateInputs(usernameField, passwordField)) {
-            //get username and password
-            final String username = usernameField.getText();
-            final String password = passwordField.getText();
-
-            //disable buttons
-            usernameField.setDisable(true);
-            logInButton.setDisable(true);
             //enable progress Indicator
             progressIndicator.setVisible(true);
-            progressIndicator.setProgress(-1f);
+            progressIndicator.progressProperty().bind(this.progressProperty());
+            new Thread(this).start();
 
-            //initiate background task for login
-            Task<Void> task = new Task<>() {
-                @Override
-                protected Void call() throws Exception {
-                    updateProgress(-1F, 1);
-                    authenticateUser(username, password);
-                    return null;
-                }
-            };
-            //task.setOnSucceeded(event1 -> );
-            progressIndicator.progressProperty().bind(task.progressProperty());
-            new Thread(task).start();
         }
 
     }
@@ -185,7 +188,21 @@ public class LogInStage {
     }
 
     private void authenticateUser(String username, String password) {
-        //TODO: authenticate user
+        //check server if its reachable
+        if (checkServerReachable(serverIPv4Address)){
+            //check if password is correct
+            if (password.equals(LogInStageData.authenticateUser(username))){
+                //check type of u
+                if (LogInStageData.getUserType(username).equals(ADMIN)){
+                    //TODO: call admin scene
+                    finishLogInProgress();
+
+                }else if (LogInStageData.getUserType(username).equals(CASHIER)){
+                    //TODO: call cashier UI
+                    finishLogInProgress();
+                }
+            }
+        }
 
     }
 
@@ -199,6 +216,11 @@ public class LogInStage {
         } else return true;
     }
 
-
+    private void finishLogInProgress(){
+        updateProgress(1,1);
+        progressIndicator.setVisible(false);
+        logInButton.setDisable(false);
+        forgetPasswordButton.setDisable(false);
+    }
 }
 
