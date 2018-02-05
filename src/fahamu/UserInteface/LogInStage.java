@@ -4,21 +4,13 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 import fahamu.dataFactory.LogInStageData;
 import fahamu.dataFactory.ServerCredentialFactory;
 import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Popup;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -44,8 +36,7 @@ public class LogInStage {
     public static String serverAddress;
     public static String username;
     public static String password;
-    @FXML
-    public AnchorPane popUp;
+
     private boolean serverReachable;
     private byte[] serverIPv4Address;
     private final String ADMIN = "admin";
@@ -200,7 +191,7 @@ public class LogInStage {
                     //TODO: call admin scene
 
                 } else if (LogInStageData.getUserType(username).equals(CASHIER)) {
-                    //TODO: call cashier UI
+                    //TODO: call cashier scene
 
                 }
             }
@@ -217,11 +208,11 @@ public class LogInStage {
         } else return true;
     }
 
-    private void enableIndicator(ProgressIndicator p) {
+    private void enableProgressIndicator(ProgressIndicator p) {
         p.setVisible(true);
     }
 
-    private void disableProgress(ProgressIndicator p) {
+    private void disableProgressIndicator(ProgressIndicator p) {
         p.setVisible(false);
     }
 
@@ -242,7 +233,7 @@ public class LogInStage {
     private void startBackGroundLogin(String username, String password, ProgressIndicator p) {
         //disable buttons and show progress indicator
         disableButtons(new Button[]{logInButton, forgetPasswordButton});
-        enableIndicator(progressIndicator);
+        enableProgressIndicator(progressIndicator);
 
         Task<Void> task = new Task<>() {
             @Override
@@ -255,11 +246,11 @@ public class LogInStage {
         };
         task.setOnSucceeded(event -> {
             enableButtons(new Button[]{logInButton, forgetPasswordButton});
-            disableProgress(progressIndicator);
+            disableProgressIndicator(progressIndicator);
         });
         task.setOnFailed(event -> {
             enableButtons(new Button[]{logInButton, forgetPasswordButton});
-            disableProgress(progressIndicator);
+            disableProgressIndicator(progressIndicator);
         });
         p.progressProperty().bind(task.progressProperty());
         new Thread(task).start();
