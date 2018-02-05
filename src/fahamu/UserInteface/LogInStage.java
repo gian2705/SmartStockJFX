@@ -48,12 +48,12 @@ public class LogInStage {
     public AnchorPane popUp;
     private boolean serverReachable;
     private byte[] serverIPv4Address;
-    private final String ADMIN="admin";
-    private final String CASHIER="cashier";
+    private final String ADMIN = "admin";
+    private final String CASHIER = "cashier";
 
 
-    public LogInStage()  {
-        serverIPv4Address=new byte[]{(byte) 192, (byte) 168, 0, 2};
+    public LogInStage() {
+        serverIPv4Address = new byte[]{(byte) 192, (byte) 168, 0, 2};
         if (getServerCredential()) {
             //TODO: implementation needed if server is reachable, the address of server is to be replaced
             //check if server is reachable
@@ -103,6 +103,7 @@ public class LogInStage {
     /**
      * check a server on the give IPv4 address if its reachable, if not it check
      * for local host too.
+     *
      * @param serverIp=byte array of the server IPv4 address
      * @return true if its reachable on the given IP or local host and
      * false if no mysql server available in a given IPv4 address and local host
@@ -149,29 +150,40 @@ public class LogInStage {
         return serverReachable;
     }
 
-    public void changeLogo(MouseEvent mouseEvent) {
+    public void changeLogo() {
         //TODO: implement change logo method
     }
 
-    public void enterKeyClicked(KeyEvent keyEvent) {
+    public void keyboardKeyClicked(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             if (usernameField.getText().isEmpty()) usernameField.requestFocus();
             else if (passwordField.getText().isEmpty()) passwordField.requestFocus();
-            else logIn(null);
+            else logIn();
+        } else {
+            if (keyEvent.getCode()==KeyCode.TAB) {
+                if (keyEvent.getSource().equals(usernameField)) {
+                    if (usernameField.getText().isEmpty()) {
+                        usernameField.requestFocus();
+                    } else passwordField.requestFocus();
+                } else if (keyEvent.getSource().equals(passwordField)) {
+                    if (passwordField.getText().isEmpty()) passwordField.requestFocus();
+                    else logIn();
+                }
+            }
         }
     }
 
-    public void logIn(ActionEvent actionEvent) {
+    public void logIn() {
         //if (actionEvent != null) actionEvent.consume();
         if (validateInputs(usernameField, passwordField)) {
-            startBackGroundLogin(usernameField.getText(),passwordField.getText(),progressIndicator);
+            startBackGroundLogin(usernameField.getText(), passwordField.getText(), progressIndicator);
         }
     }
 
-    public void resetPassword(ActionEvent actionEvent) {
-        if (usernameField.getText().isEmpty())usernameField.requestFocus();
+    public void resetPassword() {
+        if (usernameField.getText().isEmpty()) usernameField.requestFocus();
         else {
-            Alert alertType=new Alert(Alert.AlertType.INFORMATION);
+            Alert alertType = new Alert(Alert.AlertType.INFORMATION);
             alertType.setContentText("Contact admin");
             alertType.showAndWait();
             passwordField.clear();
@@ -180,14 +192,14 @@ public class LogInStage {
 
     private void authenticateUser(String username, String password) {
         //check server if its reachable
-        if (checkServerReachable(serverIPv4Address)){
+        if (checkServerReachable(serverIPv4Address)) {
             //check if password is correct
-            if (password.equals(LogInStageData.authenticateUser(username))){
+            if (password.equals(LogInStageData.authenticateUser(username))) {
                 //check type of u
-                if (LogInStageData.getUserType(username).equals(ADMIN)){
+                if (LogInStageData.getUserType(username).equals(ADMIN)) {
                     //TODO: call admin scene
 
-                }else if (LogInStageData.getUserType(username).equals(CASHIER)){
+                } else if (LogInStageData.getUserType(username).equals(CASHIER)) {
                     //TODO: call cashier UI
 
                 }
@@ -205,52 +217,52 @@ public class LogInStage {
         } else return true;
     }
 
-    private void enableIndicator(ProgressIndicator p){
+    private void enableIndicator(ProgressIndicator p) {
         p.setVisible(true);
     }
 
-    private void disableProgress(ProgressIndicator p){
+    private void disableProgress(ProgressIndicator p) {
         p.setVisible(false);
     }
 
-    private void disableButtons(Button[] buttons){
+    private void disableButtons(Button[] buttons) {
         for (Button bu :
                 buttons) {
             bu.setDisable(true);
         }
     }
 
-    private void enableButtons(Button[] buttons){
+    private void enableButtons(Button[] buttons) {
         for (Button bu :
                 buttons) {
             bu.setDisable(false);
         }
     }
 
-    private void startBackGroundLogin(String username,String password,ProgressIndicator p){
+    private void startBackGroundLogin(String username, String password, ProgressIndicator p) {
         //disable buttons and show progress indicator
-        disableButtons(new Button[]{logInButton,forgetPasswordButton});
+        disableButtons(new Button[]{logInButton, forgetPasswordButton});
         enableIndicator(progressIndicator);
 
-       Task<Void> task= new Task<>() {
-           @Override
-           protected Void call() throws Exception {
-               updateProgress(-1F, 1);
-               //authenticate user
-               authenticateUser(username, password);
-               return null;
-           }
-       } ;
-       task.setOnSucceeded(event -> {
-           enableButtons(new Button[]{logInButton,forgetPasswordButton});
-           disableProgress(progressIndicator);
-       });
-       task.setOnFailed(event -> {
-           enableButtons(new Button[]{logInButton,forgetPasswordButton});
-           disableProgress(progressIndicator);
-       });
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                updateProgress(-1F, 1);
+                //authenticate user
+                authenticateUser(username, password);
+                return null;
+            }
+        };
+        task.setOnSucceeded(event -> {
+            enableButtons(new Button[]{logInButton, forgetPasswordButton});
+            disableProgress(progressIndicator);
+        });
+        task.setOnFailed(event -> {
+            enableButtons(new Button[]{logInButton, forgetPasswordButton});
+            disableProgress(progressIndicator);
+        });
         p.progressProperty().bind(task.progressProperty());
-       new Thread(task).start();
+        new Thread(task).start();
     }
 }
 
