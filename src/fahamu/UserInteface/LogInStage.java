@@ -1,16 +1,23 @@
 package fahamu.UserInteface;
 
+import com.jfoenix.controls.JFXButton;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import fahamu.dataFactory.LogInStageData;
 import fahamu.dataFactory.ServerCredentialFactory;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -19,6 +26,8 @@ import java.sql.SQLException;
 
 public class LogInStage {
 
+    @FXML
+    public AnchorPane rootPane;
     @FXML
     public Rectangle logoRectangle;
     @FXML
@@ -33,10 +42,10 @@ public class LogInStage {
     public Rectangle rectangleImage;
     @FXML
     public ProgressIndicator progressIndicator;
+
     public static String serverAddress;
     public static String username;
     public static String password;
-
     private boolean serverReachable;
     private byte[] serverIPv4Address;
     private final String ADMIN = "admin";
@@ -66,9 +75,6 @@ public class LogInStage {
 
     }
 
-    //***********************************//
-    //private methods                   //
-    //**********************************//
     private boolean getServerCredential() {
 
         //get server credential from encrypted file
@@ -181,7 +187,7 @@ public class LogInStage {
         }
     }
 
-    private void authenticateUser(String username, String password) {
+    private String authenticateUser(String username, String password) {
         //check server if its reachable
         if (checkServerReachable(serverIPv4Address)) {
             //check if password is correct
@@ -189,13 +195,14 @@ public class LogInStage {
                 //check type of u
                 if (LogInStageData.getUserType(username).equals(ADMIN)) {
                     //TODO: call admin scene
-
+                    return ADMIN;
                 } else if (LogInStageData.getUserType(username).equals(CASHIER)) {
                     //TODO: call cashier scene
-
+                    return CASHIER;
                 }
             }
         }
+        return null;
     }
 
     private boolean validateInputs(TextField usernameField, PasswordField passwordField) {
@@ -235,25 +242,64 @@ public class LogInStage {
         disableButtons(new Button[]{logInButton, forgetPasswordButton});
         enableProgressIndicator(progressIndicator);
 
-        Task<Void> task = new Task<>() {
+        Task<String> task = new Task<>() {
             @Override
-            protected Void call() throws Exception {
+            protected String call() throws Exception {
                 updateProgress(-1F, 1);
                 //authenticate user
-                authenticateUser(username, password);
-                return null;
+                String user = authenticateUser(username, password);
+                if (user==null){
+                    cancel();
+                    return null;
+                }else {
+                    return user;
+                }
             }
         };
         task.setOnSucceeded(event -> {
-            enableButtons(new Button[]{logInButton, forgetPasswordButton});
-            disableProgressIndicator(progressIndicator);
+            changeScene(task, (Stage) rootPane.getScene().getWindow());
         });
+
         task.setOnFailed(event -> {
             enableButtons(new Button[]{logInButton, forgetPasswordButton});
             disableProgressIndicator(progressIndicator);
         });
+        task.setOnCancelled(event -> {
+            enableButtons(new Button[]{logInButton, forgetPasswordButton});
+            disableProgressIndicator(progressIndicator);
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Username is not available or password is incorrect");
+            alert.showAndWait();
+        });
+
         p.progressProperty().bind(task.progressProperty());
         new Thread(task).start();
+    }
+
+    private void changeScene(Task<String> task,Stage stage){
+        if (task.getValue().equals(ADMIN)) {
+            //for admin user interface
+            //TODO: to create admin scene
+            enableButtons(new Button[]{logInButton, forgetPasswordButton});
+            disableProgressIndicator(progressIndicator);
+            AnchorPane pane = new AnchorPane();
+            try {
+                pane = FXMLLoader.load(getClass().getResource("fxmls/reset.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            stage.setResizable(true);
+            stage.setScene(new Scene(pane));
+            stage.sizeToScene();
+        }else {
+            //TODO: to create a cashier scene
+            //for cashier user interface
+            enableButtons(new Button[]{logInButton, forgetPasswordButton});
+            disableProgressIndicator(progressIndicator);
+            stage.setResizable(true);
+            stage.setScene(new Scene(new VBox(new JFXButton("Implement this")),300,300));
+            stage.sizeToScene();
+        }
     }
 }
 

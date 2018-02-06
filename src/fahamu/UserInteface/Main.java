@@ -3,12 +3,6 @@ package fahamu.UserInteface;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,28 +11,36 @@ import java.net.URL;
 
 public class Main extends Application {
 
-    static Stage stageLogIn;
-    static String currentUserName;
-    //*********************************************//
-    //private fields                               //
-    //*********************************************//
-    private ProgressIndicator progressIndicatorLogIn = new ProgressIndicator();
-    private Button resetPassword = new Button("Reset Password");
-    private Button logInButton = new Button("Login");
-    private boolean isFirstTimeAdmin = true;
-    private boolean isFirstTimeCashier = true;
-    private VBox rootLoginStage;
-    private BorderPane rootLogInProgress;
-    private SalesCategoryUI salesCategoryUIAdmin;
-    private SalesCategoryUI salesCategoryUICashier;
-    private PasswordField passwordField;
-    private TextField usernameTextField;
+    public static String currentUserName;
+    private String BUSINESS_NAME="STOCK MANAGER"; //default name
     private Scene sceneMain;
-    private Scene sceneLoginProgress;
+
+
+    public void init() throws Exception {
+        //TODO: initialize all user data
+        BUSINESS_NAME ="Lb Pharmacy";
+    }
 
     public static void main(String[] args) {
         launch(args);
     }
+
+    @Override
+    public void start(Stage primaryStage) {
+        //set scene
+        URL location = Main.this.getClass().getResource("fxmls/loginStage.fxml");
+        FXMLLoader loader = new FXMLLoader(location);
+        try {
+            sceneMain = new Scene(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        primaryStage.setScene(sceneMain);
+        primaryStage.setResizable(false);
+        primaryStage.setTitle(BUSINESS_NAME);
+        primaryStage.show();
+    }
+
 
     /*
     private void setLogInUI() {
@@ -172,7 +174,6 @@ public class Main extends Application {
 
     }
 
-    /*
     private void login() {
         if (usernameTextField.getText().isEmpty()) {
             Platform.runLater(() -> {
@@ -354,23 +355,4 @@ public class Main extends Application {
         }
     }
     */
-
-    @Override
-    public void start(Stage primaryStage) {
-
-        //set scene
-        URL location = Main.this.getClass().getResource("fxmls/loginStage.fxml");
-
-        FXMLLoader loader = new FXMLLoader(location);
-        try {
-            sceneMain = new Scene(loader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        primaryStage.setScene(sceneMain);
-        primaryStage.setResizable(false);
-        primaryStage.setTitle("LB Pharmacy");
-        primaryStage.show();
-    }
 }

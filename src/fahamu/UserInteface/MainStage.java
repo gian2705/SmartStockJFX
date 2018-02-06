@@ -799,7 +799,7 @@ class MainStage {
 
                         stageAdmin.hide();
 
-                        Main.stageLogIn.show();
+                        //Main.stageLogIn.show();
 
                     } else {
 
@@ -988,7 +988,7 @@ class MainStage {
                         salesCategoryUI.tableViewSalesOfDay.getItems().clear();
                         salesCategoryUI.tableViewSaleTraOfDay.getItems().clear();
 
-                        Main.stageLogIn.show();
+                        //Main.stageLogIn.show();
                     } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setContentText("You have unconfirmed bill\nSubmit it or delete contents");
