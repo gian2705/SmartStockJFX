@@ -33,9 +33,9 @@ public class LogInStage {
     @FXML
     public TextField usernameField;
     @FXML
-    public Button logInButton;
+    public JFXButton logInJFXButton;
     @FXML
-    public Button forgetPasswordButton;
+    public JFXButton forgetPasswordJFXButton;
     @FXML
     public PasswordField passwordField;
     @FXML
@@ -72,7 +72,6 @@ public class LogInStage {
         Image brulImage = new Image(this.getClass().getResource("data/calculate.jpg").toExternalForm());
         logoRectangle.setFill(new ImagePattern(imageLogo));
         rectangleImage.setFill(new ImagePattern(brulImage));
-
     }
 
     private boolean getServerCredential() {
@@ -223,15 +222,15 @@ public class LogInStage {
         p.setVisible(false);
     }
 
-    private void disableButtons(Button[] buttons) {
-        for (Button bu :
+    private void disableButtons(JFXButton[] buttons) {
+        for (JFXButton bu :
                 buttons) {
             bu.setDisable(true);
         }
     }
 
-    private void enableButtons(Button[] buttons) {
-        for (Button bu :
+    private void enableButtons(JFXButton[] buttons) {
+        for (JFXButton bu :
                 buttons) {
             bu.setDisable(false);
         }
@@ -239,7 +238,7 @@ public class LogInStage {
 
     private void startBackGroundLogin(String username, String password, ProgressIndicator p) {
         //disable buttons and show progress indicator
-        disableButtons(new Button[]{logInButton, forgetPasswordButton});
+        disableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
         enableProgressIndicator(progressIndicator);
 
         Task<String> task = new Task<>() {
@@ -261,11 +260,11 @@ public class LogInStage {
         });
 
         task.setOnFailed(event -> {
-            enableButtons(new Button[]{logInButton, forgetPasswordButton});
+            enableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
             disableProgressIndicator(progressIndicator);
         });
         task.setOnCancelled(event -> {
-            enableButtons(new Button[]{logInButton, forgetPasswordButton});
+            enableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
             disableProgressIndicator(progressIndicator);
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Username is not available or password is incorrect");
@@ -280,7 +279,7 @@ public class LogInStage {
         if (task.getValue().equals(ADMIN)) {
             //for admin user interface
             //TODO: to create admin scene
-            enableButtons(new Button[]{logInButton, forgetPasswordButton});
+            enableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
             disableProgressIndicator(progressIndicator);
             AnchorPane pane = new AnchorPane();
             try {
@@ -294,7 +293,7 @@ public class LogInStage {
         }else {
             //TODO: to create a cashier scene
             //for cashier user interface
-            enableButtons(new Button[]{logInButton, forgetPasswordButton});
+            enableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
             disableProgressIndicator(progressIndicator);
             stage.setResizable(true);
             stage.setScene(new Scene(new VBox(new JFXButton("Implement this")),300,300));
