@@ -14,7 +14,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static fahamu.UserInteface.LogInStage.*;
+import static fahamu.UserInteface.Main.serverDetail;
 import static fahamu.UserInteface.StockCategoryUI.categoryList;
 
 public class ReportCategoryData {
@@ -22,6 +22,9 @@ public class ReportCategoryData {
     private static String localhost;
     private static MysqlDataSource mysqlDataSource;
     private static Connection connection;
+    private static String username=serverDetail.get("username");
+    private static String password=serverDetail.get("password");
+    private static String serverAddress=serverDetail.get("serverAddress");
 
     static {
         mysqlDataSource = new MysqlDataSource();

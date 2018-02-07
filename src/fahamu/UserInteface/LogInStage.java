@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXSnackbar;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import fahamu.dataFactory.LogInStageData;
 import fahamu.dataFactory.ServerCredentialFactory;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,26 +47,11 @@ public class LogInStage {
     @FXML
     public AnchorPane profileImagePane;
 
-    public static String serverAddress;
-    public static String username;
-    public static String password;
-    private boolean serverReachable;
-    private byte[] serverIPv4Address;
     private final String ADMIN = "admin";
     private final String CASHIER = "cashier";
-
-
-    public LogInStage() {
-        serverIPv4Address = new byte[]{(byte) 192, (byte) 168, 0, 2};
-        if (getServerCredential()) {
-            //TODO: implementation needed if server is reachable, the address of server is to be replaced
-            //check if server is reachable
-            serverReachable = checkServerReachable(serverIPv4Address);
-        } else {
-            //TODO: if it fails to get a credential of a server
-            serverReachable = false;
-        }
-    }
+    //for test only
+    private boolean isFirstTimeCashier=true;
+    private SalesCategoryUI salesCategoryUICashier;
 
 
     @FXML
@@ -75,78 +61,6 @@ public class LogInStage {
         Image brulImage = new Image(this.getClass().getResource("data/calculate.jpg").toExternalForm());
         logoRectangle.setFill(new ImagePattern(imageLogo));
         rectangleImage.setFill(new ImagePattern(brulImage));
-    }
-
-    private boolean getServerCredential() {
-
-        //get server credential from encrypted file
-        String credentialFilePath = this.getClass().getResource("data/serverCredential.db.encrypted").getFile();
-        if (credentialFilePath.contains("!")) credentialFilePath = credentialFilePath.replace("!", "");
-
-        //get server credential details
-        try {
-
-            //get the server credential just before show login interface
-            ServerCredentialFactory serverCredentialFactory = new ServerCredentialFactory(credentialFilePath);
-            username = serverCredentialFactory.serverDetail.get("username");
-            password = serverCredentialFactory.serverDetail.get("password");
-            serverAddress = serverCredentialFactory.serverDetail.get("serverAddress");
-            return true;
-
-        } catch (Throwable e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    /**
-     * check a server on the give IPv4 address if its reachable, if not it check
-     * for local host too.
-     *
-     * @param serverIp=byte array of the server IPv4 address
-     * @return true if its reachable on the given IP or local host and
-     * false if no mysql server available in a given IPv4 address and local host
-     */
-    private boolean checkServerReachable(byte[] serverIp) {
-        //this boolean check if the server is reachable
-        boolean serverReachable;
-        try {
-            //
-            InetAddress inetAddress = InetAddress.getByAddress(serverIp);
-            boolean reachable = inetAddress.isReachable(1000);
-
-            if (!reachable) {
-                //boolean check for availability of local server
-                //check availability of local databases
-                MysqlDataSource mysqlDataSource = new MysqlDataSource();
-                mysqlDataSource.setUser(username);
-                mysqlDataSource.setPassword(password);
-                mysqlDataSource.setServerName("localhost");
-
-                Connection connection = null;
-                try {
-                    connection = mysqlDataSource.getConnection();
-
-                    //if connection success, change a server address to local
-                    serverReachable = true;
-                    serverAddress = "localhost";
-
-                } catch (SQLException e) {
-                    serverReachable = false;
-                } finally {
-                    if (connection != null) try {
-                        connection.close();
-                    } catch (SQLException ignore) {
-                    }
-                }
-
-            } else serverReachable = true;
-        } catch (IOException e) {
-            serverReachable = false;
-            e.printStackTrace();
-        }
-
-        return serverReachable;
     }
 
     public void changeLogo() {
@@ -159,7 +73,7 @@ public class LogInStage {
             else if (passwordField.getText().isEmpty()) passwordField.requestFocus();
             else logIn();
         } else {
-            if (keyEvent.getCode()==KeyCode.TAB) {
+            if (keyEvent.getCode() == KeyCode.TAB) {
                 if (keyEvent.getSource().equals(usernameField)) {
                     if (usernameField.getText().isEmpty()) {
                         usernameField.requestFocus();
@@ -190,9 +104,8 @@ public class LogInStage {
     }
 
     private String authenticateUser(String username, String password) {
-        //check server if its reachable
-        if (checkServerReachable(serverIPv4Address)) {
-            //check if password is correct
+        //check if password is correct
+        try {
             if (password.equals(LogInStageData.authenticateUser(username))) {
                 //check type of u
                 if (LogInStageData.getUserType(username).equals(ADMIN)) {
@@ -203,6 +116,9 @@ public class LogInStage {
                     return CASHIER;
                 }
             }
+        } catch (SQLException e) {
+            //TODO: to print some error message in password or a any snack bar
+            e.printStackTrace();
         }
         return null;
     }
@@ -250,10 +166,10 @@ public class LogInStage {
                 updateProgress(-1F, 1);
                 //authenticate user
                 String user = authenticateUser(username, password);
-                if (user==null){
+                if (user == null) {
                     cancel();
                     return null;
-                }else {
+                } else {
                     return user;
                 }
             }
@@ -269,7 +185,7 @@ public class LogInStage {
         task.setOnCancelled(event -> {
             enableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
             disableProgressIndicator(progressIndicator);
-            Alert alert=new Alert(Alert.AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Username is not available or password is incorrect");
             alert.showAndWait();
         });
@@ -278,7 +194,7 @@ public class LogInStage {
         new Thread(task).start();
     }
 
-    private void changeScene(Task<String> task,Stage stage){
+    private void changeScene(Task<String> task, Stage stage) {
         if (task.getValue().equals(ADMIN)) {
             //for admin user interface
             //TODO: to create admin scene
@@ -293,14 +209,28 @@ public class LogInStage {
             stage.setResizable(true);
             stage.setScene(new Scene(pane));
             stage.sizeToScene();
-        }else {
+        } else {
+            /*
             //TODO: to create a cashier scene
             //for cashier user interface
             enableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
             disableProgressIndicator(progressIndicator);
             stage.setResizable(true);
-            stage.setScene(new Scene(new VBox(new JFXButton("Implement this")),300,300));
+            stage.setScene(new Scene(new VBox(new JFXButton("Implement this")), 300, 300));
             stage.sizeToScene();
+            */
+            //for testing only
+            if (isFirstTimeCashier) {
+                //set objects
+
+                salesCategoryUICashier = new SalesCategoryUI(false);
+                Platform.runLater(() ->{
+                    new MainStage(MainStage.CASHIER_UI, salesCategoryUICashier);
+                    MainStage.stageUser.show();
+                } );
+                isFirstTimeCashier = false;
+            }
+
         }
     }
 }

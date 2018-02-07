@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static fahamu.UserInteface.LogInStage.*;
+import static fahamu.UserInteface.Main.serverDetail;
 public class LogInStageData {
 
     private static MysqlDataSource mysqlDataSource;
@@ -20,11 +20,11 @@ public class LogInStageData {
     }
 
     //authenticate the username with password to match in database
-    public static String authenticateUser(String user) {
+    public static String authenticateUser(String user) throws SQLException {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(serverDetail.get("username"));
+        mysqlDataSource.setPassword(serverDetail.get("password"));
+        mysqlDataSource.setServerName(serverDetail.get("serverAddress"));
 
         connection = null;
         String password = null;
@@ -40,8 +40,6 @@ public class LogInStageData {
                 password = resultSet.getString(1);
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
         } finally {
             if (connection != null) try {
                 connection.close();
@@ -55,9 +53,9 @@ public class LogInStageData {
     //get user type
     public static String getUserType(String user) {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(serverDetail.get("username"));
+        mysqlDataSource.setPassword(serverDetail.get("password"));
+        mysqlDataSource.setServerName(serverDetail.get("serversAddress"));
 
         connection = null;
         String type = null;
@@ -88,9 +86,9 @@ public class LogInStageData {
 
     //get all user
     public static ObservableList<String> getAllUsers(String currentUser) {
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(serverDetail.get("username"));
+        mysqlDataSource.setPassword(serverDetail.get("password"));
+        mysqlDataSource.setServerName(serverDetail.get("serversAddress"));
 
         connection = null;
         String selectQuery = "SELECT name FROM users.loginInfo where name!='" + currentUser + "'";
@@ -121,9 +119,9 @@ public class LogInStageData {
     //add new user
     public static void addUser(String user, String passw, String type) {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(serverDetail.get("username"));
+        mysqlDataSource.setPassword(serverDetail.get("password"));
+        mysqlDataSource.setServerName(serverDetail.get("serversAddress"));
 
         connection = null;
 
@@ -150,9 +148,9 @@ public class LogInStageData {
     //remove user
     public static void removeUser(String user) {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(serverDetail.get("username"));
+        mysqlDataSource.setPassword(serverDetail.get("password"));
+        mysqlDataSource.setServerName(serverDetail.get("serversAddress"));
 
         connection = null;
 
@@ -180,9 +178,9 @@ public class LogInStageData {
     //update user info
     public static void updateUserInfo(String user, String paswd) {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        mysqlDataSource.setUser(serverDetail.get("username"));
+        mysqlDataSource.setPassword(serverDetail.get("password"));
+        mysqlDataSource.setServerName(serverDetail.get("serversAddress"));
 
         connection = null;
 

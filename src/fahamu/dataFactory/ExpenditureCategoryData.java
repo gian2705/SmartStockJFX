@@ -11,12 +11,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import static fahamu.UserInteface.LogInStage.*;
+import static fahamu.UserInteface.Main.serverDetail;
 
 public class ExpenditureCategoryData {
 
     private static String localhost;
     private static MysqlDataSource mysqlDataSource;
     private static Connection connection;
+    private static String username=serverDetail.get("username");
+    private static String password=serverDetail.get("password");
+    private static String serverAddress=serverDetail.get("serverAddress");
 
     static {
         mysqlDataSource = new MysqlDataSource();

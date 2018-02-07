@@ -22,7 +22,7 @@ import javafx.stage.Popup;
 import java.io.File;
 import java.sql.*;
 
-import static fahamu.UserInteface.LogInStage.*;
+import static fahamu.UserInteface.Main.serverDetail;
 
 public class StockCategoryUI {
 
@@ -37,6 +37,9 @@ public class StockCategoryUI {
     static Popup popupAddUnit;
 
     private static String localhost = "localhost";
+    private String username=serverDetail.get("username");
+    private String password=serverDetail.get("password");
+    private String serverAddress=serverDetail.get("serverAddress");
 
     StockCategoryUI() {
         addProductCategory();

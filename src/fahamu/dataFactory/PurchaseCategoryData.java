@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.NumberFormat;
 
-import static fahamu.UserInteface.LogInStage.*;
+import static fahamu.UserInteface.Main.serverDetail;
 
 public class PurchaseCategoryData {
 
@@ -29,7 +29,9 @@ public class PurchaseCategoryData {
     }
 
     public static float amountOfCreditInvoice = 0;
-    private String string;
+    private static String username=serverDetail.get("username");
+    private static String password=serverDetail.get("password");
+    private static String serverAddress=serverDetail.get("serverAddress");
 
     //add supplier information
     public static void addSupplierInfo(String supplierName, String supplierPostAddress, String shopLocation,
