@@ -1,6 +1,7 @@
 package fahamu.UserInteface;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXSnackbar;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import fahamu.dataFactory.LogInStageData;
 import fahamu.dataFactory.ServerCredentialFactory;
@@ -42,6 +43,8 @@ public class LogInStage {
     public Rectangle rectangleImage;
     @FXML
     public ProgressIndicator progressIndicator;
+    @FXML
+    public AnchorPane profileImagePane;
 
     public static String serverAddress;
     public static String username;
@@ -179,9 +182,9 @@ public class LogInStage {
     public void resetPassword() {
         if (usernameField.getText().isEmpty()) usernameField.requestFocus();
         else {
-            Alert alertType = new Alert(Alert.AlertType.INFORMATION);
-            alertType.setContentText("Contact admin");
-            alertType.showAndWait();
+            JFXSnackbar bar = new JFXSnackbar(profileImagePane);
+            bar.enqueue(new JFXSnackbar.SnackbarEvent("Contact Administrator"));
+            bar.getStyleClass().add("-fx-font-size: 16px");
             passwordField.clear();
         }
     }
