@@ -2,6 +2,7 @@ package fahamu.UserInteface;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSnackbar;
+import com.jfoenix.controls.JFXSpinner;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import fahamu.dataFactory.LogInStageData;
 import fahamu.dataFactory.ServerCredentialFactory;
@@ -43,12 +44,13 @@ public class LogInStage {
     @FXML
     public Rectangle rectangleImage;
     @FXML
-    public ProgressIndicator progressIndicator;
+    public JFXSpinner progressIndicator;
     @FXML
     public AnchorPane profileImagePane;
 
     private final String ADMIN = "admin";
     private final String CASHIER = "cashier";
+
     //for test only
     private boolean isFirstTimeCashier=true;
     private SalesCategoryUI salesCategoryUICashier;
@@ -163,7 +165,7 @@ public class LogInStage {
         Task<String> task = new Task<>() {
             @Override
             protected String call() throws Exception {
-                updateProgress(-1F, 1);
+                //updateProgress(-1F, 1);
                 //authenticate user
                 String user = authenticateUser(username, password);
                 if (user == null) {
@@ -190,7 +192,7 @@ public class LogInStage {
             alert.showAndWait();
         });
 
-        p.progressProperty().bind(task.progressProperty());
+        //p.progressProperty().bind(task.progressProperty());
         new Thread(task).start();
     }
 
@@ -212,14 +214,14 @@ public class LogInStage {
         } else {
 
             //TODO: to create a cashier scene
-            //for cashier user interface
+            /*for cashier user interface
             enableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
             disableProgressIndicator(progressIndicator);
             stage.setResizable(true);
             stage.setScene(new Scene(new VBox(new JFXButton("Implement this")), 300, 300));
             stage.sizeToScene();
+            */
 
-            /*
             //for testing only
             if (isFirstTimeCashier) {
                 //set objects
@@ -231,7 +233,6 @@ public class LogInStage {
                 } );
                 isFirstTimeCashier = false;
             }
-            */
 
         }
     }
