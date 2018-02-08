@@ -210,7 +210,7 @@ public class LogInStage {
             stage.setScene(new Scene(pane));
             stage.sizeToScene();
         } else {
-            /*
+
             //TODO: to create a cashier scene
             //for cashier user interface
             enableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
@@ -218,7 +218,8 @@ public class LogInStage {
             stage.setResizable(true);
             stage.setScene(new Scene(new VBox(new JFXButton("Implement this")), 300, 300));
             stage.sizeToScene();
-            */
+
+            /*
             //for testing only
             if (isFirstTimeCashier) {
                 //set objects
@@ -230,6 +231,7 @@ public class LogInStage {
                 } );
                 isFirstTimeCashier = false;
             }
+            */
 
         }
     }
