@@ -13,103 +13,82 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="600.0" minWidth="1100.0" prefHeight="650.0" prefWidth="1100.0" style="-fx-scale-z: 5;"
-            xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="fahamu.UserInteface.CashierUiScene">
+<AnchorPane minHeight="600.0" minWidth="1100.0" prefHeight="650.0" prefWidth="1100.0" style="-fx-scale-z: 5;" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fahamu.UserInteface.CashierUiScene">
     <children>
-        <MenuBar layoutY="7.0" prefHeight="30.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0"
-                 AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <MenuBar layoutY="7.0" prefHeight="30.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Close"/>
-                        <MenuItem mnemonicParsing="false" text="Log"/>
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem mnemonicParsing="false" text="Log" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Account">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Log Out"/>
-                        <MenuItem mnemonicParsing="false" text="Profile"/>
+                        <MenuItem mnemonicParsing="false" text="Log Out" />
+                        <MenuItem mnemonicParsing="false" text="Profile" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Delete"/>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="View">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Full Screen"/>
-                        <MenuItem mnemonicParsing="false" text="V-A-S"/>
+                        <MenuItem mnemonicParsing="false" text="Full Screen" />
+                        <MenuItem mnemonicParsing="false" text="V-A-S" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About"/>
+                        <MenuItem mnemonicParsing="false" text="About" />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
-        <AnchorPane layoutX="-2.0" layoutY="31.0" prefHeight="569.0" prefWidth="363.0" AnchorPane.bottomAnchor="0.0"
-                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="30.0">
+        <AnchorPane layoutX="-2.0" layoutY="31.0" prefHeight="569.0" prefWidth="363.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="737.0" AnchorPane.topAnchor="30.0">
             <children>
-                <AnchorPane layoutX="1.0" layoutY="6.0" prefHeight="293.0" prefWidth="363.0" AnchorPane.leftAnchor="0.0"
-                            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <AnchorPane layoutX="1.0" layoutY="6.0" prefHeight="293.0" prefWidth="363.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <Label layoutX="135.0" text="CASH SALE">
                             <font>
-                                <Font size="16.0"/>
+                                <Font size="16.0" />
                             </font>
                         </Label>
                         <Label layoutX="15.0" layoutY="26.0" text="Product Name">
                             <font>
-                                <Font size="14.0"/>
+                                <Font size="14.0" />
                             </font>
                         </Label>
-                        <JFXComboBox layoutX="140.0" layoutY="22.0" prefHeight="26.0" prefWidth="208.0"/>
-                        <Label layoutX="15.0" layoutY="52.0" prefHeight="26.0" prefWidth="33.0" text="Shelf"/>
-                        <Label layoutX="15.0" layoutY="84.0" prefHeight="26.0" prefWidth="106.0"
-                               text="Remain In Stock"/>
-                        <Label layoutX="15.0" layoutY="116.0" prefHeight="26.0" prefWidth="99.0"
-                               text="Price/Unit(TZS)"/>
-                        <Label layoutX="15.0" layoutY="151.0" prefHeight="26.0" prefWidth="77.0" text="WholeSale"/>
-                        <JFXToggleButton layoutX="128.0" layoutY="131.0" prefHeight="0.0" prefWidth="77.0" text=" "/>
-                        <Label layoutX="15.0" layoutY="176.0" prefHeight="26.0" prefWidth="100.0"
-                               text="Quantity(Units)"/>
-                        <JFXTextField layoutX="140.0" layoutY="173.0" prefHeight="26.0" prefWidth="201.0"/>
-                        <Label layoutX="15.0" layoutY="206.0" prefHeight="26.0" prefWidth="100.0" text="Discount(TZS)"/>
-                        <JFXTextField layoutX="140.0" layoutY="204.0" prefHeight="26.0" prefWidth="201.0"/>
-                        <JFXBadge layoutX="141.0" layoutY="53.0" prefHeight="26.0" prefWidth="201.0"
-                                  style="-fx-background-color: green;"/>
-                        <JFXBadge layoutX="141.0" layoutY="83.0" prefHeight="26.0" prefWidth="201.0"
-                                  style="-fx-background-color: green;"/>
-                        <JFXBadge layoutX="141.0" layoutY="113.0" prefHeight="26.0" prefWidth="201.0"
-                                  style="-fx-background-color: green;"/>
-                        <JFXBadge layoutX="141.0" layoutY="239.0" prefHeight="26.0" prefWidth="201.0"
-                                  style="-fx-background-color: green;"/>
-                        <Label layoutX="15.0" layoutY="242.0" prefHeight="20.0" prefWidth="93.0" text="Amount(TZS)"/>
-                        <JFXButton fx:id="addToCartJFXButton" buttonType="RAISED" layoutX="15.0" layoutY="271.0" prefHeight="26.0"
-                                   prefWidth="123.0" style="-fx-background-color: green;" text="Add To Cart"
-                                   textFill="WHITE"/>
-                        <JFXButton buttonType="RAISED" cancelButton="true" layoutX="141.0" layoutY="271.0"
-                                   prefHeight="26.0" prefWidth="106.0" style="-fx-background-color: red;"
-                                   text="Cancel Order" textFill="WHITE"/>
+                        <JFXComboBox layoutX="140.0" layoutY="22.0" prefHeight="26.0" prefWidth="208.0" />
+                        <Label layoutX="15.0" layoutY="52.0" prefHeight="26.0" prefWidth="33.0" text="Shelf" />
+                        <Label layoutX="15.0" layoutY="84.0" prefHeight="26.0" prefWidth="106.0" text="Remain In Stock" />
+                        <Label layoutX="15.0" layoutY="116.0" prefHeight="26.0" prefWidth="99.0" text="Price/Unit(TZS)" />
+                        <Label layoutX="15.0" layoutY="151.0" prefHeight="26.0" prefWidth="77.0" text="WholeSale" />
+                        <JFXToggleButton layoutX="128.0" layoutY="131.0" prefHeight="0.0" prefWidth="77.0" text=" " />
+                        <Label layoutX="15.0" layoutY="176.0" prefHeight="26.0" prefWidth="100.0" text="Quantity(Units)" />
+                        <JFXTextField layoutX="140.0" layoutY="173.0" prefHeight="26.0" prefWidth="201.0" />
+                        <Label layoutX="15.0" layoutY="206.0" prefHeight="26.0" prefWidth="100.0" text="Discount(TZS)" />
+                        <JFXTextField layoutX="140.0" layoutY="204.0" prefHeight="26.0" prefWidth="201.0" />
+                        <JFXBadge layoutX="141.0" layoutY="53.0" prefHeight="26.0" prefWidth="201.0" style="-fx-background-color: green;" />
+                        <JFXBadge layoutX="141.0" layoutY="83.0" prefHeight="26.0" prefWidth="201.0" style="-fx-background-color: green;" />
+                        <JFXBadge layoutX="141.0" layoutY="113.0" prefHeight="26.0" prefWidth="201.0" style="-fx-background-color: green;" />
+                        <JFXBadge layoutX="141.0" layoutY="239.0" prefHeight="26.0" prefWidth="201.0" style="-fx-background-color: green;" />
+                        <Label layoutX="15.0" layoutY="242.0" prefHeight="20.0" prefWidth="93.0" text="Amount(TZS)" />
+                        <JFXButton fx:id="addToCartJFXButton" buttonType="RAISED" layoutX="15.0" layoutY="271.0" prefHeight="26.0" prefWidth="123.0" style="-fx-background-color: green;" text="Add To Cart" textFill="WHITE" />
+                        <JFXButton buttonType="RAISED" cancelButton="true" layoutX="141.0" layoutY="271.0" prefHeight="26.0" prefWidth="106.0" style="-fx-background-color: red;" text="Cancel Order" textFill="WHITE" />
                     </children>
                 </AnchorPane>
-                <AnchorPane layoutY="303.0" prefHeight="317.0" prefWidth="363.0" style="-fx-background-color: #e5e5e5;"
-                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+                <AnchorPane layoutY="303.0" prefHeight="317.0" prefWidth="363.0" style="-fx-background-color: #e5e5e5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="303.0">
                     <children>
-                        <Label layoutX="14.0" layoutY="6.0" prefHeight="26.0" prefWidth="92.0" text="Total Bill(TZS)"/>
-                        <Label layoutX="14.0" layoutY="38.0" prefHeight="26.0" prefWidth="95.0" text="Received(TZS)"/>
-                        <Label layoutX="14.0" layoutY="66.0" prefHeight="26.0" prefWidth="86.0" text="Change(TZS)"/>
-                        <JFXBadge layoutX="143.0" layoutY="6.0" prefHeight="26.0" prefWidth="201.0"
-                                  style="-fx-background-color: green;"/>
-                        <JFXTextField layoutX="143.0" layoutY="35.0" prefHeight="26.0" prefWidth="201.0"/>
-                        <JFXBadge layoutX="143.0" layoutY="67.0" prefHeight="26.0" prefWidth="201.0"
-                                  style="-fx-background-color: green;"/>
-                        <JFXTreeTableView layoutX="2.0" layoutY="99.0" prefHeight="179.0" prefWidth="347.0"
-                                          AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="8.0"
-                                          AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="99.0"/>
+                        <Label layoutX="14.0" layoutY="6.0" prefHeight="26.0" prefWidth="92.0" text="Total Bill(TZS)" />
+                        <Label layoutX="14.0" layoutY="38.0" prefHeight="26.0" prefWidth="95.0" text="Received(TZS)" />
+                        <Label layoutX="14.0" layoutY="66.0" prefHeight="26.0" prefWidth="86.0" text="Change(TZS)" />
+                        <JFXBadge layoutX="143.0" layoutY="6.0" prefHeight="26.0" prefWidth="201.0" style="-fx-background-color: green;" />
+                        <JFXTextField layoutX="143.0" layoutY="35.0" prefHeight="26.0" prefWidth="201.0" />
+                        <JFXBadge layoutX="143.0" layoutY="67.0" prefHeight="26.0" prefWidth="201.0" style="-fx-background-color: green;" />
+                        <JFXTreeTableView layoutX="2.0" layoutY="99.0" prefHeight="179.0" prefWidth="347.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="99.0" />
                     </children>
                 </AnchorPane>
             </children>
