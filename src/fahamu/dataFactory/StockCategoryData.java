@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.NumberFormat;
 
-import static fahamu.UserInteface.LogInStage.*;
 import static fahamu.UserInteface.Main.serverDetail;
 
 public class StockCategoryData {

@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
 
 public class CashierUiScene {
 
@@ -25,6 +26,7 @@ public class CashierUiScene {
     public JFXTreeTableView billJFXTreeTable;
     public JFXBadge totalBillJFXBadge;
     public JFXTextField receivedCashJFXTextField;
+    public StackPane parentStackPane;
 
     @FXML
     public void initialize(){

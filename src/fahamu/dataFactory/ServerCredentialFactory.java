@@ -8,22 +8,13 @@ import java.sql.*;
 import java.util.HashMap;
 
 public class ServerCredentialFactory {
-    //a map contain detail of a server from sqlite file
-    public HashMap<String, String> serverDetail;
-    private FileEncrypt fileEncrypt;
 
     /**
      * this initialize create object to decrypt a file
      * and then call the method to read data from sqlite file
-     *
-     * @param path=location of encrypted sqlite file which contain server Credential
-     */
-    public ServerCredentialFactory(String path) {
+    */
+    public ServerCredentialFactory() {
 
-        //initialize file encrypt class
-        fileEncrypt = new FileEncrypt();
-        //call encrypt file method
-        getServerCredential(path);
     }
 
     /**
@@ -31,9 +22,10 @@ public class ServerCredentialFactory {
      * from encrypted sqlite file.
      * @param path=location of the sqlite file which contain server detail and its encrypted
      */
-    private void getServerCredential(String path) {
+    public HashMap<String, String> getServerCredential(String path) {
 
-        serverDetail = new HashMap<>();
+        HashMap<String, String> serverDetail = new HashMap<>();
+        FileEncrypt fileEncrypt=new FileEncrypt();
         //mysql connection object
         Connection connection = null;
 
@@ -43,10 +35,8 @@ public class ServerCredentialFactory {
         try {
             File inputFile = new File(path);
             decryptedFile = File.createTempFile("serverCredential", ".db");
-
             //dataPath is the temporary folder hold sqlite file which contain severCredential
             dataPath = decryptedFile.getPath();
-
             fileEncrypt.decrypt(FileEncrypt.KEY, inputFile, decryptedFile);
 
 
@@ -75,6 +65,7 @@ public class ServerCredentialFactory {
                 e.printStackTrace();
             }
         }
+        return serverDetail;
     }
 
 }

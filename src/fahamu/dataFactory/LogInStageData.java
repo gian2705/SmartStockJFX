@@ -9,8 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static fahamu.UserInteface.Main.serverDetail;
-public class LogInStageData {
+public class LogInStageData extends BaseDataClass{
 
     private static MysqlDataSource mysqlDataSource;
     private static Connection connection;

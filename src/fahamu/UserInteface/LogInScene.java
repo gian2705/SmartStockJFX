@@ -1,25 +1,29 @@
 package fahamu.UserInteface;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXSnackbar;
-import com.jfoenix.controls.JFXSpinner;
+import com.jfoenix.controls.*;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import fahamu.dataFactory.LogInStageData;
 import fahamu.dataFactory.ServerCredentialFactory;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -27,7 +31,13 @@ import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class LogInStage {
+public class LogInScene extends BaseUIComponents {
+
+    private final String ADMIN = "admin";
+    private final String CASHIER = "cashier";
+    //for test only
+    private boolean isFirstTimeCashier = true;
+    private SalesCategoryUI salesCategoryUICashier;
 
     @FXML
     public AnchorPane rootPane;
@@ -47,13 +57,8 @@ public class LogInStage {
     public JFXSpinner progressIndicator;
     @FXML
     public AnchorPane profileImagePane;
-
-    private final String ADMIN = "admin";
-    private final String CASHIER = "cashier";
-
-    //for test only
-    private boolean isFirstTimeCashier=true;
-    private SalesCategoryUI salesCategoryUICashier;
+    @FXML
+    public StackPane parentStackPane;
 
 
     @FXML
@@ -164,7 +169,7 @@ public class LogInStage {
 
         Task<String> task = new Task<>() {
             @Override
-            protected String call() throws Exception {
+            protected String call() {
                 //updateProgress(-1F, 1);
                 //authenticate user
                 String user = authenticateUser(username, password);
@@ -177,7 +182,7 @@ public class LogInStage {
             }
         };
         task.setOnSucceeded(event -> {
-            changeScene(task, (Stage) rootPane.getScene().getWindow());
+            changeScene(task, (Stage) parentStackPane.getScene().getWindow());
         });
 
         task.setOnFailed(event -> {
@@ -187,14 +192,16 @@ public class LogInStage {
         task.setOnCancelled(event -> {
             enableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
             disableProgressIndicator(progressIndicator);
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Username is not available or password is incorrect");
-            alert.showAndWait();
+            alertCreator("Error", "Trouble log In",
+                    "Username is not available or password is incorrect\n" +
+                    "Check your credential and try again", parentStackPane,
+                    new ImageView(getClass().getResource("data/manicon.png").toExternalForm()));
+            passwordField.clear();
         });
-
         //±p.progressProperty().bind(task.progressProperty());
         new Thread(task).start();
     }
+
 
     private void changeScene(Task<String> task, Stage stage) {
         if (task.getValue().equals(ADMIN)) {
@@ -206,10 +213,10 @@ public class LogInStage {
                 //set objects
 
                 salesCategoryUICashier = new SalesCategoryUI(false);
-                Platform.runLater(() ->{
+                Platform.runLater(() -> {
                     new MainStage(MainStage.CASHIER_UI, salesCategoryUICashier);
                     MainStage.stageUser.show();
-                } );
+                });
                 isFirstTimeCashier = false;
             }
         } else {

@@ -1,67 +1,42 @@
 package fahamu.UserInteface;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
-import fahamu.dataFactory.ServerCredentialFactory;
+import fahamu.dataFactory.BaseDataClass;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.HashMap;
 
 
 public class Main extends Application {
 
-    public static String currentUserName;
-    public static HashMap<String, String> serverDetail;
-
-    private boolean serverReachable;
-    private byte[] serverIPv4Address;
+    //public static String currentUserName;
 
     private String BUSINESS_NAME = "STOCK MANAGER"; //default name
     private Scene sceneMain;
-    private String serverCredentialFilePath;
-
 
     @Override
-    public void init() throws Exception {
+    public void init() {
         //TODO: initialize all user data when application ready to roll out
         BUSINESS_NAME = "Lb Pharmacy";
-        serverIPv4Address = new byte[]{(byte) 192, (byte) 168, 0, 2};
-        serverCredentialFilePath = "data/serverCredential.db.encrypted";
+        byte[] serverIPv4Address = new byte[]{(byte) 192, (byte) 168, 0, 2};
+        String serverCredentialFilePath = "data/serverCredential.db.encrypted";
+        BaseDataClass baseDataClass=new BaseDataClass();
 
         //run in background service to check if server is reachable
         Task<Void> task = new Task<>() {
             @Override
-            protected Void call() throws Exception {
-                mysqlServerCheck(serverIPv4Address);
+            protected Void call() {
+                baseDataClass.mysqlServerCheck(serverIPv4Address,serverCredentialFilePath);
                 return null;
             }
         };
         task.setOnSucceeded(event -> {
-            if (!serverReachable) {
-                Platform.runLater(() -> {
-
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setContentText("Database server at IP :" + serverDetail.get("serverAddress") +
-                            " \nIts not available, configure your database server.\n" +
-                            "Possible troubleshoot:" +
-                            "\n1.Make sure you are connected \n" +
-                            "2.Check if your wifi is on or cable is function\n" +
-                            "3.Check if server is up and running");
-                    alert.showAndWait();
-                });
-            }
+            baseDataClass.showDataBaseErrorDialog(new BaseUIComponents(), (StackPane) sceneMain.getRoot());
         });
         new Thread(task).start();
     }
@@ -85,94 +60,6 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
-    private void mysqlServerCheck(byte[] serverIPv4Address) {
-        if (getServerCredential(serverCredentialFilePath)) {
-            //TODO: implementation needed if server is reachable, the address of server is to be replaced
-            //check if server is reachable
-            serverReachable = checkServerReachable(serverIPv4Address);
-        } else {
-            //TODO: if it fails to get a credential of a server
-            serverReachable = false;
-        }
-    }
-
-    /**
-     * this method is used for development only
-     * during production must be changed to fit the general requirement
-     *
-     * @param path=path of encrypted file
-     * @return true if successfully get the server credential
-     */
-    private boolean getServerCredential(String path) {
-
-        //get server credential from encrypted file
-        String credentialFilePath = this.getClass().getResource(path).getFile();
-        //get server credential details
-        try {
-
-            //get the server credential just before show login interface
-            ServerCredentialFactory serverCredentialFactory = new ServerCredentialFactory(credentialFilePath);
-            serverDetail = serverCredentialFactory.serverDetail;
-            return true;
-
-        } catch (Throwable e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    /**
-     * check a server on the give IPv4 address if its reachable, if not it check
-     * for local host too.
-     *
-     * @param serverIp=byte array of the server IPv4 address
-     * @return true if its reachable on the given IP or local host and
-     * false if no mysql server available in a given IPv4 address and local host
-     */
-    private boolean checkServerReachable(byte[] serverIp) {
-        //this boolean check if the server is reachable
-        boolean serverReachable;
-        try {
-            //
-            InetAddress inetAddress = InetAddress.getByAddress(serverIp);
-            boolean reachable = inetAddress.isReachable(1000);
-
-            if (!reachable) {
-                //boolean check for availability of local server
-                //check availability of local databases
-                MysqlDataSource mysqlDataSource = new MysqlDataSource();
-                mysqlDataSource.setUser(serverDetail.get("username"));
-                mysqlDataSource.setPassword(serverDetail.get("password"));
-                mysqlDataSource.setServerName("localhost");
-
-                Connection connection = null;
-                try {
-                    connection = mysqlDataSource.getConnection();
-
-                    //if connection success, change a server address to local
-                    serverReachable = true;
-                    serverDetail.remove("serverAddress");
-                    serverDetail.put("serverAddress", "localhost");
-
-                } catch (SQLException e) {
-                    serverReachable = false;
-                } finally {
-                    if (connection != null) try {
-                        connection.close();
-                    } catch (SQLException ignore) {
-                    }
-                }
-
-            } else serverReachable = true;
-        } catch (IOException e) {
-            serverReachable = false;
-            e.printStackTrace();
-        }
-
-        return serverReachable;
-    }
-
 
     /*
     private void setLogInUI() {
