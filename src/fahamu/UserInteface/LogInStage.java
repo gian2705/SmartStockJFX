@@ -192,7 +192,7 @@ public class LogInStage {
             alert.showAndWait();
         });
 
-        //p.progressProperty().bind(task.progressProperty());
+        //±p.progressProperty().bind(task.progressProperty());
         new Thread(task).start();
     }
 
@@ -200,27 +200,6 @@ public class LogInStage {
         if (task.getValue().equals(ADMIN)) {
             //for admin user interface
             //TODO: to create admin scene
-            enableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
-            disableProgressIndicator(progressIndicator);
-            AnchorPane pane = new AnchorPane();
-            try {
-                pane = FXMLLoader.load(getClass().getResource("fxmls/reset.fxml"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            stage.setResizable(true);
-            stage.setScene(new Scene(pane));
-            stage.sizeToScene();
-        } else {
-
-            //TODO: to create a cashier scene
-            /*for cashier user interface
-            enableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
-            disableProgressIndicator(progressIndicator);
-            stage.setResizable(true);
-            stage.setScene(new Scene(new VBox(new JFXButton("Implement this")), 300, 300));
-            stage.sizeToScene();
-            */
 
             //for testing only
             if (isFirstTimeCashier) {
@@ -233,7 +212,21 @@ public class LogInStage {
                 } );
                 isFirstTimeCashier = false;
             }
+        } else {
 
+            //TODO: to create a cashier scene
+            enableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
+            disableProgressIndicator(progressIndicator);
+            AnchorPane pane = new AnchorPane();
+            try {
+                pane = FXMLLoader.load(getClass().getResource("fxmls/cashierUi.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            stage.setResizable(true);
+            stage.setScene(new Scene(pane));
+            stage.sizeToScene();
+            stage.centerOnScreen();
         }
     }
 }
