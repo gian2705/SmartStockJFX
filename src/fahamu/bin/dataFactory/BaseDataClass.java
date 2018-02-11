@@ -1,7 +1,7 @@
-package fahamu.dataFactory;
+package fahamu.bin.dataFactory;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-import fahamu.UserInteface.BaseUIComponents;
+import fahamu.bin.Ui.BaseUIComponents;
 import javafx.application.Platform;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -21,6 +21,7 @@ public class BaseDataClass {
     public BaseDataClass(){
 
     }
+
     public void mysqlServerCheck(byte[] serverIPv4Address,String dataPath) {
         if (getServerCredential(dataPath)) {
             //TODO: implementation needed if server is reachable, the address of server is to be replaced
@@ -35,17 +36,11 @@ public class BaseDataClass {
     /**
      * this method is used for development only
      * during production must be changed to fit the general requirement
-     *
-     * @param path=path of encrypted file
+     * @param credentialFilePath=path of encrypted file
      * @return true if successfully get the server credential
      */
-    private boolean getServerCredential(String path) {
-
-        //get server credential from encrypted file
-        String credentialFilePath = this.getClass().getResource(path).getFile();
-        //get server credential details
+    private boolean getServerCredential(String credentialFilePath) {
         try {
-
             //get the server credential just before show login interface
             serverCredentialFactory = new ServerCredentialFactory();
             serverDetail = serverCredentialFactory.getServerCredential(credentialFilePath);
@@ -118,7 +113,7 @@ public class BaseDataClass {
                             "\n1.Make sure you are connected \n" +
                             "2.Check if your wifi is on or cable is connected\n" +
                             "3.Check if server is up and running", parentPane
-                    , new ImageView(getClass().getResource("data/databaseIcon.png").toExternalForm())));
+                    , new ImageView(getClass().getResource("resources/databaseIcon.png").toExternalForm())));
         }
     }
 

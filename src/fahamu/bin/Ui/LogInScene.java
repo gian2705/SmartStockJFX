@@ -1,13 +1,9 @@
-package fahamu.UserInteface;
+package fahamu.bin.Ui;
 
 import com.jfoenix.controls.*;
-import com.mysql.cj.jdbc.MysqlDataSource;
-import fahamu.dataFactory.LogInStageData;
-import fahamu.dataFactory.ServerCredentialFactory;
+import fahamu.bin.dataFactory.LogInStageData;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,18 +13,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.InetAddress;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public class LogInScene extends BaseUIComponents {
@@ -64,8 +54,8 @@ public class LogInScene extends BaseUIComponents {
     @FXML
     public void initialize() {
         // to be moved to constructor
-        Image imageLogo = new Image(this.getClass().getResource("data/lbLogo.jpg").toExternalForm());
-        Image brulImage = new Image(this.getClass().getResource("data/calculate.jpg").toExternalForm());
+        Image imageLogo = new Image(this.getClass().getResource("resources/lbLogo.jpg").toExternalForm());
+        Image brulImage = new Image(this.getClass().getResource("resources/calculate.jpg").toExternalForm());
         logoRectangle.setFill(new ImagePattern(imageLogo));
         rectangleImage.setFill(new ImagePattern(brulImage));
     }
@@ -195,7 +185,7 @@ public class LogInScene extends BaseUIComponents {
             alertCreator("Error", "Trouble log In",
                     "Username is not available or password is incorrect\n" +
                     "Check your credential and try again", parentStackPane,
-                    new ImageView(getClass().getResource("data/manicon.png").toExternalForm()));
+                    new ImageView(getClass().getResource("resources/manicon.png").toExternalForm()));
             passwordField.clear();
         });
         //±p.progressProperty().bind(task.progressProperty());
@@ -226,7 +216,7 @@ public class LogInScene extends BaseUIComponents {
             disableProgressIndicator(progressIndicator);
             AnchorPane pane = new AnchorPane();
             try {
-                pane = FXMLLoader.load(getClass().getResource("fxmls/cashierUi.fxml"));
+                pane = FXMLLoader.load(getClass().getResource("../resources/fxmls/cashierUi.fxml"));
             } catch (IOException e) {
                 e.printStackTrace();
             }

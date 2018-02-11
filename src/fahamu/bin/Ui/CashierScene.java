@@ -1,4 +1,4 @@
-package fahamu.UserInteface;
+package fahamu.bin.Ui;
 
 import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 
-public class CashierUiScene {
+public class CashierScene {
 
     @FXML
     public JFXButton addToCartJFXButton;
@@ -30,7 +30,7 @@ public class CashierUiScene {
 
     @FXML
     public void initialize(){
-        addToCartJFXButton.setGraphic(new ImageView(getClass().getResource("data/cart.png").toExternalForm()));
+        addToCartJFXButton.setGraphic(new ImageView(getClass().getResource("resources/cart.png").toExternalForm()));
     }
 
     public void enterButtonPressed(KeyEvent keyEvent) {

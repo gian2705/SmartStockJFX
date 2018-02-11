@@ -1,9 +1,9 @@
-package fahamu.dataFactory;
+package fahamu.bin.dataFactory;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-import fahamu.UserInteface.PurchaseCategoryUI;
-import fahamu.UserInteface.ReportsCategoryUI;
-import fahamu.UserInteface.SalesCategoryUI;
+import fahamu.bin.Ui.PurchaseCategoryUI;
+import fahamu.bin.Ui.ReportsCategoryUI;
+import fahamu.bin.Ui.SalesCategoryUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -14,9 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.NumberFormat;
 
-import static fahamu.UserInteface.Main.serverDetail;
-
-public class PurchaseCategoryData {
+public class PurchaseCategoryData extends BaseDataClass {
 
     //**********private fields*************//
     private static String localhost;
@@ -100,7 +98,7 @@ public class PurchaseCategoryData {
         }
     }
 
-    //insert data into cash purchase table
+    //insert resources into cash purchase table
     public static void insertDataIntoCashPurchase(
             String date,
             String receipt,
@@ -162,7 +160,7 @@ public class PurchaseCategoryData {
         }
     }
 
-    //insert data into credit purchase table
+    //insert resources into credit purchase table
     public static void insertDataIntoCreditPurchase(
             String date,
             String due,

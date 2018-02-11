@@ -1,8 +1,8 @@
-package fahamu.UserInteface;
+package fahamu.bin.Ui;
 
-import fahamu.dataFactory.PurchaseCategoryData;
-import fahamu.dataFactory.ReportCategoryData;
-import fahamu.dataFactory.SaleCategoryData;
+import fahamu.bin.dataFactory.PurchaseCategoryData;
+import fahamu.bin.dataFactory.ReportCategoryData;
+import fahamu.bin.dataFactory.SaleCategoryData;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -302,7 +302,7 @@ public class ReportsCategoryUI {
 
         /*
         the following code populate the gross profit table view
-        and with the data of the last week
+        and with the resources of the last week
          */
         grossProfitTableView.setItems(ReportCategoryData.getGrossProfitReportTableData(lastWeek, today));
 
@@ -792,7 +792,7 @@ public class ReportsCategoryUI {
 
         /*
         the following code populate the gross profit graph
-        and with the data of the last week
+        and with the resources of the last week
          */
         ObservableList<XYChart.Series> series = ReportCategoryData.getGrossProfitReportGraphData(lastWeek, today);
         salesGraph.getData().clear();
@@ -919,7 +919,7 @@ public class ReportsCategoryUI {
             });
         } else {
             try {
-                //disable the button to avoid multiple press which will cause a multiple load of data
+                //disable the button to avoid multiple press which will cause a multiple load of resources
                 refreshButtonGrossProfit.setDisable(true);
 
                 LocalDate fromDatePickerValue = fromDatePickerGrossProfit.getValue();

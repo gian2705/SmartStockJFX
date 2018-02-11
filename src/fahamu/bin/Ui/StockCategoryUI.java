@@ -1,9 +1,10 @@
-package fahamu.UserInteface;
+package fahamu.bin.Ui;
 
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-import fahamu.dataFactory.PurchaseCategoryData;
-import fahamu.dataFactory.StockCategoryData;
+import fahamu.bin.dataFactory.BaseDataClass;
+import fahamu.bin.dataFactory.PurchaseCategoryData;
+import fahamu.bin.dataFactory.StockCategoryData;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -22,9 +23,8 @@ import javafx.stage.Popup;
 import java.io.File;
 import java.sql.*;
 
-import static fahamu.UserInteface.Main.serverDetail;
 
-public class StockCategoryUI {
+public class StockCategoryUI extends BaseDataClass {
 
     //this is the list of all the current stock updated
 
@@ -50,7 +50,7 @@ public class StockCategoryUI {
 
     GridPane setNewStockUI() {
 
-        //data input controls components
+        //resources input controls components
         Label zeroStockLabel = new Label("Zero Stock :");
         Label reorderStockLabel = new Label("Reorder Stock :");
         Label expiredStockLabel = new Label("Expired Stock :");
@@ -854,7 +854,7 @@ public class StockCategoryUI {
 
     GridPane setUpdateStockUI() {
         //array contain the quick reports
-        //data input controls components
+        //resources input controls components
         Label zeroStockLabel = new Label("Zero Stock :");
         Label reorderStockLabel = new Label("Reorder Stock :");
         Label expiredStockLabel = new Label("Expired Stock :");
@@ -905,7 +905,7 @@ public class StockCategoryUI {
 
         supplierChooser.setMinWidth(146);
         supplierChooser.setItems(PurchaseCategoryData.getSuppliers());
-        //its contents already added to the new Stock UI
+        //its contents already added to the new Stock Ui
         categoryChooser.setItems(categoryList);
         unitChooser.setItems(unitList);
         categoryChooser.setEditable(true);
@@ -2165,7 +2165,7 @@ public class StockCategoryUI {
                 String category = productCategory.getText().trim();
                 //hide the popup
                 popupAddCategory.hide();
-                //insert data into table and create a new supplier table
+                //insert resources into table and create a new supplier table
                 StockCategoryData.insertProductCategory(category);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setContentText("Successful");
@@ -2323,7 +2323,7 @@ public class StockCategoryUI {
                 String unit = productUnit.getText().trim();
                 //hide the popup
                 popupAddUnit.hide();
-                //insert data into table and create a new supplier table
+                //insert resources into table and create a new supplier table
                 StockCategoryData.insertProductUnit(unit);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setContentText("Successful");

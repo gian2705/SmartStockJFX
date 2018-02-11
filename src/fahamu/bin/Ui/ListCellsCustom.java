@@ -1,4 +1,4 @@
-package fahamu.UserInteface;
+package fahamu.bin.Ui;
 
 import javafx.application.Platform;
 import javafx.scene.control.ListCell;

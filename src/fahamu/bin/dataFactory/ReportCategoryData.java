@@ -1,7 +1,7 @@
-package fahamu.dataFactory;
+package fahamu.bin.dataFactory;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-import fahamu.UserInteface.ReportsCategoryUI;
+import fahamu.bin.Ui.ReportsCategoryUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
@@ -14,10 +14,9 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static fahamu.UserInteface.Main.serverDetail;
-import static fahamu.UserInteface.StockCategoryUI.categoryList;
+import static fahamu.bin.Ui.StockCategoryUI.categoryList;
 
-public class ReportCategoryData {
+public class ReportCategoryData extends BaseDataClass{
 
     private static String localhost;
     private static MysqlDataSource mysqlDataSource;
@@ -59,8 +58,8 @@ public class ReportCategoryData {
             }
 
             /*
-            get all categories from stock data.
-            this call populate categoryList static variable with data
+            get all categories from stock resources.
+            this call populate categoryList static variable with resources
              */
             categoryList.clear();
             StockCategoryData.getAllCategories();
@@ -160,7 +159,7 @@ public class ReportCategoryData {
                 }
 
                 /*
-                populate the table with data
+                populate the table with resources
                 */
 
 
@@ -211,8 +210,8 @@ public class ReportCategoryData {
             }
 
             /*
-            get all categories from stock data.
-            this call populate categoryList static variable with data
+            get all categories from stock resources.
+            this call populate categoryList static variable with resources
              */
             categoryList.clear();
             StockCategoryData.getAllCategories();
@@ -305,7 +304,7 @@ public class ReportCategoryData {
                 }
 
                 /*
-                populate the table with data
+                populate the table with resources
                 */
                 String totalSale = NumberFormat.getInstance().format(totalCashSale);
                 String profitTotal = NumberFormat.getInstance().format(profit);

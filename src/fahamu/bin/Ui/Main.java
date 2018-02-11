@@ -1,6 +1,6 @@
-package fahamu.UserInteface;
+package fahamu.bin.Ui;
 
-import fahamu.dataFactory.BaseDataClass;
+import fahamu.bin.dataFactory.BaseDataClass;
 import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +9,11 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 
 public class Main extends Application {
@@ -18,13 +22,14 @@ public class Main extends Application {
 
     private String BUSINESS_NAME = "STOCK MANAGER"; //default name
     private Scene sceneMain;
+    public static String currentUserName;
 
     @Override
     public void init() {
-        //TODO: initialize all user data when application ready to roll out
+        //TODO: initialize all user resources when application ready to roll out
         BUSINESS_NAME = "Lb Pharmacy";
         byte[] serverIPv4Address = new byte[]{(byte) 192, (byte) 168, 0, 2};
-        String serverCredentialFilePath = "data/serverCredential.db.encrypted";
+        String serverCredentialFilePath = "resources/serverCredential.db.encrypted";
         BaseDataClass baseDataClass=new BaseDataClass();
 
         //run in background service to check if server is reachable
@@ -44,7 +49,14 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         //set scene
-        URL location = Main.this.getClass().getResource("fxmls/loginStage.fxml");
+        String pwd = getClass().getResource("Main.class").getPath();
+        Path parentDir= Paths.get(pwd).getParent().getParent().getParent();
+        URL location=null;
+        try {
+            location = new URL(parentDir.toAbsolutePath()+"/resources/fxmls/loginStage.fxml");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         FXMLLoader loader = new FXMLLoader(location);
         try {
             sceneMain = new Scene(loader.load());

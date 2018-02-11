@@ -1,7 +1,7 @@
-package fahamu.UserInteface;
+package fahamu.bin.Ui;
 
-import fahamu.dataFactory.PurchaseCategoryData;
-import fahamu.dataFactory.StockCategoryData;
+import fahamu.bin.dataFactory.PurchaseCategoryData;
+import fahamu.bin.dataFactory.StockCategoryData;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -368,7 +368,7 @@ public class PurchaseCategoryUI {
                 supplierChooser.getSelectionModel().select(supplier);
                 invoiceChooser.getSelectionModel().select(invoice);
 
-                //load data into the detail invoice table view
+                //load resources into the detail invoice table view
                 invoiceDetailTable.setItems(PurchaseCategoryData.getCreditInvoiceDetail(invoice, supplier));
                 String total = NumberFormat.getInstance().format(PurchaseCategoryData.amountOfCreditInvoice);
                 invoiceDetailTitleLabel.setText(total + " TZS");
@@ -390,7 +390,7 @@ public class PurchaseCategoryUI {
                 } else invoiceChooser.setItems(PurchaseCategoryData.getDueInvoices(supplier));
             }
         });
-        //implement load data button
+        //implement load resources button
         loadDataButton.setOnAction(event -> {
             if (supplierChooser.getSelectionModel().isEmpty()) {
                 supplierChooser.requestFocus();
@@ -449,7 +449,7 @@ public class PurchaseCategoryUI {
         return dueInvoiceUI;
     }
 
-    //set credit purchase UI
+    //set credit purchase Ui
     GridPane setCreditPurchaseUI() {
 
         Label purchaseTitle = new Label("CREDIT PURCHASE");
@@ -595,7 +595,7 @@ public class PurchaseCategoryUI {
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
 
-        //data input panel
+        //resources input panel
         GridPane dataInputGridPane = new GridPane();
         dataInputGridPane.setVgap(4);
         ColumnConstraints inputCol0 = new ColumnConstraints(150);
@@ -656,7 +656,7 @@ public class PurchaseCategoryUI {
         dataInputGridPane.add(expireLabel, 0, 16);
         dataInputGridPane.add(dateOfExpire, 1, 16);
 
-        //put data input pane into vbox pane
+        //put resources input pane into vbox pane
         VBox dataInputPaneVBox = new VBox();
         HBox savePaneHBox = new HBox();
         savePaneHBox.setSpacing(90);
@@ -1643,7 +1643,7 @@ public class PurchaseCategoryUI {
                     StockCategoryData.updateWholeQuantityOfProduct(product, wQuantity);
                     StockCategoryData.updateWholeSalePrice(product, wSell);
 
-                    //insert data into credit purchase
+                    //insert resources into credit purchase
                     String date;
                     if (dateOfPurchase.getValue().getDayOfMonth() < 0) {
                         int day = dateOfPurchase.getValue().getDayOfMonth();
@@ -1666,7 +1666,7 @@ public class PurchaseCategoryUI {
                     int quantity1 = Integer.parseInt(quantityTextField.getText());
                     float purchase1 = Float.parseFloat(purchaseTextField.getText());
                     float amount = quantity1 * purchase1;
-                    //insert data into databases
+                    //insert resources into databases
                     PurchaseCategoryData.insertDataIntoCreditPurchase(
                             date,
                             dueDate,
@@ -1685,7 +1685,7 @@ public class PurchaseCategoryUI {
                     float sum = PurchaseCategoryData.getAmountOfCurrentCreditPurchase(date, invoice, supplier);
                     totalAmountTextField.setText(NumberFormat.getInstance().format(sum) + " TZS");
 
-                    //insert data into current purchase preview table
+                    //insert resources into current purchase preview table
                     purchaseListTableView.getItems().add(new CreditPurchaseList(
                             date,
                             dueDate,
@@ -1780,7 +1780,7 @@ public class PurchaseCategoryUI {
                             StockCategoryData.updateWholeQuantityOfProduct(product, wQuantity);
                             StockCategoryData.updateWholeSalePrice(product, wSell);
 
-                            //insert data into credit purchase
+                            //insert resources into credit purchase
                             String date;
                             if (dateOfPurchase.getValue().getDayOfMonth() < 0) {
                                 int day = dateOfPurchase.getValue().getDayOfMonth();
@@ -1820,7 +1820,7 @@ public class PurchaseCategoryUI {
                             float sum = PurchaseCategoryData.getAmountOfCurrentCreditPurchase(date, invoice, supplier);
                             totalAmountTextField.setText(NumberFormat.getInstance().format(sum) + " TZS");
 
-                            //insert data into current purchase preview table
+                            //insert resources into current purchase preview table
                             purchaseListTableView.getItems().add(new CreditPurchaseList(
                                     date,
                                     dueDate,
@@ -1864,7 +1864,7 @@ public class PurchaseCategoryUI {
         return creditPurchaseUI;
     }
 
-    //cash purchase UI
+    //cash purchase Ui
     GridPane setCashPurchaseUI() {
 
         Label purchaseTitle = new Label("CASH PURCHASE");
@@ -2008,7 +2008,7 @@ public class PurchaseCategoryUI {
         totalAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
 
 
-        //data input panel
+        //resources input panel
         GridPane dataInputGridPane = new GridPane();
         dataInputGridPane.setVgap(4);
         ColumnConstraints inputCol0 = new ColumnConstraints(150);
@@ -2067,7 +2067,7 @@ public class PurchaseCategoryUI {
         dataInputGridPane.add(expireLabel, 0, 15);
         dataInputGridPane.add(dateOfExpire, 1, 15);
 
-        //put data input pane into v box pane
+        //put resources input pane into v box pane
         VBox dataInputPaneVBox = new VBox();
         HBox savePaneHBox = new HBox();
         savePaneHBox.setSpacing(90);
@@ -3330,7 +3330,7 @@ public class PurchaseCategoryUI {
                     StockCategoryData.updateWholeSalePrice(product, wSell);
 
 
-                    //insert data into cash purchase
+                    //insert resources into cash purchase
                     String date;
                     if (dateOfPurchase.getValue().getDayOfMonth() < 0) {
                         int day = dateOfPurchase.getValue().getDayOfMonth();
@@ -3369,7 +3369,7 @@ public class PurchaseCategoryUI {
                     float sum = PurchaseCategoryData.getAmountOfCurrentCashPurchase(date, receipt, supplier);
                     totalAmountTextField.setText(NumberFormat.getInstance().format(sum) + " TZS");
 
-                    //insert data into current purchase preview table
+                    //insert resources into current purchase preview table
                     purchaseListsData.add(new CashPurchaseList(
                             date,
                             receipt,
@@ -3459,7 +3459,7 @@ public class PurchaseCategoryUI {
                             StockCategoryData.updateWholeSalePrice(product, wSell);
 
 
-                            //insert data into cash purchase
+                            //insert resources into cash purchase
                             String date;
                             if (dateOfPurchase.getValue().getDayOfMonth() < 0) {
                                 int day = dateOfPurchase.getValue().getDayOfMonth();
@@ -3498,7 +3498,7 @@ public class PurchaseCategoryUI {
                             float sum = PurchaseCategoryData.getAmountOfCurrentCashPurchase(date, receipt, supplier);
                             totalAmountTextField.setText(NumberFormat.getInstance().format(sum) + " TZS");
 
-                            //insert data into current purchase preview table
+                            //insert resources into current purchase preview table
                             purchaseListsData.add(new CashPurchaseList(
                                     date,
                                     receipt,
@@ -3623,7 +3623,7 @@ public class PurchaseCategoryUI {
             //hide the popup
             popup.hide();
 
-            //insert data into table and create a new supplier table
+            //insert resources into table and create a new supplier table
             PurchaseCategoryData.addSupplierInfo(supplierName, supplierAddress, shopLocation, contacts);
 
         });
@@ -3766,7 +3766,7 @@ public class PurchaseCategoryUI {
                 //hide the popup
                 popupAddReceipt.hide();
                 receipTextField.clear();
-                //insert data into table and create a new supplier table
+                //insert resources into table and create a new supplier table
                 PurchaseCategoryData.insertReceipt(receipt);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setContentText("Successful");
@@ -3918,7 +3918,7 @@ public class PurchaseCategoryUI {
                 //hide the popup
                 invoiceTextField.clear();
                 popupAddInvoice.hide();
-                //insert data into table and create a new supplier table
+                //insert resources into table and create a new supplier table
                 System.out.println(invoice);
                 PurchaseCategoryData.insertInvoice(invoice);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -4008,7 +4008,7 @@ public class PurchaseCategoryUI {
         });
     }
 
-    //cash purchase data model
+    //cash purchase resources model
     public static class CashPurchaseList {
         private final SimpleStringProperty date;
         private final SimpleStringProperty invoice;
@@ -4113,7 +4113,7 @@ public class PurchaseCategoryUI {
         }
     }
 
-    //credit purchase data model
+    //credit purchase resources model
     public static class CreditPurchaseList {
         private final SimpleStringProperty date;
         private final SimpleStringProperty due;
@@ -4283,7 +4283,7 @@ public class PurchaseCategoryUI {
         }
     }
 
-    //detail of invoice data model
+    //detail of invoice resources model
     public static class InvoiceDetail {
 
         private final SimpleStringProperty product;

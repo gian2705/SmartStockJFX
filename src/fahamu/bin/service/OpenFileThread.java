@@ -1,4 +1,4 @@
-package fahamu.service;
+package fahamu.bin.service;
 
 import java.awt.*;
 import java.io.IOException;

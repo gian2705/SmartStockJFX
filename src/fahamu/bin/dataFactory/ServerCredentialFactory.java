@@ -1,4 +1,5 @@
-package fahamu.dataFactory;
+package fahamu.bin.dataFactory;
+
 
 import com.fahamu.tech.FileEncrypt;
 
@@ -11,7 +12,7 @@ public class ServerCredentialFactory {
 
     /**
      * this initialize create object to decrypt a file
-     * and then call the method to read data from sqlite file
+     * and then call the method to read resources from sqlite file
     */
     public ServerCredentialFactory() {
 

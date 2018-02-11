@@ -1,7 +1,7 @@
-package fahamu.service;
+package fahamu.bin.service;
 
-//import static fahamu.UserInteface.Main.password;
-//import static fahamu.UserInteface.Main.username;
+//import static fahamu.bin.Ui.Main.password;
+//import static fahamu.bin.Ui.Main.username;
 
 public class ServerReachableWatch implements Runnable {
     /**

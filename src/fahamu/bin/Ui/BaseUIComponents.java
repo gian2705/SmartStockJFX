@@ -1,4 +1,4 @@
-package fahamu.UserInteface;
+package fahamu.bin.Ui;
 
 
 import com.jfoenix.controls.JFXButton;

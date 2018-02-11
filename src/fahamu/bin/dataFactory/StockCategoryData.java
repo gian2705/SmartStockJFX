@@ -1,8 +1,8 @@
-package fahamu.dataFactory;
+package fahamu.bin.dataFactory;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-import fahamu.UserInteface.SalesCategoryUI;
-import fahamu.UserInteface.StockCategoryUI;
+import fahamu.bin.Ui.SalesCategoryUI;
+import fahamu.bin.Ui.StockCategoryUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -12,9 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.NumberFormat;
 
-import static fahamu.UserInteface.Main.serverDetail;
 
-public class StockCategoryData {
+public class StockCategoryData extends BaseDataClass {
 
     //the selling price of the specific product
     public static float sellPrice;
@@ -1080,7 +1079,7 @@ public class StockCategoryData {
 
             Statement statement = connection.createStatement();
 
-            //fetch data
+            //fetch resources
             String zeroStock = "SELECT count(product) FROM stockdata.retailStock where quantity=0";
             String reorder = "SELECT count(product) FROM stockdata.retailStock where quantity<=reorder";
             String expired = "SELECT count(product) FROM stockdata.retailStock where expire<=curdate()";

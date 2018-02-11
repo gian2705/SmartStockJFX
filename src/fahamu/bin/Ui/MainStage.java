@@ -1,7 +1,7 @@
-package fahamu.UserInteface;
+package fahamu.bin.Ui;
 
-import fahamu.dataFactory.LogInStageData;
-import fahamu.dataFactory.StockCategoryData;
+import fahamu.bin.dataFactory.LogInStageData;
+import fahamu.bin.dataFactory.StockCategoryData;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -98,7 +98,7 @@ class MainStage {
             }
             case 2: {
                 stageUser = new Stage();
-                //set main task UI
+                //set main task Ui
                 setCashierTaskUI();
                 //set menu bar
                 setMenuNode(CASHIER_UI);
@@ -396,12 +396,12 @@ class MainStage {
         });
         stockNav.setOnMouseClicked(event -> {
             //open new stock section
-            //change only once the task UI
+            //change only once the task Ui
             int index = rootAdmin.getChildren().size();
 
             for (int i = 0; i < index; i++) {
                 Node node = rootAdmin.getChildren().get(i);
-                //avoid repetition of removing the same task UI
+                //avoid repetition of removing the same task Ui
                 if (node.getId().equals("new_stock")) {
 
                     break;
@@ -423,11 +423,11 @@ class MainStage {
             }
         });
         purchaseNav.setOnMouseClicked(event -> {
-            //change only once the task UI
+            //change only once the task Ui
             int index = rootAdmin.getChildren().size();
             for (int i = 0; i < index; i++) {
                 Node node = rootAdmin.getChildren().get(i);
-                //avoid repetition of removing the same task UI
+                //avoid repetition of removing the same task Ui
                 if (node.getId().equals("cash_purchase")) {
                     //break the loop
                     break;
@@ -449,11 +449,11 @@ class MainStage {
             }
         });
         expensesNav.setOnMouseClicked(event -> {
-            //change only once the task UI
+            //change only once the task Ui
             int index = rootAdmin.getChildren().size();
             for (int i = 0; i < index; i++) {
                 Node node = rootAdmin.getChildren().get(i);
-                //avoid repetition of removing the same task UI
+                //avoid repetition of removing the same task Ui
                 if (node.getId().equals("new_expenditure")) {
                     //break the loop
                     break;
@@ -554,12 +554,12 @@ class MainStage {
         });
         //call new stock activity
         newStock.setOnAction(event -> {
-            //change only once the task UI
+            //change only once the task Ui
             int index = rootAdmin.getChildren().size();
 
             for (int i = 0; i < index; i++) {
                 Node node = rootAdmin.getChildren().get(i);
-                //avoid repetition of removing the same task UI
+                //avoid repetition of removing the same task Ui
                 if (node.getId().equals("new_stock")) {
 
                     break;
@@ -582,11 +582,11 @@ class MainStage {
         });
         //call update stock activity
         updateStock.setOnAction(event -> {
-            //change only once the task UI
+            //change only once the task Ui
             int index = rootAdmin.getChildren().size();
             for (int i = 0; i < index; i++) {
                 Node node = rootAdmin.getChildren().get(i);
-                //avoid repetition of removing the same task UI
+                //avoid repetition of removing the same task Ui
                 if (node.getId().equals("update_stock")) {
 
                     break;
@@ -609,11 +609,11 @@ class MainStage {
         });
         //implementing purchase category
         cashPurchase.setOnAction(event -> {
-            //change only once the task UI
+            //change only once the task Ui
             int index = rootAdmin.getChildren().size();
             for (int i = 0; i < index; i++) {
                 Node node = rootAdmin.getChildren().get(i);
-                //avoid repetition of removing the same task UI
+                //avoid repetition of removing the same task Ui
                 if (node.getId().equals("cash_purchase")) {
                     //break the loop
                     break;
@@ -635,11 +635,11 @@ class MainStage {
             }
         });
         creditPurchase.setOnAction(event -> {
-            //change only once the task UI
+            //change only once the task Ui
             int index = rootAdmin.getChildren().size();
             for (int i = 0; i < index; i++) {
                 Node node = rootAdmin.getChildren().get(i);
-                //avoid repetition of removing the same task UI
+                //avoid repetition of removing the same task Ui
                 if (node.getId().equals("credit_purchase")) {
                     //break the loop
                     break;
@@ -661,11 +661,11 @@ class MainStage {
             }
         });
         dueInvoice.setOnAction(event -> {
-            //change only once the task UI
+            //change only once the task Ui
             int index = rootAdmin.getChildren().size();
             for (int i = 0; i < index; i++) {
                 Node node = rootAdmin.getChildren().get(i);
-                //avoid repetition of removing the same task UI
+                //avoid repetition of removing the same task Ui
                 if (node.getId().equals("due_invoice")) {
                     //break the loop
                     break;
@@ -692,11 +692,11 @@ class MainStage {
         //implement expenditure category buttons
         addExpensesCategories.setOnAction(event -> ExpenditureCategoryUI.popup.show(stageAdmin));
         officeExpenditure.setOnAction(event -> {
-            //change only once the task UI
+            //change only once the task Ui
             int index = rootAdmin.getChildren().size();
             for (int i = 0; i < index; i++) {
                 Node node = rootAdmin.getChildren().get(i);
-                //avoid repetition of removing the same task UI
+                //avoid repetition of removing the same task Ui
                 if (node.getId().equals("new_expenditure")) {
                     //break the loop
                     break;
@@ -743,7 +743,7 @@ class MainStage {
 
 
     private void setHomeUIDashboard() {
-        //set the home task UI
+        //set the home task Ui
         homeUIDashboard = new TabPane();
         homeUIDashboard.setId("dashboard");
         Tab tab = new Tab("Q.Sale Reports");
@@ -1143,11 +1143,11 @@ class MainStage {
     }
 
     private void openCashSaleCategory() {
-        //change only once the task UI
+        //change only once the task Ui
         int index = rootAdmin.getChildren().size();
         for (int i = 0; i < index; i++) {
             Node node = rootAdmin.getChildren().get(i);
-            //avoid repetition of removing the same task UI
+            //avoid repetition of removing the same task Ui
             if (node.getId().equals("cash_sale")) {
 
                 //break the loop to avoid repetition

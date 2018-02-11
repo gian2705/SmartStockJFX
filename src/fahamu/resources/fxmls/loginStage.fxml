@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 
 
-<StackPane fx:id="parentStackPane" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fahamu.UserInteface.LogInScene">
+<StackPane fx:id="parentStackPane" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fahamu.bin.Ui.LogInScene">
    <children>
       <AnchorPane fx:id="rootPane" prefHeight="450.0" prefWidth="723.0">
           <children>

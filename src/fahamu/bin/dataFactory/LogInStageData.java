@@ -1,4 +1,4 @@
-package fahamu.dataFactory;
+package fahamu.bin.dataFactory;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import javafx.collections.FXCollections;

@@ -1,7 +1,7 @@
-package fahamu.UserInteface;
+package fahamu.bin.Ui;
 
-import fahamu.dataFactory.SaleCategoryData;
-import fahamu.dataFactory.StockCategoryData;
+import fahamu.bin.dataFactory.SaleCategoryData;
+import fahamu.bin.dataFactory.StockCategoryData;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -787,7 +787,7 @@ public class SalesCategoryUI {
             }
         });
 
-        //delete the input data
+        //delete the input resources
         cancelCashSaleButton.setOnMouseClicked(event -> {
             productNameChooser.getSelectionModel().clearSelection();
             receivedTextField.clear();
@@ -855,7 +855,7 @@ public class SalesCategoryUI {
                         float amount1 = (Integer.parseInt(quantityTextField.getText()) * StockCategoryData.wSellPrice)
                                 - Integer.parseInt(discountTextField.getText());
 
-                        //add data to the columns of bill table
+                        //add resources to the columns of bill table
                         billData.add(
                                 new CashSaleTableBill(product, quantity, discount, amount1)
                         );
@@ -924,7 +924,7 @@ public class SalesCategoryUI {
                         float amount1 = (Integer.parseInt(quantityTextField.getText()) * StockCategoryData.sellPrice)
                                 - Integer.parseInt(discountTextField.getText());
 
-                        //add data to the columns of bill table
+                        //add resources to the columns of bill table
                         billData.add(
                                 new CashSaleTableBill(product, quantity, discount, amount1)
                         );
@@ -1012,7 +1012,7 @@ public class SalesCategoryUI {
                                 float amount1 = (Integer.parseInt(quantityTextField.getText()) * StockCategoryData.wSellPrice)
                                         - Integer.parseInt(discountTextField.getText());
 
-                                //add data to the columns of bill table
+                                //add resources to the columns of bill table
                                 billData.add(
                                         new CashSaleTableBill(product, quantity, discount, amount1)
                                 );
@@ -1083,7 +1083,7 @@ public class SalesCategoryUI {
                                         * StockCategoryData.sellPrice)
                                         - Integer.parseInt(discountTextField.getText());
 
-                                //add data to the columns of bill table
+                                //add resources to the columns of bill table
                                 billData.add(
                                         new CashSaleTableBill(product, quantity, discount, amount1)
                                 );
@@ -1200,10 +1200,10 @@ public class SalesCategoryUI {
                     long timeInMillis = Calendar.getInstance().getTimeInMillis();
                     Date date1 = new Date(timeInMillis);
 
-                    //get the user input the data
+                    //get the user input the resources
                     user = Main.currentUserName;
 
-                    //add data to all sale of the day table
+                    //add resources to all sale of the day table
                     tableViewSalesOfDay.getItems().add(
                             new CashSaleOfDay(
                                     date1.toString(),
@@ -1214,7 +1214,7 @@ public class SalesCategoryUI {
                             )
                     );
 
-                    //add data to tra table sale of the day
+                    //add resources to tra table sale of the day
                     if (id.equals("n/n")) {
                         tableViewSaleTraOfDay.getItems().add(
                                 new CashTraSaleOfDay(
@@ -1227,7 +1227,7 @@ public class SalesCategoryUI {
                         );
                     }
 
-                    //add data to database
+                    //add resources to database
                     SaleCategoryData.insertData(
                             id,
                             product,

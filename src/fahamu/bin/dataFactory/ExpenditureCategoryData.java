@@ -1,7 +1,7 @@
-package fahamu.dataFactory;
+package fahamu.bin.dataFactory;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-import fahamu.UserInteface.ExpenditureCategoryUI;
+import fahamu.bin.Ui.ExpenditureCategoryUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -10,9 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static fahamu.UserInteface.Main.serverDetail;
-
-public class ExpenditureCategoryData {
+public class ExpenditureCategoryData extends BaseDataClass{
 
     private static String localhost;
     private static MysqlDataSource mysqlDataSource;
@@ -102,7 +100,7 @@ public class ExpenditureCategoryData {
 
     }
 
-    //insert expenditure data
+    //insert expenditure resources
     public static void insertExpenditureData(String date, String name, String description, String user, float amount) {
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);

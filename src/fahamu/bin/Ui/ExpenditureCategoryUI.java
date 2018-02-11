@@ -1,6 +1,6 @@
-package fahamu.UserInteface;
+package fahamu.bin.Ui;
 
-import fahamu.dataFactory.ExpenditureCategoryData;
+import fahamu.bin.dataFactory.ExpenditureCategoryData;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -25,7 +25,7 @@ public class ExpenditureCategoryUI {
         setNewExpenditureUI();
     }
 
-    //new expenditure UI
+    //new expenditure Ui
     private static void setNewExpenditureUI() {
 
         //input control
@@ -155,7 +155,7 @@ public class ExpenditureCategoryUI {
                     throw new IllegalArgumentException("Illegal input");
                 }
 
-                //insert data into expenses table
+                //insert resources into expenses table
                 String date = datePicker.getValue().getYear()
                         + "-" + datePicker.getValue().getMonthValue()
                         + "-" + datePicker.getValue().getDayOfMonth();
@@ -258,7 +258,7 @@ public class ExpenditureCategoryUI {
                 String expenditure = expenditureNameTextField.getText().trim();
                 //hide the popup
                 popup.hide();
-                //insert data into table and create a new supplier table
+                //insert resources into table and create a new supplier table
                 ExpenditureCategoryData.insertNewCategory(expenditure);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setContentText("Successful");
@@ -273,7 +273,7 @@ public class ExpenditureCategoryUI {
 
     }
 
-    //expenses data model
+    //expenses resources model
     public static class ExpensesList {
         private final SimpleStringProperty date;
         private final SimpleStringProperty name;
