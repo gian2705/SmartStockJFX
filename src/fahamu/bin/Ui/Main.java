@@ -4,13 +4,16 @@ import fahamu.bin.dataFactory.BaseDataClass;
 import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -29,7 +32,9 @@ public class Main extends Application {
         //TODO: initialize all user resources when application ready to roll out
         BUSINESS_NAME = "Lb Pharmacy";
         byte[] serverIPv4Address = new byte[]{(byte) 192, (byte) 168, 0, 2};
-        String serverCredentialFilePath = "resources/serverCredential.db.encrypted";
+        String serverCredentialFilePath = getClass().
+                getResource("../resources/sqlite3/serverCredential.db.encrypted").
+                toExternalForm().replace("file:","");
         BaseDataClass baseDataClass=new BaseDataClass();
 
         //run in background service to check if server is reachable
@@ -49,21 +54,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         //set scene
-        String pwd = getClass().getResource("Main.class").getPath();
-        Path parentDir= Paths.get(pwd).getParent().getParent().getParent();
-        
-        URL location=null;
+        Parent root= null;
         try {
-            location = new URL(parentDir.toAbsolutePath()+"/resources/fxmls/loginStage.fxml");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        FXMLLoader loader = new FXMLLoader(location);
-        try {
-            sceneMain = new Scene(loader.load());
+            root = FXMLLoader.load(getClass().getResource("../resources/fxmls/loginUi.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        sceneMain = new Scene(root);
         primaryStage.setScene(sceneMain);
         primaryStage.setResizable(false);
         primaryStage.setTitle(BUSINESS_NAME);

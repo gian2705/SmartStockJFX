@@ -113,7 +113,7 @@ public class BaseDataClass {
                             "\n1.Make sure you are connected \n" +
                             "2.Check if your wifi is on or cable is connected\n" +
                             "3.Check if server is up and running", parentPane
-                    , new ImageView(getClass().getResource("resources/databaseIcon.png").toExternalForm())));
+                    , new ImageView(getClass().getResource("../resources/image/databaseIcon.png").toExternalForm())));
         }
     }
 

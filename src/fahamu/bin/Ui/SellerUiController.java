@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -14,7 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.StackPane;
 
-public class CashierScene {
+public class SellerUiController {
 
     @FXML
     public JFXButton addToCartJFXButton;
@@ -47,14 +48,20 @@ public class CashierScene {
     public JFXTreeTableView allSaleJFXTreeTableView;
 
     @FXML
-    public void initialize(){
-        addToCartJFXButton.setGraphic(new ImageView(getClass().getResource("resources/cart.png").toExternalForm()));
+    public void initialize() {
+        addToCartJFXButton.setGraphic(
+                new ImageView(getClass().getResource("../resources/image/cart.png").toExternalForm()));
     }
 
     public void enterButtonPressed(KeyEvent keyEvent) {
+
     }
 
     public void changeToWholeSale(ActionEvent actionEvent) {
+        tJFXToggleButton.setAlignment(Pos.TOP_LEFT);
+        if (wholesaleJFXToggleButton.isSelected())wholesaleJFXToggleButton.setText("Whole Sale");
+        else wholesaleJFXToggleButton.setText("          ");
+        actionEvent.consume();
     }
 
     public void displayProductsResults(KeyEvent keyEvent) {
@@ -73,6 +80,11 @@ public class CashierScene {
     }
 
     public void changeBillMode(ActionEvent actionEvent) {
+        if (tJFXToggleButton.isSelected()){
+            tJFXToggleButton.setText("n/n");
+        }
+        else tJFXToggleButton.setText("   ");
+        actionEvent.consume();
     }
 
     public void setFullScreen(ActionEvent actionEvent) {

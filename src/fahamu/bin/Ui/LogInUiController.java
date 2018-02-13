@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -21,7 +22,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class LogInScene extends BaseUIComponents {
+public class LogInUiController extends BaseUIComponents {
 
     private final String ADMIN = "admin";
     private final String CASHIER = "cashier";
@@ -54,8 +55,8 @@ public class LogInScene extends BaseUIComponents {
     @FXML
     public void initialize() {
         // to be moved to constructor
-        Image imageLogo = new Image(this.getClass().getResource("resources/lbLogo.jpg").toExternalForm());
-        Image brulImage = new Image(this.getClass().getResource("resources/calculate.jpg").toExternalForm());
+        Image imageLogo = new Image(this.getClass().getResource("../resources/image/lbLogo.jpg").toExternalForm());
+        Image brulImage = new Image(this.getClass().getResource("../resources/image/calculate.jpg").toExternalForm());
         logoRectangle.setFill(new ImagePattern(imageLogo));
         rectangleImage.setFill(new ImagePattern(brulImage));
     }
@@ -185,7 +186,7 @@ public class LogInScene extends BaseUIComponents {
             alertCreator("Error", "Trouble log In",
                     "Username is not available or password is incorrect\n" +
                     "Check your credential and try again", parentStackPane,
-                    new ImageView(getClass().getResource("resources/manicon.png").toExternalForm()));
+                    new ImageView(getClass().getResource("../resources/image/manicon.png").toExternalForm()));
             passwordField.clear();
         });
         //±p.progressProperty().bind(task.progressProperty());
@@ -214,7 +215,7 @@ public class LogInScene extends BaseUIComponents {
             //TODO: to create a cashier scene
             enableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
             disableProgressIndicator(progressIndicator);
-            AnchorPane pane = new AnchorPane();
+            Parent pane=null;
             try {
                 pane = FXMLLoader.load(getClass().getResource("../resources/fxmls/sellerUi.fxml"));
             } catch (IOException e) {
