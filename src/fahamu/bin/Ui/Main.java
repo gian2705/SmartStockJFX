@@ -51,6 +51,7 @@ public class Main extends Application {
         //set scene
         String pwd = getClass().getResource("Main.class").getPath();
         Path parentDir= Paths.get(pwd).getParent().getParent().getParent();
+        
         URL location=null;
         try {
             location = new URL(parentDir.toAbsolutePath()+"/resources/fxmls/loginStage.fxml");
