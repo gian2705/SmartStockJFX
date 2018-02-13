@@ -216,7 +216,7 @@ public class LogInScene extends BaseUIComponents {
             disableProgressIndicator(progressIndicator);
             AnchorPane pane = new AnchorPane();
             try {
-                pane = FXMLLoader.load(getClass().getResource("../resources/fxmls/cashierUi.fxml"));
+                pane = FXMLLoader.load(getClass().getResource("../resources/fxmls/sellerUi.fxml"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
