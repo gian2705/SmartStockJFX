@@ -1,6 +1,7 @@
-package fahamu.bin.Ui;
+package fahamu;
 
-import fahamu.bin.dataFactory.BaseDataClass;
+import fahamu.Ui.BaseUIComponents;
+import fahamu.dataFactory.BaseDataClass;
 import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
@@ -10,13 +11,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 
 public class Main extends Application {
