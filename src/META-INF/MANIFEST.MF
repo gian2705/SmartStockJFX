@@ -1,3 +1,5 @@
 Manifest-Version: 1.0
-Main-Class: fahamu.bin.Ui.Main
+Class-Path: sqlite-jdbc-3.20.1.jar mysql-connector-java-6.0.6.jar File
+ Encryption.jar jfoenix-9.0.1.jar charm-glisten-4.4.1.jar
+Main-Class: fahamu.Main
 
