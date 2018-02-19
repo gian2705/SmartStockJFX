@@ -1,11 +1,25 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="Lb">
+  <artifact type="javafx" name="Lb">
     <output-path>$PROJECT_DIR$/out/artifacts/Lb</output-path>
-    <root id="archive" name="Lb.jar">
-      <element id="module-output" name="StockManager" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/xerial/sqlite-jdbc/3.20.1/sqlite-jdbc-3.20.1.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/src/fahamu/libs/FileEncryption.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/mysql/mysql-connector-java/6.0.6/mysql-connector-java-6.0.6.jar" path-in-jar="/" />
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="fahamu.Main" />
+        <option name="convertCss2Bin" value="true" />
+        <option name="description" value="" />
+        <option name="height" value="650" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="nativeBundle" value="exe" />
+        <option name="title" value="SSM" />
+        <option name="vendor" value="fahamutech" />
+        <option name="version" value="2" />
+        <option name="width" value="1100" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="StockManager.jar">
+        <element id="module-output" name="StockManager" />
+      </element>
+      <element id="dir-copy" path="$PROJECT_DIR$/res" />
     </root>
   </artifact>
 </component>

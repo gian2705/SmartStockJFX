@@ -30,7 +30,6 @@ public class Main extends Application {
                 getResource("../resources/sqlite3/serverCredential.db.encrypted").
                 toExternalForm().replace("file:","");
         BaseDataClass baseDataClass=new BaseDataClass();
-
         //run in background service to check if server is reachable
         Task<Void> task = new Task<>() {
             @Override
@@ -46,14 +45,9 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
         //set scene
-        Parent root= null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("../resources/fxmls/loginUi.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Parent root = FXMLLoader.load(getClass().getResource("../resources/fxmls/loginUi.fxml"));
         sceneMain = new Scene(root);
         primaryStage.setScene(sceneMain);
         primaryStage.setResizable(false);

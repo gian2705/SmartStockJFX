@@ -167,7 +167,8 @@
                                             <columns>
                                                 <TreeTableColumn prefWidth = "143.0" text = "Product"/>
                                                 <TreeTableColumn prefWidth = "74.0" text = "Quantity"/>
-                                                <TreeTableColumn prefWidth = "116.0" text = "Amount(TZS)"/>
+                                                <TreeTableColumn editable = "false" prefWidth = "116.0"
+                                                                 text = "Amount(TZS)"/>
                                             </columns>
                                         </JFXTreeTableView>
                                         <JFXButton fx:id = "submitBillJFXButton" buttonType = "RAISED" layoutX = "-3.0"
