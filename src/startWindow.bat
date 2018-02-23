@@ -1,0 +1,1 @@
+bin\java -jar SSM.jar

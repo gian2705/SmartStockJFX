@@ -24,6 +24,8 @@ public class Main extends Application {
     @Override
     public void init() {
         //TODO: initialize all user resources when application ready to roll out
+        System.out.println(System.getProperty("user.dir"));
+
         BUSINESS_NAME = "Lb Pharmacy";
         byte[] serverIPv4Address = new byte[]{(byte) 192, (byte) 168, 0, 2};
         String serverCredentialFilePath = getClass().
