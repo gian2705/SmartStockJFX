@@ -9,8 +9,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-
-import java.net.MalformedURLException;
+import javafx.scene.layout.StackPane;
 
 public class SellerUiController extends BaseUIComponents {
 
@@ -37,11 +36,12 @@ public class SellerUiController extends BaseUIComponents {
     public MenuItem aboutMenuItem;
     public JFXTreeTableView salesOfDayJFXTreeTableView;
     public JFXTreeTableView allSaleJFXTreeTableView;
+    public StackPane parentPane;
 
     @FXML
-    public void initialize() throws MalformedURLException {
+    public void initialize()  {
         addToCartJFXButton.setGraphic(
-                new ImageView(getResourceAsUrl(rootResourcePath,"image/cart.png").toExternalForm()));
+                new ImageView(getResourceAsUrl("res/image/cart.png").toExternalForm()));
     }
 
     public void enterButtonPressed(KeyEvent keyEvent) {
@@ -98,4 +98,14 @@ public class SellerUiController extends BaseUIComponents {
 
     public void changeSaleTrendMode(ActionEvent actionEvent) {
     }
+
+//    private void onCloseStage(){
+//        parentPane.getScene().getWindow().setOnCloseRequest(new EventHandler<WindowEvent>() {
+//            @Override
+//            public void handle(WindowEvent event) {
+//                event.consume();
+//                System.out.println("Close stoped");
+//            }
+//        });
+//    }
 }

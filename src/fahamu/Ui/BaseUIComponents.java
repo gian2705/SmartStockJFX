@@ -4,13 +4,13 @@ package fahamu.Ui;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
-import fahamu.service.GetResources;
+import fahamu.service.Resources;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
-public class BaseUIComponents extends GetResources {
+public class BaseUIComponents extends Resources {
 
     public BaseUIComponents() {
     }

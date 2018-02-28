@@ -36,7 +36,7 @@ public class LogInStageData extends BaseDataClass{
             String selectQuery = "SELECT password FROM users.loginInfo WHERE name=\'" + user + "\'";
             ResultSet resultSet = statement.executeQuery(selectQuery);
             while (resultSet.next()) {
-                password = resultSet.getString(1);
+                password = resultSet.getString("password");
             }
 
         } finally {

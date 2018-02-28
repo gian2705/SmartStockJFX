@@ -1,7 +1,8 @@
 package fahamu.Ui;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXSnackbar;
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.controls.JFXSpinner;
 import fahamu.dataFactory.LogInStageData;
 import javafx.application.Platform;
@@ -15,150 +16,122 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.sql.SQLException;
 
 public class LogInUiController extends BaseUIComponents {
+
 
     private final String ADMIN = "admin";
     //for test only
     private boolean isFirstTimeCashier = true;
     private SalesCategoryUI salesCategoryUICashier;
 
-    @FXML
-    public AnchorPane rootPane;
-    @FXML
-    public Rectangle logoRectangle;
-    @FXML
-    public TextField usernameField;
-    @FXML
-    public JFXButton logInJFXButton;
-    @FXML
-    public JFXButton forgetPasswordJFXButton;
-    @FXML
-    public PasswordField passwordField;
-    @FXML
+    public JFXDrawersStack drawerStack;
+    public JFXDrawer leftDrawer;
+    public JFXDrawer rightDrawer;
+    public JFXButton testDrawer;
     public Rectangle rectangleImage;
-    @FXML
     public JFXSpinner progressIndicator;
-    @FXML
-    public AnchorPane profileImagePane;
-    @FXML
     public StackPane parentStackPane;
 
 
     @FXML
-    public void initialize() throws MalformedURLException {
+    public void initialize() {
+//        FlowPane content = new FlowPane();
+//        JFXButton leftButton = new JFXButton(LEFT);
+//        JFXButton topButton = new JFXButton(TOP);
+//        JFXButton rightButton = new JFXButton(RIGHT);
+//        JFXButton bottomButton = new JFXButton(BOTTOM);
+//        content.getChildren().addAll(leftButton, topButton, rightButton, bottomButton);
+//        content.setMaxSize(200, 200);
+//
+//
+//        JFXDrawer leftDrawer = new JFXDrawer();
+//        StackPane leftDrawerPane = new StackPane();
+//        leftDrawerPane.getStyleClass().add("red-400");
+//        leftDrawerPane.getChildren().add(new JFXButton("Left Content"));
+//        leftDrawer.setSidePane(leftDrawerPane);
+//        leftDrawer.setDefaultDrawerSize(150);
+//        leftDrawer.setResizeContent(true);
+//        leftDrawer.setOverLayVisible(false);
+//        leftDrawer.setResizableOnDrag(true);
+//
+//
+//        JFXDrawer bottomDrawer = new JFXDrawer();
+//        StackPane bottomDrawerPane = new StackPane();
+//        bottomDrawerPane.getStyleClass().add("deep-purple-400");
+//        bottomDrawerPane.getChildren().add(new JFXButton("Bottom Content"));
+//        bottomDrawer.setDefaultDrawerSize(150);
+//        bottomDrawer.setDirection(JFXDrawer.DrawerDirection.BOTTOM);
+//        bottomDrawer.setSidePane(bottomDrawerPane);
+//        bottomDrawer.setResizeContent(true);
+//        bottomDrawer.setOverLayVisible(false);
+//        bottomDrawer.setResizableOnDrag(true);
+//
+//
+//        JFXDrawer rightDrawer = new JFXDrawer();
+//        StackPane rightDrawerPane = new StackPane();
+//        rightDrawerPane.getStyleClass().add("blue-400");
+//        rightDrawerPane.getChildren().add(new JFXButton("Right Content"));
+//        rightDrawer.setDirection(JFXDrawer.DrawerDirection.RIGHT);
+//        rightDrawer.setDefaultDrawerSize(150);
+//        rightDrawer.setSidePane(rightDrawerPane);
+//        rightDrawer.setOverLayVisible(false);
+//        rightDrawer.setResizableOnDrag(true);
+//
+//
+//        JFXDrawer topDrawer = new JFXDrawer();
+//        StackPane topDrawerPane = new StackPane();
+//        topDrawerPane.getStyleClass().add("green-400");
+//        topDrawerPane.getChildren().add(new JFXButton("Top Content"));
+//        topDrawer.setDirection(JFXDrawer.DrawerDirection.TOP);
+//        topDrawer.setDefaultDrawerSize(150);
+//        topDrawer.setSidePane(topDrawerPane);
+//
+//
+//        drawerStack.setContent(content);
+//        leftDrawer.setId(LEFT);
+//        rightDrawer.setId(RIGHT);
+//        bottomDrawer.setId(BOTTOM);
+//        topDrawer.setId(TOP);
+//
+//        leftButton.addEventHandler(MOUSE_PRESSED, e ->drawerStack.toggle(leftDrawer));
+//        bottomButton.addEventHandler(MOUSE_PRESSED, e ->drawerStack .toggle(bottomDrawer));
+//        rightButton.addEventHandler(MOUSE_PRESSED, e -> drawerStack.toggle(rightDrawer));
+//        topButton.addEventHandler(MOUSE_PRESSED, e -> drawerStack.toggle(topDrawer));
+
         // to be moved to constructor
-        Image imageLogo = new Image(getResourceAsUrl(rootResourcePath,"image/lbLogo.jpg").toExternalForm());
-        Image brulImage = new Image(getResourceAsUrl(rootResourcePath,"image/calculate.jpg").toExternalForm());
-        logoRectangle.setFill(new ImagePattern(imageLogo));
+        Image brulImage = new Image(getResourceAsUrl("res/image/calculate.jpg").toString());
+        Image signUP = new Image(getResourceAsUrl("res/image/googleSign.png").toString());
+
         rectangleImage.setFill(new ImagePattern(brulImage));
-    }
 
-    public void changeLogo() {
-        //TODO: implement change logo method
-    }
-
-    public void keyboardKeyClicked(KeyEvent keyEvent) {
-        if (keyEvent.getCode() == KeyCode.ENTER) {
-            if (usernameField.getText().isEmpty()) usernameField.requestFocus();
-            else if (passwordField.getText().isEmpty()) passwordField.requestFocus();
-            else logIn();
-        } else {
-            if (keyEvent.getCode() == KeyCode.TAB) {
-                if (keyEvent.getSource().equals(usernameField)) {
-                    if (usernameField.getText().isEmpty()) {
-                        usernameField.requestFocus();
-                    } else passwordField.requestFocus();
-                } else if (keyEvent.getSource().equals(passwordField)) {
-                    if (passwordField.getText().isEmpty()) passwordField.requestFocus();
-                    else logIn();
-                }
-            }
-        }
-    }
-
-    public void logIn() {
-        //if (actionEvent != null) actionEvent.consume();
-        if (validateInputs(usernameField, passwordField)) {
-            startBackGroundLogin(usernameField.getText(), passwordField.getText(), progressIndicator);
-        }
-    }
-
-    public void resetPassword() {
-        if (usernameField.getText().isEmpty()) usernameField.requestFocus();
-        else {
-            JFXSnackbar bar = new JFXSnackbar(profileImagePane);
-            bar.enqueue(new JFXSnackbar.SnackbarEvent("Contact Administrator"));
-            bar.getStyleClass().add("-fx-font-size: 16px");
-            passwordField.clear();
-        }
-    }
-
-    private String authenticateUser(String username, String password) {
-        //check if password is correct
         try {
-            if (password.equals(LogInStageData.authenticateUser(username))) {
-                //check type of u
-                String CASHIER = "cashier";
-                if (LogInStageData.getUserType(username).equals(ADMIN)) {
-                    //TODO: call admin scene
-                    return ADMIN;
-                } else if (LogInStageData.getUserType(username).equals(CASHIER)) {
-                    //TODO: call cashier scene
-                    return CASHIER;
-                }
-            }
-        } catch (SQLException e) {
-            //TODO: to print some error message in password or a any snack bar
+
+            leftDrawer.setSidePane((VBox)FXMLLoader
+                    .load(getResourceAsUrl("res/fxmls/logInLeftDrawerContents.fxml")));
+            leftDrawer.setOverLayVisible(false);
+            leftDrawer.setResizableOnDrag(true);
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+
     }
 
-    private boolean validateInputs(TextField usernameField, PasswordField passwordField) {
-        if (usernameField.getText().isEmpty()) {
-            usernameField.requestFocus();
-            return false;
-        } else if (passwordField.getText().isEmpty()) {
-            passwordField.requestFocus();
-            return false;
-        } else return true;
-    }
-
-    private void enableProgressIndicator(ProgressIndicator p) {
-        p.setVisible(true);
-    }
-
-    private void disableProgressIndicator(ProgressIndicator p) {
-        p.setVisible(false);
-    }
-
-    private void disableButtons(JFXButton[] buttons) {
-        for (JFXButton bu :
-                buttons) {
-            bu.setDisable(true);
-        }
-    }
-
-    private void enableButtons(JFXButton[] buttons) {
-        for (JFXButton bu :
-                buttons) {
-            bu.setDisable(false);
-        }
-    }
-
-    private void startBackGroundLogin(String username, String password, ProgressIndicator p) {
+    public void startBackGroundLogin(TextField username,
+                                     PasswordField password,
+                                     ProgressIndicator p,
+                                     JFXButton logInJFXButton,
+                                     JFXButton forgetPasswordJFXButton) {
         //disable buttons and show progress indicator
         disableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
         enableProgressIndicator(progressIndicator);
@@ -168,7 +141,7 @@ public class LogInUiController extends BaseUIComponents {
             protected String call() {
                 //updateProgress(-1F, 1);
                 //authenticate user
-                String user = authenticateUser(username, password);
+                String user = authenticateUser(username.getText(), password.getText());
                 if (user == null) {
                     cancel();
                     return null;
@@ -178,11 +151,7 @@ public class LogInUiController extends BaseUIComponents {
             }
         };
         task.setOnSucceeded(event -> {
-            try {
-                changeScene(task, (Stage) parentStackPane.getScene().getWindow());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            changeScene(task, (Stage) parentStackPane.getScene().getWindow(),logInJFXButton,forgetPasswordJFXButton);
         });
 
         task.setOnFailed(event -> {
@@ -194,16 +163,65 @@ public class LogInUiController extends BaseUIComponents {
             disableProgressIndicator(progressIndicator);
             alertCreator("Error", "Trouble log In",
                     "Username is not available or password is incorrect\n" +
-                    "Check your credential and try again", parentStackPane,
-                    new ImageView(getClass().getResource("../resources/image/manicon.png").toExternalForm()));
-            passwordField.clear();
+                            "Check your credential and try again", parentStackPane,
+                    new ImageView(getResourceAsUrl("/res/image/manicon.png").toExternalForm()));
+            password.clear();
         });
-        //±p.progressProperty().bind(task.progressProperty());
+        //p.progressProperty().bind(task.progressProperty());
         new Thread(task).start();
     }
 
+    private String authenticateUser(String username, String password) {
+        //check if password is correct
+        try {
+            if (password.equals(LogInStageData.authenticateUser(username))) {
+                //check type of u
+                String CASHIER = "cashier";
+                if (LogInStageData.getUserType(username).equals(ADMIN)) {
+                    //TODO: call admin scene
+                    return ADMIN;
+                } else return CASHIER;
+            }
+        } catch (SQLException e) {
+            //TODO: to print some error message in password or a any snack bar
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-    private void changeScene(Task<String> task, Stage stage) throws IOException {
+    private void enableProgressIndicator(ProgressIndicator p) {
+        try {
+            p.setVisible(true);
+        }catch (Throwable ignore){ }
+    }
+
+    private void disableButtons(JFXButton[] buttons) {
+        for (JFXButton bu :
+                buttons) {
+            bu.setDisable(true);
+        }
+    }
+
+    private void disableProgressIndicator(ProgressIndicator p) {
+        try {
+
+            p.setVisible(false);
+        }catch (Throwable ignore){
+
+        }
+    }
+
+    private void enableButtons(JFXButton[] buttons) {
+        for (JFXButton bu :
+                buttons) {
+            bu.setDisable(false);
+        }
+    }
+
+    private void changeScene(Task<String> task,
+                             Stage stage,
+                             JFXButton logInJFXButton,
+                             JFXButton reset) {
         if (task.getValue().equals(ADMIN)) {
             //for admin user interface
             //TODO: to create admin scene
@@ -214,21 +232,32 @@ public class LogInUiController extends BaseUIComponents {
 
                 salesCategoryUICashier = new SalesCategoryUI(false);
                 Platform.runLater(() -> {
-                    new MainStage(MainStage.CASHIER_UI, salesCategoryUICashier);
-                    MainStage.stageUser.show();
+                    new MainStage(MainStage.ADMIN_UI, salesCategoryUICashier);
+                    MainStage.stageAdmin.show();
+                    stage.close();
                 });
                 isFirstTimeCashier = false;
             }
         } else {
             //TODO: to create a cashier scene
-            enableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
+            enableButtons(new JFXButton[]{logInJFXButton,reset });
             disableProgressIndicator(progressIndicator);
-            Parent pane = FXMLLoader.load(getResourceAsUrl(rootResourcePath,"fxmls/sellerUi.fxml"));
+            Parent pane = null;
+            try {
+                pane = FXMLLoader.load(getResourceAsUrl("res/fxmls/sellerUi.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             stage.setResizable(true);
             stage.setScene(new Scene(pane));
             stage.sizeToScene();
             stage.centerOnScreen();
         }
+    }
+
+    public void openDrawer(MouseEvent mouseEvent) {
+        drawerStack.toggle(leftDrawer);
+        leftDrawer.toFront();
     }
 }
 
