@@ -28,7 +28,6 @@ import java.sql.SQLException;
 
 public class LogInUiController extends BaseUIComponents {
 
-
     private final String ADMIN = "admin";
     //for test only
     private boolean isFirstTimeCashier = true;
@@ -161,9 +160,10 @@ public class LogInUiController extends BaseUIComponents {
         task.setOnCancelled(event -> {
             enableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
             disableProgressIndicator(progressIndicator);
+
             alertCreator("Error", "Trouble log In",
                     "Username is not available or password is incorrect\n" +
-                            "Check your credential and try again", parentStackPane,
+                            "Check your credential and try again", logInJFXButton.getScene().getRoot(),
                     new ImageView(getResourceAsUrl("/res/image/manicon.png").toExternalForm()));
             password.clear();
         });
