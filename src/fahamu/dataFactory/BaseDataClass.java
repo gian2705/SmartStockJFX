@@ -2,6 +2,7 @@ package fahamu.dataFactory;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import fahamu.Ui.BaseUIComponents;
+import fahamu.service.Resources;
 import javafx.application.Platform;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -12,10 +13,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-public class BaseDataClass {
+public class BaseDataClass extends Resources{
 
-    private ServerCredentialFactory serverCredentialFactory;
-    public static HashMap<String, String> serverDetail;
+    protected static HashMap<String, String> serverDetail;
     private boolean serverReachable;
 
     public BaseDataClass(){
@@ -42,7 +42,7 @@ public class BaseDataClass {
     private boolean getServerCredential(String credentialFilePath) {
         try {
             //get the server credential just before show login interface
-            serverCredentialFactory = new ServerCredentialFactory();
+            ServerCredentialFactory serverCredentialFactory = new ServerCredentialFactory();
             serverDetail = serverCredentialFactory.getServerCredential(credentialFilePath);
             return true;
 
@@ -112,7 +112,7 @@ public class BaseDataClass {
                             "\n1.Make sure you are connected \n" +
                             "2.Check if your wifi is on or cable is connected\n" +
                             "3.Check if server is up and running", parentPane
-                    , new ImageView(getClass().getResource("../resources/image/databaseIcon.png").toExternalForm())));
+                    , new ImageView(DATABASE_ERROR_ICON.toExternalForm())));
         }
     }
 

@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
-<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.shape.Rectangle?>
-<StackPane fx:id="parentStackPane" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fahamu.Ui.LogInUiController">
+<StackPane fx:id="parentStackPane" prefHeight="450" prefWidth="700" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fahamu.Ui.LogInUiController">
     <children>
-        <Rectangle fx:id="rectangleImage" fill="#2197ff00" height="450.0" stroke="TRANSPARENT" strokeType="INSIDE" width="723.0">
-            <effect>
-                <GaussianBlur radius="18.25" />
-            </effect>
-        </Rectangle>
         <JFXDrawersStack fx:id="drawerStack" prefHeight="450.0" prefWidth="422.0">
             <children>
                 <JFXDrawer fx:id="leftDrawer" defaultDrawerSize="300.0" resizableOnDrag="true" resizeContent="true" />
@@ -18,7 +11,7 @@
                 <JFXDrawer fx:id="rightDrawer" alignment="BOTTOM_RIGHT" direction="RIGHT" />
             </children>
         </JFXDrawersStack>
-          <JFXSpinner fx:id="progressIndicator" prefHeight="181.0" prefWidth="194.0" visible="false" />
+        <JFXSpinner fx:id="progressIndicator" prefHeight="181.0" prefWidth="194.0" visible="false" />
         <JFXButton fx:id="testDrawer" buttonType="RAISED" defaultButton="true" onMouseClicked="#openDrawer" ripplerFill="#2c0101" text="button" />
     </children>
 </StackPane>

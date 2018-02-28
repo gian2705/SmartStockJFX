@@ -26,15 +26,14 @@ public class Main extends Application {
     public void init() {
         //TODO: initialize all user resources when application ready to roll out
         resources = new Resources();
-        resources.rootResourcePath=System.getProperty("user.dir");
+        resources.ROOT_PATH_FOR_RESOURCE=System.getProperty("user.dir"); //get the current working directory
 
         BaseDataClass baseDataClass=new BaseDataClass();
         //run in background service to check if server is reachable
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() {
-                baseDataClass.mysqlServerCheck(resources.serverIPv4Address,
-                        resources.getResourceAsPath("res/sqlite3/serverCredential.db.encrypted").toString());
+                baseDataClass.mysqlServerCheck(resources.SERVER_IPA4_ADDRESS, resources.SERVER_CREDENTIAL_FILE);
                 return null;
             }
         };
@@ -46,12 +45,12 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         //set scene
-        Parent root = FXMLLoader.load(resources.getResourceAsUrl("res/fxmls/loginUi.fxml"));
+        Parent root = FXMLLoader.load(resources.LOG_IN_UI_FXML);
         sceneMain = new Scene(root);
         primaryStage.setScene(sceneMain);
         primaryStage.setResizable(false);
-        primaryStage.setTitle(Resources.BUSINESS_NAME);
-        primaryStage.getIcons().setAll(new Image(resources.getResourceAsUrl("/res/image/ssmlogo.png").toString()));
+        primaryStage.setTitle(resources.BUSINESS_NAME);
+        primaryStage.getIcons().setAll(new Image(resources.ICON.toExternalForm()));
         primaryStage.show();
     }
 

@@ -27,7 +27,7 @@ public class LeftDrawer extends BaseUIComponents{
     @FXML
     public void initialize(){
         logInUiController=new LogInUiController();
-        Image imageLogo = new Image(getResourceAsUrl("res/image/lbLogo.jpg").toString());
+        Image imageLogo = new Image(BUSINESS_LOGO.toExternalForm());
         logoRectangle.setFill(new ImagePattern(imageLogo));
     }
 

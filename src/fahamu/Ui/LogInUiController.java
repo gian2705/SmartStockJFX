@@ -9,17 +9,14 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -28,11 +25,6 @@ import java.sql.SQLException;
 
 public class LogInUiController extends BaseUIComponents {
 
-    private final String ADMIN = "admin";
-    //for test only
-    private boolean isFirstTimeCashier = true;
-    private SalesCategoryUI salesCategoryUICashier;
-
     public JFXDrawersStack drawerStack;
     public JFXDrawer leftDrawer;
     public JFXDrawer rightDrawer;
@@ -40,6 +32,10 @@ public class LogInUiController extends BaseUIComponents {
     public Rectangle rectangleImage;
     public JFXSpinner progressIndicator;
     public StackPane parentStackPane;
+
+    //for test only
+    private boolean isFirstTimeCashier = true;
+    private SalesCategoryUI salesCategoryUICashier;
 
 
     @FXML
@@ -107,18 +103,11 @@ public class LogInUiController extends BaseUIComponents {
 //        rightButton.addEventHandler(MOUSE_PRESSED, e -> drawerStack.toggle(rightDrawer));
 //        topButton.addEventHandler(MOUSE_PRESSED, e -> drawerStack.toggle(topDrawer));
 
-        // to be moved to constructor
-        Image brulImage = new Image(getResourceAsUrl("res/image/calculate.jpg").toString());
-        Image signUP = new Image(getResourceAsUrl("res/image/googleSign.png").toString());
-
-        rectangleImage.setFill(new ImagePattern(brulImage));
-
+        // to be moved to constructo
         try {
 
-            leftDrawer.setSidePane((VBox)FXMLLoader
-                    .load(getResourceAsUrl("res/fxmls/logInLeftDrawerContents.fxml")));
-            leftDrawer.setOverLayVisible(false);
-            leftDrawer.setResizableOnDrag(true);
+            parentStackPane.setStyle("-fx-background-image: url("+BACKGROUND_IMAGE_PATH+")");
+            leftDrawer.setSidePane((VBox)FXMLLoader.load(LEFT_DRAWER_LAYOUT_FXML));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -150,7 +139,7 @@ public class LogInUiController extends BaseUIComponents {
             }
         };
         task.setOnSucceeded(event -> {
-            changeScene(task, (Stage) parentStackPane.getScene().getWindow(),logInJFXButton,forgetPasswordJFXButton);
+            changeScene(task, (Stage) logInJFXButton.getScene().getWindow(),logInJFXButton,forgetPasswordJFXButton);
         });
 
         task.setOnFailed(event -> {
@@ -164,7 +153,7 @@ public class LogInUiController extends BaseUIComponents {
             alertCreator("Error", "Trouble log In",
                     "Username is not available or password is incorrect\n" +
                             "Check your credential and try again", logInJFXButton.getScene().getRoot(),
-                    new ImageView(getResourceAsUrl("/res/image/manicon.png").toExternalForm()));
+                    new ImageView(new Image(WRONG_PASSWORD_ICON.toExternalForm())));
             password.clear();
         });
         //p.progressProperty().bind(task.progressProperty());
@@ -240,24 +229,22 @@ public class LogInUiController extends BaseUIComponents {
             }
         } else {
             //TODO: to create a cashier scene
-            enableButtons(new JFXButton[]{logInJFXButton,reset });
-            disableProgressIndicator(progressIndicator);
-            Parent pane = null;
+
             try {
-                pane = FXMLLoader.load(getResourceAsUrl("res/fxmls/sellerUi.fxml"));
+                enableButtons(new JFXButton[]{logInJFXButton,reset });
+                disableProgressIndicator(progressIndicator);
+                stage.setResizable(true);
+                stage.setScene(new Scene(FXMLLoader.load(SALE_UI_LAYOUT_FXML)));
+                stage.sizeToScene();
+                stage.centerOnScreen();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            stage.setResizable(true);
-            stage.setScene(new Scene(pane));
-            stage.sizeToScene();
-            stage.centerOnScreen();
         }
     }
 
-    public void openDrawer(MouseEvent mouseEvent) {
+    public void openDrawer() {
         drawerStack.toggle(leftDrawer);
-        leftDrawer.toFront();
     }
 }
 
