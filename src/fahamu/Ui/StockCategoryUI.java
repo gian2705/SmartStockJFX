@@ -2,9 +2,9 @@ package fahamu.Ui;
 
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-import fahamu.dataFactory.BaseDataClass;
 import fahamu.dataFactory.PurchaseCategoryData;
 import fahamu.dataFactory.StockCategoryData;
+import fahamu.provider.BaseDataClass;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;

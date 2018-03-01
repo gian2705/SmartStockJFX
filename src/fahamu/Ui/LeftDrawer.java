@@ -1,7 +1,9 @@
 package fahamu.Ui;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXSnackbar;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -14,6 +16,7 @@ import javafx.scene.shape.Rectangle;
 
 public class LeftDrawer extends BaseUIComponents{
 
+    public JFXButton jFXButtonCloseDrawer;
     private LogInUiController logInUiController;
 
     public TextField usernameField;
@@ -82,4 +85,9 @@ public class LeftDrawer extends BaseUIComponents{
         } else return true;
     }
 
+    public void closeDrawer(ActionEvent actionEvent) {
+        JFXButton button= (JFXButton) actionEvent.getSource();
+        JFXDrawer  parent = (JFXDrawer) button.getParent().getParent().getParent().getParent();
+        if (parent.isShown())parent.close();
+    }
 }

@@ -1,4 +1,4 @@
-package fahamu.service;
+package fahamu.provider;
 
 //import static fahamu.Main.password;
 //import static fahamu.Main.username;
@@ -6,7 +6,7 @@ package fahamu.service;
 public class ServerReachableWatch implements Runnable {
     /**
      * This class construct an object which
-     * is the service to watch if database
+     * is the provider to watch if database
      * is reachable when a program is running
      */
 

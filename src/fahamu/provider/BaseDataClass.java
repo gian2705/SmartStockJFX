@@ -1,8 +1,8 @@
-package fahamu.dataFactory;
+package fahamu.provider;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import fahamu.Ui.BaseUIComponents;
-import fahamu.service.Resources;
+import fahamu.dataFactory.ServerCredentialFactory;
 import javafx.application.Platform;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;

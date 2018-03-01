@@ -3,6 +3,7 @@ package fahamu.dataFactory;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import fahamu.Ui.SalesCategoryUI;
 import fahamu.Ui.StockCategoryUI;
+import fahamu.provider.BaseDataClass;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

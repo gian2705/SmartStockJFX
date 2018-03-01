@@ -2,6 +2,7 @@ package fahamu.dataFactory;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import fahamu.Ui.ReportsCategoryUI;
+import fahamu.provider.BaseDataClass;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
@@ -16,7 +17,7 @@ import java.util.HashMap;
 
 import static fahamu.Ui.StockCategoryUI.categoryList;
 
-public class ReportCategoryData extends BaseDataClass{
+public class ReportCategoryData extends BaseDataClass {
 
     private static String localhost;
     private static MysqlDataSource mysqlDataSource;

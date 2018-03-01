@@ -1,8 +1,8 @@
 package fahamu;
 
 import fahamu.Ui.BaseUIComponents;
-import fahamu.dataFactory.BaseDataClass;
-import fahamu.service.Resources;
+import fahamu.provider.BaseDataClass;
+import fahamu.provider.Resources;
 import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
@@ -29,11 +29,12 @@ public class Main extends Application {
         resources.ROOT_PATH_FOR_RESOURCE=System.getProperty("user.dir"); //get the current working directory
 
         BaseDataClass baseDataClass=new BaseDataClass();
-        //run in background service to check if server is reachable
+        //run in background provider to check if server is reachable
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() {
-                baseDataClass.mysqlServerCheck(resources.SERVER_IPA4_ADDRESS, resources.SERVER_CREDENTIAL_FILE);
+                baseDataClass
+                        .mysqlServerCheck(resources.SERVER_IPA4_ADDRESS, resources.SERVER_CREDENTIAL_FILE.toString());
                 return null;
             }
         };

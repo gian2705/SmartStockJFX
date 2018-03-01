@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.controls.JFXSpinner;
+import com.jfoenix.controls.events.JFXDrawerEvent;
 import fahamu.dataFactory.LogInStageData;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -15,9 +16,9 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,8 +29,6 @@ public class LogInUiController extends BaseUIComponents {
     public JFXDrawersStack drawerStack;
     public JFXDrawer leftDrawer;
     public JFXDrawer rightDrawer;
-    public JFXButton testDrawer;
-    public Rectangle rectangleImage;
     public JFXSpinner progressIndicator;
     public StackPane parentStackPane;
 
@@ -103,11 +102,14 @@ public class LogInUiController extends BaseUIComponents {
 //        rightButton.addEventHandler(MOUSE_PRESSED, e -> drawerStack.toggle(rightDrawer));
 //        topButton.addEventHandler(MOUSE_PRESSED, e -> drawerStack.toggle(topDrawer));
 
-        // to be moved to constructo
+        // to be moved to constructor
         try {
-
-            parentStackPane.setStyle("-fx-background-image: url("+BACKGROUND_IMAGE_PATH+")");
-            leftDrawer.setSidePane((VBox)FXMLLoader.load(LEFT_DRAWER_LAYOUT_FXML));
+            assert LOG_IN_DRAWER_STACK_PANE_CONTENT != null;
+            drawerStack.setContent(FXMLLoader.load(LOG_IN_DRAWER_STACK_PANE_CONTENT));
+            assert LOG_IN_BANNER_IMAGE != null;
+            parentStackPane.setStyle("-fx-background-image: url(" + BACKGROUND_IMAGE_PATH + ");");
+            assert LEFT_DRAWER_LAYOUT_FXML != null;
+            leftDrawer.setSidePane((VBox) FXMLLoader.load(LEFT_DRAWER_LAYOUT_FXML));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -138,9 +140,10 @@ public class LogInUiController extends BaseUIComponents {
                 }
             }
         };
-        task.setOnSucceeded(event -> {
-            changeScene(task, (Stage) logInJFXButton.getScene().getWindow(),logInJFXButton,forgetPasswordJFXButton);
-        });
+        task.setOnSucceeded(event ->
+                changeScene(task,
+                        (Stage) logInJFXButton.getScene().getWindow(),
+                        logInJFXButton, forgetPasswordJFXButton));
 
         task.setOnFailed(event -> {
             enableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
@@ -150,6 +153,7 @@ public class LogInUiController extends BaseUIComponents {
             enableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
             disableProgressIndicator(progressIndicator);
 
+            assert WRONG_PASSWORD_ICON != null;
             alertCreator("Error", "Trouble log In",
                     "Username is not available or password is incorrect\n" +
                             "Check your credential and try again", logInJFXButton.getScene().getRoot(),
@@ -181,7 +185,8 @@ public class LogInUiController extends BaseUIComponents {
     private void enableProgressIndicator(ProgressIndicator p) {
         try {
             p.setVisible(true);
-        }catch (Throwable ignore){ }
+        } catch (Throwable ignore) {
+        }
     }
 
     private void disableButtons(JFXButton[] buttons) {
@@ -195,7 +200,7 @@ public class LogInUiController extends BaseUIComponents {
         try {
 
             p.setVisible(false);
-        }catch (Throwable ignore){
+        } catch (Throwable ignore) {
 
         }
     }
@@ -231,9 +236,10 @@ public class LogInUiController extends BaseUIComponents {
             //TODO: to create a cashier scene
 
             try {
-                enableButtons(new JFXButton[]{logInJFXButton,reset });
+                enableButtons(new JFXButton[]{logInJFXButton, reset});
                 disableProgressIndicator(progressIndicator);
                 stage.setResizable(true);
+                assert SALE_UI_LAYOUT_FXML != null;
                 stage.setScene(new Scene(FXMLLoader.load(SALE_UI_LAYOUT_FXML)));
                 stage.sizeToScene();
                 stage.centerOnScreen();
@@ -243,8 +249,22 @@ public class LogInUiController extends BaseUIComponents {
         }
     }
 
-    public void openDrawer() {
-        drawerStack.toggle(leftDrawer);
+    public void translateBannersRight(JFXDrawerEvent jfxDrawerEvent) {
+        JFXDrawersStack parent= (JFXDrawersStack) ((JFXDrawer)jfxDrawerEvent.getSource()).getParent();
+        FlowPane content = (FlowPane) parent.getContent();
+        content.setTranslateX(150f);
+    }
+
+    public void translateBannersCenter(JFXDrawerEvent jfxDrawerEvent) {
+        JFXDrawersStack parent= (JFXDrawersStack) ((JFXDrawer)jfxDrawerEvent.getSource()).getParent();
+        FlowPane content = (FlowPane) parent.getContent();
+        content.setTranslateX(0f);
+    }
+
+    public void translateBannersLeft(JFXDrawerEvent jfxDrawerEvent) {
+        JFXDrawersStack parent= (JFXDrawersStack) ((JFXDrawer)jfxDrawerEvent.getSource()).getParent();
+        FlowPane content = (FlowPane) parent.getContent();
+        content.setTranslateX(-150f);
     }
 }
 

@@ -2,6 +2,7 @@ package fahamu.dataFactory;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import fahamu.Ui.ExpenditureCategoryUI;
+import fahamu.provider.BaseDataClass;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -10,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class ExpenditureCategoryData extends BaseDataClass{
+public class ExpenditureCategoryData extends BaseDataClass {
 
     private static String localhost;
     private static MysqlDataSource mysqlDataSource;

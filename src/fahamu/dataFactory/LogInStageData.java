@@ -1,6 +1,7 @@
 package fahamu.dataFactory;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import fahamu.provider.BaseDataClass;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -9,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class LogInStageData extends BaseDataClass{
+public class LogInStageData extends BaseDataClass {
 
     private static MysqlDataSource mysqlDataSource;
     private static Connection connection;
