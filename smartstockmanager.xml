@@ -282,7 +282,7 @@
                 <patternset refid = "compiler.resources"/>
                 <type type = "file"/>
             </fileset>
-            <fileset dir = "${module.stockmanager.basedir}/res">
+            <fileset dir = "/">
                 <patternset refid = "compiler.resources"/>
                 <type type = "file"/>
             </fileset>
@@ -327,7 +327,7 @@
             <fileset dir = "${stockmanager.output.dir}"/>
         </copy>
         <copy todir = "${artifact.temp.output.StockManager}">
-            <fileset dir = "${basedir}/res"/>
+            <fileset dir = "/"/>
         </copy>
         <fx:fileset id = "all_but_StockManager" dir = "${artifact.temp.output.StockManager}" includes = "**/*.jar">
             <exclude name = "StockManager.jar"/>
