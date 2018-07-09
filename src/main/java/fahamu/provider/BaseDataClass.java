@@ -8,20 +8,80 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
+import java.net.Inet4Address;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-public class BaseDataClass extends Resources{
+public class BaseDataClass extends Resources {
 
     protected static HashMap<String, String> serverDetail;
     private boolean serverReachable;
+    protected static MysqlDataSource mysqlDataSource;
+    protected static final String SERVER_ADDRESS = "serverAddress";
+    protected static final String SERVER_USERNAME = "username";
+    protected static final String SERVER_PASSWORD = "password";
+    protected static final String SERVER_DATABASE = "database";
 
-    public BaseDataClass(){
+    private String serverAddress;
+    private String userName;
+    private String databaseName;
+    private String databasePassword;
+
+//    static {
+//
+//
+//    }
+
+    public BaseDataClass() {
 
     }
 
+    public BaseDataClass(String serverAddress, String username, String password, String database) {
+        this.serverAddress = serverAddress;
+        this.userName = username;
+        this.databasePassword = password;
+        this.databaseName = database;
+
+        //initialize the server detail
+        serverDetail = getDataBaseDetail();
+
+        mysqlDataSource = new MysqlDataSource();
+        mysqlDataSource.setUser(serverDetail.get(SERVER_USERNAME));
+        mysqlDataSource.setPassword(serverDetail.get(SERVER_PASSWORD));
+        mysqlDataSource.setServerName(serverDetail.get(SERVER_ADDRESS));
+        mysqlDataSource.setDatabaseName(serverDetail.get(SERVER_DATABASE));
+
+    }
+
+    private HashMap<String, String> getDataBaseDetail() {
+        HashMap<String, String> data = new HashMap<>();
+        data.put(SERVER_ADDRESS, getServerAddress());
+        data.put(SERVER_USERNAME, getUserName());
+        data.put(SERVER_PASSWORD, getDatabasePassword());
+        data.put(SERVER_DATABASE, getDatabaseName());
+        return data;
+    }
+
+    public String getServerAddress() {
+        return serverAddress;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getDatabaseName() {
+        return databaseName;
+    }
+
+    public String getDatabasePassword() {
+        return databasePassword;
+    }
+
+    @Deprecated
     public void mysqlServerCheck(byte[] serverIPv4Address, String dataPath) {
         if (getServerCredential(dataPath)) {
             //TODO: implementation needed if server is reachable, the address of server is to be replaced
@@ -33,12 +93,23 @@ public class BaseDataClass extends Resources{
         }
     }
 
+    public void checkDatabaseStatus(String address) {
+        try {
+            InetAddress inet4Address = Inet4Address.getByName(address);
+            serverReachable = checkServerReachable(inet4Address.getAddress());
+        } catch (UnknownHostException ignore) {
+            serverReachable = false;
+        }
+    }
+
     /**
      * this method is used for development only
      * during production must be changed to fit the general requirement
+     *
      * @param credentialFilePath =path of encrypted file
      * @return true if successfully get the server credential
      */
+    @Deprecated
     private boolean getServerCredential(String credentialFilePath) {
         try {
             //get the server credential just before show login interface
@@ -51,6 +122,7 @@ public class BaseDataClass extends Resources{
             return false;
         }
     }
+
 
     /**
      * check a server on the give IPv4 address if its reachable, if not it check
@@ -66,7 +138,7 @@ public class BaseDataClass extends Resources{
         try {
             //
             InetAddress inetAddress = InetAddress.getByAddress(serverIp);
-            boolean reachable = inetAddress.isReachable(1000);
+            boolean reachable = inetAddress.isReachable(10000);
 
             if (!reachable) {
                 //boolean check for availability of local server
@@ -102,7 +174,7 @@ public class BaseDataClass extends Resources{
         return serverReachable;
     }
 
-    public void showDataBaseErrorDialog(BaseUIComponents baseUIComponents, StackPane parentPane){
+    public void showDataBaseErrorDialog(BaseUIComponents baseUIComponents, StackPane parentPane) {
         if (!serverReachable) {
             Platform.runLater(() -> baseUIComponents.alertCreator("Error",
                     "Database Problem",

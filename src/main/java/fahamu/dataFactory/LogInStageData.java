@@ -17,14 +17,14 @@ public class LogInStageData extends BaseDataClass {
 
     static {
         mysqlDataSource = new MysqlDataSource();
+        mysqlDataSource.setUser(serverDetail.get("username"));
+        mysqlDataSource.setPassword(serverDetail.get("password"));
+        mysqlDataSource.setServerName(serverDetail.get("serverAddress"));
+        mysqlDataSource.setDatabaseName(serverDetail.get("database"));
     }
 
     //authenticate the username with password to match in database
     public static String authenticateUser(String user) throws SQLException {
-
-        mysqlDataSource.setUser(serverDetail.get("username"));
-        mysqlDataSource.setPassword(serverDetail.get("password"));
-        mysqlDataSource.setServerName(serverDetail.get("serverAddress"));
 
         connection = null;
         String password = null;
@@ -34,7 +34,7 @@ public class LogInStageData extends BaseDataClass {
             connection = mysqlDataSource.getConnection();
 
             Statement statement = connection.createStatement();
-            String selectQuery = "SELECT password FROM users.loginInfo WHERE name=\'" + user + "\'";
+            String selectQuery = "SELECT password FROM login_info WHERE name=\'" + user + "\'";
             ResultSet resultSet = statement.executeQuery(selectQuery);
             while (resultSet.next()) {
                 password = resultSet.getString("password");
@@ -50,15 +50,11 @@ public class LogInStageData extends BaseDataClass {
         return password;
     }
 
-    //get user type
+    //get user user_type
     public static String getUserType(String user) {
 
-        mysqlDataSource.setUser(serverDetail.get("username"));
-        mysqlDataSource.setPassword(serverDetail.get("password"));
-        mysqlDataSource.setServerName(serverDetail.get("serversAddress"));
-
         connection = null;
-        String type = null;
+        String user_type = null;
 
         try {
 
@@ -66,10 +62,10 @@ public class LogInStageData extends BaseDataClass {
 
 
             Statement statement = connection.createStatement();
-            String selectQuery = "SELECT type FROM users.loginInfo WHERE name=\'" + user + "\'";
+            String selectQuery = "SELECT user_type FROM login_info WHERE name=\'" + user + "\'";
             ResultSet resultSet = statement.executeQuery(selectQuery);
             while (resultSet.next()) {
-                type = resultSet.getString(1);
+                user_type = resultSet.getString(1);
             }
 
         } catch (SQLException e) {
@@ -81,17 +77,14 @@ public class LogInStageData extends BaseDataClass {
                 e.printStackTrace();
             }
         }
-        return type;
+        return user_type;
     }
 
     //get all user
     public static ObservableList<String> getAllUsers(String currentUser) {
-        mysqlDataSource.setUser(serverDetail.get("username"));
-        mysqlDataSource.setPassword(serverDetail.get("password"));
-        mysqlDataSource.setServerName(serverDetail.get("serversAddress"));
 
         connection = null;
-        String selectQuery = "SELECT name FROM users.loginInfo where name!='" + currentUser + "'";
+        String selectQuery = "SELECT name FROM login_info where name!='" + currentUser + "'";
 
         ObservableList<String> users = FXCollections.observableArrayList();
 
@@ -117,11 +110,7 @@ public class LogInStageData extends BaseDataClass {
     }
 
     //add new user
-    public static void addUser(String user, String passw, String type) {
-
-        mysqlDataSource.setUser(serverDetail.get("username"));
-        mysqlDataSource.setPassword(serverDetail.get("password"));
-        mysqlDataSource.setServerName(serverDetail.get("serversAddress"));
+    public static void addUser(String user, String passw, String user_type) {
 
         connection = null;
 
@@ -130,8 +119,8 @@ public class LogInStageData extends BaseDataClass {
 
 
             Statement statement = connection.createStatement();
-            String insertQuery = "INSERT INTO users.loginInfo(name,password,type) " +
-                    " VALUES(\'" + user + "\',\'" + passw + "\',\'" + type + "\')";
+            String insertQuery = "INSERT INTO login_info(name,password,user_type) " +
+                    " VALUES(\'" + user + "\',\'" + passw + "\',\'" + user_type + "\')";
             statement.execute(insertQuery);
 
         } catch (SQLException e) {
@@ -148,10 +137,6 @@ public class LogInStageData extends BaseDataClass {
     //remove user
     public static void removeUser(String user) {
 
-        mysqlDataSource.setUser(serverDetail.get("username"));
-        mysqlDataSource.setPassword(serverDetail.get("password"));
-        mysqlDataSource.setServerName(serverDetail.get("serversAddress"));
-
         connection = null;
 
         try {
@@ -160,7 +145,7 @@ public class LogInStageData extends BaseDataClass {
 
 
             Statement statement = connection.createStatement();
-            String insertQuery = "DELETE FROM users.loginInfo WHERE name=\'" + user + "\'";
+            String insertQuery = "DELETE FROM login_info WHERE name=\'" + user + "\'";
 
             statement.execute(insertQuery);
 
@@ -178,10 +163,6 @@ public class LogInStageData extends BaseDataClass {
     //update user info
     public static void updateUserInfo(String user, String paswd) {
 
-        mysqlDataSource.setUser(serverDetail.get("username"));
-        mysqlDataSource.setPassword(serverDetail.get("password"));
-        mysqlDataSource.setServerName(serverDetail.get("serversAddress"));
-
         connection = null;
 
         try {
@@ -190,7 +171,7 @@ public class LogInStageData extends BaseDataClass {
 
 
             Statement statement = connection.createStatement();
-            String updateQuery = "UPDATE users.loginInfo SET password=\'" + paswd + "\' WHERE name=\'" + user + "\'";
+            String updateQuery = "UPDATE login_info SET password=\'" + paswd + "\' WHERE name=\'" + user + "\'";
             statement.execute(updateQuery);
 
         } catch (SQLException e) {

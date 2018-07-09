@@ -49,7 +49,7 @@ public class SaleCategoryData extends BaseDataClass {
         connection = null;
 
 
-        insertQuery = "INSERT INTO salesdata.cashSale(" +
+        insertQuery = "INSERT INTO cash_sale(" +
                 "id," +
                 "date," +
                 "product," +
@@ -93,7 +93,7 @@ public class SaleCategoryData extends BaseDataClass {
         connection = null;
         ObservableList<SalesCategoryUI.CashSaleOfDay> allCashSale = FXCollections.observableArrayList();
 
-        String selectQuery = "SELECT * FROM salesdata.cashSale WHERE user=\'" + user + "\' AND date=curdate()";
+        String selectQuery = "SELECT * FROM cash_sale WHERE user=\'" + user + "\' AND date=curdate()";
         try {
             try {
                 connection = mysqlDataSource.getConnection();
@@ -136,7 +136,7 @@ public class SaleCategoryData extends BaseDataClass {
         connection = null;
         ObservableList<SalesCategoryUI.CashTraSaleOfDay> allCashSale = FXCollections.observableArrayList();
 
-        String selectQuery = "SELECT * FROM salesdata.cashSale WHERE user=\'" + user + "\' AND date=curdate() AND id='n/n'";
+        String selectQuery = "SELECT * FROM cash_sale WHERE user=\'" + user + "\' AND date=curdate() AND id='n/n'";
         try {
             try {
                 connection = mysqlDataSource.getConnection();
@@ -177,7 +177,7 @@ public class SaleCategoryData extends BaseDataClass {
         mysqlDataSource.setServerName(serverAddress);
 
         connection = null;
-        String selectQuery = "SELECT DISTINCT user FROM salesdata.cashSale WHERE date=\'" + inputDate + "\'";
+        String selectQuery = "SELECT DISTINCT user FROM cash_sale WHERE date=\'" + inputDate + "\'";
         ObservableList<String> data = FXCollections.observableArrayList();
 
         try {
@@ -215,7 +215,7 @@ public class SaleCategoryData extends BaseDataClass {
 
         connection = null;
         String selectQuery
-                = "SELECT sum(amount) FROM salesdata.cashSale WHERE user=\'" + user + "\' AND date=\'" + date + "\'";
+                = "SELECT sum(amount) FROM cash_sale WHERE user=\'" + user + "\' AND date=\'" + date + "\'";
         float sum = 0;
         try {
             try {
@@ -259,7 +259,7 @@ public class SaleCategoryData extends BaseDataClass {
             }
             Statement statement = connection.createStatement();
             String selectQuery = "SELECT product,amount,discount " +
-                    "FROM salesdata.cashSale WHERE date=\'" + date + "\' AND user=\'" + user + "\' AND discount>0";
+                    "FROM cash_sale WHERE date=\'" + date + "\' AND user=\'" + user + "\' AND discount>0";
             ResultSet resultSet = statement.executeQuery(selectQuery);
             while (resultSet.next()) {
                 data.add(new ReportsCategoryUI.DiscountDetailTableDataClass(
@@ -298,7 +298,7 @@ public class SaleCategoryData extends BaseDataClass {
                 mysqlDataSource.setServerName(localhost);
                 connection = mysqlDataSource.getConnection();
             }
-            String getDate = "SELECT DISTINCT date FROM salesdata.cashSale WHERE date>=\'"
+            String getDate = "SELECT DISTINCT date FROM cash_sale WHERE date>=\'"
                     + fromDate + "\'  AND date<=\'" + toDate + "\'";
 
             Statement statementDate = connection.createStatement();
@@ -321,7 +321,7 @@ public class SaleCategoryData extends BaseDataClass {
                 for (String date : dates) {
 
                     String getSums = "SELECT sum(amount)" +
-                            " FROM salesdata.cashSale " +
+                            " FROM cash_sale " +
                             " WHERE date=\'" + date + "\' AND category=\'" + category + "\'";
 
                     Statement statementSeries = connection.createStatement();
@@ -358,7 +358,7 @@ public class SaleCategoryData extends BaseDataClass {
 
         connection = null;
         String selectQuery
-                = "SELECT sum(amount) FROM salesdata.cashSale WHERE date=\'" + date + "\'";
+                = "SELECT sum(amount) FROM cash_sale WHERE date=\'" + date + "\'";
         float sum = 0;
         try {
             try {
@@ -401,7 +401,7 @@ public class SaleCategoryData extends BaseDataClass {
                 mysqlDataSource.setServerName(localhost);
                 connection = mysqlDataSource.getConnection();
             }
-            String getDate = "SELECT DISTINCT date FROM salesdata.cashSale WHERE date>=\'"
+            String getDate = "SELECT DISTINCT date FROM cash_sale WHERE date>=\'"
                     + dateFrom + "\'  AND date<=\'" + dateTo + "\'";
 
             Statement statementDate = connection.createStatement();
@@ -414,7 +414,7 @@ public class SaleCategoryData extends BaseDataClass {
             //get sums on dates range
             for (String date : dates) {
 
-                String getSums = "SELECT sum(amount), sum(discount) FROM salesdata.cashSale WHERE date=\'" + date + "\'";
+                String getSums = "SELECT sum(amount), sum(discount) FROM cash_sale WHERE date=\'" + date + "\'";
                 Statement statementSum = connection.createStatement();
 
                 ResultSet resultSetSums = statementSum.executeQuery(getSums);
@@ -451,7 +451,7 @@ public class SaleCategoryData extends BaseDataClass {
 
         connection = null;
         String selectQuery =
-                "SELECT sum(amount) FROM salesdata.cashSale WHERE user=\'" + user + "\' AND id='n/n' AND date=curdate()";
+                "SELECT sum(amount) FROM cash_sale WHERE user=\'" + user + "\' AND id='n/n' AND date=curdate()";
         float sum = 0;
         try {
             try {
@@ -486,7 +486,7 @@ public class SaleCategoryData extends BaseDataClass {
 
         connection = null;
         String selectQuery =
-                "SELECT sum(amount) FROM salesdata.cashSale WHERE  id='n/n' AND date=curdate()";
+                "SELECT sum(amount) FROM cash_sale WHERE  id='n/n' AND date=curdate()";
         float sum = 0;
         try {
             try {
@@ -520,7 +520,7 @@ public class SaleCategoryData extends BaseDataClass {
         mysqlDataSource.setServerName(serverAddress);
 
         connection = null;
-        String selectQuery = "SELECT sum(discount) FROM salesdata.cashSale where user=\'" + user + "\' AND date=\'" + date + "\'";
+        String selectQuery = "SELECT sum(discount) FROM cash_sale where user=\'" + user + "\' AND date=\'" + date + "\'";
         float sum = 0;
         try {
             try {
@@ -564,7 +564,7 @@ public class SaleCategoryData extends BaseDataClass {
                 connection = mysqlDataSource.getConnection();
             }
             String selectQuery = "SELECT date,quantity" +
-                    " FROM salesdata.cashSale " +
+                    " FROM cash_sale " +
                     " WHERE product=\'" + product + "\' AND date>=\'" + fromDate + "\' AND date<=\'" + toDate + "\'";
 
             Statement statement = connection.createStatement();
@@ -603,7 +603,7 @@ public class SaleCategoryData extends BaseDataClass {
                 connection = mysqlDataSource.getConnection();
             }
             String selectQuery = "SELECT DISTINCT product " +
-                    " FROM salesdata.cashSale " +
+                    " FROM cash_sale " +
                     " WHERE date>=\'" + fromDate + "\' AND date<=\'" + toDate + "\'";
 
             Statement statement = connection.createStatement();
@@ -642,7 +642,7 @@ public class SaleCategoryData extends BaseDataClass {
                 mysqlDataSource.setServerName(localhost);
                 connection = mysqlDataSource.getConnection();
             }
-            String getProducts = "SELECT DISTINCT product FROM salesdata.cashSale  WHERE date>=\'"
+            String getProducts = "SELECT DISTINCT product FROM cash_sale  WHERE date>=\'"
                     + fromDate + "\'  AND date<=\'" + toDate + "\' ORDER BY product";
 
             Statement statementDate = connection.createStatement();
@@ -656,7 +656,7 @@ public class SaleCategoryData extends BaseDataClass {
             for (String string : products) {
                 a++;
                 String getFrequency = "SELECT count(product)" +
-                        " FROM salesdata.cashSale " +
+                        " FROM cash_sale " +
                         " WHERE  date>=\'" + fromDate + "\' AND date<=\'" + toDate + "\' AND product=\'" + string + "\'";
 
                 Statement statementSeries = connection.createStatement();

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
 
+@Deprecated
 public class ServerCredentialFactory {
 
     /**
@@ -22,6 +23,7 @@ public class ServerCredentialFactory {
      * a private method to get server password and user name
      * from encrypted sqlite file.
      * @param path =location of the sqlite file which contain server detail and its encrypted
+     *
      */
     public HashMap<String, String> getServerCredential(String path) {
 

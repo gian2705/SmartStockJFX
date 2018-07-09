@@ -22,9 +22,6 @@ public class ReportCategoryData extends BaseDataClass {
     private static String localhost;
     private static MysqlDataSource mysqlDataSource;
     private static Connection connection;
-    private static String username=serverDetail.get("username");
-    private static String password=serverDetail.get("password");
-    private static String serverAddress=serverDetail.get("serverAddress");
 
     static {
         mysqlDataSource = new MysqlDataSource();
@@ -33,9 +30,7 @@ public class ReportCategoryData extends BaseDataClass {
 
     public static ObservableList<XYChart.Series> getGrossProfitReportGraphData(String fromDate, String toDate) {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+
 
         connection = null;
         ObservableList<XYChart.Series> series = FXCollections.observableArrayList();
@@ -84,7 +79,7 @@ public class ReportCategoryData extends BaseDataClass {
             select a distinct product from cashSale table on the given range
              */
             String selectAllSoldProducts = "SELECT DISTINCT product " +
-                    "FROM salesdata.cashSale " +
+                    "FROM cash_sale " +
                     "WHERE date>=\'" + fromDate + "\' AND date<=\'" + toDate + "\'";
 
             statement = connection.createStatement();
@@ -104,7 +99,7 @@ public class ReportCategoryData extends BaseDataClass {
                     products) {
 
                 String selectSumOfQuantitySold = "SELECT SUM(quantity) as sum" +
-                        " FROM salesdata.cashSale WHERE product=\'" + product + "\' AND " +
+                        " FROM cash_sale WHERE product=\'" + product + "\' AND " +
                         " date>=\'" + fromDate + "\' AND date<=\'" + toDate + "\'";
 
                 statement = connection.createStatement();
@@ -127,7 +122,7 @@ public class ReportCategoryData extends BaseDataClass {
                 get total cashSale on the given range of date
                 */
                 String selectSumSale = "SELECT sum(amount) as sum" +
-                        " FROM salesdata.cashSale " +
+                        " FROM cash_sale " +
                         " WHERE date>=\'" + fromDate + "\' AND date<=\'" + toDate + "\' AND category=\'" + category + "\'";
                 float totalCashSale = 0;
 
@@ -185,9 +180,7 @@ public class ReportCategoryData extends BaseDataClass {
 
     public static ObservableList<ReportsCategoryUI.GrossProfitTableViewData> getGrossProfitReportTableData(
             String fromDate, String toDate) {
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+
 
         connection = null;
         ObservableList<ReportsCategoryUI.GrossProfitTableViewData> data = FXCollections.observableArrayList();
@@ -229,7 +222,7 @@ public class ReportCategoryData extends BaseDataClass {
             select a distinct product from cashSale table on the given range
              */
             String selectAllSoldProducts = "SELECT DISTINCT product " +
-                    "FROM salesdata.cashSale " +
+                    "FROM cash_sale " +
                     "WHERE date>=\'" + fromDate + "\' AND date<=\'" + toDate + "\'";
 
             statement = connection.createStatement();
@@ -249,7 +242,7 @@ public class ReportCategoryData extends BaseDataClass {
                     products) {
 
                 String selectSumOfQuantitySold = "SELECT SUM(quantity) as sum" +
-                        " FROM salesdata.cashSale WHERE product=\'" + product + "\' AND " +
+                        " FROM cash_sale WHERE product=\'" + product + "\' AND " +
                         " date>=\'" + fromDate + "\' AND date<=\'" + toDate + "\'";
 
                 statement = connection.createStatement();
@@ -272,7 +265,7 @@ public class ReportCategoryData extends BaseDataClass {
                 get total cashSale on the given range of date
                 */
                 String selectSumSale = "SELECT sum(amount) as sum" +
-                        " FROM salesdata.cashSale " +
+                        " FROM cash_sale " +
                         " WHERE date>=\'" + fromDate + "\' AND date<=\'" + toDate + "\' AND category=\'" + category + "\'";
                 float totalCashSale = 0;
 

@@ -1,16 +1,10 @@
 package fahamu.provider;
 
-import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Resources {
 
-    public String ROOT_PATH_FOR_RESOURCE=""; //empty string solve a nul bug
     public static final String BUSINESS_NAME = "SMART STOCK MANAGER";
-    //public final Path SERVER_CREDENTIAL_FILE = getResourceAsPath("../sqlite3/serverCredential.db.encrypted");
     public final URL BUSINESS_LOGO =getResourceAsUrl("image/lbLogo.jpg");
     public final URL CART_ICON=getResourceAsUrl("image/cart.png");
     public final URL DATABASE_ERROR_ICON=getResourceAsUrl("image/databaseIcon.png");
@@ -26,7 +20,9 @@ public class Resources {
     public final URL SETTING_BANNER_IMAGE=getResourceAsUrl("image/setting.png");
 
     public final String ADMIN = "admin";
-    public static byte[] SERVER_IPA4_ADDRESS = new byte[]{(byte) 192, (byte) 168, 0, 2};
+
+    //45.56.64.243
+    public static byte[] SERVER_IPA4_ADDRESS = new byte[]{(byte) 45, (byte) 56, (byte)64, (byte)243};
 
     public Resources() {
 

@@ -1,6 +1,5 @@
 package fahamu.dataFactory;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
 import fahamu.Ui.PurchaseCategoryUI;
 import fahamu.Ui.ReportsCategoryUI;
 import fahamu.Ui.SalesCategoryUI;
@@ -19,27 +18,21 @@ public class PurchaseCategoryData extends BaseDataClass {
 
     //**********private fields*************//
     private static String localhost;
-    private static MysqlDataSource mysqlDataSource;
     private static Connection connection;
 
-    static {
-        mysqlDataSource = new MysqlDataSource();
-        localhost = "localhost";
-    }
+
 
     public static float amountOfCreditInvoice = 0;
     private static String username=serverDetail.get("username");
     private static String password=serverDetail.get("password");
     private static String serverAddress=serverDetail.get("serverAddress");
 
+
     //add supplier information
     public static void addSupplierInfo(String supplierName, String supplierPostAddress, String shopLocation,
                                        String supplierContacts) {
         connection = null;
         try {
-            mysqlDataSource.setUser(username);
-            mysqlDataSource.setPassword(password);
-            mysqlDataSource.setServerName(serverAddress);
 
             try {
                 connection = mysqlDataSource.getConnection();
@@ -47,7 +40,7 @@ public class PurchaseCategoryData extends BaseDataClass {
                 mysqlDataSource.setServerName(localhost);
                 connection = mysqlDataSource.getConnection();
             }
-            String insertQuery = "INSERT INTO suppliers.supplierInfo VALUES" +
+            String insertQuery = "INSERT INTO suppliers VALUES" +
                     "(\'" + supplierName + "\'," +
                     "\'" + supplierPostAddress + "\'," +
                     "\'" + shopLocation + "\'," +
@@ -73,9 +66,7 @@ public class PurchaseCategoryData extends BaseDataClass {
     public static void removeSupplier(String supplier) {
         connection = null;
         try {
-            mysqlDataSource.setUser(username);
-            mysqlDataSource.setPassword(password);
-            mysqlDataSource.setServerName(serverAddress);
+
 
             try {
                 connection = mysqlDataSource.getConnection();
@@ -83,7 +74,7 @@ public class PurchaseCategoryData extends BaseDataClass {
                 mysqlDataSource.setServerName(localhost);
                 connection = mysqlDataSource.getConnection();
             }
-            String deleteQuery = "DELETE FROM suppliers.supplierInfo WHERE name=\'" + supplier + "\'";
+            String deleteQuery = "DELETE FROM suppliers WHERE name=\'" + supplier + "\'";
 
             Statement statement = connection.createStatement();
             statement.execute(deleteQuery);
@@ -125,7 +116,7 @@ public class PurchaseCategoryData extends BaseDataClass {
             }
             Statement statement = connection.createStatement();
             String insertQuery = "INSERT INTO " +
-                    "purchasedata.cashPurchase " +
+                    "cash_purchase " +
                     "(date, " +
                     "receipt, " +
                     "product," +
@@ -189,7 +180,7 @@ public class PurchaseCategoryData extends BaseDataClass {
             }
             Statement statement = connection.createStatement();
             String insertQuery = "INSERT INTO " +
-                    "purchasedata.creditPurchase " +
+                    "credit_purchase " +
                     "(date, " +
                     "due, " +
                     "invoice, " +
@@ -230,16 +221,14 @@ public class PurchaseCategoryData extends BaseDataClass {
 
     //get suppliers
     public static ObservableList<String> getSuppliers() {
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+
 
         ObservableList<String> suppliers = FXCollections.observableArrayList();
 
         connection = null;
         try {
 
-            String selectQuery = "SELECT name FROM suppliers.supplierInfo";
+            String selectQuery = "SELECT name FROM suppliers";
             try {
                 connection = mysqlDataSource.getConnection();
             } catch (SQLException e) {
@@ -276,7 +265,7 @@ public class PurchaseCategoryData extends BaseDataClass {
         connection = null;
         try {
 
-            String selectQuery = "SELECT DISTINCT invoice FROM purchasedata.creditPurchase WHERE supplier=\'" +
+            String selectQuery = "SELECT DISTINCT invoice FROM credit_purchase WHERE supplier=\'" +
                     supplier + "\' and status='not paid'";
             try {
                 connection = mysqlDataSource.getConnection();
@@ -319,7 +308,7 @@ public class PurchaseCategoryData extends BaseDataClass {
                     "quantity," +
                     "purchase," +
                     "amount " +
-                    "FROM purchasedata.creditPurchase WHERE invoice=\'" + invoice + "\' AND supplier=\'" + supplier + "\'";
+                    "FROM credit_purchase WHERE invoice=\'" + invoice + "\' AND supplier=\'" + supplier + "\'";
 
             try {
                 connection = mysqlDataSource.getConnection();
@@ -372,7 +361,7 @@ public class PurchaseCategoryData extends BaseDataClass {
                     "date," +
                     "status," +
                     "supplier " +
-                    "FROM purchasedata.creditPurchase where status='not paid' ";
+                    "FROM credit_purchase where status='not paid' ";
             try {
                 connection = mysqlDataSource.getConnection();
             } catch (SQLException e) {
@@ -417,7 +406,7 @@ public class PurchaseCategoryData extends BaseDataClass {
 
             String selectQuery = "SELECT " +
                     "count(DISTINCT invoice) " +
-                    "FROM purchasedata.creditPurchase " +
+                    "FROM credit_purchase " +
                     "where timestampdiff(day,curdate(),due)<=0 and status=\'not paid\' ";
             try {
                 connection = mysqlDataSource.getConnection();
@@ -455,7 +444,7 @@ public class PurchaseCategoryData extends BaseDataClass {
 
             String selectQuery = "SELECT " +
                     "count(DISTINCT invoice) " +
-                    "FROM purchasedata.creditPurchase " +
+                    "FROM credit_purchase " +
                     "where timestampdiff(day,curdate(),due)<=5 and status=\'not paid\'";
             try {
                 connection = mysqlDataSource.getConnection();
@@ -493,7 +482,7 @@ public class PurchaseCategoryData extends BaseDataClass {
 
             String selectQuery = "SELECT " +
                     "count(DISTINCT invoice) " +
-                    "FROM purchasedata.creditPurchase where status=\'not paid\'";
+                    "FROM credit_purchase where status=\'not paid\'";
             try {
                 connection = mysqlDataSource.getConnection();
             } catch (SQLException e) {
@@ -530,7 +519,7 @@ public class PurchaseCategoryData extends BaseDataClass {
         float amount = 0;
         try {
 
-            String selectQuery = "select sum(amount) from purchasedata.creditPurchase where status='not paid'";
+            String selectQuery = "select sum(amount) from credit_purchase where status='not paid'";
             try {
                 connection = mysqlDataSource.getConnection();
             } catch (SQLException e) {
@@ -566,7 +555,7 @@ public class PurchaseCategoryData extends BaseDataClass {
         try {
 
             String updateQuery;
-            updateQuery = "update purchasedata.creditPurchase set status='paid' where invoice=\'" + invoice + "\'";
+            updateQuery = "update credit_purchase set status='paid' where invoice=\'" + invoice + "\'";
             try {
                 connection = mysqlDataSource.getConnection();
             } catch (SQLException e) {
@@ -594,7 +583,7 @@ public class PurchaseCategoryData extends BaseDataClass {
 
         connection = null;
         ObservableList<String> data = FXCollections.observableArrayList();
-        String selectQuery = "SELECT receipt FROM purchasedata.receipt";
+        String selectQuery = "SELECT receipt FROM receipt";
 
         try {
             try {
@@ -629,7 +618,7 @@ public class PurchaseCategoryData extends BaseDataClass {
 
         connection = null;
         ObservableList<String> data = FXCollections.observableArrayList();
-        String selectQuery = "SELECT invoice FROM purchasedata.invoice";
+        String selectQuery = "SELECT invoice FROM invoice";
 
         try {
             try {
@@ -669,7 +658,7 @@ public class PurchaseCategoryData extends BaseDataClass {
 
         connection = null;
         ObservableList<PurchaseCategoryUI.CashPurchaseList> data = FXCollections.observableArrayList();
-        String selectQuery = "SELECT * FROM purchasedata.cashPurchase " +
+        String selectQuery = "SELECT * FROM cash_purchase " +
                 "WHERE date=\'" + date + "\' " +
                 "AND receipt=\'" + receipt + "\' " +
                 "AND supplier=\'" + supplier + "\'";
@@ -722,7 +711,7 @@ public class PurchaseCategoryData extends BaseDataClass {
 
         connection = null;
         ObservableList<PurchaseCategoryUI.CreditPurchaseList> data = FXCollections.observableArrayList();
-        String selectQuery = "SELECT * FROM purchasedata.creditPurchase " +
+        String selectQuery = "SELECT * FROM credit_purchase " +
                 "WHERE date=\'" + date + "\' " +
                 "AND invoice=\'" + invoice + "\' " +
                 "AND supplier=\'" + supplier + "\'";
@@ -772,7 +761,7 @@ public class PurchaseCategoryData extends BaseDataClass {
 
         connection = null;
         float sum = 0;
-        String selectQuery = "SELECT sum(amount) FROM purchasedata.cashPurchase " +
+        String selectQuery = "SELECT sum(amount) FROM cash_purchase " +
                 "WHERE date=\'" + date + "\'" +
                 " AND receipt=\'" + receipt + "\'" +
                 " AND supplier=\'" + supplier + "\'";
@@ -807,7 +796,7 @@ public class PurchaseCategoryData extends BaseDataClass {
 
         connection = null;
         float sum = 0;
-        String selectQuery = "SELECT sum(amount) FROM purchasedata.creditPurchase " +
+        String selectQuery = "SELECT sum(amount) FROM credit_purchase " +
                 "WHERE date=\'" + date + "\'" +
                 " AND invoice=\'" + invoice + "\'" +
                 " AND supplier=\'" + supplier + "\'";
@@ -851,7 +840,7 @@ public class PurchaseCategoryData extends BaseDataClass {
                 connection = mysqlDataSource.getConnection();
             }
             String selectQuery = "SELECT date,quantity,squantity " +
-                    " FROM purchasedata.creditPurchase " +
+                    " FROM credit_purchase " +
                     " WHERE product=\'" + product + "\' AND date>=\'" + fromDate + "\' AND date<=\'" + toDate + "\'";
 
             Statement statement = connection.createStatement();
@@ -890,7 +879,7 @@ public class PurchaseCategoryData extends BaseDataClass {
                 connection = mysqlDataSource.getConnection();
             }
             String selectQuery = "SELECT DISTINCT product " +
-                    " FROM purchasedata.creditPurchase " +
+                    " FROM credit_purchase " +
                     " WHERE date>=\'" + fromDate + "\' AND date<=\'" + toDate + "\'";
 
             Statement statement = connection.createStatement();
@@ -926,7 +915,7 @@ public class PurchaseCategoryData extends BaseDataClass {
                 connection = mysqlDataSource.getConnection();
             }
             String selectQuery = "SELECT date,quantity,squantity " +
-                    " FROM purchasedata.cashPurchase " +
+                    " FROM cash_purchase " +
                     " WHERE product=\'" + product + "\' AND date>=\'" + fromDate + "\' AND date<=\'" + toDate + "\'";
 
             Statement statement = connection.createStatement();
@@ -966,7 +955,7 @@ public class PurchaseCategoryData extends BaseDataClass {
                 connection = mysqlDataSource.getConnection();
             }
             String selectQuery = "SELECT DISTINCT product " +
-                    " FROM purchasedata.cashPurchase " +
+                    " FROM cash_purchase " +
                     " WHERE date>=\'" + fromDate + "\' AND date<=\'" + toDate + "\'";
 
             Statement statement = connection.createStatement();
@@ -1000,7 +989,7 @@ public class PurchaseCategoryData extends BaseDataClass {
         mysqlDataSource.setServerName(serverAddress);
 
         connection = null;
-        String updateQuery = "UPDATE purchasedata.cashPurchase SET " +
+        String updateQuery = "UPDATE cash_purchase SET " +
                 "date=\'" + date + "\', " +
                 "quantity=" + quantity + ", " +
                 "purchase=" + purchase + ", " +
@@ -1044,7 +1033,7 @@ public class PurchaseCategoryData extends BaseDataClass {
         mysqlDataSource.setServerName(serverAddress);
 
         connection = null;
-        String updateQuery = "UPDATE purchasedata.creditPurchase SET " +
+        String updateQuery = "UPDATE credit_purchase SET " +
                 "date=\'" + date + "\', " +
                 "quantity=" + quantity + ", " +
                 "purchase=" + purchase + ", " +
@@ -1080,7 +1069,7 @@ public class PurchaseCategoryData extends BaseDataClass {
         mysqlDataSource.setServerName(serverAddress);
 
         connection = null;
-        String insertQuery = "INSERT INTO purchasedata.receipt(date,receipt) " +
+        String insertQuery = "INSERT INTO receipt(date,receipt) " +
                 "VALUES(curdate(), \'" + receipt + "\')";
         try {
             try {
@@ -1110,7 +1099,7 @@ public class PurchaseCategoryData extends BaseDataClass {
 
         connection = null;
 
-        String deleteQuery = "DELETE  FROM purchasedata.receipt where receipt=\'" + receipt + "\'";
+        String deleteQuery = "DELETE  FROM receipt where receipt=\'" + receipt + "\'";
 
         try {
             try {
@@ -1139,7 +1128,7 @@ public class PurchaseCategoryData extends BaseDataClass {
         mysqlDataSource.setServerName(serverAddress);
 
         connection = null;
-        String insertQuery = "INSERT INTO purchasedata.invoice(date,invoice) " +
+        String insertQuery = "INSERT INTO invoice(date,invoice) " +
                 "VALUES(curdate(), \'" + invoice + "\')";
         try {
             try {
@@ -1170,7 +1159,7 @@ public class PurchaseCategoryData extends BaseDataClass {
 
         connection = null;
 
-        String deleteQuery = "DELETE  FROM purchasedata.invoice where invoice=\'" + invoice + "\'";
+        String deleteQuery = "DELETE  FROM invoice where invoice=\'" + invoice + "\'";
 
         try {
             try {

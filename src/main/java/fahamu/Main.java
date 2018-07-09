@@ -6,7 +6,6 @@ import fahamu.provider.Resources;
 import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
@@ -18,24 +17,21 @@ import java.io.IOException;
 public class Main extends Application {
 
     //public static String currentUserName;
-    //private Resources resources;
     private Scene sceneMain;
     public static String currentUserName;
 
     @Override
     public void init() {
         //TODO: initialize all user resources when application ready to roll out
-//        resources = new Resources();
-//        resources.ROOT_PATH_FOR_RESOURCE=System.getProperty("user.dir"); //get the current working directory
-        //System.out.println(resources.ROOT_PATH_FOR_RESOURCE);
-        BaseDataClass baseDataClass=new BaseDataClass();
+
+        BaseDataClass baseDataClass = new BaseDataClass("kilimotaarifa.co.tz",
+                "joshua", "joshua5715", "lb");
+
         //run in background provider to check if server is reachable
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() {
-                baseDataClass
-                        .mysqlServerCheck(Resources.SERVER_IPA4_ADDRESS,
-                                Resources.class.getResource("sqlite3/serverCredential.db.encrypted").getPath());
+                baseDataClass.checkDatabaseStatus(baseDataClass.getServerAddress());
                 return null;
             }
         };

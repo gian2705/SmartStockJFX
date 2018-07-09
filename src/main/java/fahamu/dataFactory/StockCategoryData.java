@@ -1,6 +1,5 @@
 package fahamu.dataFactory;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
 import fahamu.Ui.SalesCategoryUI;
 import fahamu.Ui.StockCategoryUI;
 import fahamu.provider.BaseDataClass;
@@ -20,17 +19,10 @@ public class StockCategoryData extends BaseDataClass {
     public static float sellPrice;
     public static float wSellPrice;
 
-    private static String localhost;
-    private static MysqlDataSource mysqlDataSource;
+    private static String localhost="localhost";
     private static Connection connection;
-    private static String username=serverDetail.get("username");
-    private static String password=serverDetail.get("password");
-    private static String serverAddress=serverDetail.get("serverAddress");
 
-    static {
-        mysqlDataSource = new MysqlDataSource();
-        localhost = "localhost";
-    }
+
 
     StockCategoryData() {
 
@@ -39,13 +31,11 @@ public class StockCategoryData extends BaseDataClass {
     //get all product for update
     public static ObservableList<String> getProductNames() {
         ObservableList<String> stockRetailProducts = FXCollections.observableArrayList();
-        String getAllProducts = "SELECT product FROM stockdata.retailStock   ORDER BY product";
+        String getAllProducts = "SELECT product FROM retail_stock   ORDER BY product";
 
         connection = null;
         try {
-            mysqlDataSource.setUser(username);
-            mysqlDataSource.setPassword(password);
-            mysqlDataSource.setServerName(serverAddress);
+
             try {
                 connection = mysqlDataSource.getConnection();
             } catch (SQLException sq) {
@@ -73,14 +63,11 @@ public class StockCategoryData extends BaseDataClass {
 
     public static String getUnit(String condition) {
 
-        String query = "SELECT unit FROM stockdata.retailStock WHERE product=\'" + condition + "\';";
+        String query = "SELECT unit FROM retail_stock WHERE product=\'" + condition + "\';";
         connection = null;
         String data = null;
         try {
 
-            mysqlDataSource.setUser(username);
-            mysqlDataSource.setPassword(password);
-            mysqlDataSource.setServerName(serverAddress);
             try {
                 connection = mysqlDataSource.getConnection();
             } catch (SQLException sq) {
@@ -105,14 +92,11 @@ public class StockCategoryData extends BaseDataClass {
     }
 
     public static String getSellPrice(String condition) {
-        String query = "SELECT sell FROM stockdata.retailStock WHERE product=\'" + condition + "\'";
+        String query = "SELECT sell FROM retail_stock WHERE product=\'" + condition + "\'";
         connection = null;
         String formattedPrice = null;
         try {
 
-            mysqlDataSource.setUser(username);
-            mysqlDataSource.setPassword(password);
-            mysqlDataSource.setServerName(serverAddress);
             try {
                 connection = mysqlDataSource.getConnection();
             } catch (SQLException sq) {
@@ -141,13 +125,10 @@ public class StockCategoryData extends BaseDataClass {
     }
 
     public static void getWholeSellPrice(String condition) {
-        String query = "SELECT wsell FROM stockdata.retailStock WHERE product=\'" + condition + "\'";
+        String query = "SELECT wsell FROM retail_stock WHERE product=\'" + condition + "\'";
         connection = null;
         try {
 
-            mysqlDataSource.setUser(username);
-            mysqlDataSource.setPassword(password);
-            mysqlDataSource.setServerName(serverAddress);
             try {
                 connection = mysqlDataSource.getConnection();
             } catch (SQLException sq) {
@@ -173,14 +154,11 @@ public class StockCategoryData extends BaseDataClass {
     }
 
     public static String getCategory(String condition) {
-        String query = "SELECT category FROM stockdata.retailStock WHERE product=\'" + condition + "\';";
+        String query = "SELECT category FROM retail_stock WHERE product=\'" + condition + "\';";
         String category = null;
         connection = null;
         try {
 
-            mysqlDataSource.setUser(username);
-            mysqlDataSource.setPassword(password);
-            mysqlDataSource.setServerName(serverAddress);
             try {
                 connection = mysqlDataSource.getConnection();
             } catch (SQLException sq) {
@@ -210,9 +188,6 @@ public class StockCategoryData extends BaseDataClass {
         connection = null;
         try {
 
-            mysqlDataSource.setUser(username);
-            mysqlDataSource.setPassword(password);
-            mysqlDataSource.setServerName(serverAddress);
 
             try {
                 connection = mysqlDataSource.getConnection();
@@ -222,7 +197,7 @@ public class StockCategoryData extends BaseDataClass {
             }
             Statement statement = connection.createStatement();
             //get the results
-            String query = "SELECT * FROM stockdata.categoryList ";
+            String query = "SELECT * FROM category_list ";
 
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) StockCategoryUI.categoryList.add(resultSet.getString(1));
@@ -243,9 +218,6 @@ public class StockCategoryData extends BaseDataClass {
         connection = null;
         try {
 
-            mysqlDataSource.setUser(username);
-            mysqlDataSource.setPassword(password);
-            mysqlDataSource.setServerName(serverAddress);
 
             try {
                 connection = mysqlDataSource.getConnection();
@@ -255,7 +227,7 @@ public class StockCategoryData extends BaseDataClass {
             }
             Statement statement = connection.createStatement();
             //get the results
-            String query = "DELETE FROM stockdata.categoryList WHERE category=\'" + condition + "\'";
+            String query = "DELETE FROM category_list WHERE category=\'" + condition + "\'";
             statement.execute(query);
 
         } catch (SQLException e) {
@@ -274,9 +246,6 @@ public class StockCategoryData extends BaseDataClass {
         connection = null;
         try {
 
-            mysqlDataSource.setUser(username);
-            mysqlDataSource.setPassword(password);
-            mysqlDataSource.setServerName(serverAddress);
 
             try {
                 connection = mysqlDataSource.getConnection();
@@ -286,7 +255,7 @@ public class StockCategoryData extends BaseDataClass {
             }
             Statement statement = connection.createStatement();
             //get the results
-            String query = "DELETE FROM stockdata.unitList WHERE unit=\'" + condition + "\'";
+            String query = "DELETE FROM unit_list WHERE unit=\'" + condition + "\'";
             statement.execute(query);
 
         } catch (SQLException e) {
@@ -307,9 +276,6 @@ public class StockCategoryData extends BaseDataClass {
 
         try {
 
-            mysqlDataSource.setUser(username);
-            mysqlDataSource.setPassword(password);
-            mysqlDataSource.setServerName(serverAddress);
 
             try {
                 connection = mysqlDataSource.getConnection();
@@ -319,7 +285,7 @@ public class StockCategoryData extends BaseDataClass {
             }
             Statement statement = connection.createStatement();
             //get the results
-            String query = "SELECT * FROM stockdata.unitList ";
+            String query = "SELECT * FROM unit_list ";
 
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) StockCategoryUI.unitList.add(resultSet.getString(1));
@@ -337,12 +303,9 @@ public class StockCategoryData extends BaseDataClass {
 
     public static String getShelf(String condition) {
         connection = null;
-        String query = "SELECT shelf FROM stockdata.retailStock WHERE product=\'" + condition + "\';";
+        String query = "SELECT shelf FROM retail_stock WHERE product=\'" + condition + "\';";
         String shelf = null;
         try {
-            mysqlDataSource.setUser(username);
-            mysqlDataSource.setPassword(password);
-            mysqlDataSource.setServerName(serverAddress);
             try {
                 connection = mysqlDataSource.getConnection();
             } catch (SQLException sq) {
@@ -369,14 +332,10 @@ public class StockCategoryData extends BaseDataClass {
 
     public static float getProfit(String condition) {
         connection = null;
-        String query = "SELECT sell-purchase FROM stockdata.retailStock WHERE product=\'" + condition + "\'";
+        String query = "SELECT sell-purchase FROM retail_stock WHERE product=\'" + condition + "\'";
         float profitPrice = 0;
 
         try {
-            MysqlDataSource mysqlDataSource = new MysqlDataSource();
-            mysqlDataSource.setUser(username);
-            mysqlDataSource.setPassword(password);
-            mysqlDataSource.setServerName(serverAddress);
             try {
                 connection = mysqlDataSource.getConnection();
             } catch (SQLException sq) {
@@ -404,13 +363,10 @@ public class StockCategoryData extends BaseDataClass {
 
     public static float getPurchase(String condition) {
         connection = null;
-        String query = "SELECT purchase FROM stockdata.retailStock WHERE product=\'" + condition + "\'";
+        String query = "SELECT purchase FROM retail_stock WHERE product=\'" + condition + "\'";
         float purchasePrice = 0;
         try {
 
-            mysqlDataSource.setUser(username);
-            mysqlDataSource.setPassword(password);
-            mysqlDataSource.setServerName(serverAddress);
             try {
                 connection = mysqlDataSource.getConnection();
             } catch (SQLException sq) {
@@ -439,11 +395,8 @@ public class StockCategoryData extends BaseDataClass {
     //get a specific quantity of the product
     public static int getProductQuantity(String condition) {
         int quantity = 0;
-        String quantityQuery = "SELECT quantity FROM stockdata.retailStock WHERE product=\'" + condition + "\'";
+        String quantityQuery = "SELECT quantity FROM retail_stock WHERE product=\'" + condition + "\'";
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
 
         connection = null;
         try {
@@ -473,11 +426,8 @@ public class StockCategoryData extends BaseDataClass {
 
     public static String getProductQuantityCheckStatus(String condition) {
         String q_status = null;
-        String quantityQuery = "SELECT q_status FROM stockdata.retailStock WHERE product=\'" + condition + "\'";
+        String quantityQuery = "SELECT q_status FROM retail_stock WHERE product=\'" + condition + "\'";
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
 
         connection = null;
         try {
@@ -507,11 +457,8 @@ public class StockCategoryData extends BaseDataClass {
 
     public static int getWholeProductQuantity(String condition) {
         int quantity = 0;
-        String quantityQuery = "SELECT wquantity FROM stockdata.retailStock WHERE product=\'" + condition + "\'";
+        String quantityQuery = "SELECT wquantity FROM retail_stock WHERE product=\'" + condition + "\'";
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
 
         connection = null;
         try {
@@ -542,13 +489,10 @@ public class StockCategoryData extends BaseDataClass {
     //get Product reorder level
     public static int getReorderLevel(String condition) {
         connection = null;
-        String query = "SELECT reorder FROM stockdata.retailStock WHERE product=\'" + condition + "\'";
+        String query = "SELECT reorder FROM retail_stock WHERE product=\'" + condition + "\'";
         int reoderLevel = 0;
         try {
 
-            mysqlDataSource.setUser(username);
-            mysqlDataSource.setPassword(password);
-            mysqlDataSource.setServerName(serverAddress);
             try {
                 connection = mysqlDataSource.getConnection();
             } catch (SQLException sq) {
@@ -576,11 +520,7 @@ public class StockCategoryData extends BaseDataClass {
 
     //get all stock
     public static ObservableList<StockCategoryUI.StockList> getStockList() {
-        String selectQuery = "SELECT * FROM stockdata.retailStock";
-
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
+        String selectQuery = "SELECT * FROM retail_stock";
 
         connection = null;
 
@@ -634,10 +574,7 @@ public class StockCategoryData extends BaseDataClass {
     //also this method will be called when you update the stock
     public static void updateProductQuantity(String product, int quantity) {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
-        String updateQuery = "UPDATE stockdata.retailStock SET quantity=" + quantity + ",profit=sell-purchase ," +
+        String updateQuery = "UPDATE retail_stock SET quantity=" + quantity + ",profit=sell-purchase ," +
                 "times=sell/purchase WHERE product=\'" + product + "\'" ;
 
         connection = null;
@@ -665,13 +602,10 @@ public class StockCategoryData extends BaseDataClass {
 
     public static void updateWholeQuantityOfProduct(String product, int wquantity) {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
 
         connection = null;
 
-        String updateQuery = "UPDATE stockdata.retailStock SET " +
+        String updateQuery = "UPDATE retail_stock SET " +
                 "wquantity=" + wquantity + " WHERE product=\'" + product + "\'";
         try {
             try {
@@ -697,13 +631,10 @@ public class StockCategoryData extends BaseDataClass {
 
     public static void updateWholeSalePrice(String product, float wsell) {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
 
         connection = null;
 
-        String updateQuery = "UPDATE stockdata.retailStock SET " +
+        String updateQuery = "UPDATE retail_stock SET " +
                 "wsell=" + wsell + " WHERE product=\'" + product + "\'";
         try {
             try {
@@ -733,10 +664,6 @@ public class StockCategoryData extends BaseDataClass {
         connection = null;
         try {
 
-            mysqlDataSource.setUser(username);
-            mysqlDataSource.setPassword(password);
-            mysqlDataSource.setServerName(serverAddress);
-
             try {
                 connection = mysqlDataSource.getConnection();
             } catch (SQLException sq) {
@@ -745,7 +672,7 @@ public class StockCategoryData extends BaseDataClass {
             }
             Statement statement = connection.createStatement();
             //get the results
-            String query = "INSERT INTO stockdata.categoryList(category) VALUES(\'" + category + "\')";
+            String query = "INSERT INTO category_list(category) VALUES(\'" + category + "\')";
 
             statement.execute(query);
 
@@ -764,9 +691,6 @@ public class StockCategoryData extends BaseDataClass {
     public static void insertProductUnit(String unit) {
         connection = null;
         try {
-            mysqlDataSource.setUser(username);
-            mysqlDataSource.setPassword(password);
-            mysqlDataSource.setServerName(serverAddress);
 
             try {
                 connection = mysqlDataSource.getConnection();
@@ -776,7 +700,7 @@ public class StockCategoryData extends BaseDataClass {
             }
             Statement statement = connection.createStatement();
             //get the results
-            String query = "INSERT INTO stockdata.unitList(unit) VALUES(\'" + unit + "\')";
+            String query = "INSERT INTO unit_list(unit) VALUES(\'" + unit + "\')";
 
             statement.execute(query);
 
@@ -794,10 +718,7 @@ public class StockCategoryData extends BaseDataClass {
     //update the purchase
     public static void updatePurchasePrice(String product, float purchase) {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
-        String updateQuery = "UPDATE stockdata.retailStock SET purchase=" + purchase + "," +
+        String updateQuery = "UPDATE retail_stock SET purchase=" + purchase + "," +
                 "profit=sell-purchase, times=sell/purchase WHERE product=\'" + product + "\'" ;
 
         connection = null;
@@ -825,10 +746,7 @@ public class StockCategoryData extends BaseDataClass {
 
     public static void updateSellPrice(String product, float sellPrice) {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
-        String updateQuery = "UPDATE stockdata.retailStock SET sell=" + sellPrice + ",profit=sell-purchase," +
+        String updateQuery = "UPDATE retail_stock SET sell=" + sellPrice + ",profit=sell-purchase," +
                 "times=sell/purchase WHERE product=\'" + product + "\'";
 
         connection = null;
@@ -857,10 +775,7 @@ public class StockCategoryData extends BaseDataClass {
     //update to current supplier
     public static void updateCurrentSupplier(String product, String supplier) {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
-        String updateQuery = "UPDATE stockdata.retailStock SET supplier=\'"
+        String updateQuery = "UPDATE retail_stock SET supplier=\'"
                 + supplier + "\' WHERE product=\'" + product + "\'";
 
         connection = null;
@@ -889,11 +804,7 @@ public class StockCategoryData extends BaseDataClass {
     //delete a row
     public static void deleteProduct(String product) {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
-
-        String deleteQuery = "DELETE FROM stockdata.retailStock WHERE product=\'" + product + "\'";
+        String deleteQuery = "DELETE FROM retail_stock WHERE product=\'" + product + "\'";
 
         connection = null;
         try {
@@ -934,9 +845,6 @@ public class StockCategoryData extends BaseDataClass {
             float wSellPrice,
             String expire) {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
 
         connection = null;
         try {
@@ -948,7 +856,7 @@ public class StockCategoryData extends BaseDataClass {
                 connection = mysqlDataSource.getConnection();
             }
             Statement statement = connection.createStatement();
-            String updateQuery = "UPDATE stockdata.retailStock SET " +
+            String updateQuery = "UPDATE retail_stock SET " +
                     "product=\'" + product + "\'," +
                     "unit=\'" + unity + "\'," +
                     "category=\'" + category + "\'," +
@@ -998,9 +906,6 @@ public class StockCategoryData extends BaseDataClass {
             float times,
             String expire) {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
 
         connection = null;
         try {
@@ -1012,7 +917,7 @@ public class StockCategoryData extends BaseDataClass {
             }
             Statement statement = connection.createStatement();
             String insertQuery = "INSERT INTO " +
-                    "stockdata.retailStock " +
+                    "retail_stock " +
                     "(product, " +
                     "unit, " +
                     "category," +
@@ -1063,10 +968,6 @@ public class StockCategoryData extends BaseDataClass {
 
         String[] reports = new String[4];
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
-
         connection = null;
 
         try {
@@ -1081,10 +982,10 @@ public class StockCategoryData extends BaseDataClass {
             Statement statement = connection.createStatement();
 
             //fetch resources
-            String zeroStock = "SELECT count(product) FROM stockdata.retailStock where quantity=0";
-            String reorder = "SELECT count(product) FROM stockdata.retailStock where quantity<=reorder";
-            String expired = "SELECT count(product) FROM stockdata.retailStock where expire<=curdate()";
-            String totalStock = "SELECT count(product) FROM stockdata.retailStock ";
+            String zeroStock = "SELECT count(product) FROM retail_stock where quantity=0";
+            String reorder = "SELECT count(product) FROM retail_stock where quantity<=reorder";
+            String expired = "SELECT count(product) FROM retail_stock where expire<=curdate()";
+            String totalStock = "SELECT count(product) FROM retail_stock ";
 
             ResultSet zeroResults = statement.executeQuery(zeroStock);
             while (zeroResults.next()) {
@@ -1121,12 +1022,9 @@ public class StockCategoryData extends BaseDataClass {
 
     public static ObservableList<String> getExpiredProduct() {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
 
         connection = null;
-        String selectQuery = "SELECT product FROM stockdata.retailStock WHERE expire<=curdate()";
+        String selectQuery = "SELECT product FROM retail_stock WHERE expire<=curdate()";
         ObservableList<String> data = FXCollections.observableArrayList();
         try {
             try {
@@ -1155,12 +1053,9 @@ public class StockCategoryData extends BaseDataClass {
 
     public static ObservableList<SalesCategoryUI.ExpiredProduct> getExpiredProductDetail() {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
 
         connection = null;
-        String selectQuery = "SELECT product,quantity,expire FROM stockdata.retailStock WHERE expire<=curdate()";
+        String selectQuery = "SELECT product,quantity,expire FROM retail_stock WHERE expire<=curdate()";
         ObservableList<SalesCategoryUI.ExpiredProduct> data = FXCollections.observableArrayList();
         try {
             try {
@@ -1193,12 +1088,9 @@ public class StockCategoryData extends BaseDataClass {
 
     public static ObservableList<String> getNearExpiredProduct() {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
 
         connection = null;
-        String selectQuery = "SELECT product FROM stockdata.retailStock WHERE expire>=curdate() AND expire<=curdate()+90";
+        String selectQuery = "SELECT product FROM retail_stock WHERE expire>=curdate() AND expire<=curdate()+90";
         ObservableList<String> data = FXCollections.observableArrayList();
         try {
             try {
@@ -1227,12 +1119,9 @@ public class StockCategoryData extends BaseDataClass {
 
     public static ObservableList<SalesCategoryUI.NearExpire> getNearExpiredProductDetail() {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
 
         connection = null;
-        String selectQuery = "SELECT product,quantity,expire FROM stockdata.retailStock " +
+        String selectQuery = "SELECT product,quantity,expire FROM retail_stock " +
                 "WHERE expire>=curdate() AND expire<=curdate()+90";
         ObservableList<SalesCategoryUI.NearExpire> data = FXCollections.observableArrayList();
         try {
@@ -1266,12 +1155,9 @@ public class StockCategoryData extends BaseDataClass {
 
     public static ObservableList<String> getOrderList() {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
 
         connection = null;
-        String selectQuery = "SELECT product FROM stockdata.retailStock WHERE quantity<=reorder";
+        String selectQuery = "SELECT product FROM retail_stock WHERE quantity<=reorder";
         ObservableList<String> data = FXCollections.observableArrayList();
         try {
             try {
@@ -1300,13 +1186,10 @@ public class StockCategoryData extends BaseDataClass {
 
     public static ObservableList<SalesCategoryUI.OrderList> getOrderListDetail() {
 
-        mysqlDataSource.setUser(username);
-        mysqlDataSource.setPassword(password);
-        mysqlDataSource.setServerName(serverAddress);
 
         connection = null;
         String selectQuery = "SELECT product,quantity,supplier,purchase " +
-                "FROM stockdata.retailStock WHERE quantity<=reorder";
+                "FROM retail_stock WHERE quantity<=reorder";
         ObservableList<SalesCategoryUI.OrderList> data = FXCollections.observableArrayList();
         try {
             try {
