@@ -8,8 +8,6 @@
     <artifactId>stockmanager</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
-
     <dependencies>
         <dependency>
             <groupId>com.fahamutech</groupId>
