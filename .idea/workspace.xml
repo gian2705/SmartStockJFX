@@ -2,17 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="908653d0-88f1-473c-93b0-1171e3db859b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/fahamu/dataFactory/DataFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fahamu/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fahamu/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fahamu/dataFactory/LogInStageData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fahamu/dataFactory/LogInStageData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fahamu/dataFactory/PurchaseCategoryData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fahamu/dataFactory/PurchaseCategoryData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fahamu/dataFactory/ReportCategoryData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fahamu/dataFactory/ReportCategoryData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fahamu/dataFactory/SaleCategoryData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fahamu/dataFactory/SaleCategoryData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fahamu/dataFactory/ServerCredentialFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fahamu/dataFactory/ServerCredentialFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fahamu/dataFactory/StockCategoryData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fahamu/dataFactory/StockCategoryData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fahamu/provider/BaseDataClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fahamu/provider/BaseDataClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fahamu/provider/Resources.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fahamu/provider/Resources.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fahamu/Main$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fahamu/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/dataFactory/LogInStageData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fahamu/dataFactory/LogInStageData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/dataFactory/PurchaseCategoryData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fahamu/dataFactory/PurchaseCategoryData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/dataFactory/ReportCategoryData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fahamu/dataFactory/ReportCategoryData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/dataFactory/SaleCategoryData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fahamu/dataFactory/SaleCategoryData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/dataFactory/ServerCredentialFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fahamu/dataFactory/ServerCredentialFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/dataFactory/StockCategoryData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fahamu/dataFactory/StockCategoryData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/BaseDataClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fahamu/provider/BaseDataClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/Resources.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fahamu/provider/Resources.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,40 +23,45 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="lb@kilimotaarifa.co.tz" type="feb32156:DbDataSourceImpl" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
+            <state relative-caret-position="390">
               <caret line="26" selection-start-line="26" selection-end-line="26" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1004#1212#0" expanded="true" />
-                <element signature="e#1211#1212#0" expanded="true" />
-                <element signature="e#1625#2213#0" />
-                <element signature="e#2258#2259#0" expanded="true" />
-                <element signature="e#2286#2287#0" expanded="true" />
-                <element signature="e#2289#2291#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseDataClass.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BaseDataClass.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/provider/BaseDataClass.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="71">
-              <caret line="35" column="7" lean-forward="true" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
+            <state relative-caret-position="330">
+              <caret line="35" column="7" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
               <folding>
-                <element signature="e#1715#1716#0" expanded="true" />
-                <element signature="e#1751#1752#0" expanded="true" />
-                <element signature="e#1786#1787#0" expanded="true" />
-                <element signature="e#1817#1818#0" expanded="true" />
-                <element signature="e#1856#1857#0" expanded="true" />
-                <element signature="e#1891#1892#0" expanded="true" />
-                <element signature="e#1934#1935#0" expanded="true" />
-                <element signature="e#1973#1974#0" expanded="true" />
                 <element signature="method#mysqlServerCheck#0;class#BaseDataClass#0" />
                 <element signature="docComment;method#getServerCredential#0;class#BaseDataClass#0" />
                 <element signature="docComment;method#checkServerReachable#0;class#BaseDataClass#0" />
@@ -66,48 +72,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LogInUiController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/Ui/LogInUiController.java">
+      <file leaf-file-name="console.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/af4506a0-aaf5-416e-93be-d6a6c5335d17/console.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="101">
-              <caret line="143" selection-start-line="143" selection-end-line="143" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1228#1272#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SalesCategoryUI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/Ui/SalesCategoryUI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-61">
-              <caret line="58" selection-start-line="58" selection-end-line="58" />
-              <folding>
-                <element signature="method#setCashSaleUI#0;class#SalesCategoryUI#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PurchaseCategoryData.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/dataFactory/PurchaseCategoryData.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="266" lean-forward="true" selection-start-line="266" selection-end-line="266" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReportCategoryData.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/dataFactory/ReportCategoryData.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+            <state>
+              <caret column="12" selection-start-column="12" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -189,6 +158,7 @@
         <option value="$PROJECT_DIR$/src/main/java/fahamu/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/fahamu/provider/BaseDataClass.java" />
         <option value="$PROJECT_DIR$/src/main/java/fahamu/dataFactory/StockCategoryData.java" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/af4506a0-aaf5-416e-93be-d6a6c5335d17/console.sql" />
       </list>
     </option>
   </component>
@@ -227,6 +197,7 @@
     <panes>
       <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -256,13 +227,14 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+    <property name="database.data.extractors.current.id" value="Tab-separated (TSV)_id" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="SDKs" />
@@ -402,46 +374,56 @@
       <workItem from="1524435880422" duration="1311000" />
       <workItem from="1529699817515" duration="2174000" />
       <workItem from="1530142115002" duration="601000" />
-      <workItem from="1531166608103" duration="5689000" />
+      <workItem from="1531166608103" duration="5850000" />
+      <workItem from="1531468843361" duration="657000" />
     </task>
+    <task id="LOCAL-00001" summary="update database">
+      <created>1531172319649</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1531172319650</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11754000" />
+    <option name="totallyTimeSpent" value="12572000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="43" y="25" width="1323" height="743" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Application Servers" order="7" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="Designer" order="2" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32954547" />
-      <window_info anchor="right" id="Palette&#9;" order="3" />
-      <window_info id="Image Layers" order="2" />
-      <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.4301948" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32954547" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2513661" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32954547" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info anchor="bottom" id="Database Console" weight="0.6720779" />
+      <window_info id="Designer" order="2" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25604996" />
+      <window_info active="true" anchor="right" id="Database" order="3" visible="true" weight="0.2919594" />
       <window_info anchor="right" id="Google Cloud Storage" order="3" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32954547" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32954547" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -457,16 +439,69 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/Main.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/provider/BaseDataClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" column="7" lean-forward="true" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
+          <folding>
+            <element signature="method#mysqlServerCheck#0;class#BaseDataClass#0" />
+            <element signature="docComment;method#getServerCredential#0;class#BaseDataClass#0" />
+            <element signature="docComment;method#checkServerReachable#0;class#BaseDataClass#0" />
+            <element signature="method#checkServerReachable#0;class#BaseDataClass#0" />
+            <element signature="method#showDataBaseErrorDialog#0;class#BaseDataClass#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/Ui/LogInUiController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2145">
+          <caret line="143" selection-start-line="143" selection-end-line="143" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1228#1272#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/Ui/SalesCategoryUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="870">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+          <folding>
+            <element signature="method#setCashSaleUI#0;class#SalesCategoryUI#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/dataFactory/ReportCategoryData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/dataFactory/PurchaseCategoryData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3990">
+          <caret line="266" lean-forward="true" selection-start-line="266" selection-end-line="266" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1004#1212#0" expanded="true" />
-            <element signature="e#1211#1212#0" expanded="true" />
-            <element signature="e#1625#2213#0" />
-            <element signature="e#2258#2259#0" expanded="true" />
-            <element signature="e#2286#2287#0" expanded="true" />
-            <element signature="e#2289#2291#0" />
           </folding>
         </state>
       </provider>
@@ -718,8 +753,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/dataFactory/ReportCategoryData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+        <state relative-caret-position="585">
+          <caret line="54" selection-start-line="54" selection-end-line="54" />
         </state>
       </provider>
     </entry>
@@ -727,44 +762,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="24" selection-end-line="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1004#1212#0" expanded="true" />
-            <element signature="e#1211#1212#0" expanded="true" />
-            <element signature="e#1625#2213#0" />
-            <element signature="e#2258#2259#0" expanded="true" />
-            <element signature="e#2286#2287#0" expanded="true" />
-            <element signature="e#2289#2291#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/provider/BaseDataClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="35" column="7" lean-forward="true" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
-          <folding>
-            <element signature="e#1715#1716#0" expanded="true" />
-            <element signature="e#1751#1752#0" expanded="true" />
-            <element signature="e#1786#1787#0" expanded="true" />
-            <element signature="e#1817#1818#0" expanded="true" />
-            <element signature="e#1856#1857#0" expanded="true" />
-            <element signature="e#1891#1892#0" expanded="true" />
-            <element signature="e#1934#1935#0" expanded="true" />
-            <element signature="e#1973#1974#0" expanded="true" />
-            <element signature="method#mysqlServerCheck#0;class#BaseDataClass#0" />
-            <element signature="docComment;method#getServerCredential#0;class#BaseDataClass#0" />
-            <element signature="docComment;method#checkServerReachable#0;class#BaseDataClass#0" />
-            <element signature="method#checkServerReachable#0;class#BaseDataClass#0" />
-            <element signature="method#showDataBaseErrorDialog#0;class#BaseDataClass#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -778,9 +775,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/af4506a0-aaf5-416e-93be-d6a6c5335d17/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" selection-start-column="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/dataFactory/PurchaseCategoryData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/Ui/SalesCategoryUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+          <folding>
+            <element signature="method#setCashSaleUI#0;class#SalesCategoryUI#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/Ui/LogInUiController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
+        <state relative-caret-position="15">
           <caret line="143" selection-start-line="143" selection-end-line="143" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -789,22 +820,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/Ui/SalesCategoryUI.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/provider/BaseDataClass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-61">
-          <caret line="58" selection-start-line="58" selection-end-line="58" />
+        <state relative-caret-position="330">
+          <caret line="35" column="7" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
           <folding>
-            <element signature="method#setCashSaleUI#0;class#SalesCategoryUI#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/fahamu/dataFactory/PurchaseCategoryData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="266" lean-forward="true" selection-start-line="266" selection-end-line="266" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#mysqlServerCheck#0;class#BaseDataClass#0" />
+            <element signature="docComment;method#getServerCredential#0;class#BaseDataClass#0" />
+            <element signature="docComment;method#checkServerReachable#0;class#BaseDataClass#0" />
+            <element signature="method#checkServerReachable#0;class#BaseDataClass#0" />
+            <element signature="method#showDataBaseErrorDialog#0;class#BaseDataClass#0" />
           </folding>
         </state>
       </provider>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+<FlowPane fx:id="flowPane" alignment = "CENTER" maxHeight = "-Infinity" maxWidth = "-Infinity" minHeight = "-Infinity"
+          minWidth = "-Infinity" prefHeight = "450.0" prefWidth = "700.0" vgap = "10.0"
+          xmlns = "http://javafx.com/javafx/9" xmlns:fx = "http://javafx.com/fxml/1"
+          fx:controller = "com.fahamutech.smartstock.Ui.LogInDrawerContent">
+    <VBox alignment = "CENTER" spacing = "10.0">
+        <JFXButton fx:id = "signUpBannerJFXButton" buttonType = "RAISED" onAction = "#signUpBanner"/>
+        <JFXButton fx:id = "logInBannerJFXButton" buttonType = "RAISED" onAction = "#logInBanner"/>
+        <JFXButton fx:id = "settingBannerJFXButton" buttonType = "RAISED" onAction = "#settingDrawer"/>
+    </VBox>
+</FlowPane>

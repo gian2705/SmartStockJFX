@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXDrawersStack?>
+<?import com.jfoenix.controls.JFXSpinner?>
+<?import javafx.scene.layout.StackPane?>
+<StackPane fx:id="parentStackPane" prefHeight="450" prefWidth="700" xmlns="http://javafx.com/javafx/9"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fahamutech.smartstock.Ui.LogInUiController">
+    <JFXDrawersStack fx:id="drawerStack">
+        <children>
+            <JFXDrawer fx:id="leftDrawer" defaultDrawerSize="300.0" onDrawerClosing="#translateBannersCenter"
+                       onDrawerOpening="#translateBannersRight" resizableOnDrag="true" resizeContent="true"/>
+            <JFXDrawer fx:id="rightDrawer" defaultDrawerSize="300.0" direction="RIGHT"
+                       onDrawerClosing="#translateBannersCenter" onDrawerOpening="#translateBannersLeft"
+                       resizableOnDrag="true" resizeContent="true"/>
+        </children>
+    </JFXDrawersStack>
+    <JFXSpinner fx:id="progressIndicator" prefHeight="181.0" prefWidth="194.0" visible="false"/>
+</StackPane>
