@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://kilimotaarifa.co.tz:3306/lb</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hbm2ddl.auto">update</property>
+        <mapping class="com.fahamutech.smartstock.databasemodel.CashPurchaseEntity"/>
+        <mapping class="com.fahamutech.smartstock.databasemodel.CashSaleEntity"/>
+        <mapping class="com.fahamutech.smartstock.databasemodel.CategoryListEntity"/>
+        <mapping class="com.fahamutech.smartstock.databasemodel.CheckStockEntity"/>
+        <mapping class="com.fahamutech.smartstock.databasemodel.CreditPurchaseEntity"/>
+        <mapping class="com.fahamutech.smartstock.databasemodel.ExpenseListEntity"/>
+        <mapping class="com.fahamutech.smartstock.databasemodel.InvoiceEntity"/>
+        <mapping class="com.fahamutech.smartstock.databasemodel.LoginInfoEntity"/>
+        <mapping class="com.fahamutech.smartstock.databasemodel.PaidInvoiceEntity"/>
+        <mapping class="com.fahamutech.smartstock.databasemodel.ReceiptEntity"/>
+        <mapping class="com.fahamutech.smartstock.databasemodel.RetailStockEntity"/>
+        <mapping class="com.fahamutech.smartstock.databasemodel.ReturnGoodsEntity"/>
+        <mapping class="com.fahamutech.smartstock.databasemodel.SuppliersEntity"/>
+        <mapping class="com.fahamutech.smartstock.databasemodel.UnitListEntity"/>
+        <!-- <property name="connection.username"/> -->
+        <!-- <property name="connection.password"/> -->
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

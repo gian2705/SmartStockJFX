@@ -333,7 +333,7 @@
             <exclude name = "StockManager.jar"/>
         </fx:fileset>
         <fx:fileset id = "all_StockManager" dir = "${artifact.temp.output.StockManager}" includes = "**/*.jar"/>
-        <fx:application id = "StockManager_id" name = "Lb" mainClass = "com.fahamutech.smartstock.Main" version = "1.0"/>
+        <fx:application id = "StockManager_id" name = "Lb" mainClass = "com.fahamutech.smartstock.javafx.Main" version = "1.0"/>
         <fx:csstobin outdir = "${artifact.temp.output.StockManager}">
             <fileset dir = "${artifact.temp.output.StockManager}" includes = "**/*.css"/>
         </fx:csstobin>

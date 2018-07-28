@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Exec=/home/joshua/Desktop/b.sh
+Name=LB Pharmacy
+Comment=Stock management
+Icon=/home/joshua/filesBackup/icon.png

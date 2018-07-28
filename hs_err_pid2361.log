@@ -16,7 +16,7 @@
 
 ---------------  S U M M A R Y ------------
 
-Command Line: -javaagent:/home/olive/.local/share/umake/ide/idea-ultimate/lib/idea_rt.jar=39623:/home/olive/.local/share/umake/ide/idea-ultimate/bin -Dfile.encoding=UTF-8 Main
+Command Line: -javaagent:/home/olive/.local/share/umake/ide/idea-ultimate/lib/idea_rt.jar=39623:/home/olive/.local/share/umake/ide/idea-ultimate/bin -Dfile.encoding=UTF-8 com.fahamutech.smartstock.databasemodel.Main
 
 Host: Intel(R) Core(TM) i5 CPU       M 560  @ 2.67GHz, 4 cores, 5G, Ubuntu 17.10
 Time: Fri Mar  2 13:15:42 2018 EAT elapsed time: 3636 seconds (0d 1h 0m 36s)
@@ -139,7 +139,7 @@ Other Threads:
   0x00007f284002c800 GCTaskThread "GC Thread#1" [stack: 0x00007f282553f000,0x00007f282563f000] [id=2364]
   0x00007f284002e800 GCTaskThread "GC Thread#2" [stack: 0x00007f282543e000,0x00007f282553e000] [id=2365]
   0x00007f2840030000 GCTaskThread "GC Thread#3" [stack: 0x00007f282533d000,0x00007f282543d000] [id=2366]
-  0x00007f2840085000 ConcurrentGCThread "G1 Main Marker" [stack: 0x00007f28240db000,0x00007f28241db000] [id=2372]
+  0x00007f2840085000 ConcurrentGCThread "G1 com.fahamutech.smartstock.databasemodel.Main Marker" [stack: 0x00007f28240db000,0x00007f28241db000] [id=2372]
   0x00007f2840086800 ConcurrentGCThread "G1 Marker#0" [stack: 0x00007f27fcfb8000,0x00007f27fd0b8000] [id=2373]
   0x00007f2840037800 ConcurrentGCThread "G1 Refine#0" [stack: 0x00007f2824b35000,0x00007f2824c35000] [id=2370]
   0x00007f2840035800 ConcurrentGCThread "G1 Refine#1" [stack: 0x00007f2824c36000,0x00007f2824d36000] [id=2369]
@@ -1118,7 +1118,7 @@ ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsysca
 
 VM Arguments:
 jvm_args: -javaagent:/home/olive/.local/share/umake/ide/idea-ultimate/lib/idea_rt.jar=39623:/home/olive/.local/share/umake/ide/idea-ultimate/bin -Dfile.encoding=UTF-8 
-java_command: Main
+java_command: com.fahamutech.smartstock.databasemodel.Main
 java_class_path (initial): /home/olive/IdeaProjects/SmartStockManager/out/production/StockManager:/home/olive/.m2/repository/mysql/mysql-connector-java/6.0.6/mysql-connector-java-6.0.6.jar:/home/olive/.m2/repository/org/xerial/sqlite-jdbc/3.20.1/sqlite-jdbc-3.20.1.jar:/home/olive/IdeaProjects/SmartStockManager/src/fahamu/libs/FileEncryption.jar:/home/olive/IdeaProjects/SmartStockManager/src/fahamu/libs/jfoenix-9.0.1.jar:/home/olive/.local/share/umake/ide/idea-ultimate/redist/annotations-java8.jar
 Launcher Type: SUN_STANDARD
 
