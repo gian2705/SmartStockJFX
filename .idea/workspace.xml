@@ -2,197 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="908653d0-88f1-473c-93b0-1171e3db859b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Hibernate_5_3_2_5_3_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/antlr-2.7.7.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/byte-buddy-1.8.12.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/classmate-1.3.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/dom4j-1.6.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hibernate-commons-annotations-5.0.4.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hibernate-core-5.3.2.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/jandex-2.0.5.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/javassist-3.22.0-GA.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/javax.activation-api-1.2.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/javax.persistence-api-2.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/jboss-logging-3.3.2.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/jboss-transaction-api_1.2_spec-1.1.1.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/CashPurchaseEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/CashSaleEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/CategoryListEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/CheckStockEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/CreditPurchaseEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/ExpenseListEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/InvoiceEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/LoginInfoEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/PaidInvoiceEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/ReceiptEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/RetailStockEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/ReturnGoodsEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/SuppliersEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/UnitListEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/hibernate.cfg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/webservice/StockWebService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/webservice/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/home.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/stockmanager.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/databasemodel/CashPurchaseEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/databasemodel/CashSaleEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/databasemodel/CategoryListEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/databasemodel/CheckStockEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/databasemodel/CreditPurchaseEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/databasemodel/ExpenseListEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/databasemodel/InvoiceEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/databasemodel/LoginInfoEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/databasemodel/PaidInvoiceEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/databasemodel/ReceiptEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/databasemodel/RetailStockEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/databasemodel/ReturnGoodsEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/databasemodel/SuppliersEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/databasemodel/UnitListEntity.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/databasemodel/hibernate.cfg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/LeftDrawer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/LogInUiController$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/ReportsCategoryUI$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/ReportsCategoryUI$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/ReportsCategoryUI$DiscountDetailTableDataClass.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/ReportsCategoryUI$SalesTableDataClass.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/SalesCategoryUI$CashierSale.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/SalesCategoryUI$ExpiredProduct.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/SalesCategoryUI$NearExpire.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/dataFactory/ReportCategoryData.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/dataFactory/SaleCategoryData.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/ServerReachableWatch.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/webservice/StockWebService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/webservice/controller/UserController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/af4506a0-aaf5-416e-93be-d6a6c5335d17.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/af4506a0-aaf5-416e-93be-d6a6c5335d17.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hs_err_pid2361.log" beforeDir="false" afterPath="$PROJECT_DIR$/hs_err_pid2361.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid2361.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartstockmanager.xml" beforeDir="false" afterPath="$PROJECT_DIR$/smartstockmanager.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/Ui/BaseUIComponents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/Ui/BaseUIComponents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/Ui/ExpenditureCategoryUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/Ui/ExpenditureCategoryUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/Ui/LeftDrawer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/Ui/LeftDrawer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/Ui/ListCellsCustom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/Ui/ListCellsCustom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/Ui/LogInDrawerContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/Ui/LogInDrawerContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/Ui/LogInUiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/Ui/LogInUiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/Ui/MainStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/Ui/MainStage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/Ui/PurchaseCategoryUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/Ui/PurchaseCategoryUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/Ui/ReportsCategoryUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/Ui/ReportsCategoryUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/Ui/SalesCategoryUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/Ui/SalesCategoryUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/Ui/SellerUiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/Ui/SellerUiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/Ui/StockCategoryUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/Ui/StockCategoryUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/dataFactory/DataFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/dataFactory/DataFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/dataFactory/ExpenditureCategoryData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/dataFactory/ExpenditureCategoryData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/dataFactory/LogInStageData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/dataFactory/LogInStageData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/dataFactory/PurchaseCategoryData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/dataFactory/PurchaseCategoryData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/dataFactory/ReportCategoryData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/dataFactory/ReportCategoryData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/dataFactory/SaleCategoryData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/dataFactory/SaleCategoryData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/dataFactory/ServerCredentialFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/dataFactory/ServerCredentialFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/dataFactory/StockCategoryData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/dataFactory/StockCategoryData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/BaseDataClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/BaseDataClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/Resources.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/Resources.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/ServerReachableWatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/ServerReachableWatch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/fxmls/logInDrawerContent.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/fxmls/logInDrawerContent.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/fxmls/logInLeftDrawer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/fxmls/logInLeftDrawer.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/fxmls/loginUi.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/fxmls/loginUi.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/fxmls/sellerUi.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/fxmls/sellerUi.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/image/calculate.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/image/calculate.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/image/calculate.xcf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/image/calculate.xcf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/image/cart.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/image/cart.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/image/databaseIcon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/image/databaseIcon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/image/developerLogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/image/developerLogo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/image/googleSign.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/image/googleSign.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/image/googleSign.xcf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/image/googleSign.xcf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/image/googleSignUp.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/image/googleSignUp.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/image/lbLogo.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/image/lbLogo.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/image/manicon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/image/manicon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/image/setting.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/image/setting.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/image/ssmlogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/image/ssmlogo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/provider/sqlite3/serverCredential.db.encrypted" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/sqlite3/serverCredential.db.encrypted" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/README.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mysql/Dump20180208.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/mysql/Dump20180208.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/scripts/installer.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/scripts/installer.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/scripts/lb.desktop" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/scripts/lb.desktop" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/scripts/start.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/scripts/start.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/test.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/README.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Main$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/BaseUIComponents.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/BaseUIComponents.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/ExpenditureCategoryUI$ExpensesList.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/ExpenditureCategoryUI$ExpensesList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/ExpenditureCategoryUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/ExpenditureCategoryUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/LeftDrawer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/ListCellsCustom.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/ListCellsCustom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/LogInDrawerContent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/LogInDrawerContent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/LogInUiController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/LogInUiController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/LogInUiController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/MainStage$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/MainStage$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/MainStage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/MainStage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/PurchaseCategoryUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/PurchaseCategoryUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/PurchaseCategoryUI$CashPurchaseList.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/PurchaseCategoryUI$CashPurchaseList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/PurchaseCategoryUI$CreditPurchaseList.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/PurchaseCategoryUI$CreditPurchaseList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/PurchaseCategoryUI$DueInvoiceListTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/PurchaseCategoryUI$DueInvoiceListTable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/PurchaseCategoryUI$InvoiceDetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/PurchaseCategoryUI$InvoiceDetail.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/PurchaseCategoryUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/PurchaseCategoryUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/ReportsCategoryUI$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/ReportsCategoryUI$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/ReportsCategoryUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/ReportsCategoryUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/ReportsCategoryUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/ReportsCategoryUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/ReportsCategoryUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/ReportsCategoryUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/ReportsCategoryUI$DiscountDetailTableDataClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/ReportsCategoryUI$GrossProfitTableViewData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/ReportsCategoryUI$GrossProfitTableViewData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/ReportsCategoryUI$ProductSellHistoryDataClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/ReportsCategoryUI$ProductSellHistoryDataClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/ReportsCategoryUI$SalesTableDataClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/ReportsCategoryUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/ReportsCategoryUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/SalesCategoryUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/SalesCategoryUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/SalesCategoryUI$CashSaleOfDay.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/SalesCategoryUI$CashSaleOfDay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/SalesCategoryUI$CashSaleTableBill.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/SalesCategoryUI$CashSaleTableBill.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/SalesCategoryUI$CashTraSaleOfDay.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/SalesCategoryUI$CashTraSaleOfDay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/SalesCategoryUI$CashierSale.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/SalesCategoryUI$ExpiredProduct.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/SalesCategoryUI$NearExpire.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/SalesCategoryUI$OrderList.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/SalesCategoryUI$OrderList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/SalesCategoryUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/SalesCategoryUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/SellerUiController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/SellerUiController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/StockCategoryUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/StockCategoryUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/StockCategoryUI$StockList.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/StockCategoryUI$StockList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/Ui/StockCategoryUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/Ui/StockCategoryUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/dataFactory/ExpenditureCategoryData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/dataFactory/ExpenditureCategoryData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/dataFactory/LogInStageData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/dataFactory/LogInStageData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/dataFactory/PurchaseCategoryData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/dataFactory/PurchaseCategoryData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/dataFactory/ReportCategoryData.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/dataFactory/SaleCategoryData.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/dataFactory/ServerCredentialFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/dataFactory/ServerCredentialFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/dataFactory/StockCategoryData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/dataFactory/StockCategoryData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/BaseDataClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/BaseDataClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/Resources.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/Resources.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/ServerReachableWatch.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/fxmls/logInDrawerContent.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/fxmls/logInDrawerContent.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/fxmls/logInLeftDrawer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/fxmls/logInLeftDrawer.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/fxmls/loginUi.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/fxmls/loginUi.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/fxmls/sellerUi.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/fxmls/sellerUi.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/image/calculate.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/image/calculate.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/image/calculate.xcf" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/image/calculate.xcf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/image/cart.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/image/cart.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/image/databaseIcon.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/image/databaseIcon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/image/developerLogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/image/developerLogo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/image/googleSign.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/image/googleSign.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/image/googleSign.xcf" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/image/googleSign.xcf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/image/googleSignUp.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/image/googleSignUp.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/image/lbLogo.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/image/lbLogo.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/image/manicon.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/image/manicon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/image/setting.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/image/setting.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/image/ssmlogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/image/ssmlogo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fahamu/provider/sqlite3/serverCredential.db.encrypted" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fahamutech/smartstock/javafx/provider/sqlite3/serverCredential.db.encrypted" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mysql/Dump20180208.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/mysql/Dump20180208.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/scripts/installer.sh" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/scripts/installer.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/scripts/lb.desktop" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/scripts/lb.desktop" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/scripts/start.sh" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/scripts/start.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/test.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartstockmanager.properties" beforeDir="false" afterPath="$PROJECT_DIR$/smartstockmanager.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -234,36 +47,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
-              <folding>
-                <element signature="n#plugin#0;n#plugins#0;n#build#0;n#project#0;n#!!top" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="StockWebService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/webservice/StockWebService.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -273,6 +56,41 @@
                 <element signature="imports" expanded="true" />
                 <element signature="e#211#212#0" expanded="true" />
                 <element signature="e#248#249#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="17" column="2" selection-start-line="17" selection-start-column="2" selection-end-line="19" selection-end-column="17" />
+              <folding>
+                <element signature="n#plugin#0;n#plugins#0;n#build#0;n#project#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="smartstockmanager.properties" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/smartstockmanager.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="47" lean-forward="true" selection-start-line="3" selection-start-column="47" selection-end-line="3" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/webservice/controller/UserController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#264#265#0" expanded="true" />
+                <element signature="e#293#294#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -372,6 +190,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/webservice/controller/UserController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/Main.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/smartstockmanager.properties" />
       </list>
     </option>
   </component>
@@ -393,6 +212,28 @@
         <option name="createModuleGroups" value="true" />
       </MavenImportingSettings>
     </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="stockmanager" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="stockmanager" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="stockmanager" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
+          <item name="spring-boot" type="36feed69:MavenProjectsStructure$PluginNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="206" />
@@ -448,7 +289,12 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="smartstock" type="462c0819:PsiDirectoryNode" />
-              <item name="databasemodel" type="462c0819:PsiDirectoryNode" />
+              <item name="webservice" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="stockmanager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SmartStockManager" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -474,7 +320,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
@@ -492,11 +338,11 @@
       <recent name="com.fahamutech.smartstock" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/resources/static" />
       <recent name="$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/data" />
       <recent name="$PROJECT_DIR$/src/main/java/fahamu/provider" />
       <recent name="$PROJECT_DIR$/src/main/java/fahamu/provider/fxmls" />
-      <recent name="$PROJECT_DIR$/src/main/java/fahamu/Ui" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -637,7 +483,7 @@
       <workItem from="1531468843361" duration="3057000" />
       <workItem from="1532430581754" duration="2261000" />
       <workItem from="1532779501233" duration="66000" />
-      <workItem from="1532779776640" duration="4183000" />
+      <workItem from="1532779776640" duration="4832000" />
     </task>
     <task id="LOCAL-00001" summary="update database">
       <created>1531172319649</created>
@@ -646,20 +492,26 @@
       <option name="project" value="LOCAL" />
       <updated>1531172319650</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update database and add spring support">
+      <created>1532786037944</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1532786037944</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21482000" />
+    <option name="totallyTimeSpent" value="22131000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="43" y="25" width="1323" height="743" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Application Servers" order="7" />
-      <window_info anchor="right" id="Maven Projects" order="3" />
+      <window_info anchor="right" id="Maven Projects" order="3" visible="true" weight="0.32943013" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
@@ -675,12 +527,13 @@
       <window_info anchor="bottom" id="Java Enterprise" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.51623374" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.51623374" />
       <window_info anchor="bottom" id="Spring" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32954547" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32954547" />
       <window_info id="Persistence" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24043716" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24043716" />
       <window_info anchor="right" id="Bean Validation" />
+      <window_info id="Web" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32954547" />
       <window_info anchor="right" id="Google Cloud Storage" order="3" />
       <window_info anchor="right" id="Theme Preview" order="3" />
@@ -689,7 +542,6 @@
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Database Console" order="8" weight="0.6720779" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="Web" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
@@ -702,23 +554,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update database" />
-    <option name="LAST_COMMIT_MESSAGE" value="update database" />
+    <MESSAGE value="update database and add spring support" />
+    <option name="LAST_COMMIT_MESSAGE" value="update database and add spring support" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/provider/Resources.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="21" lean-forward="true" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/dataFactory/ServerCredentialFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
@@ -819,11 +658,6 @@
         <state relative-caret-position="174">
           <caret line="42" column="60" selection-start-line="42" selection-start-column="60" selection-end-line="42" selection-end-column="60" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hs_err_pid2361.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-765" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/Ui/LogInDrawerContent.java">
@@ -1004,13 +838,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/hibernate.cfg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="55" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/CashPurchaseEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -1032,17 +859,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-9-oracle/lib/src.zip!/java.base/java/lang/ClassLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="495" selection-start-line="495" selection-end-line="495" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="26" lean-forward="true" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/webservice/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        <state relative-caret-position="90">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#264#265#0" expanded="true" />
-            <element signature="e#288#289#0" expanded="true" />
+            <element signature="e#293#294#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hs_err_pid2361.log">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/webservice/StockWebService.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1056,27 +914,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/javafx/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/fahamutech/smartstock/databasemodel/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
+        <state relative-caret-position="120">
+          <caret line="17" column="2" selection-start-line="17" selection-start-column="2" selection-end-line="19" selection-end-column="17" />
           <folding>
             <element signature="n#plugin#0;n#plugins#0;n#build#0;n#project#0;n#!!top" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smartstockmanager.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="47" lean-forward="true" selection-start-line="3" selection-start-column="47" selection-end-line="3" selection-end-column="47" />
         </state>
       </provider>
     </entry>
