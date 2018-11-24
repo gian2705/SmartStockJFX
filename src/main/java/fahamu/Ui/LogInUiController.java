@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXDrawersStack;
 import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.events.JFXDrawerEvent;
 import fahamu.dataFactory.LogInStageData;
+import fahamu.provider.Resources;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -105,11 +106,11 @@ public class LogInUiController extends BaseUIComponents {
         // to be moved to constructor
         try {
 
-            drawerStack.setContent(FXMLLoader.load(LogInUiController.class.getResource("../provider/fxmls/logInDrawerContent.fxml")));
-            assert LOG_IN_BANNER_IMAGE != null;
-            parentStackPane.setStyle("-fx-background-image: url(" + BACKGROUND_IMAGE_PATH + ");");
-            assert LEFT_DRAWER_LAYOUT_FXML != null;
-            leftDrawer.setSidePane((VBox) FXMLLoader.load(getClass().getResource("../provider/fxmls/logInLeftDrawer.fxml")));
+            drawerStack.setContent(FXMLLoader.load(Resources.Companion.getResourceAsUrl("fxmls/logInDrawerContent.fxml")));
+            assert getLOG_IN_BANNER_IMAGE() != null;
+            parentStackPane.setStyle("-fx-background-image: url(" + getBACKGROUND_IMAGE_PATH() + ");");
+            assert getLEFT_DRAWER_LAYOUT_FXML() != null;
+            leftDrawer.setSidePane((VBox) FXMLLoader.load(Resources.Companion.getResourceAsUrl("fxmls/logInLeftDrawer.fxml")));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -126,7 +127,7 @@ public class LogInUiController extends BaseUIComponents {
         disableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
         enableProgressIndicator(progressIndicator);
 
-        Task<String> task = new Task<>() {
+        Task<String> task = new Task<String>() {
             @Override
             protected String call() {
                 //updateProgress(-1F, 1);
@@ -153,11 +154,11 @@ public class LogInUiController extends BaseUIComponents {
             enableButtons(new JFXButton[]{logInJFXButton, forgetPasswordJFXButton});
             disableProgressIndicator(progressIndicator);
 
-            assert WRONG_PASSWORD_ICON != null;
+            assert getWRONG_PASSWORD_ICON() != null;
             alertCreator("Error", "Trouble log In",
                     "Username is not available or password is incorrect\n" +
                             "Check your credential and try again", logInJFXButton.getScene().getRoot(),
-                    new ImageView(new Image(WRONG_PASSWORD_ICON.toExternalForm())));
+                    new ImageView(new Image(getWRONG_PASSWORD_ICON().toExternalForm())));
             password.clear();
         });
         //p.progressProperty().bind(task.progressProperty());
@@ -170,9 +171,9 @@ public class LogInUiController extends BaseUIComponents {
             if (password.equals(LogInStageData.authenticateUser(username))) {
                 //check type of u
                 String CASHIER = "cashier";
-                if (LogInStageData.getUserType(username).equals(ADMIN)) {
+                if (LogInStageData.getUserType(username).equals(getADMIN())) {
                     //TODO: call admin scene
-                    return ADMIN;
+                    return getADMIN();
                 } else return CASHIER;
             }
         } catch (SQLException e) {
@@ -216,7 +217,7 @@ public class LogInUiController extends BaseUIComponents {
                              Stage stage,
                              JFXButton logInJFXButton,
                              JFXButton reset) {
-        if (task.getValue().equals(ADMIN)) {
+        if (task.getValue().equals(getADMIN())) {
             //for admin user interface
             //TODO: to create admin scene
 
@@ -239,8 +240,8 @@ public class LogInUiController extends BaseUIComponents {
                 enableButtons(new JFXButton[]{logInJFXButton, reset});
                 disableProgressIndicator(progressIndicator);
                 stage.setResizable(true);
-                assert SALE_UI_LAYOUT_FXML != null;
-                stage.setScene(new Scene(FXMLLoader.load(SALE_UI_LAYOUT_FXML)));
+                assert getSALE_UI_LAYOUT_FXML() != null;
+                stage.setScene(new Scene(FXMLLoader.load(getSALE_UI_LAYOUT_FXML())));
                 stage.sizeToScene();
                 stage.centerOnScreen();
             } catch (IOException e) {
@@ -250,19 +251,19 @@ public class LogInUiController extends BaseUIComponents {
     }
 
     public void translateBannersRight(JFXDrawerEvent jfxDrawerEvent) {
-        JFXDrawersStack parent= (JFXDrawersStack) ((JFXDrawer)jfxDrawerEvent.getSource()).getParent();
+        JFXDrawersStack parent = (JFXDrawersStack) ((JFXDrawer) jfxDrawerEvent.getSource()).getParent();
         FlowPane content = (FlowPane) parent.getContent();
         content.setTranslateX(150f);
     }
 
     public void translateBannersCenter(JFXDrawerEvent jfxDrawerEvent) {
-        JFXDrawersStack parent= (JFXDrawersStack) ((JFXDrawer)jfxDrawerEvent.getSource()).getParent();
+        JFXDrawersStack parent = (JFXDrawersStack) ((JFXDrawer) jfxDrawerEvent.getSource()).getParent();
         FlowPane content = (FlowPane) parent.getContent();
         content.setTranslateX(0f);
     }
 
     public void translateBannersLeft(JFXDrawerEvent jfxDrawerEvent) {
-        JFXDrawersStack parent= (JFXDrawersStack) ((JFXDrawer)jfxDrawerEvent.getSource()).getParent();
+        JFXDrawersStack parent = (JFXDrawersStack) ((JFXDrawer) jfxDrawerEvent.getSource()).getParent();
         FlowPane content = (FlowPane) parent.getContent();
         content.setTranslateX(-150f);
     }

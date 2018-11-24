@@ -30,7 +30,7 @@ public class LeftDrawer extends BaseUIComponents{
     @FXML
     public void initialize(){
         logInUiController=new LogInUiController();
-        Image imageLogo = new Image(BUSINESS_LOGO.toExternalForm());
+        Image imageLogo = new Image(getBUSINESS_LOGO().toExternalForm());
         logoRectangle.setFill(new ImagePattern(imageLogo));
     }
 
@@ -87,6 +87,6 @@ public class LeftDrawer extends BaseUIComponents{
     public void closeDrawer(ActionEvent actionEvent) {
         JFXButton button= (JFXButton) actionEvent.getSource();
         JFXDrawer  parent = (JFXDrawer) button.getParent().getParent().getParent().getParent();
-        if (parent.isShown())parent.close();
+        if (parent.isOpened())parent.close();
     }
 }

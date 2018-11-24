@@ -112,7 +112,7 @@ public class BaseDataClass extends Resources{
                             "\n1.Make sure you are connected \n" +
                             "2.Check if your wifi is on or cable is connected\n" +
                             "3.Check if server is up and running", parentPane
-                    , new ImageView(DATABASE_ERROR_ICON.toExternalForm())));
+                    , new ImageView(getDATABASE_ERROR_ICON().toExternalForm())));
         }
     }
 

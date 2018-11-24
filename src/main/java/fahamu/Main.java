@@ -6,13 +6,13 @@ import fahamu.provider.Resources;
 import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 
 
 public class Main extends Application {
@@ -28,13 +28,13 @@ public class Main extends Application {
 //        resources = new Resources();
 //        resources.ROOT_PATH_FOR_RESOURCE=System.getProperty("user.dir"); //get the current working directory
         //System.out.println(resources.ROOT_PATH_FOR_RESOURCE);
-        BaseDataClass baseDataClass=new BaseDataClass();
+        BaseDataClass baseDataClass = new BaseDataClass();
         //run in background provider to check if server is reachable
-        Task<Void> task = new Task<>() {
+        Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() {
                 baseDataClass
-                        .mysqlServerCheck(Resources.SERVER_IPA4_ADDRESS,
+                        .mysqlServerCheck(Resources.Companion.getSERVER_IPA4_ADDRESS(),
                                 Resources.class.getResource("sqlite3/serverCredential.db.encrypted").getPath());
                 return null;
             }
@@ -48,12 +48,19 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
         //set scene
         //System.out.println(Main.class.getResource("../test.fxml").toExternalForm());
-        sceneMain = new Scene(FXMLLoader.load(Resources.class.getResource("fxmls/loginUi.fxml")));
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        // URL resource = classloader.getResource("fxmls/test.fxml");
+
+        System.out.println(Resources.Companion.getResourceAsUrl("fxmls/loginUi.fxml"));
+
+        URL url = Resources.Companion.getResourceAsUrl("fxmls/loginUi.fxml");
+
+        sceneMain = new Scene(FXMLLoader.load(url));
         primaryStage.setScene(sceneMain);
         primaryStage.setResizable(false);
-        primaryStage.setTitle(Resources.BUSINESS_NAME);
+        primaryStage.setTitle(Resources.Companion.getBUSINESS_NAME());
         primaryStage.getIcons().setAll(
-                new Image(Resources.class.getResource("image/ssmlogo.png").toExternalForm()));
+                new Image(Resources.Companion.getResourceAsUrl("image/ssmlogo.png").toExternalForm()));
         primaryStage.show();
     }
 
