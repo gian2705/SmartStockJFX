@@ -92,6 +92,8 @@ public class SellerUiController extends BaseUIComponents {
     public void showAbout(ActionEvent actionEvent) {
     }
 
+
+
     public void refreshSalesTrend(Event mouseEvent) {
     }
 
