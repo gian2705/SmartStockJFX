@@ -62,7 +62,7 @@ public class LogInStageData extends BaseDataClass {
 
         mysqlDataSource.setUser(serverDetail.get("username"));
         mysqlDataSource.setPassword(serverDetail.get("password"));
-        mysqlDataSource.setServerName(serverDetail.get("serversAddress"));
+        mysqlDataSource.setServerName("192.168.0.2");
 
         connection = null;
         String type = null;

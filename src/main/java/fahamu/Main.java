@@ -1,17 +1,13 @@
 package fahamu;
 
-import fahamu.Ui.BaseUIComponents;
 import fahamu.provider.BaseDataClass;
 import fahamu.provider.Resources;
 import javafx.application.Application;
-import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
@@ -52,14 +48,14 @@ public class Main extends Application {
         //set scene
         // System.out.println(Resources.Companion.getResourceAsUrl("fxmls/loginUi.fxml"));
 
-        URL url = Resources.Companion.getResourceAsUrl("fxmls/loginUi.fxml");
+        URL url = Resources.getResourceAsUrl("fxmls/loginUi.fxml");
 
         sceneMain = new Scene(FXMLLoader.load(url));
         primaryStage.setScene(sceneMain);
         primaryStage.setResizable(false);
-        primaryStage.setTitle(Resources.Companion.getBUSINESS_NAME());
+        primaryStage.setTitle(Resources.BUSINESS_NAME);
         primaryStage.getIcons().setAll(
-                new Image(Resources.Companion.getResourceAsUrl("image/ssmlogo.png").toExternalForm()));
+                new Image(Resources.getResourceAsUrl("image/ssmlogo.png").toExternalForm()));
 
         stageLogIn = primaryStage;
         primaryStage.show();

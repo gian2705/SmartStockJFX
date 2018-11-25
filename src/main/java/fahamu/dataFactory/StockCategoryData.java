@@ -94,7 +94,7 @@ public class StockCategoryData extends BaseDataClass {
             //get the products
             ResultSet resultSet = statement.executeQuery(getAllProducts);
             while (resultSet.next()) {
-                stockRetailProducts.add(resultSet.getString("product") + " ( " + resultSet.getString("wsell") + " )");
+                stockRetailProducts.add(resultSet.getString("product") + " (*" + resultSet.getString("wsell") + "*)");
             }
         } catch (SQLException ignore) {
 

@@ -27,9 +27,9 @@ public class LogInDrawerContent extends Resources{
     public void initialize() {
 
 
-        logInBannerJFXButton.setGraphic(new ImageView(getLOG_IN_BANNER_IMAGE().toExternalForm()));
-        signUpBannerJFXButton.setGraphic(new ImageView(getSIGN_UP_BANNER_IMAGE().toExternalForm()));
-        settingBannerJFXButton.setGraphic(new ImageView(getSETTING_BANNER_IMAGE().toExternalForm()));
+        logInBannerJFXButton.setGraphic(new ImageView(LOG_IN_BANNER_IMAGE.toExternalForm()));
+        signUpBannerJFXButton.setGraphic(new ImageView(SIGN_UP_BANNER_IMAGE.toExternalForm()));
+        settingBannerJFXButton.setGraphic(new ImageView(SETTING_BANNER_IMAGE.toExternalForm()));
     }
 
     public void signUpBanner(ActionEvent actionEvent) {

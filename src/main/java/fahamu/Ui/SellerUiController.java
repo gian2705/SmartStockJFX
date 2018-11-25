@@ -40,7 +40,7 @@ public class SellerUiController extends BaseUIComponents {
 
     @FXML
     public void initialize()  {
-        addToCartJFXButton.setGraphic(new ImageView(getCART_ICON().toExternalForm()));
+        addToCartJFXButton.setGraphic(new ImageView(CART_ICON.toExternalForm()));
     }
 
     public void enterButtonPressed(KeyEvent keyEvent) {

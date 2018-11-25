@@ -17,6 +17,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Popup;
@@ -50,17 +51,39 @@ public class SalesCategoryUI {
     TableView<CashSaleTableBill> listBillTable;
     TableView<CashSaleOfDay> tableViewSalesOfDay;
     TableView<CashTraSaleOfDay> tableViewSaleTraOfDay;
+
     TextField totalTraSale;
     TextField totalUserTraSales;
     TextField quantityTextField;
     TextField amountTextField;
     TextField discountTextField;
 
+    TabPane tabPaneWhole;
+
+    TextField quantityTextFieldWhole;
+    TextField amountTextFieldWhole;
+    TextField discountTextFieldWhole;
+    TextField totalUserTraSalesWhole;
+    TextField totalTraSaleWhole;
+
+    Tab salesTableViewTabWhole;
+    Button submitCashBillWhole;
+    RadioButton traCheckButtonWhole;
+    CheckBox wholeSaleCheckBoxWhole;
+    TableView<CashSaleTableBill> listBillTableWhole;
+    TableView<CashSaleOfDay> tableViewSalesOfDayWhole;
+    TableView<CashTraSaleOfDay> tableViewSaleTraOfDayWhole;
+
+    private SplitPane splitPaneWhole;
+    private Button addToCartButtonWhole;
+    private TextField receivedTextFieldWhole;
+    private TextField totalAmountTextFieldWhole;
+    private TextField changesTextFieldWhole;
+    private TextField invisibleTotalAmountTextFieldWhole;
+
 
     public SalesCategoryUI(boolean isAdmin) {
-
         cashSaleReports(isAdmin);
-
     }
 
     //the cash sale section
@@ -102,7 +125,7 @@ public class SalesCategoryUI {
         wholeSaleUI.getRowConstraints().add(row0);
         wholeSaleUI.getColumnConstraints().addAll(column0, column1);
 
-        setWholeSaleDataInputPaneAdmin(wholeSaleUI);
+         setWholeSaleDataInputPaneAdmin(wholeSaleUI);
 
         return wholeSaleUI;
     }
@@ -1190,41 +1213,41 @@ public class SalesCategoryUI {
         Label cashReceivedLabel = new Label("Received(TZS) :");
         Label changesLabel = new Label("Changes (TZS) :");
 
-        addToCartButton = new Button("Add To Cart");
+        addToCartButtonWhole = new Button("Add To Cart");
         Button removeFromCart = new Button("Remove Selection");
         Button cancelCashSaleButton = new Button("Cancel");
-        submitCashBill = new Button("Submit Bill");
+        submitCashBillWhole = new Button("Submit Bill");
         Button refreshTraButton = new Button("Refresh");
         refreshTraButton.setDefaultButton(true);
 
-        discountTextField = new TextField();
-        receivedTextField = new TextField();
+        discountTextFieldWhole = new TextField();
+        receivedTextFieldWhole = new TextField();
         TextField priceTextField = new TextField();
-        quantityTextField = new TextField();
-        amountTextField = new TextField();
-        changesTextField = new TextField();
-        totalAmountTextField = new TextField();
+        quantityTextFieldWhole = new TextField();
+        amountTextFieldWhole = new TextField();
+        changesTextFieldWhole = new TextField();
+        totalAmountTextFieldWhole = new TextField();
         TextField shelfTextField = new TextField();
         TextField remainInStockTextField = new TextField();
-        invisibleTotalAmountTextField = new TextField();
+        invisibleTotalAmountTextFieldWhole = new TextField();
 
-        traCheckButton = new RadioButton();
-        wholeSaleCheckBox = new CheckBox();
-        wholeSaleCheckBox.setSelected(true);
-        wholeSaleCheckBox.setDisable(true);
+        traCheckButtonWhole = new RadioButton();
+        wholeSaleCheckBoxWhole = new CheckBox();
+        wholeSaleCheckBoxWhole.setSelected(true);
+        wholeSaleCheckBoxWhole.setDisable(true);
 
-        totalTraSale = new TextField();
-        totalUserTraSales = new TextField();
+        totalTraSaleWhole = new TextField();
+        totalUserTraSalesWhole = new TextField();
         productNameChooserWhole = new ComboBox<>(StockCategoryData.getProductNamesWholeSale());
         productNameChooserWhole.autosize();
 
-        discountTextField.setText(String.valueOf(0));
-        receivedTextField.setText(String.valueOf(0));
-        changesTextField.setText(String.valueOf(0));
-        totalTraSale.setEditable(false);
-        totalUserTraSales.setEditable(false);
-        quantityTextField.setPromptText("Click me...");
-        invisibleTotalAmountTextField.setText(String.valueOf(0));
+        discountTextFieldWhole.setText(String.valueOf(0));
+        receivedTextFieldWhole.setText(String.valueOf(0));
+        changesTextFieldWhole.setText(String.valueOf(0));
+        totalTraSaleWhole.setEditable(false);
+        totalUserTraSalesWhole.setEditable(false);
+        quantityTextFieldWhole.setPromptText("Click me...");
+        invisibleTotalAmountTextFieldWhole.setText(String.valueOf(0));
         productNameChooserWhole.promptTextProperty().setValue("choose product");
 
         dataInputTitle.setFont(new Font(16));
@@ -1243,31 +1266,31 @@ public class SalesCategoryUI {
 
         productNameChooserWhole.setEditable(true);
         priceTextField.setEditable(false);
-        amountTextField.setEditable(false);
+        amountTextFieldWhole.setEditable(false);
         shelfTextField.setEditable(false);
         remainInStockTextField.setEditable(false);
-        changesTextField.setEditable(false);
+        changesTextFieldWhole.setEditable(false);
         remainInStockTextField.setStyle("-fx-background-color: #13a715");
         shelfTextField.setStyle("-fx-background-color: #13a715");
         priceTextField.setStyle("-fx-background-color: #13a715");
-        amountTextField.setStyle("-fx-background-color: #13a715");
-        totalAmountTextField.setStyle("-fx-background-color: #13a715");
-        changesTextField.setStyle("-fx-background-color: #13a715");
+        amountTextFieldWhole.setStyle("-fx-background-color: #13a715");
+        totalAmountTextFieldWhole.setStyle("-fx-background-color: #13a715");
+        changesTextFieldWhole.setStyle("-fx-background-color: #13a715");
 
-        addToCartButton.setDefaultButton(true);
-        submitCashBill.setDefaultButton(true);
+        addToCartButtonWhole.setDefaultButton(true);
+        submitCashBillWhole.setDefaultButton(true);
         removeFromCart.setVisible(false);
-        totalAmountTextField.setEditable(false);
+        totalAmountTextFieldWhole.setEditable(false);
 
         //total sale of the day table view
         //create table view sales of the day;
-        tableViewSalesOfDay = new TableView<>();
+        tableViewSalesOfDayWhole = new TableView<>();
         TableColumn<CashSaleOfDay, String> dateColumn = new TableColumn<>("Date");
         TableColumn<CashSaleOfDay, String> productColumn = new TableColumn<>("Product");
         TableColumn<CashSaleOfDay, String> categoryColumn = new TableColumn<>("Category");
         TableColumn<CashSaleOfDay, Integer> quantityColumn = new TableColumn<>("Quantity");
         TableColumn<CashSaleOfDay, Float> amountColumn = new TableColumn<>("Amount(TZS)");
-        tableViewSalesOfDay.getColumns().addAll(
+        tableViewSalesOfDayWhole.getColumns().addAll(
                 dateColumn,
                 productColumn,
                 categoryColumn,
@@ -1284,17 +1307,17 @@ public class SalesCategoryUI {
         productColumn.setPrefWidth(180);
         categoryColumn.setPrefWidth(80);
         amountColumn.setPrefWidth(100);
-        tableViewSalesOfDay.autosize();
+        tableViewSalesOfDayWhole.autosize();
 
         //tra sales of the day table
-        tableViewSaleTraOfDay = new TableView<>();
-        tableViewSaleTraOfDay.setStyle("-fx-base: #00ff00");
+        tableViewSaleTraOfDayWhole = new TableView<>();
+        tableViewSaleTraOfDayWhole.setStyle("-fx-base: #00ff00");
         TableColumn<CashTraSaleOfDay, String> dateTraColumn = new TableColumn<>("Date");
         TableColumn<CashTraSaleOfDay, String> productTraColumn = new TableColumn<>("Product");
         TableColumn<CashTraSaleOfDay, String> categoryTraColumn = new TableColumn<>("Category");
         TableColumn<CashTraSaleOfDay, Integer> quantityTraColumn = new TableColumn<>("Quantity");
         TableColumn<CashTraSaleOfDay, Float> amountTraColumn = new TableColumn<>("Amount(TZS)");
-        tableViewSaleTraOfDay.getColumns().addAll(
+        tableViewSaleTraOfDayWhole.getColumns().addAll(
                 dateTraColumn,
                 productTraColumn,
                 categoryTraColumn,
@@ -1311,32 +1334,32 @@ public class SalesCategoryUI {
         productTraColumn.setPrefWidth(180);
         categoryTraColumn.setPrefWidth(80);
         amountTraColumn.setPrefWidth(100);
-        tableViewSaleTraOfDay.autosize();
+        tableViewSaleTraOfDayWhole.autosize();
 
         int firstRow = 0;
         int secondColumn = 1;
 
         //put alert and sales of the day in the tab
-        tabPane = new TabPane();
+        tabPaneWhole = new TabPane();
 
-        salesTableViewTab = new Tab("All Cash Sales");
+        salesTableViewTabWhole = new Tab("All Whole Sales");
         Tab alertOfStockTabPane = new Tab("Reports");
         Tab traSalesTabPane = new Tab("Sales Of Day");
 
-        tabPane.setPadding(new Insets(0, 0, 0, 6));
+        tabPaneWhole.setPadding(new Insets(0, 0, 0, 6));
         alertOfStockTabPane.setClosable(false);
         traSalesTabPane.setClosable(false);
 
 
-        salesTableViewTab.setContent(tableViewSalesOfDay);
-        alertOfStockTabPane.setContent(splitPane);
+        salesTableViewTabWhole.setContent(tableViewSalesOfDayWhole);
+        alertOfStockTabPane.setContent(splitPaneWhole);
 
         //vertical box for tra sales preview and total
         HBox hBox = new HBox();
 
         hBox.setPadding(new Insets(6, 0, 6, 0));
         hBox.setSpacing(8);
-        hBox.getChildren().addAll(yourSale, totalUserTraSales, totalSale, totalTraSale, refreshTraButton);
+        hBox.getChildren().addAll(yourSale, totalUserTraSalesWhole, totalSale, totalTraSaleWhole, refreshTraButton);
 
         GridPane traSalesVBox = new GridPane();
         RowConstraints r0 = new RowConstraints(30);
@@ -1348,14 +1371,14 @@ public class SalesCategoryUI {
         c0.setHgrow(Priority.ALWAYS);
 
         traSalesVBox.add(hBox, 0, 0);
-        traSalesVBox.add(tableViewSaleTraOfDay, 0, 1);
+        traSalesVBox.add(tableViewSaleTraOfDayWhole, 0, 1);
 
         traSalesTabPane.setContent(traSalesVBox);
 
-        tabPane.getTabs().addAll(
+        tabPaneWhole.getTabs().addAll(
                 traSalesTabPane,
                 alertOfStockTabPane);
-        cashSaleUI.add(tabPane, secondColumn, firstRow);
+        cashSaleUI.add(tabPaneWhole, secondColumn, firstRow);
 
         //content of input control panel
         GridPane gridPaneDataInput = new GridPane();
@@ -1384,19 +1407,19 @@ public class SalesCategoryUI {
         gridPaneDataInput.add(priceLabel, 0, 4);
         gridPaneDataInput.add(priceTextField, 1, 4);
         gridPaneDataInput.add(wholeSaleLabel, 0, 5);
-        gridPaneDataInput.add(wholeSaleCheckBox, 1, 5);
+        gridPaneDataInput.add(wholeSaleCheckBoxWhole, 1, 5);
         gridPaneDataInput.add(quantityLabel, 0, 6);
-        gridPaneDataInput.add(quantityTextField, 1, 6);
+        gridPaneDataInput.add(quantityTextFieldWhole, 1, 6);
         gridPaneDataInput.add(discountLabel, 0, 7);
-        gridPaneDataInput.add(discountTextField, 1, 7);
+        gridPaneDataInput.add(discountTextFieldWhole, 1, 7);
         gridPaneDataInput.add(amountLabel, 0, 8);
-        gridPaneDataInput.add(amountTextField, 1, 8);
-        gridPaneDataInput.add(addToCartButton, 0, 9);
+        gridPaneDataInput.add(amountTextFieldWhole, 1, 8);
+        gridPaneDataInput.add(addToCartButtonWhole, 0, 9);
         gridPaneDataInput.add(cancelCashSaleButton, 1, 9);
 
 
         //cart table view and bill table view
-        listBillTable = new TableView<>();
+        listBillTableWhole = new TableView<>();
         ObservableList<CashSaleTableBill> billData = FXCollections.observableArrayList();
         TableColumn<CashSaleTableBill, String> productBill = new TableColumn<>("Product");
         TableColumn<CashSaleTableBill, Integer> quantityBill = new TableColumn<>("Quantity");
@@ -1407,8 +1430,8 @@ public class SalesCategoryUI {
         productBill.setMinWidth(150);
         quantityBill.setPrefWidth(48);
         amountBill.setPrefWidth(78);
-        listBillTable.autosize();
-        listBillTable.getColumns().addAll(productBill, quantityBill, amountBill);
+        listBillTableWhole.autosize();
+        listBillTableWhole.getColumns().addAll(productBill, quantityBill, amountBill);
 
         VBox vBox = new VBox();
         HBox hBoxSubmit = new HBox();
@@ -1420,17 +1443,17 @@ public class SalesCategoryUI {
         changesHBox.setAlignment(Pos.TOP_LEFT);
         receivedCashHBox.setSpacing(8);
         changesHBox.setSpacing(8);
-        receivedCashHBox.getChildren().addAll(cashReceivedLabel, receivedTextField);
-        changesHBox.getChildren().addAll(changesLabel, changesTextField);
+        receivedCashHBox.getChildren().addAll(cashReceivedLabel, receivedTextFieldWhole);
+        changesHBox.getChildren().addAll(changesLabel, changesTextFieldWhole);
         hBoxTotalAmount.getChildren().add(totalAmountLabel);
-        hBoxTotalAmount.getChildren().add(totalAmountTextField);
-        hBoxTotalAmount.getChildren().add(traCheckButton);
-        hBoxSubmit.getChildren().add(submitCashBill);
+        hBoxTotalAmount.getChildren().add(totalAmountTextFieldWhole);
+        hBoxTotalAmount.getChildren().add(traCheckButtonWhole);
+        hBoxSubmit.getChildren().add(submitCashBillWhole);
         hBoxSubmit.getChildren().add(removeFromCart);
         vBox.getChildren().add(hBoxTotalAmount);
         vBox.getChildren().addAll(receivedCashHBox);
         vBox.getChildren().addAll(changesHBox);
-        vBox.getChildren().add(listBillTable);
+        vBox.getChildren().add(listBillTableWhole);
         vBox.getChildren().add(hBoxSubmit);
 
         vBox.setPadding(new Insets(4, 0, 0, 0));
@@ -1452,8 +1475,8 @@ public class SalesCategoryUI {
         inputPaneAndBillTablePane.add(vBox, firstColumn, secondRow);
 
 
-        //reurn salling goods
-        tableViewSalesOfDay.setOnMouseClicked(event -> {
+        // return salling goods
+        tableViewSalesOfDayWhole.setOnMouseClicked(event -> {
             switch (event.getButton()) {
                 case SECONDARY: {
                     double x = event.getSceneX() + 50;
@@ -1471,66 +1494,68 @@ public class SalesCategoryUI {
                 }
             }
         });
+
         //wholesale check box
-        wholeSaleCheckBox.setOnMouseClicked(event -> {
+        wholeSaleCheckBoxWhole.setOnMouseClicked(event -> {
             if (productNameChooserWhole.getSelectionModel().isEmpty()) {
                 productNameChooserWhole.requestFocus();
                 productNameChooserWhole.show();
             } else {
-                if (wholeSaleCheckBox.isSelected()) {
-                    if (quantityTextField.getText().isEmpty()) {
-                        amountTextField.setText(String.valueOf(0));
+                if (wholeSaleCheckBoxWhole.isSelected()) {
+                    if (quantityTextFieldWhole.getText().isEmpty()) {
+                        amountTextFieldWhole.setText(String.valueOf(0));
                     } else {
-                        int quant = Integer.parseInt(quantityTextField.getText());
+                        int quant = Integer.parseInt(quantityTextFieldWhole.getText());
                         float wPrice = StockCategoryData.wSellPrice;
                         try {
-                            float total = (wPrice * quant) - Integer.parseInt(discountTextField.getText());
-                            amountTextField.setText(NumberFormat.getInstance().format(total));
+                            float total = (wPrice * quant) - Integer.parseInt(discountTextFieldWhole.getText());
+                            amountTextFieldWhole.setText(NumberFormat.getInstance().format(total));
 
                         } catch (Throwable q) {
-                            amountTextField.setText(String.valueOf(0));
+                            amountTextFieldWhole.setText(String.valueOf(0));
                         }
                     }
-                    quantityTextField.requestFocus();
+                    quantityTextFieldWhole.requestFocus();
                     //event.consume();
                 } else {
                     float price = StockCategoryData.sellPrice;
                     try {
-                        float product = (price * (Integer.parseInt(quantityTextField.getText())))
-                                - Integer.parseInt(discountTextField.getText());
+                        float product = (price * (Integer.parseInt(quantityTextFieldWhole.getText())))
+                                - Integer.parseInt(discountTextFieldWhole.getText());
                         //format number for accountant
                         String value = NumberFormat.getInstance().format(product);
-                        amountTextField.setText(value);
+                        amountTextFieldWhole.setText(value);
                     } catch (Throwable throwable) {
-                        amountTextField.setText(String.valueOf(0));
+                        amountTextFieldWhole.setText(String.valueOf(0));
                     }
-                    quantityTextField.requestFocus();
+                    quantityTextFieldWhole.requestFocus();
                 }
 
             }
 
 
         });
-        //simple calculator
-        receivedTextField.setOnKeyReleased(event -> {
-            if (event.getCode().isDigitKey() && !invisibleTotalAmountTextField.getText().isEmpty()) {
 
-                int received = Integer.parseInt(receivedTextField.getText());
-                int change = received - Integer.parseInt(invisibleTotalAmountTextField.getText());
-                changesTextField.setText(NumberFormat.getInstance().format(change));
+        //simple calculator
+        receivedTextFieldWhole.setOnKeyReleased(event -> {
+            if (event.getCode().isDigitKey() && !invisibleTotalAmountTextFieldWhole.getText().isEmpty()) {
+
+                int received = Integer.parseInt(receivedTextFieldWhole.getText());
+                int change = received - Integer.parseInt(invisibleTotalAmountTextFieldWhole.getText());
+                changesTextFieldWhole.setText(NumberFormat.getInstance().format(change));
 
             } else {
                 switch (event.getCode()) {
                     case BACK_SPACE: {
-                        if (!invisibleTotalAmountTextField.getText().isEmpty()) {
+                        if (!invisibleTotalAmountTextFieldWhole.getText().isEmpty()) {
                             try {
 
-                                int received = Integer.parseInt(receivedTextField.getText());
-                                int change = received - Integer.parseInt(invisibleTotalAmountTextField.getText());
-                                changesTextField.setText(NumberFormat.getInstance().format(change));
+                                int received = Integer.parseInt(receivedTextFieldWhole.getText());
+                                int change = received - Integer.parseInt(invisibleTotalAmountTextFieldWhole.getText());
+                                changesTextFieldWhole.setText(NumberFormat.getInstance().format(change));
                             } catch (NumberFormatException ignore) {
-                                if (receivedTextField.getText().isEmpty()) {
-                                    changesTextField.clear();
+                                if (receivedTextFieldWhole.getText().isEmpty()) {
+                                    changesTextFieldWhole.clear();
                                 }
                             }
 
@@ -1548,8 +1573,8 @@ public class SalesCategoryUI {
             float traSaleTotal1 = SaleCategoryData.getTotalTraSaleOfDay();
             float traCashierSales1 = SaleCategoryData
                     .getTotalTraSaleOfDayOfCashier(Main.currentUserName);
-            totalTraSale.setText(NumberFormat.getInstance().format(traSaleTotal1));
-            totalUserTraSales.setText(NumberFormat.getInstance().format(traCashierSales1));
+            totalTraSaleWhole.setText(NumberFormat.getInstance().format(traSaleTotal1));
+            totalUserTraSalesWhole.setText(NumberFormat.getInstance().format(traCashierSales1));
 
         });
 
@@ -1560,13 +1585,13 @@ public class SalesCategoryUI {
             removeFromCart.setVisible(false);
             productNameChooserWhole.getSelectionModel().clearSelection();
             productNameChooserWhole.show();
-            quantityTextField.clear();
-            changesTextField.clear();
-            receivedTextField.clear();
+            quantityTextFieldWhole.clear();
+            changesTextFieldWhole.clear();
+            receivedTextFieldWhole.clear();
             shelfTextField.clear();
             remainInStockTextField.clear();
             priceTextField.clear();
-            amountTextField.clear();
+            amountTextFieldWhole.clear();
 
         });
 
@@ -1577,17 +1602,17 @@ public class SalesCategoryUI {
                 case ENTER:
                     //if select is not empty
                     if (!productNameChooserWhole.getSelectionModel().isEmpty()) {
-                        String condition = productNameChooserWhole.getSelectionModel().getSelectedItem();
-                        String sell = StockCategoryData.getSellPrice(condition);
+                        String condition = sanitizeProduct(productNameChooserWhole.getSelectionModel().getSelectedItem());
+                        String sell = String.valueOf(StockCategoryData.getWholePrice(condition));
                         String shelf = StockCategoryData.getShelf(condition);
                         String stockRemain = String.valueOf(StockCategoryData.getProductQuantity(condition));
                         StockCategoryData.getWholeSellPrice(condition);
                         priceTextField.setText(sell);
                         shelfTextField.setText(shelf);
                         remainInStockTextField.setText(stockRemain);
-                        discountTextField.setText(Integer.toString(0));
+                        discountTextFieldWhole.setText(Integer.toString(0));
                     }
-                    quantityTextField.requestFocus();
+                    quantityTextFieldWhole.requestFocus();
                     break;
             }
 
@@ -1595,7 +1620,7 @@ public class SalesCategoryUI {
 
         productNameChooserWhole.getEditor().setOnKeyReleased(event -> {
             //update list of combo box
-            ObservableList<String> products = StockCategoryData.getProductNames();
+            ObservableList<String> products = StockCategoryData.getProductNamesWholeSale();
 
             switch (event.getCode()) {
                 case DOWN: {
@@ -1627,7 +1652,6 @@ public class SalesCategoryUI {
                     break;
                 }
                 case SPACE: {
-
                     break;
                 }
                 case BACK_SPACE: {
@@ -1687,38 +1711,44 @@ public class SalesCategoryUI {
             switch (event.getCode()) {
                 case ENTER:
                     if (!productNameChooserWhole.getSelectionModel().isEmpty()) {
-                        String condition = productNameChooserWhole.getSelectionModel().getSelectedItem();
+
+                        String condition = sanitizeProduct(productNameChooserWhole.getSelectionModel().getSelectedItem());
+
+                        // System.out.println(sanitizeProduct(condition));
+
                         String sell = String.valueOf(StockCategoryData.getWholePrice(condition));
                         String shelf = StockCategoryData.getShelf(condition);
                         String stockRemain = String.valueOf(StockCategoryData.getProductQuantity(condition));
+
                         StockCategoryData.getWholeSellPrice(condition);
+
                         priceTextField.setText(sell);
                         shelfTextField.setText(shelf);
-                        discountTextField.setText(Integer.toString(0));
+                        discountTextFieldWhole.setText(Integer.toString(0));
                         remainInStockTextField.setText(stockRemain);
                     }
-                    quantityTextField.requestFocus();
+                    quantityTextFieldWhole.requestFocus();
                     break;
             }
         });
 
         productNameChooserWhole.setOnMouseClicked(event -> {
-            ObservableList<String> products = StockCategoryData.getProductNames();
+            ObservableList<String> products = StockCategoryData.getProductNamesWholeSale();
             productNameChooserWhole.setItems(products);
             removeFromCart.setVisible(false);
             productNameChooserWhole.getSelectionModel().clearSelection();
             productNameChooserWhole.show();
-            quantityTextField.clear();
-            changesTextField.clear();
+            quantityTextFieldWhole.clear();
+            changesTextFieldWhole.clear();
             shelfTextField.clear();
             remainInStockTextField.clear();
             priceTextField.clear();
-            amountTextField.clear();
+            amountTextFieldWhole.clear();
 
         });
 
         //check if a product is selected and quantity is set then shift focus to add to cart if its tru
-        quantityTextField.setOnKeyPressed(event -> {
+        quantityTextFieldWhole.setOnKeyPressed(event -> {
 
             if (productNameChooserWhole.getSelectionModel().isEmpty()) {
                 productNameChooserWhole.requestFocus();
@@ -1729,10 +1759,10 @@ public class SalesCategoryUI {
                     case ENTER:
 
                         //implementation to add to view list will be here
-                        if (quantityTextField.getText().isEmpty()) {
-                            quantityTextField.requestFocus();
+                        if (quantityTextFieldWhole.getText().isEmpty()) {
+                            quantityTextFieldWhole.requestFocus();
                         } else {
-                            discountTextField.requestFocus();
+                            discountTextFieldWhole.requestFocus();
                         }
                 }
             }
@@ -1740,22 +1770,22 @@ public class SalesCategoryUI {
         });
 
         //implement discount text field
-        discountTextField.setOnKeyPressed(event -> {
-            if (quantityTextField.getText().isEmpty()) {
+        discountTextFieldWhole.setOnKeyPressed(event -> {
+            if (quantityTextFieldWhole.getText().isEmpty()) {
 
-                quantityTextField.requestFocus();
+                quantityTextFieldWhole.requestFocus();
 
             } else {
                 switch (event.getCode()) {
                     case ENTER:
                         //implementation to add to view list will be here
-                        if (discountTextField.getText().isEmpty()) {
+                        if (discountTextFieldWhole.getText().isEmpty()) {
 
-                            discountTextField.requestFocus();
+                            discountTextFieldWhole.requestFocus();
 
                         } else {
 
-                            addToCartButton.requestFocus();
+                            addToCartButtonWhole.requestFocus();
 
                         }
                 }
@@ -1763,15 +1793,15 @@ public class SalesCategoryUI {
         });
 
         //dynamic calculate the amount of product if is selected and key pressed=digit
-        quantityTextField.setOnKeyReleased(event -> {
+        quantityTextFieldWhole.setOnKeyReleased(event -> {
             //if is a digit
             if (event.getCode().isDigitKey()) {
-                if (wholeSaleCheckBox.isSelected()) {
-                    int quant = Integer.parseInt(quantityTextField.getText());
+                if (wholeSaleCheckBoxWhole.isSelected()) {
+                    int quant = Integer.parseInt(quantityTextFieldWhole.getText());
                     float wPrice = StockCategoryData.wSellPrice;
                     try {
-                        float total = (wPrice * quant) - Integer.parseInt(discountTextField.getText());
-                        amountTextField.setText(NumberFormat.getInstance().format(total));
+                        float total = (wPrice * quant) - Integer.parseInt(discountTextFieldWhole.getText());
+                        amountTextFieldWhole.setText(NumberFormat.getInstance().format(total));
 
                     } catch (Throwable q) {
                         q.printStackTrace();
@@ -1781,11 +1811,11 @@ public class SalesCategoryUI {
 
                     float price = StockCategoryData.sellPrice;
                     try {
-                        float product = (price * (Integer.parseInt(quantityTextField.getText())))
-                                - Integer.parseInt(discountTextField.getText());
+                        float product = (price * (Integer.parseInt(quantityTextFieldWhole.getText())))
+                                - Integer.parseInt(discountTextFieldWhole.getText());
                         //format number for accountant
                         String value = NumberFormat.getInstance().format(product);
-                        amountTextField.setText(value);
+                        amountTextFieldWhole.setText(value);
                     } catch (Throwable ignore) {
                     }
                 }
@@ -1794,33 +1824,33 @@ public class SalesCategoryUI {
             switch (event.getCode()) {
                 case BACK_SPACE:
                     float price = StockCategoryData.sellPrice;
-                    if (wholeSaleCheckBox.isSelected()) {
-                        if (quantityTextField.getText().isEmpty()) {
-                            amountTextField.setText(String.valueOf(0));
+                    if (wholeSaleCheckBoxWhole.isSelected()) {
+                        if (quantityTextFieldWhole.getText().isEmpty()) {
+                            amountTextFieldWhole.setText(String.valueOf(0));
                         } else {
-                            int quant = Integer.parseInt(quantityTextField.getText());
+                            int quant = Integer.parseInt(quantityTextFieldWhole.getText());
                             float wPrice = StockCategoryData.wSellPrice;
                             try {
-                                float total = (wPrice * quant) - Integer.parseInt(discountTextField.getText());
-                                amountTextField.setText(NumberFormat.getInstance().format(total));
+                                float total = (wPrice * quant) - Integer.parseInt(discountTextFieldWhole.getText());
+                                amountTextFieldWhole.setText(NumberFormat.getInstance().format(total));
 
                             } catch (Throwable q) {
-                                amountTextField.setText(String.valueOf(0));
+                                amountTextFieldWhole.setText(String.valueOf(0));
                             }
                         }
 
                     } else {
-                        if (quantityTextField.getText().isEmpty()) {
-                            amountTextField.setText(String.valueOf(0));
+                        if (quantityTextFieldWhole.getText().isEmpty()) {
+                            amountTextFieldWhole.setText(String.valueOf(0));
                         } else {
                             try {
-                                float product = (price * (Integer.parseInt(quantityTextField.getText())))
-                                        - Integer.parseInt(discountTextField.getText());
+                                float product = (price * (Integer.parseInt(quantityTextFieldWhole.getText())))
+                                        - Integer.parseInt(discountTextFieldWhole.getText());
                                 //format number for accountant
                                 String value = NumberFormat.getInstance().format(product);
-                                amountTextField.setText(value);
+                                amountTextFieldWhole.setText(value);
                             } catch (Throwable throwable) {
-                                amountTextField.setText(String.valueOf(0));
+                                amountTextFieldWhole.setText(String.valueOf(0));
                             }
                         }
                     }
@@ -1829,17 +1859,17 @@ public class SalesCategoryUI {
         });
 
         //implement discount
-        discountTextField.setOnKeyReleased(event -> {
-            if (quantityTextField.getText().isEmpty()) quantityTextField.requestFocus();
+        discountTextFieldWhole.setOnKeyReleased(event -> {
+            if (quantityTextFieldWhole.getText().isEmpty()) quantityTextFieldWhole.requestFocus();
             else {
                 if (event.getCode().isDigitKey()) {
                     float price = StockCategoryData.sellPrice;
                     try {
-                        float discountAmount = (price * (Integer.parseInt(quantityTextField.getText())))
-                                - Integer.parseInt(discountTextField.getText());
+                        float discountAmount = (price * (Integer.parseInt(quantityTextFieldWhole.getText())))
+                                - Integer.parseInt(discountTextFieldWhole.getText());
                         //format number for accountant
                         String value = NumberFormat.getInstance().format(discountAmount);
-                        amountTextField.setText(value);
+                        amountTextFieldWhole.setText(value);
                     } catch (Throwable throwable) {
                         throwable.printStackTrace();
                     }
@@ -1849,12 +1879,12 @@ public class SalesCategoryUI {
                     case BACK_SPACE:
                         float price = StockCategoryData.sellPrice;
                         try {
-                            int amount = ((int) (price * (Integer.parseInt(quantityTextField.getText()))))
-                                    - Integer.parseInt(discountTextField.getText());
+                            int amount = ((int) (price * (Integer.parseInt(quantityTextFieldWhole.getText()))))
+                                    - Integer.parseInt(discountTextFieldWhole.getText());
                             String value = NumberFormat.getInstance().format(amount);
-                            amountTextField.setText(value);
+                            amountTextFieldWhole.setText(value);
                         } catch (Throwable t) {
-                            amountTextField.setText(String.valueOf("0"));
+                            amountTextFieldWhole.setText(String.valueOf("0"));
                         }
                         break;
                 }
@@ -1862,21 +1892,23 @@ public class SalesCategoryUI {
         });
 
         //when clicked set unit and price and category of product if selected
-        quantityTextField.setOnMouseClicked(event -> {
+        quantityTextFieldWhole.setOnMouseClicked(event -> {
             if (productNameChooserWhole.getSelectionModel().isEmpty()) {
                 productNameChooserWhole.requestFocus();
                 productNameChooserWhole.show();
             } else {
                 if (!productNameChooserWhole.getSelectionModel().isEmpty()) {
-                    String condition = productNameChooserWhole.getSelectionModel().getSelectedItem();
-                    String sellPrice = StockCategoryData.getSellPrice(condition);
+                    String condition = sanitizeProduct(productNameChooserWhole.getSelectionModel().getSelectedItem());
+                    String sellPrice = String.valueOf(StockCategoryData.getWholePrice(condition));
                     String shelf = StockCategoryData.getShelf(condition);
                     String stockRemain = String.valueOf(StockCategoryData.getProductQuantity(condition));
+
                     StockCategoryData.getWholeSellPrice(condition);
+
                     priceTextField.setText(sellPrice);
                     shelfTextField.setText(shelf);
                     remainInStockTextField.setText(stockRemain);
-                    discountTextField.setText("0");
+                    discountTextFieldWhole.setText("0");
                 }
             }
         });
@@ -1884,10 +1916,10 @@ public class SalesCategoryUI {
         //delete the input resources
         cancelCashSaleButton.setOnMouseClicked(event -> {
             productNameChooserWhole.getSelectionModel().clearSelection();
-            receivedTextField.clear();
-            changesTextField.clear();
-            quantityTextField.clear();
-            amountTextField.clear();
+            receivedTextFieldWhole.clear();
+            changesTextFieldWhole.clear();
+            quantityTextFieldWhole.clear();
+            amountTextFieldWhole.clear();
             priceTextField.clear();
             shelfTextField.clear();
             remainInStockTextField.clear();
@@ -1895,39 +1927,38 @@ public class SalesCategoryUI {
 
         //save the current product to the slip before submit and shift product to product chooser if
         //every input filled
-        addToCartButton.setOnMouseClicked(event -> {
+        addToCartButtonWhole.setOnMouseClicked(event -> {
 
-            if (amountTextField.getText().isEmpty()) {
+            if (amountTextFieldWhole.getText().isEmpty()) {
 
-                quantityTextField.requestFocus();
+                quantityTextFieldWhole.requestFocus();
 
-            } else if (discountTextField.getText().isEmpty()) {
+            } else if (discountTextFieldWhole.getText().isEmpty()) {
 
-                discountTextField.requestFocus();
+                discountTextFieldWhole.requestFocus();
 
             } else {
 
-                if (wholeSaleCheckBox.isSelected()) {
+                if (wholeSaleCheckBoxWhole.isSelected()) {
                     //check if product stock quantity minus sell quantity is negative
-                    String product = productNameChooserWhole.getSelectionModel().getSelectedItem();
+                    String product = sanitizeProduct(productNameChooserWhole.getSelectionModel().getSelectedItem());
                     int quantity;
                     float discount;
 
                     //check if discount is number
                     try {
-                        discount = Float.parseFloat(discountTextField.getText());
+                        discount = Float.parseFloat(discountTextFieldWhole.getText());
                     } catch (Throwable t) {
-                        discountTextField.requestFocus();
+                        discountTextFieldWhole.requestFocus();
                         throw new IllegalArgumentException("Illegal input in discount");
                     }
 
                     //test if quantity is number
                     try {
-                        quantity = Integer.parseInt(quantityTextField.getText())
-                                * StockCategoryData.getWholeProductQuantity(product);
+                        quantity = Integer.parseInt(quantityTextFieldWhole.getText()) * StockCategoryData.getWholeProductQuantity(product);
                     } catch (NumberFormatException e) {
-                        quantityTextField.clear();
-                        quantityTextField.requestFocus();
+                        quantityTextFieldWhole.clear();
+                        quantityTextFieldWhole.requestFocus();
                         throw new NumberFormatException();
                     }
 
@@ -1935,7 +1966,7 @@ public class SalesCategoryUI {
                     int stockQuantity = StockCategoryData.getProductQuantity(product);
                     stockQuantity = stockQuantity - quantity;
                     if (stockQuantity < 0) {
-                        quantityTextField.requestFocus();
+                        quantityTextFieldWhole.requestFocus();
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setContentText("You sell more than available");
                         alert.setTitle("Zero Stock Error");
@@ -1946,56 +1977,56 @@ public class SalesCategoryUI {
                         //it update the static sell price field in stock category class
 
                         //get amount of a product with discount
-                        float amount1 = (Integer.parseInt(quantityTextField.getText()) * StockCategoryData.wSellPrice)
-                                - Integer.parseInt(discountTextField.getText());
+                        float amount1 = (Integer.parseInt(quantityTextFieldWhole.getText()) * StockCategoryData.wSellPrice)
+                                - Integer.parseInt(discountTextFieldWhole.getText());
 
                         //add resources to the columns of bill table
                         billData.add(
                                 new CashSaleTableBill(product, quantity, discount, amount1)
                         );
-                        listBillTable.setItems(billData);
+                        listBillTableWhole.setItems(billData);
 
                         //calculate the sum after add all items to the cart
-                        int totalSum = (int) (((int) (Integer.valueOf(quantityTextField.getText())
+                        int totalSum = (int) (((int) (Integer.valueOf(quantityTextFieldWhole.getText())
                                 * StockCategoryData.wSellPrice)) - discount);
                         int sum;
-                        sum = (Integer.parseInt(invisibleTotalAmountTextField.getText()) + totalSum);
+                        sum = (Integer.parseInt(invisibleTotalAmountTextFieldWhole.getText()) + totalSum);
 
-                        invisibleTotalAmountTextField.setText(String.valueOf(sum));
-                        totalAmountTextField.setText(NumberFormat.getInstance().format(sum));
+                        invisibleTotalAmountTextFieldWhole.setText(String.valueOf(sum));
+                        totalAmountTextFieldWhole.setText(NumberFormat.getInstance().format(sum));
                         productNameChooserWhole.getSelectionModel().clearSelection();
-                        receivedTextField.clear();
+                        receivedTextFieldWhole.clear();
                         priceTextField.clear();
-                        changesTextField.clear();
-                        quantityTextField.clear();
-                        amountTextField.clear();
+                        changesTextFieldWhole.clear();
+                        quantityTextFieldWhole.clear();
+                        amountTextFieldWhole.clear();
                         shelfTextField.clear();
-                        discountTextField.clear();
+                        discountTextFieldWhole.clear();
                         remainInStockTextField.clear();
                         productNameChooserWhole.requestFocus();
-                        wholeSaleCheckBox.setSelected(false);
+                        // wholeSaleCheckBox.setSelected(false);
                     }
 
                 } else {
                     //check if product stock quantity minus sell quantity is negative
-                    String product = productNameChooserWhole.getSelectionModel().getSelectedItem();
+                    String product = sanitizeProduct(productNameChooserWhole.getSelectionModel().getSelectedItem());
                     int quantity;
                     float discount;
 
                     //check if discount is number
                     try {
-                        discount = Float.parseFloat(discountTextField.getText());
+                        discount = Float.parseFloat(discountTextFieldWhole.getText());
                     } catch (Throwable t) {
-                        discountTextField.requestFocus();
+                        discountTextFieldWhole.requestFocus();
                         throw new IllegalArgumentException("Illegal input in discount");
                     }
 
                     //test if quantity is number
                     try {
-                        quantity = Integer.parseInt(quantityTextField.getText());
+                        quantity = Integer.parseInt(quantityTextFieldWhole.getText());
                     } catch (NumberFormatException e) {
-                        quantityTextField.clear();
-                        quantityTextField.requestFocus();
+                        quantityTextFieldWhole.clear();
+                        quantityTextFieldWhole.requestFocus();
                         throw new NumberFormatException();
                     }
 
@@ -2003,7 +2034,7 @@ public class SalesCategoryUI {
                     int stockQuantity = StockCategoryData.getProductQuantity(product);
                     stockQuantity = stockQuantity - quantity;
                     if (stockQuantity < 0) {
-                        quantityTextField.requestFocus();
+                        quantityTextFieldWhole.requestFocus();
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setContentText("You sell more than available");
                         alert.setTitle("Zero Stock Error");
@@ -2015,195 +2046,191 @@ public class SalesCategoryUI {
                         StockCategoryData.getSellPrice(productNameChooserWhole.getSelectionModel().getSelectedItem());
 
                         //get amount of a product with discount
-                        float amount1 = (Integer.parseInt(quantityTextField.getText()) * StockCategoryData.sellPrice)
-                                - Integer.parseInt(discountTextField.getText());
+                        float amount1 = (Integer.parseInt(quantityTextFieldWhole.getText()) * StockCategoryData.sellPrice)
+                                - Integer.parseInt(discountTextFieldWhole.getText());
 
                         //add resources to the columns of bill table
                         billData.add(
                                 new CashSaleTableBill(product, quantity, discount, amount1)
                         );
-                        listBillTable.setItems(billData);
+                        listBillTableWhole.setItems(billData);
 
                         //calculate the sum after add all items to the cart
-                        int totalSum = (int) (((int) (Integer.valueOf(quantityTextField.getText())
+                        int totalSum = (int) (((int) (Integer.valueOf(quantityTextFieldWhole.getText())
                                 * StockCategoryData.sellPrice)) - discount);
                         int sum;
-                        sum = (Integer.parseInt(invisibleTotalAmountTextField.getText()) + totalSum);
-                        invisibleTotalAmountTextField.setText(String.valueOf(totalSum));
+                        sum = (Integer.parseInt(invisibleTotalAmountTextFieldWhole.getText()) + totalSum);
+                        invisibleTotalAmountTextFieldWhole.setText(String.valueOf(totalSum));
 
-                        invisibleTotalAmountTextField.setText(String.valueOf(sum));
-                        totalAmountTextField.setText(NumberFormat.getInstance().format(sum));
+                        invisibleTotalAmountTextFieldWhole.setText(String.valueOf(sum));
+                        totalAmountTextFieldWhole.setText(NumberFormat.getInstance().format(sum));
                         productNameChooserWhole.getSelectionModel().clearSelection();
-                        receivedTextField.clear();
+                        receivedTextFieldWhole.clear();
                         priceTextField.clear();
-                        changesTextField.clear();
-                        quantityTextField.clear();
-                        amountTextField.clear();
+                        changesTextFieldWhole.clear();
+                        quantityTextFieldWhole.clear();
+                        amountTextFieldWhole.clear();
                         shelfTextField.clear();
-                        discountTextField.clear();
+                        discountTextFieldWhole.clear();
                         remainInStockTextField.clear();
                         productNameChooserWhole.requestFocus();
-                        wholeSaleCheckBox.setSelected(false);
+                        // wholeSaleCheckBox.setSelected(false);
                     }
                 }
             }
         });
 
-        addToCartButton.setOnKeyPressed(event -> {
-            switch (event.getCode()) {
+        addToCartButtonWhole.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                if (amountTextFieldWhole.getText().isEmpty()) {
 
-                case ENTER: {
+                    quantityTextFieldWhole.requestFocus();
 
-                    if (amountTextField.getText().isEmpty()) {
+                } else if (discountTextFieldWhole.getText().isEmpty()) {
 
-                        quantityTextField.requestFocus();
+                    discountTextFieldWhole.requestFocus();
 
-                    } else if (discountTextField.getText().isEmpty()) {
+                } else {
 
-                        discountTextField.requestFocus();
+                    if (wholeSaleCheckBoxWhole.isSelected()) {
+                        //check if product stock quantity minus sell quantity is negative
+                        String product = sanitizeProduct(productNameChooserWhole.getSelectionModel().getSelectedItem());
+
+                        int quantity;
+                        float discount;
+
+                        //check if discount is number
+                        try {
+                            discount = Float.parseFloat(discountTextFieldWhole.getText());
+                        } catch (Throwable t) {
+                            discountTextFieldWhole.requestFocus();
+                            throw new IllegalArgumentException("Illegal input in discount");
+                        }
+
+                        //test if quantity is number
+                        try {
+                            quantity = Integer.parseInt(quantityTextFieldWhole.getText())
+                                    * StockCategoryData.getWholeProductQuantity(product);
+                        } catch (NumberFormatException e) {
+                            quantityTextFieldWhole.clear();
+                            quantityTextFieldWhole.requestFocus();
+                            throw new NumberFormatException();
+                        }
+
+                        //check if quantity is greater than available
+                        int stockQuantity = StockCategoryData.getProductQuantity(product);
+                        stockQuantity = stockQuantity - quantity;
+                        if (stockQuantity < 0) {
+                            quantityTextFieldWhole.requestFocus();
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setContentText("You sell more than available");
+                            alert.setTitle("Zero Stock Error");
+                            alert.show();
+                            //if all condition are okay then we add to cart
+                        } else {
+
+                            //it update the static sell price field in stock category class
+
+                            //get amount of a product with discount
+                            float amount1 = (Integer.parseInt(quantityTextFieldWhole.getText()) * StockCategoryData.wSellPrice)
+                                    - Integer.parseInt(discountTextFieldWhole.getText());
+
+                            //add resources to the columns of bill table
+                            billData.add(
+                                    new CashSaleTableBill(product, quantity, discount, amount1)
+                            );
+                            listBillTableWhole.setItems(billData);
+
+                            //calculate the sum after add all items to the cart
+                            int totalSum = (int) (((int) (Integer.valueOf(quantityTextFieldWhole.getText())
+                                    * StockCategoryData.wSellPrice)) - discount);
+                            int sum;
+                            sum = (Integer.parseInt(invisibleTotalAmountTextFieldWhole.getText()) + totalSum);
+
+                            invisibleTotalAmountTextFieldWhole.setText(String.valueOf(sum));
+                            totalAmountTextFieldWhole.setText(NumberFormat.getInstance().format(sum));
+                            productNameChooserWhole.getSelectionModel().clearSelection();
+                            receivedTextFieldWhole.clear();
+                            priceTextField.clear();
+                            changesTextFieldWhole.clear();
+                            quantityTextFieldWhole.clear();
+                            amountTextFieldWhole.clear();
+                            shelfTextField.clear();
+                            discountTextFieldWhole.clear();
+                            remainInStockTextField.clear();
+                            productNameChooserWhole.requestFocus();
+                            // wholeSaleCheckBox.setSelected(false);
+                        }
 
                     } else {
+                        //check if product stock quantity minus sell quantity is negative
+                        String product = sanitizeProduct(productNameChooserWhole.getSelectionModel().getSelectedItem());
+                        int quantity;
+                        float discount;
 
-                        if (wholeSaleCheckBox.isSelected()) {
-                            //check if product stock quantity minus sell quantity is negative
-                            String product = productNameChooserWhole.getSelectionModel().getSelectedItem();
-                            int quantity;
-                            float discount;
+                        //check if discount is number
+                        try {
+                            discount = Float.parseFloat(discountTextFieldWhole.getText());
+                        } catch (Throwable t) {
+                            discountTextFieldWhole.requestFocus();
+                            throw new IllegalArgumentException("Illegal input in discount");
+                        }
 
-                            //check if discount is number
-                            try {
-                                discount = Float.parseFloat(discountTextField.getText());
-                            } catch (Throwable t) {
-                                discountTextField.requestFocus();
-                                throw new IllegalArgumentException("Illegal input in discount");
-                            }
+                        //test if quantity is number
+                        try {
+                            quantity = Integer.parseInt(quantityTextFieldWhole.getText());
+                        } catch (NumberFormatException e) {
+                            quantityTextFieldWhole.clear();
+                            quantityTextFieldWhole.requestFocus();
+                            throw new NumberFormatException();
+                        }
 
-                            //test if quantity is number
-                            try {
-                                quantity = Integer.parseInt(quantityTextField.getText())
-                                        * StockCategoryData.getWholeProductQuantity(product);
-                            } catch (NumberFormatException e) {
-                                quantityTextField.clear();
-                                quantityTextField.requestFocus();
-                                throw new NumberFormatException();
-                            }
-
-                            //check if quantity is greater than available
-                            int stockQuantity = StockCategoryData.getProductQuantity(product);
-                            stockQuantity = stockQuantity - quantity;
-                            if (stockQuantity < 0) {
-                                quantityTextField.requestFocus();
-                                Alert alert = new Alert(Alert.AlertType.ERROR);
-                                alert.setContentText("You sell more than available");
-                                alert.setTitle("Zero Stock Error");
-                                alert.show();
-                                //if all condition are okay then we add to cart
-                            } else {
-
-                                //it update the static sell price field in stock category class
-
-                                //get amount of a product with discount
-                                float amount1 = (Integer.parseInt(quantityTextField.getText()) * StockCategoryData.wSellPrice)
-                                        - Integer.parseInt(discountTextField.getText());
-
-                                //add resources to the columns of bill table
-                                billData.add(
-                                        new CashSaleTableBill(product, quantity, discount, amount1)
-                                );
-                                listBillTable.setItems(billData);
-
-                                //calculate the sum after add all items to the cart
-                                int totalSum = (int) (((int) (Integer.valueOf(quantityTextField.getText())
-                                        * StockCategoryData.wSellPrice)) - discount);
-                                int sum;
-                                sum = (Integer.parseInt(invisibleTotalAmountTextField.getText()) + totalSum);
-
-                                invisibleTotalAmountTextField.setText(String.valueOf(sum));
-                                totalAmountTextField.setText(NumberFormat.getInstance().format(sum));
-                                productNameChooserWhole.getSelectionModel().clearSelection();
-                                receivedTextField.clear();
-                                priceTextField.clear();
-                                changesTextField.clear();
-                                quantityTextField.clear();
-                                amountTextField.clear();
-                                shelfTextField.clear();
-                                discountTextField.clear();
-                                remainInStockTextField.clear();
-                                productNameChooserWhole.requestFocus();
-                                wholeSaleCheckBox.setSelected(false);
-                            }
-
+                        //check if quantity is greater than available
+                        int stockQuantity = StockCategoryData.getProductQuantity(product);
+                        stockQuantity = stockQuantity - quantity;
+                        if (stockQuantity < 0) {
+                            quantityTextFieldWhole.requestFocus();
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setContentText("You sell more than available");
+                            alert.setTitle("Zero Stock Error");
+                            alert.show();
+                            //if all condition are okay then we add to cart
                         } else {
-                            //check if product stock quantity minus sell quantity is negative
-                            String product = productNameChooserWhole.getSelectionModel().getSelectedItem();
-                            int quantity;
-                            float discount;
 
-                            //check if discount is number
-                            try {
-                                discount = Float.parseFloat(discountTextField.getText());
-                            } catch (Throwable t) {
-                                discountTextField.requestFocus();
-                                throw new IllegalArgumentException("Illegal input in discount");
-                            }
+                            //it update the static sell price field in stock category class
+                            StockCategoryData.getSellPrice(sanitizeProduct(productNameChooserWhole.getSelectionModel().getSelectedItem()));
 
-                            //test if quantity is number
-                            try {
-                                quantity = Integer.parseInt(quantityTextField.getText());
-                            } catch (NumberFormatException e) {
-                                quantityTextField.clear();
-                                quantityTextField.requestFocus();
-                                throw new NumberFormatException();
-                            }
+                            //get amount of a product with discount
+                            float amount1 = (Integer.parseInt(quantityTextFieldWhole.getText())
+                                    * StockCategoryData.sellPrice)
+                                    - Integer.parseInt(discountTextFieldWhole.getText());
 
-                            //check if quantity is greater than available
-                            int stockQuantity = StockCategoryData.getProductQuantity(product);
-                            stockQuantity = stockQuantity - quantity;
-                            if (stockQuantity < 0) {
-                                quantityTextField.requestFocus();
-                                Alert alert = new Alert(Alert.AlertType.ERROR);
-                                alert.setContentText("You sell more than available");
-                                alert.setTitle("Zero Stock Error");
-                                alert.show();
-                                //if all condition are okay then we add to cart
-                            } else {
+                            //add resources to the columns of bill table
+                            billData.add(
+                                    new CashSaleTableBill(product, quantity, discount, amount1)
+                            );
+                            listBillTableWhole.setItems(billData);
 
-                                //it update the static sell price field in stock category class
-                                StockCategoryData.getSellPrice(productNameChooserWhole
-                                        .getSelectionModel().getSelectedItem());
+                            //calculate the sum after add all items to the cart
+                            int totalSum = (int) (((int) (Integer.valueOf(quantityTextFieldWhole.getText())
+                                    * StockCategoryData.sellPrice)) - discount);
+                            int sum;
+                            sum = (Integer.parseInt(invisibleTotalAmountTextFieldWhole.getText()) + totalSum);
+                            invisibleTotalAmountTextFieldWhole.setText(String.valueOf(totalSum));
 
-                                //get amount of a product with discount
-                                float amount1 = (Integer.parseInt(quantityTextField.getText())
-                                        * StockCategoryData.sellPrice)
-                                        - Integer.parseInt(discountTextField.getText());
-
-                                //add resources to the columns of bill table
-                                billData.add(
-                                        new CashSaleTableBill(product, quantity, discount, amount1)
-                                );
-                                listBillTable.setItems(billData);
-
-                                //calculate the sum after add all items to the cart
-                                int totalSum = (int) (((int) (Integer.valueOf(quantityTextField.getText())
-                                        * StockCategoryData.sellPrice)) - discount);
-                                int sum;
-                                sum = (Integer.parseInt(invisibleTotalAmountTextField.getText()) + totalSum);
-                                invisibleTotalAmountTextField.setText(String.valueOf(totalSum));
-
-                                invisibleTotalAmountTextField.setText(String.valueOf(sum));
-                                totalAmountTextField.setText(NumberFormat.getInstance().format(sum));
-                                productNameChooserWhole.getSelectionModel().clearSelection();
-                                receivedTextField.clear();
-                                priceTextField.clear();
-                                changesTextField.clear();
-                                quantityTextField.clear();
-                                amountTextField.clear();
-                                shelfTextField.clear();
-                                discountTextField.clear();
-                                remainInStockTextField.clear();
-                                productNameChooserWhole.requestFocus();
-                                wholeSaleCheckBox.setSelected(false);
-                            }
+                            invisibleTotalAmountTextFieldWhole.setText(String.valueOf(sum));
+                            totalAmountTextFieldWhole.setText(NumberFormat.getInstance().format(sum));
+                            productNameChooserWhole.getSelectionModel().clearSelection();
+                            receivedTextFieldWhole.clear();
+                            priceTextField.clear();
+                            changesTextFieldWhole.clear();
+                            quantityTextFieldWhole.clear();
+                            amountTextFieldWhole.clear();
+                            shelfTextField.clear();
+                            discountTextFieldWhole.clear();
+                            remainInStockTextField.clear();
+                            productNameChooserWhole.requestFocus();
+                            //  wholeSaleCheckBox.setSelected(false);
                         }
                     }
                 }
@@ -2212,33 +2239,163 @@ public class SalesCategoryUI {
         });
 
         removeFromCart.setOnMouseClicked(event -> {
-            if (listBillTable.getSelectionModel().isEmpty()) listBillTable.getSelectionModel().select(0);
+            if (listBillTableWhole.getSelectionModel().isEmpty()) listBillTableWhole.getSelectionModel().select(0);
             else {
-                int selectedIndex = listBillTable.getSelectionModel().getSelectedIndex();
-                int amount = (int) listBillTable.getSelectionModel().getSelectedItem().getAmount();
-                int amountNew = Integer.parseInt(invisibleTotalAmountTextField.getText()) - amount;
-                invisibleTotalAmountTextField.setText(String.valueOf(amountNew));
-                totalAmountTextField.setText(NumberFormat.getInstance().format(amountNew));
-                listBillTable.getItems().remove(selectedIndex);
+                int selectedIndex = listBillTableWhole.getSelectionModel().getSelectedIndex();
+                int amount = (int) listBillTableWhole.getSelectionModel().getSelectedItem().getAmount();
+                int amountNew = Integer.parseInt(invisibleTotalAmountTextFieldWhole.getText()) - amount;
+                invisibleTotalAmountTextFieldWhole.setText(String.valueOf(amountNew));
+                totalAmountTextFieldWhole.setText(NumberFormat.getInstance().format(amountNew));
+                listBillTableWhole.getItems().remove(selectedIndex);
             }
             removeFromCart.setVisible(false);
         });
 
         //show remove button when clicked
-        listBillTable.setOnMouseClicked(event -> removeFromCart.setVisible(true));
+        listBillTableWhole.setOnMouseClicked(event -> removeFromCart.setVisible(true));
 
         //when submit bill button pressed
-        submitCashBill.setOnMouseClicked(event -> {
-            setSubmitCashBill();
+        submitCashBillWhole.setOnMouseClicked(event -> {
+            setSubmitCashBillWhole();
         });
 
         //when check button pressed for
-        traCheckButton.setOnMouseClicked(event -> {
-            if (traCheckButton.isSelected()) listBillTable.setStyle("-fx-base: #00ff00");
-            else listBillTable.setStyle("-fx-base: #efeded");
+        traCheckButtonWhole.setOnMouseClicked(event -> {
+            if (traCheckButtonWhole.isSelected()) listBillTableWhole.setStyle("-fx-base: #00ff00");
+            else listBillTableWhole.setStyle("-fx-base: #efeded");
         });
 
         cashSaleUI.add(inputPaneAndBillTablePane, firstColumn, firstRow);
+    }
+
+    void setSubmitCashBillWhole() {
+        //set alert dialog if error happen on submit slip
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Zero Stock Error");
+        alert.setContentText("You sell more than available...\n\n");
+        boolean showAlert = false;
+
+        //insert the list of product in the cash sale database when paid
+        String id;
+        String product;
+        String category;
+        String unit;
+        int quantity;
+        int stockQuantity;
+        float discount;
+        float amount;
+        String user;
+        //check if tra button is pressed
+        //n-means a normal sell
+        //n/n
+        if (traCheckButtonWhole.isSelected()) id = "n/n";
+        else id = "n";
+
+        //check first if list is not empty
+        if (!listBillTableWhole.getItems().isEmpty()) {
+
+            //add content of the bill to the database
+            for (CashSaleTableBill cashSaleTableBill : listBillTableWhole.getItems()) {
+
+                product = cashSaleTableBill.getProduct();
+                amount = cashSaleTableBill.getAmount();
+                quantity = cashSaleTableBill.getQuantity();
+                discount = cashSaleTableBill.getDiscount();
+
+                //update the stock quantity
+                stockQuantity = StockCategoryData.getProductQuantity(product);
+                stockQuantity = stockQuantity - quantity;
+
+                //check each product quantity for zero stock error
+                if (stockQuantity < 0) {
+                    String string = alert.getContentText();
+                    alert.setContentText(string.concat(product + "\n"));
+                    showAlert = true;
+                } else {
+
+                    //update product quantity after sell it
+                    StockCategoryData.updateProductQuantity(product, stockQuantity);
+
+                    category = StockCategoryData.getCategory(product);
+                    unit = StockCategoryData.getUnit(product);
+                    long timeInMillis = Calendar.getInstance().getTimeInMillis();
+                    Date date1 = new Date(timeInMillis);
+
+                    //get the user input the resources
+                    user = Main.currentUserName;
+
+                    //add resources to all sale of the day table
+                    tableViewSalesOfDayWhole.getItems().add(
+                            new CashSaleOfDay(
+                                    date1.toString(),
+                                    product,
+                                    category,
+                                    quantity,
+                                    amount
+                            )
+                    );
+
+                    //add resources to tra table sale of the day
+                    if (id.equals("n/n")) {
+                        tableViewSaleTraOfDayWhole.getItems().add(
+                                new CashTraSaleOfDay(
+                                        date1.toString(),
+                                        product,
+                                        category,
+                                        quantity,
+                                        amount
+                                )
+                        );
+                    }
+
+                    //add resources to database
+                    SaleCategoryData.insertData(
+                            id,
+                            product,
+                            category,
+                            unit,
+                            quantity,
+                            amount,
+                            discount,
+                            user
+                    );
+
+                    //update total tra sales
+                    float traSaleTotal1 = SaleCategoryData.getTotalTraSaleOfDay();
+                    float traCashierSales1 = SaleCategoryData
+                            .getTotalTraSaleOfDayOfCashier(Main.currentUserName);
+                    totalTraSaleWhole.setText(NumberFormat.getInstance().format(traSaleTotal1));
+                    totalUserTraSalesWhole.setText(NumberFormat.getInstance().format(traCashierSales1));
+
+                    //clear simple calculator
+                    receivedTextFieldWhole.clear();
+                    changesTextFieldWhole.clear();
+
+                }
+            }
+            //show product with results int zero stock
+            if (showAlert) {
+                String concat = alert.getContentText().concat("\n remove those from cart");
+                alert.setContentText(concat);
+                alert.show();
+            } else {
+
+                //if successful bill is submitted
+                invisibleTotalAmountTextFieldWhole.setText(String.valueOf(0));
+                totalAmountTextFieldWhole.clear();
+                listBillTableWhole.getItems().clear();
+                traCheckButtonWhole.setSelected(false);
+                listBillTableWhole.setStyle("-fx-base: #efeded");
+                productNameChooserWhole.requestFocus();
+                productNameChooserWhole.show();
+            }
+
+        } else if (productNameChooserWhole.getSelectionModel().isEmpty()) {
+            productNameChooserWhole.requestFocus();
+            productNameChooserWhole.show();
+        } else {
+            addToCartButtonWhole.requestFocus();
+        }
     }
 
     void setSubmitCashBill() {
@@ -2510,6 +2667,149 @@ public class SalesCategoryUI {
             splitPane.setOrientation(Orientation.VERTICAL);
             splitPane.setDividerPositions(0.8f);
             splitPane.getItems().add(cashierAlerts());
+        }
+
+    }
+
+    private void cashSaleReportsWhole(boolean isAdmin) {
+
+        if (isAdmin) {
+
+            Label totalSale = new Label("Total :");
+            Label chooseDateLabel = new Label("Choose Date :");
+            chooseDateLabel.setFont(new Font(14));
+            totalSale.setFont(new Font(14));
+
+            Button refreshButton = new Button("Refresh");
+            refreshButton.setDefaultButton(true);
+
+            TextField totalAmountTextField = new TextField();
+            totalAmountTextField.setEditable(false);
+            totalAmountTextField.setStyle("-fx-background-color: #13a715");
+
+            NumberAxis floatAxis = new NumberAxis();
+            CategoryAxis categoryAxis = new CategoryAxis();
+
+            ObservableList<String> observableList = FXCollections.observableArrayList();
+            observableList.addAll("N/N", "N", "A");
+
+            floatAxis.setLabel("amount");
+            categoryAxis.setCategories(observableList);
+
+            BarChart<Number, String> barChart = new BarChart<>(floatAxis, categoryAxis);
+            barChart.setTitle("Sales Report");
+
+            XYChart.Series<Number, String> seriesTra;
+            XYChart.Series<Number, String> seriesNormal;
+            XYChart.Series<Number, String> seriesTotal;
+
+            seriesTra = new XYChart.Series<>();
+            seriesNormal = new XYChart.Series<>();
+            seriesTotal = new XYChart.Series<>();
+            seriesTotal.getData().add(new XYChart.Data<>(10000, "A"));
+            seriesNormal.getData().add(new XYChart.Data<>(2300, "N"));
+            seriesTra.getData().add(new XYChart.Data<>(4879, "N/N"));
+
+            barChart.getData().add(0, seriesTotal);
+            barChart.getData().add(1, seriesNormal);
+            barChart.getData().add(2, seriesTra);
+
+            TableView<CashierSale> cashierSaleTableView = new TableView<>();
+            cashierSaleTableView.setStyle("-fx-base: #13a715");
+            cashierSaleTableView.autosize();
+
+            TableColumn<CashierSale, String> cashierColumn = new TableColumn<>("Name");
+            TableColumn<CashierSale, Float> amountColumn = new TableColumn<>("Amount(TZS)");
+            TableColumn<CashierSale, Float> discountColumn = new TableColumn<>("Discount(TZS)");
+
+            cashierColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+            discountColumn.setCellValueFactory(new PropertyValueFactory<>("discount"));
+
+            cashierSaleTableView.getColumns().addAll(cashierColumn, amountColumn, discountColumn);
+            java.util.Date dat = new java.util.Date();
+
+            String date = new Date(dat.getTime()).toString();
+
+            ObservableList<String> data = SaleCategoryData.cashierList(date);
+            String totalCashSale = NumberFormat.getInstance().format(SaleCategoryData.getTotalSaleOfDay(date));
+            totalAmountTextField.setText(totalCashSale);
+            for (String s : data) {
+                cashierSaleTableView.getItems().add(
+                        new CashierSale(
+                                s,
+                                SaleCategoryData.getTotalSaleOfDay(s, date),
+                                SaleCategoryData.getTotalDiscount(s, date)
+                        )
+                );
+
+            }
+
+            //for total amount and refresh table
+            HBox totalSaleHBox = new HBox();
+            totalSaleHBox.setAlignment(Pos.TOP_LEFT);
+            totalSaleHBox.setSpacing(4);
+            totalSaleHBox.getChildren().addAll(refreshButton, totalSale, totalAmountTextField);
+
+            //for pick date
+            HBox dateHBox = new HBox();
+            dateHBox.setAlignment(Pos.TOP_LEFT);
+            dateHBox.setSpacing(20);
+            DatePicker saleOfDayDatePicker = new DatePicker();
+            dateHBox.getChildren().addAll(chooseDateLabel, saleOfDayDatePicker);
+
+            VBox totalSaleVBox = new VBox();
+            totalSaleVBox.setSpacing(4);
+            totalSaleVBox.getChildren().addAll(
+                    dateHBox,
+                    totalSaleHBox,
+                    cashierSaleTableView
+            );
+
+
+            splitPaneWhole = new SplitPane();
+            SplitPane splitPaneSaleTotalReports = new SplitPane();
+            splitPaneSaleTotalReports.setOrientation(Orientation.VERTICAL);
+            splitPaneSaleTotalReports.setDividerPositions(0.37f);
+
+            splitPaneWhole.setOrientation(Orientation.HORIZONTAL);
+            splitPaneWhole.setDividerPositions(0.4f);
+
+            splitPaneSaleTotalReports.getItems().addAll(barChart, totalSaleVBox);
+            splitPaneWhole.getItems().addAll(splitPaneSaleTotalReports, cashierAlerts());
+
+            refreshButton.setOnAction(event -> {
+                if (saleOfDayDatePicker.getValue() == null) {
+
+                    saleOfDayDatePicker.requestFocus();
+                    saleOfDayDatePicker.show();
+
+                } else {
+                    int year = saleOfDayDatePicker.getValue().getYear();
+                    int month = saleOfDayDatePicker.getValue().getMonthValue();
+                    int day = saleOfDayDatePicker.getValue().getDayOfMonth();
+                    String date1 = year + "-" + month + "-" + day;
+
+                    cashierSaleTableView.getItems().clear();
+                    ObservableList<String> data1 = SaleCategoryData.cashierList(date1);
+                    for (String s : data1) {
+                        cashierSaleTableView.getItems().add(
+                                new CashierSale(
+                                        s,
+                                        SaleCategoryData.getTotalSaleOfDay(s, date1),
+                                        SaleCategoryData.getTotalDiscount(s, date1)
+                                )
+                        );
+                    }
+                    String totalCashSale1 = NumberFormat.getInstance().format(SaleCategoryData.getTotalSaleOfDay(date1));
+                    totalAmountTextField.setText(totalCashSale1);
+                }
+            });
+        } else {
+            splitPaneWhole = new SplitPane();
+            splitPaneWhole.setOrientation(Orientation.VERTICAL);
+            splitPaneWhole.setDividerPositions(0.8f);
+            splitPaneWhole.getItems().add(cashierAlerts());
         }
 
     }
@@ -3022,6 +3322,14 @@ public class SalesCategoryUI {
         public String getDate() {
             return date.get();
         }
+    }
+
+
+    ///sanitize whole sale
+    private String sanitizeProduct(String product) {
+        int i = product.indexOf("(*");
+        String substring = product.substring(0, i);
+        return substring;
     }
 
 }

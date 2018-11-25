@@ -149,7 +149,7 @@ public class LogInUiController extends BaseUIComponents {
             alertCreator("Error", "Trouble log In",
                     "Process is cancelled\n" +
                             "Check your credential and try again", logInJFXButton.getScene().getRoot(),
-                    new ImageView(new Image(getWrongPasswordIcon().toExternalForm())));
+                    new ImageView(new Image(wrongPasswordIcon.toExternalForm())));
             password.clear();
 
         });
@@ -161,7 +161,7 @@ public class LogInUiController extends BaseUIComponents {
             alertCreator("Error", "Trouble log In",
                     "Username is not available or password is incorrect\n" +
                             "Check your credential and try again", logInJFXButton.getScene().getRoot(),
-                    new ImageView(new Image(getWrongPasswordIcon().toExternalForm())));
+                    new ImageView(new Image(wrongPasswordIcon.toExternalForm())));
             password.clear();
 
         });
@@ -175,9 +175,9 @@ public class LogInUiController extends BaseUIComponents {
         if (password.equals(LogInStageData.authenticateUser(username))) {
             //check type of u
             String CASHIER = "cashier";
-            if (LogInStageData.getUserType(username).equals(getADMIN())) {
+            if (LogInStageData.getUserType(username).equals(ADMIN)) {
                 //TODO: call admin scene
-                return getADMIN();
+                return ADMIN;
             } else return CASHIER;
         } else
             return null;
@@ -213,7 +213,7 @@ public class LogInUiController extends BaseUIComponents {
     }
 
     private void changeScene(Task<String> task, Stage stage, Button logInJFXButton, Button reset) {
-        if (task.getValue().equals(getADMIN())) {
+        if (task.getValue().equals(ADMIN)) {
             //for admin user interface
             //TODO: to create admin scene
             //for testing only
