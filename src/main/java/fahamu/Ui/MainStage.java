@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 import java.text.NumberFormat;
 
 
-class MainStage {
+public class MainStage {
 
     private SalesCategoryUI salesCategoryUI;
     private PurchaseCategoryUI purchaseCategoryUI;
@@ -31,6 +31,7 @@ class MainStage {
     private ReportsCategoryUI reportsCategoryUI;
 
     private GridPane cashSaleUI;
+    private GridPane wholeSaleUI;
     private GridPane rootAdmin;
     private GridPane rootUser;
     private GridPane newStockUI;
@@ -40,14 +41,14 @@ class MainStage {
     private GridPane duePurchaseUI;
     private TabPane homeUIDashboard;
 
-    static Stage stageAdmin;
-    static Stage stageUser;
+    public static Stage stageAdmin;
+    public static Stage stageUser;
 
     private int firstRow = 0;
 
 
-    static int ADMIN_UI = 1;
-    static int CASHIER_UI = 2;
+    public static int ADMIN_UI = 1;
+    public static int CASHIER_UI = 2;
 
     MainStage(int service, SalesCategoryUI salesCategoryUI) {
         this.salesCategoryUI = salesCategoryUI;
@@ -60,6 +61,7 @@ class MainStage {
         this.creditPurchaseUI = purchaseCategoryUI.setCreditPurchaseUI();
         this.duePurchaseUI = purchaseCategoryUI.setDueInvoiceUI();
         this.cashSaleUI = salesCategoryUI.setCashSaleUI();
+        this.wholeSaleUI = salesCategoryUI.setWholeSaleUI();
 
 
         switch (service) {
@@ -96,7 +98,7 @@ class MainStage {
 
                 });
                 break;
-            }
+            } // admin ui
             case 2: {
                 stageUser = new Stage();
                 //set main task Ui
@@ -125,7 +127,7 @@ class MainStage {
 
                 });
                 break;
-            }
+            } //cashier ui
         }
     }
 
@@ -553,6 +555,11 @@ class MainStage {
         cashSalesButton.setOnAction(event -> {
             openCashSaleCategory();
         });
+
+        wholeSale.setOnAction(event -> {
+            openWholeSaleCategory();
+        });
+
         //call new stock activity
         newStock.setOnAction(event -> {
             //change only once the task Ui
@@ -800,7 +807,7 @@ class MainStage {
 
                         stageAdmin.hide();
 
-                        //fahamu.Main.stageLogIn.show();
+                        Main.stageLogIn.show();
 
                     } else {
 
@@ -963,7 +970,7 @@ class MainStage {
                 int secondColumn = 1;
                 rootAdmin.add(menuBar, secondColumn, firstRow);
                 break;
-            }
+            } //admin ui
             case 2: {
                 MenuBar menuBar = new MenuBar();
                 menuBar.setId("menu_bar");
@@ -989,7 +996,8 @@ class MainStage {
                         salesCategoryUI.tableViewSalesOfDay.getItems().clear();
                         salesCategoryUI.tableViewSaleTraOfDay.getItems().clear();
 
-                        //fahamu.Main.stageLogIn.show();
+                        Main.stageLogIn.show();
+
                     } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setContentText("You have unconfirmed bill\nSubmit it or delete contents");
@@ -1016,7 +1024,7 @@ class MainStage {
 
                 rootUser.add(menuBar, 0, firstRow);
                 break;
-            }
+            } //user ui
         }
     }
 
@@ -1145,6 +1153,7 @@ class MainStage {
 
     private void openCashSaleCategory() {
         //change only once the task Ui
+
         int index = rootAdmin.getChildren().size();
         for (int i = 0; i < index; i++) {
             Node node = rootAdmin.getChildren().get(i);
@@ -1153,60 +1162,60 @@ class MainStage {
 
                 //break the loop to avoid repetition
                 //some keyboard shortcut
-                salesCategoryUI.submitCashBill.getScene().getAccelerators().put(
-                        new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN),
-                        () -> {
-                            salesCategoryUI.setSubmitCashBill();
-                        }
-                );
-                salesCategoryUI.traCheckButton.getScene().getAccelerators().put(
-                        new KeyCodeCombination(KeyCode.T, KeyCombination.SHORTCUT_DOWN),
-                        () -> {
-                            if (salesCategoryUI.traCheckButton.isSelected()) {
-                                salesCategoryUI.traCheckButton.setSelected(false);
-                                salesCategoryUI.listBillTable.setStyle("-fx-base: #efeded");
-                            } else {
-                                salesCategoryUI.traCheckButton.setSelected(true);
-                                salesCategoryUI.listBillTable.setStyle("-fx-base: #00ff00");
-                            }
-                        }
-                );
-                salesCategoryUI.wholeSaleCheckBox.getScene().getAccelerators().put(
-                        new KeyCodeCombination(KeyCode.W, KeyCombination.SHORTCUT_DOWN),
-                        () -> {
-                            if (salesCategoryUI.wholeSaleCheckBox.isSelected()) {
-                                salesCategoryUI.wholeSaleCheckBox.setSelected(false);
-                                float price = StockCategoryData.sellPrice;
-                                try {
-                                    float product = (price * (Integer.parseInt(salesCategoryUI.
-                                            quantityTextField.getText())))
-                                            - Integer.parseInt(salesCategoryUI.discountTextField.getText());
-                                    //format number for accountant
-                                    String value = NumberFormat.getInstance().format(product);
-                                    salesCategoryUI.amountTextField.setText(value);
-                                } catch (Throwable throwable) {
-                                    salesCategoryUI.amountTextField.setText(String.valueOf(0));
-                                }
-                            } else {
-                                salesCategoryUI.wholeSaleCheckBox.setSelected(true);
-                                if (salesCategoryUI.quantityTextField.getText().isEmpty()) {
-                                    salesCategoryUI.amountTextField.setText(String.valueOf(0));
-                                } else {
-                                    int quant = Integer.parseInt(salesCategoryUI.quantityTextField.getText());
-                                    float wPrice = StockCategoryData.wSellPrice;
-                                    try {
-                                        float total = (wPrice * quant)
-                                                - Integer.parseInt(salesCategoryUI.discountTextField.getText());
-                                        salesCategoryUI.amountTextField
-                                                .setText(NumberFormat.getInstance().format(total));
-
-                                    } catch (Throwable q) {
-                                        salesCategoryUI.amountTextField.setText(String.valueOf(0));
-                                    }
-                                }
-                            }
-                        }
-                );
+//                salesCategoryUI.submitCashBill.getScene().getAccelerators().put(
+//                        new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN),
+//                        () -> {
+//                            salesCategoryUI.setSubmitCashBill();
+//                        }
+//                );
+//                salesCategoryUI.traCheckButton.getScene().getAccelerators().put(
+//                        new KeyCodeCombination(KeyCode.T, KeyCombination.SHORTCUT_DOWN),
+//                        () -> {
+//                            if (salesCategoryUI.traCheckButton.isSelected()) {
+//                                salesCategoryUI.traCheckButton.setSelected(false);
+//                                salesCategoryUI.listBillTable.setStyle("-fx-base: #efeded");
+//                            } else {
+//                                salesCategoryUI.traCheckButton.setSelected(true);
+//                                salesCategoryUI.listBillTable.setStyle("-fx-base: #00ff00");
+//                            }
+//                        }
+//                );
+//                salesCategoryUI.wholeSaleCheckBox.getScene().getAccelerators().put(
+//                        new KeyCodeCombination(KeyCode.W, KeyCombination.SHORTCUT_DOWN),
+//                        () -> {
+//                            if (salesCategoryUI.wholeSaleCheckBox.isSelected()) {
+//                                salesCategoryUI.wholeSaleCheckBox.setSelected(false);
+//                                float price = StockCategoryData.sellPrice;
+//                                try {
+//                                    float product = (price * (Integer.parseInt(salesCategoryUI.
+//                                            quantityTextField.getText())))
+//                                            - Integer.parseInt(salesCategoryUI.discountTextField.getText());
+//                                    //format number for accountant
+//                                    String value = NumberFormat.getInstance().format(product);
+//                                    salesCategoryUI.amountTextField.setText(value);
+//                                } catch (Throwable throwable) {
+//                                    salesCategoryUI.amountTextField.setText(String.valueOf(0));
+//                                }
+//                            } else {
+//                                salesCategoryUI.wholeSaleCheckBox.setSelected(true);
+//                                if (salesCategoryUI.quantityTextField.getText().isEmpty()) {
+//                                    salesCategoryUI.amountTextField.setText(String.valueOf(0));
+//                                } else {
+//                                    int quant = Integer.parseInt(salesCategoryUI.quantityTextField.getText());
+//                                    float wPrice = StockCategoryData.wSellPrice;
+//                                    try {
+//                                        float total = (wPrice * quant)
+//                                                - Integer.parseInt(salesCategoryUI.discountTextField.getText());
+//                                        salesCategoryUI.amountTextField
+//                                                .setText(NumberFormat.getInstance().format(total));
+//
+//                                    } catch (Throwable q) {
+//                                        salesCategoryUI.amountTextField.setText(String.valueOf(0));
+//                                    }
+//                                }
+//                            }
+//                        }
+//                );
                 break;
             } else {
                 //check if its home page
@@ -1214,96 +1223,274 @@ class MainStage {
                     rootAdmin.getChildren().remove(i);
                     rootAdmin.add(cashSaleUI, 1, 1);
 
-                    //some keyboard shortcut
-                    salesCategoryUI.submitCashBill.getScene().getAccelerators().put(
-                            new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN),
-                            () -> {
-                                salesCategoryUI.setSubmitCashBill();
-                            }
-                    );
-                    salesCategoryUI.traCheckButton.getScene().getAccelerators().put(
-                            new KeyCodeCombination(KeyCode.T, KeyCombination.SHORTCUT_DOWN),
-                            () -> {
-                                if (salesCategoryUI.traCheckButton.isSelected()) {
-                                    salesCategoryUI.traCheckButton.setSelected(false);
-                                    salesCategoryUI.listBillTable.setStyle("-fx-base: #efeded");
-                                } else {
-                                    salesCategoryUI.traCheckButton.setSelected(true);
-                                    salesCategoryUI.listBillTable.setStyle("-fx-base: #00ff00");
-                                }
-                            }
-                    );
-                    salesCategoryUI.wholeSaleCheckBox.getScene().getAccelerators().put(
-                            new KeyCodeCombination(KeyCode.W, KeyCombination.SHORTCUT_DOWN),
-                            () -> {
-                                if (salesCategoryUI.wholeSaleCheckBox.isSelected()) {
-                                    salesCategoryUI.wholeSaleCheckBox.setSelected(false);
-                                    float price = StockCategoryData.sellPrice;
-                                    try {
-                                        float product = (price * (Integer.parseInt(salesCategoryUI.
-                                                quantityTextField.getText())))
-                                                - Integer.parseInt(salesCategoryUI.discountTextField.getText());
-                                        //format number for accountant
-                                        String value = NumberFormat.getInstance().format(product);
-                                        salesCategoryUI.amountTextField.setText(value);
-                                    } catch (Throwable throwable) {
-                                        salesCategoryUI.amountTextField.setText(String.valueOf(0));
-                                    }
-                                } else {
-                                    salesCategoryUI.wholeSaleCheckBox.setSelected(true);
-                                    if (salesCategoryUI.quantityTextField.getText().isEmpty()) {
-                                        salesCategoryUI.amountTextField.setText(String.valueOf(0));
-                                    } else {
-                                        int quant = Integer.parseInt(salesCategoryUI.quantityTextField.getText());
-                                        float wPrice = StockCategoryData.wSellPrice;
-                                        try {
-                                            float total = (wPrice * quant)
-                                                    - Integer.parseInt(salesCategoryUI.discountTextField.getText());
-                                            salesCategoryUI.amountTextField
-                                                    .setText(NumberFormat.getInstance().format(total));
+//                    //some keyboard shortcut
+//                    salesCategoryUI.submitCashBill.getScene().getAccelerators().put(
+//                            new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN),
+//                            () -> {
+//                                salesCategoryUI.setSubmitCashBill();
+//                            }
+//                    );
 
-                                        } catch (Throwable q) {
-                                            salesCategoryUI.amountTextField.setText(String.valueOf(0));
-                                        }
-                                    }
-                                }
-                            }
-                    );
+//                    salesCategoryUI.traCheckButton.getScene().getAccelerators().put(
+//                            new KeyCodeCombination(KeyCode.T, KeyCombination.SHORTCUT_DOWN),
+//                            () -> {
+//                                if (salesCategoryUI.traCheckButton.isSelected()) {
+//                                    salesCategoryUI.traCheckButton.setSelected(false);
+//                                    salesCategoryUI.listBillTable.setStyle("-fx-base: #efeded");
+//                                } else {
+//                                    salesCategoryUI.traCheckButton.setSelected(true);
+//                                    salesCategoryUI.listBillTable.setStyle("-fx-base: #00ff00");
+//                                }
+//                            }
+//                    );
+
+//                    salesCategoryUI.wholeSaleCheckBox.getScene().getAccelerators().put(
+//                            new KeyCodeCombination(KeyCode.W, KeyCombination.SHORTCUT_DOWN),
+//                            () -> {
+//                                if (salesCategoryUI.wholeSaleCheckBox.isSelected()) {
+//                                    salesCategoryUI.wholeSaleCheckBox.setSelected(false);
+//                                    float price = StockCategoryData.sellPrice;
+//                                    try {
+//                                        float product = (price * (Integer.parseInt(salesCategoryUI.
+//                                                quantityTextField.getText())))
+//                                                - Integer.parseInt(salesCategoryUI.discountTextField.getText());
+//                                        //format number for accountant
+//                                        String value = NumberFormat.getInstance().format(product);
+//                                        salesCategoryUI.amountTextField.setText(value);
+//                                    } catch (Throwable throwable) {
+//                                        salesCategoryUI.amountTextField.setText(String.valueOf(0));
+//                                    }
+//                                } else {
+//                                    salesCategoryUI.wholeSaleCheckBox.setSelected(true);
+//                                    if (salesCategoryUI.quantityTextField.getText().isEmpty()) {
+//                                        salesCategoryUI.amountTextField.setText(String.valueOf(0));
+//                                    } else {
+//                                        int quant = Integer.parseInt(salesCategoryUI.quantityTextField.getText());
+//                                        float wPrice = StockCategoryData.wSellPrice;
+//                                        try {
+//                                            float total = (wPrice * quant)
+//                                                    - Integer.parseInt(salesCategoryUI.discountTextField.getText());
+//                                            salesCategoryUI.amountTextField
+//                                                    .setText(NumberFormat.getInstance().format(total));
+//
+//                                        } catch (Throwable q) {
+//                                            salesCategoryUI.amountTextField.setText(String.valueOf(0));
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                    );
+
                     break;
+
                     //check if its other pane
                 } else if (node.toString().startsWith("Grid")) {
                     rootAdmin.getChildren().remove(i);
                     rootAdmin.add(cashSaleUI, 1, 1);
 
+//                    //some keyboard shortcut
+//                    salesCategoryUI.submitCashBill.getScene().getAccelerators().put(
+//                            new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN),
+//                            () -> {
+//                                salesCategoryUI.setSubmitCashBill();
+//                            }
+//                    );
+
+
+//                    salesCategoryUI.traCheckButton.getScene().getAccelerators().put(
+//                            new KeyCodeCombination(KeyCode.T, KeyCombination.SHORTCUT_DOWN),
+//                            () -> {
+//                                if (salesCategoryUI.traCheckButton.isSelected()) {
+//                                    salesCategoryUI.traCheckButton.setSelected(false);
+//                                    salesCategoryUI.listBillTable.setStyle("-fx-base: #efeded");
+//                                } else {
+//                                    salesCategoryUI.traCheckButton.setSelected(true);
+//                                    salesCategoryUI.listBillTable.setStyle("-fx-base: #00ff00");
+//                                }
+//                            }
+//                    );
+//                    salesCategoryUI.wholeSaleCheckBox.getScene().getAccelerators().put(
+//                            new KeyCodeCombination(KeyCode.W, KeyCombination.SHORTCUT_DOWN),
+//                            () -> {
+//                                if (salesCategoryUI.wholeSaleCheckBox.isSelected()) {
+//                                    salesCategoryUI.wholeSaleCheckBox.setSelected(false);
+//                                } else {
+//                                    salesCategoryUI.wholeSaleCheckBox.setSelected(true);
+//                                }
+//                            }
+//                    );
+                    break;
+
+                }
+            }
+        }
+    }
+
+    private void openWholeSaleCategory() {
+        //change only once the task Ui
+
+        System.out.println("Whole sale is created");
+
+        int index = rootAdmin.getChildren().size();
+        for (int i = 0; i < index; i++) {
+            Node node = rootAdmin.getChildren().get(i);
+            //avoid repetition of removing the same task Ui
+            if (node.getId().equals("whole_sale")) {
+
+                //break the loop to avoid repetition
+                //some keyboard shortcut
+//                salesCategoryUI.submitCashBill.getScene().getAccelerators().put(
+//                        new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN),
+//                        () -> {
+//                            salesCategoryUI.setSubmitCashBill();
+//                        }
+//                );
+//                salesCategoryUI.traCheckButton.getScene().getAccelerators().put(
+//                        new KeyCodeCombination(KeyCode.T, KeyCombination.SHORTCUT_DOWN),
+//                        () -> {
+//                            if (salesCategoryUI.traCheckButton.isSelected()) {
+//                                salesCategoryUI.traCheckButton.setSelected(false);
+//                                salesCategoryUI.listBillTable.setStyle("-fx-base: #efeded");
+//                            } else {
+//                                salesCategoryUI.traCheckButton.setSelected(true);
+//                                salesCategoryUI.listBillTable.setStyle("-fx-base: #00ff00");
+//                            }
+//                        }
+//                );
+//                salesCategoryUI.wholeSaleCheckBox.getScene().getAccelerators().put(
+//                        new KeyCodeCombination(KeyCode.W, KeyCombination.SHORTCUT_DOWN),
+//                        () -> {
+//                            if (salesCategoryUI.wholeSaleCheckBox.isSelected()) {
+//                                salesCategoryUI.wholeSaleCheckBox.setSelected(false);
+//                                float price = StockCategoryData.sellPrice;
+//                                try {
+//                                    float product = (price * (Integer.parseInt(salesCategoryUI.
+//                                            quantityTextField.getText())))
+//                                            - Integer.parseInt(salesCategoryUI.discountTextField.getText());
+//                                    //format number for accountant
+//                                    String value = NumberFormat.getInstance().format(product);
+//                                    salesCategoryUI.amountTextField.setText(value);
+//                                } catch (Throwable throwable) {
+//                                    salesCategoryUI.amountTextField.setText(String.valueOf(0));
+//                                }
+//                            } else {
+//                                salesCategoryUI.wholeSaleCheckBox.setSelected(true);
+//                                if (salesCategoryUI.quantityTextField.getText().isEmpty()) {
+//                                    salesCategoryUI.amountTextField.setText(String.valueOf(0));
+//                                } else {
+//                                    int quant = Integer.parseInt(salesCategoryUI.quantityTextField.getText());
+//                                    float wPrice = StockCategoryData.wSellPrice;
+//                                    try {
+//                                        float total = (wPrice * quant)
+//                                                - Integer.parseInt(salesCategoryUI.discountTextField.getText());
+//                                        salesCategoryUI.amountTextField
+//                                                .setText(NumberFormat.getInstance().format(total));
+//
+//                                    } catch (Throwable q) {
+//                                        salesCategoryUI.amountTextField.setText(String.valueOf(0));
+//                                    }
+//                                }
+//                            }
+//                        }
+//                );
+                break;
+
+            } else {
+                //check if its home page
+                if (node.toString().startsWith("TabPan")) {
+                    rootAdmin.getChildren().remove(i);
+                    rootAdmin.add(wholeSaleUI, 1, 1);
+
+//                    //some keyboard shortcut
+//                    salesCategoryUI.submitCashBill.getScene().getAccelerators().put(
+//                            new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN),
+//                            () -> {
+//                                salesCategoryUI.setSubmitCashBill();
+//                            }
+//                    );
+//                    salesCategoryUI.traCheckButton.getScene().getAccelerators().put(
+//                            new KeyCodeCombination(KeyCode.T, KeyCombination.SHORTCUT_DOWN),
+//                            () -> {
+//                                if (salesCategoryUI.traCheckButton.isSelected()) {
+//                                    salesCategoryUI.traCheckButton.setSelected(false);
+//                                    salesCategoryUI.listBillTable.setStyle("-fx-base: #efeded");
+//                                } else {
+//                                    salesCategoryUI.traCheckButton.setSelected(true);
+//                                    salesCategoryUI.listBillTable.setStyle("-fx-base: #00ff00");
+//                                }
+//                            }
+//                    );
+//                    salesCategoryUI.wholeSaleCheckBox.getScene().getAccelerators().put(
+//                            new KeyCodeCombination(KeyCode.W, KeyCombination.SHORTCUT_DOWN),
+//                            () -> {
+//                                if (salesCategoryUI.wholeSaleCheckBox.isSelected()) {
+//                                    salesCategoryUI.wholeSaleCheckBox.setSelected(false);
+//                                    float price = StockCategoryData.sellPrice;
+//                                    try {
+//                                        float product = (price * (Integer.parseInt(salesCategoryUI.
+//                                                quantityTextField.getText())))
+//                                                - Integer.parseInt(salesCategoryUI.discountTextField.getText());
+//                                        //format number for accountant
+//                                        String value = NumberFormat.getInstance().format(product);
+//                                        salesCategoryUI.amountTextField.setText(value);
+//                                    } catch (Throwable throwable) {
+//                                        salesCategoryUI.amountTextField.setText(String.valueOf(0));
+//                                    }
+//                                } else {
+//                                    salesCategoryUI.wholeSaleCheckBox.setSelected(true);
+//                                    if (salesCategoryUI.quantityTextField.getText().isEmpty()) {
+//                                        salesCategoryUI.amountTextField.setText(String.valueOf(0));
+//                                    } else {
+//                                        int quant = Integer.parseInt(salesCategoryUI.quantityTextField.getText());
+//                                        float wPrice = StockCategoryData.wSellPrice;
+//                                        try {
+//                                            float total = (wPrice * quant)
+//                                                    - Integer.parseInt(salesCategoryUI.discountTextField.getText());
+//                                            salesCategoryUI.amountTextField
+//                                                    .setText(NumberFormat.getInstance().format(total));
+//
+//                                        } catch (Throwable q) {
+//                                            salesCategoryUI.amountTextField.setText(String.valueOf(0));
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                    );
+                    break;
+                    //check if its other pane
+                } else if (node.toString().startsWith("Grid")) {
+                    rootAdmin.getChildren().remove(i);
+                    rootAdmin.add(wholeSaleUI, 1, 1);
+
                     //some keyboard shortcut
-                    salesCategoryUI.submitCashBill.getScene().getAccelerators().put(
-                            new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN),
-                            () -> {
-                                salesCategoryUI.setSubmitCashBill();
-                            }
-                    );
-                    salesCategoryUI.traCheckButton.getScene().getAccelerators().put(
-                            new KeyCodeCombination(KeyCode.T, KeyCombination.SHORTCUT_DOWN),
-                            () -> {
-                                if (salesCategoryUI.traCheckButton.isSelected()) {
-                                    salesCategoryUI.traCheckButton.setSelected(false);
-                                    salesCategoryUI.listBillTable.setStyle("-fx-base: #efeded");
-                                } else {
-                                    salesCategoryUI.traCheckButton.setSelected(true);
-                                    salesCategoryUI.listBillTable.setStyle("-fx-base: #00ff00");
-                                }
-                            }
-                    );
-                    salesCategoryUI.wholeSaleCheckBox.getScene().getAccelerators().put(
-                            new KeyCodeCombination(KeyCode.W, KeyCombination.SHORTCUT_DOWN),
-                            () -> {
-                                if (salesCategoryUI.wholeSaleCheckBox.isSelected()) {
-                                    salesCategoryUI.wholeSaleCheckBox.setSelected(false);
-                                } else {
-                                    salesCategoryUI.wholeSaleCheckBox.setSelected(true);
-                                }
-                            }
-                    );
+//                    salesCategoryUI.submitCashBill.getScene().getAccelerators().put(
+//                            new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN),
+//                            () -> {
+//                                salesCategoryUI.setSubmitCashBill();
+//                            }
+//                    );
+//                    salesCategoryUI.traCheckButton.getScene().getAccelerators().put(
+//                            new KeyCodeCombination(KeyCode.T, KeyCombination.SHORTCUT_DOWN),
+//                            () -> {
+//                                if (salesCategoryUI.traCheckButton.isSelected()) {
+//                                    salesCategoryUI.traCheckButton.setSelected(false);
+//                                    salesCategoryUI.listBillTable.setStyle("-fx-base: #efeded");
+//                                } else {
+//                                    salesCategoryUI.traCheckButton.setSelected(true);
+//                                    salesCategoryUI.listBillTable.setStyle("-fx-base: #00ff00");
+//                                }
+//                            }
+//                    );
+//                    salesCategoryUI.wholeSaleCheckBox.getScene().getAccelerators().put(
+//                            new KeyCodeCombination(KeyCode.W, KeyCombination.SHORTCUT_DOWN),
+//                            () -> {
+//                                if (salesCategoryUI.wholeSaleCheckBox.isSelected()) {
+//                                    salesCategoryUI.wholeSaleCheckBox.setSelected(false);
+//                                } else {
+//                                    salesCategoryUI.wholeSaleCheckBox.setSelected(true);
+//                                }
+//                            }
+//                    );
                     break;
 
                 }

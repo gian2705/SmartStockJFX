@@ -11,7 +11,7 @@ open class Resources() {
     val DATABASE_ERROR_ICON = getResourceAsUrl("image/databaseIcon.png")
     val ICON = getResourceAsUrl("image/ssmlogo.png")
     val BACKGROUND_IMAGE_PATH = getResourceAsUrl("image/calculate.jpg")
-    val WRONG_PASSWORD_ICON = getResourceAsUrl("image/manicon.png")
+    val wrongPasswordIcon = getResourceAsUrl("image/manicon.png")
     val LOG_IN_UI_FXML = getResourceAsUrl("fxmls/loginUi.fxml")
     val LEFT_DRAWER_LAYOUT_FXML = getResourceAsUrl("fxmls/logInLeftDrawer.fxml")
     val SALE_UI_LAYOUT_FXML = getResourceAsUrl("fxmls/sellerUi.fxml")

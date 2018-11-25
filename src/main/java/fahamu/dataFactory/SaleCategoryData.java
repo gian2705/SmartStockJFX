@@ -45,6 +45,11 @@ public class SaleCategoryData extends BaseDataClass {
         mysqlDataSource.setUser(username);
         mysqlDataSource.setPassword(password);
         mysqlDataSource.setServerName(serverAddress);
+        try {
+            mysqlDataSource.setUseSSL(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         connection = null;
 

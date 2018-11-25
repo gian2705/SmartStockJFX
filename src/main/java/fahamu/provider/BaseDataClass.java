@@ -5,6 +5,7 @@ import fahamu.Ui.BaseUIComponents;
 import fahamu.dataFactory.ServerCredentialFactory;
 import javafx.application.Platform;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
@@ -12,14 +13,17 @@ import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Set;
 
-public class BaseDataClass extends Resources{
+public class BaseDataClass extends Resources {
 
-    protected static HashMap<String, String> serverDetail;
+    protected static HashMap<String, String> serverDetail = new HashMap<>();
     private boolean serverReachable;
 
-    public BaseDataClass(){
-
+    public BaseDataClass() {
+        serverDetail.put("username", "joshua");
+        serverDetail.put("password", "joshua");
+        serverDetail.put("serverAddress", "localhost");
     }
 
     public void mysqlServerCheck(byte[] serverIPv4Address, String dataPath) {
@@ -36,6 +40,7 @@ public class BaseDataClass extends Resources{
     /**
      * this method is used for development only
      * during production must be changed to fit the general requirement
+     *
      * @param credentialFilePath =path of encrypted file
      * @return true if successfully get the server credential
      */
@@ -102,7 +107,7 @@ public class BaseDataClass extends Resources{
         return serverReachable;
     }
 
-    public void showDataBaseErrorDialog(BaseUIComponents baseUIComponents, StackPane parentPane){
+    public void showDataBaseErrorDialog(BaseUIComponents baseUIComponents, AnchorPane parentPane) {
         if (!serverReachable) {
             Platform.runLater(() -> baseUIComponents.alertCreator("Error",
                     "Database Problem",

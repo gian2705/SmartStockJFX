@@ -20,10 +20,15 @@ public class LogInStageData extends BaseDataClass {
     }
 
     //authenticate the username with password to match in database
-    public static String authenticateUser(String user) throws SQLException {
+    public static String authenticateUser(String user) {
 
         mysqlDataSource.setUser(serverDetail.get("username"));
         mysqlDataSource.setPassword(serverDetail.get("password"));
+        try {
+            mysqlDataSource.setUseSSL(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         mysqlDataSource.setServerName(serverDetail.get("serverAddress"));
 
         connection = null;
@@ -40,6 +45,8 @@ public class LogInStageData extends BaseDataClass {
                 password = resultSet.getString("password");
             }
 
+        } catch (SQLException e) {
+            System.out.println(e);
         } finally {
             if (connection != null) try {
                 connection.close();

@@ -29,6 +29,11 @@ public class ExpenditureCategoryData extends BaseDataClass {
     public static ObservableList<String> getCategoryList() {
 
         mysqlDataSource.setUser(username);
+        try {
+            mysqlDataSource.setUseSSL(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         mysqlDataSource.setPassword(password);
         mysqlDataSource.setServerName(serverAddress);
 

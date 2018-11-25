@@ -39,6 +39,7 @@ public class PurchaseCategoryData extends BaseDataClass {
         try {
             mysqlDataSource.setUser(username);
             mysqlDataSource.setPassword(password);
+            mysqlDataSource.setUseSSL(false);
             mysqlDataSource.setServerName(serverAddress);
 
             try {

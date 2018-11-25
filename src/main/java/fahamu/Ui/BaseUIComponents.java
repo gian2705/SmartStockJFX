@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
 
 public class BaseUIComponents extends Resources {
 
-    public BaseUIComponents() {
+    BaseUIComponents() {
     }
 
     public void alertCreator(String title, String header, String content, Parent parent, ImageView icon) {

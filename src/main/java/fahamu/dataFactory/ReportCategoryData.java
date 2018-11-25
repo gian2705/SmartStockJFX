@@ -37,6 +37,11 @@ public class ReportCategoryData extends BaseDataClass {
         mysqlDataSource.setPassword(password);
         mysqlDataSource.setServerName(serverAddress);
 
+        try {
+            mysqlDataSource.setUseSSL(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         connection = null;
         ObservableList<XYChart.Series> series = FXCollections.observableArrayList();
 

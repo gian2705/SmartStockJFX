@@ -59,8 +59,8 @@ public class LeftDrawer extends BaseUIComponents{
 
     public void logIn() {
         if (validateInputs(usernameField, passwordField)) {
-            logInUiController.startBackGroundLogin(usernameField, passwordField,
-                    logInUiController.progressIndicator,logInJFXButton,forgetPasswordJFXButton);
+//            logInUiController.startBackGroundLogin(usernameField, passwordField,
+//                    logInUiController.progressIndicator,logInJFXButton,forgetPasswordJFXButton);
         }
     }
 

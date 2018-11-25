@@ -7,9 +7,11 @@ import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +23,8 @@ public class Main extends Application {
     //private Resources resources;
     private Scene sceneMain;
     public static String currentUserName;
+    private TextField resetPassword;
+    public static Stage stageLogIn;
 
     @Override
     public void init() {
@@ -29,29 +33,24 @@ public class Main extends Application {
 //        resources.ROOT_PATH_FOR_RESOURCE=System.getProperty("user.dir"); //get the current working directory
         //System.out.println(resources.ROOT_PATH_FOR_RESOURCE);
         BaseDataClass baseDataClass = new BaseDataClass();
-        //run in background provider to check if server is reachable
-        Task<Void> task = new Task<Void>() {
-            @Override
-            protected Void call() {
-                baseDataClass
-                        .mysqlServerCheck(Resources.Companion.getSERVER_IPA4_ADDRESS(),
-                                Resources.class.getResource("sqlite3/serverCredential.db.encrypted").getPath());
-                return null;
-            }
-        };
-        task.setOnSucceeded(event -> baseDataClass.showDataBaseErrorDialog(new BaseUIComponents(),
-                (StackPane) sceneMain.getRoot()));
-        new Thread(task).start();
+//        //run in background provider to check if server is reachable
+//        Task<Void> task = new Task<Void>() {
+//            @Override
+//            protected Void call() {
+//                baseDataClass.mysqlServerCheck(Resources.Companion.getSERVER_IPA4_ADDRESS(),
+//                        Resources.Companion.getResourceAsUrl("sqlite3/serverCredential.db.encrypted").getPath());
+//                return null;
+//            }
+//        };
+//        task.setOnSucceeded(event ->
+//                baseDataClass.showDataBaseErrorDialog(new BaseUIComponents(), (AnchorPane) sceneMain.getRoot()));
+//        new Thread(task).start();
     }
 
     @Override
     public void start(Stage primaryStage) throws IOException {
         //set scene
-        //System.out.println(Main.class.getResource("../test.fxml").toExternalForm());
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        // URL resource = classloader.getResource("fxmls/test.fxml");
-
-        System.out.println(Resources.Companion.getResourceAsUrl("fxmls/loginUi.fxml"));
+        // System.out.println(Resources.Companion.getResourceAsUrl("fxmls/loginUi.fxml"));
 
         URL url = Resources.Companion.getResourceAsUrl("fxmls/loginUi.fxml");
 
@@ -61,6 +60,8 @@ public class Main extends Application {
         primaryStage.setTitle(Resources.Companion.getBUSINESS_NAME());
         primaryStage.getIcons().setAll(
                 new Image(Resources.Companion.getResourceAsUrl("image/ssmlogo.png").toExternalForm()));
+
+        stageLogIn = primaryStage;
         primaryStage.show();
     }
 
@@ -68,7 +69,7 @@ public class Main extends Application {
         launch(args);
     }
 
-//
+
 //    private void setLogInUI() {
 //
 //        rootLoginStage = new VBox();
@@ -199,7 +200,7 @@ public class Main extends Application {
 //        });
 //
 //    }
-//
+
 //    private void login() {
 //        if (usernameTextField.getText().isEmpty()) {
 //            Platform.runLater(() -> {
@@ -380,5 +381,5 @@ public class Main extends Application {
 //            }
 //        }
 //    }
-//
+
 }

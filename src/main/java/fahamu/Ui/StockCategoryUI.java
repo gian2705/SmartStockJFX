@@ -41,7 +41,7 @@ public class StockCategoryUI extends BaseDataClass {
     private String password=serverDetail.get("password");
     private String serverAddress=serverDetail.get("serverAddress");
 
-    StockCategoryUI() {
+    public StockCategoryUI() {
         addProductCategory();
         addProductUnit();
         removeProductCategory();

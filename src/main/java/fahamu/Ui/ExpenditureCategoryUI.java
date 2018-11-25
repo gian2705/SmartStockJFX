@@ -20,7 +20,7 @@ public class ExpenditureCategoryUI {
     public static ObservableList<ExpensesList> expensesListObservableList;
     private static ListView<String> categoryListView;
 
-    ExpenditureCategoryUI() {
+    public ExpenditureCategoryUI() {
         addExpenditureCategory();
         setNewExpenditureUI();
     }

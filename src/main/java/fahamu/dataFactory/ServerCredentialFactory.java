@@ -7,13 +7,14 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
+import java.util.Set;
 
 public class ServerCredentialFactory {
 
     /**
      * this initialize create object to decrypt a file
      * and then call the method to read resources from sqlite file
-    */
+     */
     public ServerCredentialFactory() {
 
     }
@@ -21,20 +22,21 @@ public class ServerCredentialFactory {
     /**
      * a private method to get server password and user name
      * from encrypted sqlite file.
+     *
      * @param path =location of the sqlite file which contain server detail and its encrypted
      */
     public HashMap<String, String> getServerCredential(String path) {
 
         HashMap<String, String> serverDetail = new HashMap<>();
-        FileEncrypt fileEncrypt=new FileEncrypt();
+        FileEncrypt fileEncrypt = new FileEncrypt();
         //mysql connection object
         Connection connection = null;
 
         //decrypt a server credential file
         String dataPath = null;
-        File decryptedFile=null;
+        File decryptedFile = null;
         try {
-            File inputFile=new File(path);
+            File inputFile = new File(path);
             decryptedFile = File.createTempFile("serverCredential", ".db");
             //dataPath is the temporary folder hold sqlite file which contain severCredential
             dataPath = decryptedFile.getPath();
@@ -51,7 +53,18 @@ public class ServerCredentialFactory {
             ResultSet resultSet = statement.executeQuery("select * from serverDetail");
             while (resultSet.next()) {
                 serverDetail.put(resultSet.getString(1), resultSet.getString(2));
+
+
+                //debug
+//                System.out.println(resultSet.getString(2));
+
             }
+
+//            Set<String> strings = serverDetail.keySet();
+//            for (String s :
+//                    strings) {
+//                System.out.println(s);
+//            }
 
             //delete the temporary file when done
             if (decryptedFile != null) decryptedFile.delete();

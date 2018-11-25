@@ -23,9 +23,9 @@ public class StockCategoryData extends BaseDataClass {
     private static String localhost;
     private static MysqlDataSource mysqlDataSource;
     private static Connection connection;
-    private static String username=serverDetail.get("username");
-    private static String password=serverDetail.get("password");
-    private static String serverAddress=serverDetail.get("serverAddress");
+    private static String username = serverDetail.get("username");
+    private static String password = serverDetail.get("password");
+    private static String serverAddress = serverDetail.get("serverAddress");
 
     static {
         mysqlDataSource = new MysqlDataSource();
@@ -46,6 +46,7 @@ public class StockCategoryData extends BaseDataClass {
             mysqlDataSource.setUser(username);
             mysqlDataSource.setPassword(password);
             mysqlDataSource.setServerName(serverAddress);
+            mysqlDataSource.setUseSSL(false);
             try {
                 connection = mysqlDataSource.getConnection();
             } catch (SQLException sq) {
@@ -58,6 +59,42 @@ public class StockCategoryData extends BaseDataClass {
             ResultSet resultSet = statement.executeQuery(getAllProducts);
             while (resultSet.next()) {
                 stockRetailProducts.add(resultSet.getString("product"));
+            }
+        } catch (SQLException ignore) {
+
+        } finally {
+            if (connection != null) try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return stockRetailProducts;
+    }
+
+    //get all product for update
+    public static ObservableList<String> getProductNamesWholeSale() {
+        ObservableList<String> stockRetailProducts = FXCollections.observableArrayList();
+        String getAllProducts = "SELECT product, wsell FROM stockdata.retailStock   ORDER BY product";
+
+        connection = null;
+        try {
+            mysqlDataSource.setUser(username);
+            mysqlDataSource.setPassword(password);
+            mysqlDataSource.setServerName(serverAddress);
+            mysqlDataSource.setUseSSL(false);
+            try {
+                connection = mysqlDataSource.getConnection();
+            } catch (SQLException sq) {
+                mysqlDataSource.setServerName(localhost);
+                connection = mysqlDataSource.getConnection();
+            }
+            Statement statement = connection.createStatement();
+
+            //get the products
+            ResultSet resultSet = statement.executeQuery(getAllProducts);
+            while (resultSet.next()) {
+                stockRetailProducts.add(resultSet.getString("product") + " ( " + resultSet.getString("wsell") + " )");
             }
         } catch (SQLException ignore) {
 
@@ -171,6 +208,42 @@ public class StockCategoryData extends BaseDataClass {
             }
         }
     }
+
+    public static float getWholePrice(String condition) {
+        float price = 0f;
+        String query = "SELECT wsell FROM stockdata.retailStock WHERE product=\'" + condition + "\'";
+        connection = null;
+        try {
+
+            mysqlDataSource.setUser(username);
+            mysqlDataSource.setPassword(password);
+            mysqlDataSource.setServerName(serverAddress);
+            try {
+                connection = mysqlDataSource.getConnection();
+            } catch (SQLException sq) {
+                mysqlDataSource.setServerName(localhost);
+                connection = mysqlDataSource.getConnection();
+            }
+            Statement statement = connection.createStatement();
+
+            //get results from selected database
+            ResultSet resultSet = statement.executeQuery(query);
+            //store the sell price and the number separate formatted separate
+            while (resultSet.next()) price = resultSet.getFloat("wsell");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return price;
+    }
+
 
     public static String getCategory(String condition) {
         String query = "SELECT category FROM stockdata.retailStock WHERE product=\'" + condition + "\';";
@@ -638,7 +711,7 @@ public class StockCategoryData extends BaseDataClass {
         mysqlDataSource.setPassword(password);
         mysqlDataSource.setServerName(serverAddress);
         String updateQuery = "UPDATE stockdata.retailStock SET quantity=" + quantity + ",profit=sell-purchase ," +
-                "times=sell/purchase WHERE product=\'" + product + "\'" ;
+                "times=sell/purchase WHERE product=\'" + product + "\'";
 
         connection = null;
         try {
@@ -798,7 +871,7 @@ public class StockCategoryData extends BaseDataClass {
         mysqlDataSource.setPassword(password);
         mysqlDataSource.setServerName(serverAddress);
         String updateQuery = "UPDATE stockdata.retailStock SET purchase=" + purchase + "," +
-                "profit=sell-purchase, times=sell/purchase WHERE product=\'" + product + "\'" ;
+                "profit=sell-purchase, times=sell/purchase WHERE product=\'" + product + "\'";
 
         connection = null;
         try {
